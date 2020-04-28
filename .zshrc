@@ -111,5 +111,5 @@ alias zshconfig="vim ~/.zshrc"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source /etc/profile
-
+export TERM=xterm-256color
 alias dotfile='/usr/bin/git --git-dir=$HOME/Documents/dotfiles/ --work-tree=$HOME'
