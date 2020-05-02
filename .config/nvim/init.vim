@@ -63,7 +63,12 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Key Bindings
 map <C-e> :Lex <bar> vertical resize 30 <CR>
-map <C-r> :source ~/.vimrc<CR>
+map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 
 " Require for nvim-colorizer
 "lua require'colorizer'.setup()
+
+" nvim config
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+endif
