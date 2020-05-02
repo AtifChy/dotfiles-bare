@@ -11,6 +11,10 @@ Add dotfile alias to .bashrc or .zshrc:
 ```
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 ```
+Ignore unnecessary files (IMPORTANT):
+```
+dotfile config --local status.showUntrackedFiles no
+```
 Replace existing files with the files from the repo:
 ```
 dotfile checkout -f
