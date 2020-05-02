@@ -1,6 +1,5 @@
 set nocompatible                             " be iMproved, required
 
-
 " Plugins
 call plug#begin('/home/atif/.vim/plugged')   "required
 " alternatively, pass a path where VimPlug should install plugins
@@ -11,15 +10,17 @@ call plug#begin('/home/atif/.vim/plugged')   "required
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'ryanoasis/vim-devicons'
+	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
     "Plug 'airblade/vim-gitgutter'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
-	Plug 'NLKNguyen/papercolor-theme'
-	Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'joshdick/onedark.vim'
-    Plug 'norcalli/nvim-colorizer.lua'
+	Plug 'ap/vim-css-color'
+	"Plug 'NLKNguyen/papercolor-theme'
+	"Plug 'kristijanhusak/vim-hybrid-material'
+    "Plug 'joshdick/onedark.vim'
+	"Plug 'norcalli/nvim-colorizer.lua'
 
 " All of your Plugs must be added before the following line
 call plug#end()                              " required
@@ -34,36 +35,6 @@ call plug#end()                              " required
 " :PlugSnapshot   - Generate script for restoring the current snapshot of the plugins
 "
 " Put your non-Plug stuff after this line
-
-" Color Settings
-        "colorscheme gruvbox
-"set background=dark
-	colorscheme onedark
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) 
-                                             " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
-
-hi Comment cterm=italic
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-let g:onedark_termcolors=256
-
-	" checks if your terminal has 24-bit color support
-if (has("termguicolors"))
-    set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
-endif
-
-
-syntax enable
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
 
 " General Settings
 set number                                   " always show line number
@@ -87,7 +58,23 @@ set hlsearch                                 " highlight search terms
 set incsearch                                " show search matches as you type
 set cursorline                               " highlight cursor line
 
+" Color Settings
+set t_Co=256
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
+colorscheme gruvbox
+"syntax enable
+
+" Airline Configuration
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " Key Bindings
 map <C-e> :Lex <bar> vertical resize 30 <CR>
 map <C-r> :source ~/.vimrc<CR>
+
+" Vim cursor modes
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"

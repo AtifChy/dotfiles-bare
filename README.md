@@ -9,7 +9,7 @@ git clone --bare https://github.com/atifchy/dotfiles.git $HOME/Documents/Dotfile
 ```
 Add dotfile alias to .bashrc or .zshrc:
 ```
-alias dotfile='git --git-dir=$HOME/Documents/dotfiles/ --work-tree=$HOME'
+alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 ```
 Replace existing files with the files from the repo:
 ```

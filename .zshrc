@@ -112,4 +112,4 @@ alias zshconfig="vim ~/.zshrc"
 
 source /etc/profile
 export TERM=xterm-256color
-alias dotfile='/usr/bin/git --git-dir=$HOME/Documents/dotfiles/ --work-tree=$HOME'
+alias dotfile='/usr/bin/git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
