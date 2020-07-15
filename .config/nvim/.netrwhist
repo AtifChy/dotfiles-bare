@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =7
-let g:netrw_dirhist_7='/home/atif'
-let g:netrw_dirhist_6='/home/atif/Downloads'
-let g:netrw_dirhist_5='/home/atif'
-let g:netrw_dirhist_4='/home/atif/Downloads'
-let g:netrw_dirhist_3='/home/atif'
-let g:netrw_dirhist_2='/home/atif/Downloads'
-let g:netrw_dirhist_1='/home/atif'
