@@ -48,7 +48,7 @@ set smartcase                                " ignore case if search pattern is 
 set cursorline                               " highlight cursor line
 set clipboard=unnamedplus                    " copy paste between vim and everything else
 set inccommand=nosplit                       " required for hlsearch
-"set updatetime=100
+set updatetime=100
 
 " Color Settings
 set t_Co=256
@@ -73,7 +73,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Key Bindings
 "map <C-e> :NERDTree<CR>
 map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
-map <C-e> :Lex <bar> vertical resize 30 <CR>
+map <C-e> :Lex<bar>vertical resize 30<CR>
 
 " Require for nvim-colorizer
 "lua require'colorizer'.setup()
