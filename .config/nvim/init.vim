@@ -17,6 +17,8 @@ call plug#begin('/home/atif/.vim/plugged')   "required
 	
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
+	Plug 'sainnhe/edge'
+	Plug 'sainnhe/sonokai'
 	"Plug 'gruvbox-community/gruvbox'
 	"Plug 'NLKNguyen/papercolor-theme'
 	"Plug 'kristijanhusak/vim-hybrid-material'
@@ -56,8 +58,22 @@ set t_Co=256
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
 colorscheme gruvbox
-"set background=dark	                      " set background color
+set background=dark	                      " set background color
 "hi Normal ctermbg=NONE guibg=NONE            " transparent background
+
+"edge settings
+"set termguicolors
+"let g:edge_style = 'aura'
+"let g:edge_disable_italic_comment = 1
+"colorscheme edge
+
+"sonokai settings
+"colorscheme sonokai
+"if has('termguicolors')
+"  set termguicolors
+"endif
+"let g:sonokai_style = 'atlantis'
+"let g:sonokai_enable_italic = 1
 
 " NERDTree Config
 "let g:NERDTreeDirArrowExpandable = '►'
