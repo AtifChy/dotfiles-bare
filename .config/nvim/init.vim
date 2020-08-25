@@ -55,10 +55,10 @@ set updatetime=100
 " Color Settings
 set t_Co=256
 "let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
-colorscheme gruvbox
-set background=dark	                      " set background color
+"let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
+"colorscheme gruvbox
+"set background=dark	                      " set background color
 "hi Normal ctermbg=NONE guibg=NONE            " transparent background
 
 "edge settings
@@ -68,12 +68,13 @@ set background=dark	                      " set background color
 "colorscheme edge
 
 "sonokai settings
-"colorscheme sonokai
-"if has('termguicolors')
-"  set termguicolors
-"endif
-"let g:sonokai_style = 'atlantis'
-"let g:sonokai_enable_italic = 1
+colorscheme sonokai
+if has('termguicolors')
+  set termguicolors
+endif
+let g:sonokai_style = 'atlantis'
+"let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
 
 " NERDTree Config
 "let g:NERDTreeDirArrowExpandable = '►'
@@ -90,6 +91,7 @@ let g:airline#extensions#tabline#enabled = 1
 "map <C-e> :NERDTree<CR>
 map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 map <C-e> :Lex<bar>vertical resize 30<CR>
+map <C-t> :term<CR>
 
 " Require for nvim-colorizer
 "lua require'colorizer'.setup()

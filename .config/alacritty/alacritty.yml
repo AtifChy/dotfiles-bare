@@ -10,7 +10,7 @@ env:
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  TERM: alacritty
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -113,26 +113,26 @@ font:
     style: Bold
 
   # Italic font face
-  italic:
+  #italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fira Code
+    #family: Fira Code
 
     # The `style` can be specified to pick a specific face.
-    style: Italic
+    #style: Italic
 
   # Bold italic font face
-  bold_italic:
+  #bold_italic:
     # Font family
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fira Code
+    #family: Fira Code
 
     # The `style` can be specified to pick a specific face.
-    style: Bold Italic
+    #style: Bold Italic
 
   # Point size
   size: 10.5
