@@ -14,7 +14,9 @@ call plug#begin('/home/atif/.vim/plugged')   "required
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
 	"Plug 'airblade/vim-gitgutter'
-	
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
 	Plug 'sainnhe/edge'
@@ -50,7 +52,7 @@ set smartcase                                " ignore case if search pattern is 
 set cursorline                               " highlight cursor line
 set clipboard=unnamedplus                    " copy paste between vim and everything else
 set inccommand=nosplit                       " required for hlsearch
-set updatetime=100
+set updatetime=300
 
 " Color Settings
 set t_Co=256
@@ -100,3 +102,16 @@ map <C-t> :term<CR>
 if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
+
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-json', 
+  \ 'coc-clangd',
+  \ 'coc-html',
+  \ ]
+"  \ 'coc-sh',
+
+" Prettier config
+au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
