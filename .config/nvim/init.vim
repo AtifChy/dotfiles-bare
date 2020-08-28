@@ -14,12 +14,12 @@ call plug#begin('/home/atif/.vim/plugged')   "required
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
 	"Plug 'airblade/vim-gitgutter'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
-	Plug 'sainnhe/edge'
+	"Plug 'sainnhe/edge'
 	Plug 'sainnhe/sonokai'
 	"Plug 'gruvbox-community/gruvbox'
 	"Plug 'NLKNguyen/papercolor-theme'
@@ -56,10 +56,10 @@ set updatetime=300
 
 " Color Settings
 set t_Co=256
-"let g:gruvbox_italic=1
-"let g:gruvbox_contrast_dark = 'hard'
-"let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
-"colorscheme gruvbox
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
+colorscheme gruvbox
 "set background=dark	                      " set background color
 "hi Normal ctermbg=NONE guibg=NONE            " transparent background
 
@@ -70,13 +70,13 @@ set t_Co=256
 "colorscheme edge
 
 "sonokai settings
-colorscheme sonokai
-if has('termguicolors')
-  set termguicolors
-endif
-let g:sonokai_style = 'atlantis'
+"colorscheme sonokai
+"if has('termguicolors')
+"  set termguicolors
+"endif
+"let g:sonokai_style = 'atlantis'
 "let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
+"let g:sonokai_enable_italic = 1
 
 " NERDTree Config
 "let g:NERDTreeDirArrowExpandable = '►'
@@ -95,23 +95,17 @@ map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
 
-" Require for nvim-colorizer
-"lua require'colorizer'.setup()
-
 " nvim config
 if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
 
 " coc config
-let g:coc_global_extensions = [
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-json', 
-  \ 'coc-clangd',
-  \ 'coc-html',
-  \ ]
+"let g:coc_global_extensions = [
+"  \ 'coc-pairs',
+"  \ 'coc-tsserver',
+"  \ 'coc-json', 
+"  \ 'coc-clangd',
+"  \ 'coc-html',
+"  \ ]
 "  \ 'coc-sh',
-
-" Prettier config
-au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"

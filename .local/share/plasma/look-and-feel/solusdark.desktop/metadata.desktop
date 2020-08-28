@@ -1,9 +1,10 @@
 [Desktop Entry]
 Comment=SolusDark
 Name=SolusDark
-Type=Service
 
 X-KDE-ServiceTypes=Plasma/LookAndFeel
+X-KDE-PluginInfo-Category=Plasma Look And Feel
+X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Solus Plasma
 X-KDE-PluginInfo-Category=
@@ -14,3 +15,4 @@ X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=https://getsol.us
 X-Plasma-MainScript=defaults
 X-KDE-PluginInfo-License=Apache-2.0
+X-KDE-fallbackPackage=org.kde.breeze.desktop

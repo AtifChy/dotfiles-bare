@@ -63,6 +63,7 @@ set t_Co=256
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
+set background=dark
 colorscheme gruvbox
 "syntax enable
 
