@@ -1,3 +1,9 @@
+# Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
+if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|alacritty|kitty$' ]]; then
+        for wid in $(xdotool search --pid $PPID); do
+            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -111,12 +117,6 @@ alias zshconfig="nvim ~/.zshrc"
 
 source /etc/profile
 
-# Enable blur for unsupported terminals (Only works on KDE plasma)
-if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|alacritty|kitty$' ]]; then
-        for wid in $(xdotool search --pid $PPID); do
-            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
-fi
-
 # alias for Dotfiles github repo
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 
@@ -136,4 +136,3 @@ alias yta-opus="youtube-dl --extract-audio --audio-format opus  "
 alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis  "
 alias yta-wav="youtube-dl --extract-audio --audio-format wav  "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio  "
-
