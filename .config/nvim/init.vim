@@ -1,7 +1,7 @@
 set nocompatible                             " be iMproved, required
 
 " Plugins
-call plug#begin('/home/atif/.vim/plugged')   "required
+call plug#begin('/usr/share/vim/plugged')   "required
 " alternatively, pass a path where VimPlug should install plugins
 "call plug#begin('~/some/path/here')
         
