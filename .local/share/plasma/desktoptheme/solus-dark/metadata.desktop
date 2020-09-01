@@ -2,14 +2,14 @@
 Name=SolusDark
 Comment=dark solus theme
 
-X-KDE-PluginInfo-Author=Solus Plasma
-X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-Author=KDE Plasma
+X-KDE-PluginInfo-Email=kde-artists@kde.org
 X-KDE-PluginInfo-Name=solus-dark
-X-KDE-PluginInfo-Version=0.1
-X-KDE-PluginInfo-Website=https://getsol.us
+X-KDE-PluginInfo-Version=5.73.0
+X-KDE-PluginInfo-Website=https://plasma.kde.org
 X-KDE-PluginInfo-Category=
 X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=Apache-2.0
+X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-API=5.0
 
@@ -25,5 +25,6 @@ defaultHeight=1080
 [ContrastEffect]
 enabled=true
 contrast=0.2
-intensity=0.4
+#intensity is disabled, in order to auto adjust to the chosen theme color
+#intensity=2.0
 saturation=1.7
