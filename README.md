@@ -5,7 +5,7 @@ Dotfiles are the customization files that are used to personalize your Linux or 
 #  Install dotfiles
 Clone Repo:
 ```
-git clone --bare https://github.com/AtifChy/dotfiles.git $HOME/Documents/Dotfiles
+git clone --bare git@github.com:AtifChy/dotfiles.git $HOME/Documents/Dotfiles
 ```
 Add dotfile alias to .bashrc or .zshrc:
 ```
