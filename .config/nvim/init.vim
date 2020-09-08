@@ -14,19 +14,14 @@ call plug#begin('/usr/share/vim/plugged')   "required
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
 	"Plug 'airblade/vim-gitgutter'
-	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
-	"Plug 'sainnhe/edge'
 	Plug 'sainnhe/sonokai'
-	"Plug 'gruvbox-community/gruvbox'
 	"Plug 'NLKNguyen/papercolor-theme'
 	"Plug 'kristijanhusak/vim-hybrid-material'
 	"Plug 'joshdick/onedark.vim'
 	Plug 'ap/vim-css-color'
-	"Plug 'norcalli/nvim-colorizer.lua'
 
 " All of your Plugs must be added before the following line
 call plug#end()                              " required
@@ -63,12 +58,6 @@ colorscheme gruvbox
 "set background=dark	                      " set background color
 "hi Normal ctermbg=NONE guibg=NONE            " transparent background
 
-"edge settings
-"set termguicolors
-"let g:edge_style = 'aura'
-"let g:edge_disable_italic_comment = 1
-"colorscheme edge
-
 "sonokai settings
 "colorscheme sonokai
 "if has('termguicolors')
@@ -99,13 +88,3 @@ map <C-t> :term<CR>
 if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
-
-" coc config
-"let g:coc_global_extensions = [
-"  \ 'coc-pairs',
-"  \ 'coc-tsserver',
-"  \ 'coc-json', 
-"  \ 'coc-clangd',
-"  \ 'coc-html',
-"  \ ]
-"  \ 'coc-sh',
