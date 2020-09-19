@@ -1,19 +1,20 @@
 set nocompatible                             " be iMproved, required
 
 " Plugins
-call plug#begin('/usr/share/vim/plugged')   "required
+call plug#begin('~/.vim/plugged')   "required
 " alternatively, pass a path where VimPlug should install plugins
 "call plug#begin('~/some/path/here')
-        
+
 	" Tools
 	Plug 'tpope/vim-fugitive'
 	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'ryanoasis/vim-devicons'
 	"Plug 'preservim/nerdtree'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
 	"Plug 'airblade/vim-gitgutter'
+	"Plug 'itchyny/lightline.vim'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
@@ -38,16 +39,18 @@ call plug#end()                              " required
 
 " General Settings
 set splitbelow splitright
-set mouse=a                                  " enable mouse 
+set mouse=a                                  " enable mouse
 set number                                   " always show line number
 set showmatch                                " set show matching parenthesis
 set ignorecase                               " ignore case when searching
-set smartcase                                " ignore case if search pattern is all lowercase, 
+set smartcase                                " ignore case if search pattern is all lowercase,
                                              "     case-sensitive otherwise
 set cursorline                               " highlight cursor line
-set clipboard=unnamedplus                    " copy paste between vim and everything else
+set clipboard+=unnamedplus                   " copy paste between vim and everything else
 set inccommand=nosplit                       " required for hlsearch
-set updatetime=300
+"set updatetime=300
+
+autocmd BufWritePre * %s/\s\+$//e	     " remove trailing whitespace on save
 
 " Color Settings
 set t_Co=256
@@ -88,3 +91,4 @@ map <C-t> :term<CR>
 if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
+

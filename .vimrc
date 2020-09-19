@@ -1,14 +1,14 @@
 set nocompatible                             " be iMproved, required
 
 " Plugins
-call plug#begin('/usr/share/vim/plugged')   "required
+call plug#begin('~/.vim/plugged')   "required
 " alternatively, pass a path where VimPlug should install plugins
 "call plug#begin('~/some/path/here')
 
     " Tools
 	Plug 'tpope/vim-fugitive'
 	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'ryanoasis/vim-devicons'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
