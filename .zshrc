@@ -60,8 +60,8 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 alias sudo="sudo -E"
 source /etc/profile
-export PATH="$HOME/.local/bin:$PATH"
-
+export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
+#export PATH="$HOME/.emacs.d/bin:$PATH"
 # alias for for github dotfile repo
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 
