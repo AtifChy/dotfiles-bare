@@ -52,16 +52,18 @@ set inccommand=nosplit                       " required for hlsearch
 
 autocmd BufWritePre * %s/\s\+$//e	     " remove trailing whitespace on save
 
-" Color Settings
+"" Color Settings
 set t_Co=256
+
+" gruvbox settings
+colorscheme gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
-colorscheme gruvbox
 "set background=dark	                      " set background color
 "hi Normal ctermbg=NONE guibg=NONE            " transparent background
 
-"sonokai settings
+" sonokai settings
 "colorscheme sonokai
 "if has('termguicolors')
 "  set termguicolors
