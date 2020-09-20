@@ -1,9 +1,7 @@
 set nocompatible                             " be iMproved, required
 
 " Plugins
-call plug#begin('~/.vim/plugged')   "required
-" alternatively, pass a path where VimPlug should install plugins
-"call plug#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')   		 "required
 
     " Tools
 	Plug 'tpope/vim-fugitive'
@@ -12,7 +10,7 @@ call plug#begin('~/.vim/plugged')   "required
 	Plug 'ryanoasis/vim-devicons'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
-        "Plug 'airblade/vim-gitgutter'
+    "Plug 'airblade/vim-gitgutter'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
@@ -22,8 +20,7 @@ call plug#begin('~/.vim/plugged')   "required
         "Plug 'joshdick/onedark.vim'
 	"Plug 'norcalli/nvim-colorizer.lua'
 
-" All of your Plugs must be added before the following line
-call plug#end()                              " required
+call plug#end()                               " required
 
 
 " Brief help

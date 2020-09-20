@@ -1,5 +1,5 @@
 # Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
-if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|alacritty|kitty$' ]]; then
+if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|st|alacritty|kitty$' ]]; then
         for wid in $(xdotool search --pid $PPID); do
             xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
 fi
@@ -60,8 +60,10 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 alias sudo="sudo -E"
 source /etc/profile
+
+# some useful PATH
 export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
-#export PATH="$HOME/.emacs.d/bin:$PATH"
+
 # alias for for github dotfile repo
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 
