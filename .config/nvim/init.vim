@@ -1,9 +1,7 @@
-set nocompatible                             " be iMproved, required
+set nocompatible				" be iMproved, required
 
 " Plugins
-call plug#begin('~/.vim/plugged')   "required
-" alternatively, pass a path where VimPlug should install plugins
-"call plug#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')		"required
 
 	" Tools
 	Plug 'tpope/vim-fugitive'
@@ -24,8 +22,7 @@ call plug#begin('~/.vim/plugged')   "required
 	"Plug 'joshdick/onedark.vim'
 	Plug 'ap/vim-css-color'
 
-" All of your Plugs must be added before the following line
-call plug#end()                              " required
+call plug#end()					" required
 
 " Brief help
 " :PlugInstall    - installs plugins; append `!` to update or just :PlugUpdate
@@ -35,22 +32,19 @@ call plug#end()                              " required
 " :PlugDiff       - Examine changes from the previous update and the pending changes
 " :PlugSnapshot   - Generate script for restoring the current snapshot of the plugins
 
-" Put your non-Plug stuff after this line
-
 " General Settings
-set splitbelow splitright
-set mouse=a                                  " enable mouse
-set number                                   " always show line number
-set showmatch                                " set show matching parenthesis
-set ignorecase                               " ignore case when searching
-set smartcase                                " ignore case if search pattern is all lowercase,
-                                             "     case-sensitive otherwise
-set cursorline                               " highlight cursor line
-set clipboard+=unnamedplus                   " copy paste between vim and everything else
-set inccommand=nosplit                       " required for hlsearch
+set splitbelow splitright			" fix vim window split
+set mouse=a					" enable mouse
+set number					" always show line number
+set showmatch					" set show matching parenthesis
+set ignorecase					" ignore case when searching
+set smartcase					" ignore case if search pattern is all lowercase, case-sensitive otherwise
+set cursorline					" highlight cursor line
+set clipboard+=unnamedplus			" copy paste between vim and everything else
+set inccommand=nosplit				" required for hlsearch
 "set updatetime=300
 
-autocmd BufWritePre * %s/\s\+$//e	     " remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e		" remove trailing whitespace on save
 
 "" Color Settings
 set t_Co=256
@@ -59,9 +53,9 @@ set t_Co=256
 colorscheme gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0           " selected texts are highlighted in white
-"set background=dark	                      " set background color
-"hi Normal ctermbg=NONE guibg=NONE            " transparent background
+let g:gruvbox_invert_selection = 0		" selected texts are highlighted in white
+"set background=dark				" set background color
+"hi Normal ctermbg=NONE guibg=NONE		" transparent background
 
 " sonokai settings
 "colorscheme sonokai
