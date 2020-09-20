@@ -54,3 +54,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; window size
+(when window-system (set-frame-size (selected-frame) 140 45))
