@@ -14,7 +14,6 @@ fi
 ### Added by Zinit's installer
 declare -A ZINIT					# necessary for changing location
 ZINIT[HOME_DIR]=$HOME/.cache/zinit
-#ZINIT[BIN_DIR]=$HOME/.cache/zinit/bin
 
 if [[ ! -f $HOME/.cache/zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
