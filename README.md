@@ -24,7 +24,7 @@ To stop README.md file from being downloaded (Optional):
 dotfile config core.sparsecheckout true
 touch $HOME/Documents/Dotfiles/info/sparse-checkout
 echo "/*">>$HOME/Documents/Dotfiles/info/sparse-checkout
-echo "!README.md">>$HOME/Documents/Dotfiles/info/sparse-checkout
+echo "\!README.md">>$HOME/Documents/Dotfiles/info/sparse-checkout
 ```
 Replace existing files with the files from the repo:
 ```
