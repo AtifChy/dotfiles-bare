@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')		"required
 	Plug 'sainnhe/sonokai'
 	"Plug 'NLKNguyen/papercolor-theme'
 	"Plug 'kristijanhusak/vim-hybrid-material'
-	"Plug 'joshdick/onedark.vim'
+	Plug 'AtifChy/onedark.vim'
 	Plug 'ap/vim-css-color'
 
 call plug#end()					" required
@@ -49,19 +49,41 @@ autocmd BufWritePre * %s/\s\+$//e		" remove trailing whitespace on save
 "" Color Settings
 set t_Co=256
 
+" onedark settings
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+" `bg` will not be styled since there is no `bg` setting
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white })
+  augroup END
+endif
+
+hi Comment cterm=italic
+let g:onedark_hide_endofbuffer=1
+let g:onedark_terminal_italics=1
+let g:onedark_termcolors=256
+
+syntax on
+colorscheme onedark
+
+" checks if your terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+    hi LineNr ctermbg=NONE guibg=NONE
+endif
+
 " gruvbox settings
-colorscheme gruvbox
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0		" selected texts are highlighted in white
+"colorscheme gruvbox
+"let g:gruvbox_italic=1
+"let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_invert_selection = 0		" selected texts are highlighted in white
 "set background=dark				" set background color
 "hi Normal ctermbg=NONE guibg=NONE		" transparent background
 
 " sonokai settings
 "colorscheme sonokai
-"if has('termguicolors')
-"  set termguicolors
-"endif
+"set termguicolors
 "let g:sonokai_style = 'atlantis'
 "let g:sonokai_style = 'andromeda'
 "let g:sonokai_enable_italic = 1
