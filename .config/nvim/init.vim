@@ -1,24 +1,22 @@
 set nocompatible				" be iMproved, required
 
 " Plugins
-call plug#begin('~/.vim/plugged')		"required
+call plug#begin('/home/atif/.vim/plugged')	"required
 
 	" Tools
 	Plug 'tpope/vim-fugitive'
 	Plug 'vim-airline/vim-airline'
 	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'ryanoasis/vim-devicons'
-	"Plug 'preservim/nerdtree'
+	Plug 'preservim/nerdtree'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
 	"Plug 'airblade/vim-gitgutter'
-	"Plug 'itchyny/lightline.vim'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
 	Plug 'sainnhe/sonokai'
 	"Plug 'NLKNguyen/papercolor-theme'
-	"Plug 'kristijanhusak/vim-hybrid-material'
 	Plug 'AtifChy/onedark.vim'
 	Plug 'ap/vim-css-color'
 
@@ -33,6 +31,8 @@ call plug#end()					" required
 " :PlugSnapshot   - Generate script for restoring the current snapshot of the plugins
 
 " General Settings
+set t_Co=256					" color support
+set encoding=UTF-8				" uses UTF-8 as the default encoding
 set splitbelow splitright			" fix vim window split
 set mouse=a					" enable mouse
 set number					" always show line number
@@ -45,9 +45,6 @@ set inccommand=nosplit				" required for hlsearch
 "set updatetime=300
 
 autocmd BufWritePre * %s/\s\+$//e		" remove trailing whitespace on save
-
-"" Color Settings
-set t_Co=256
 
 " onedark settings
 if (has("autocmd") && !has("gui_running"))
@@ -89,20 +86,20 @@ endif
 "let g:sonokai_enable_italic = 1
 
 " NERDTree Config
-"let g:NERDTreeDirArrowExpandable = '►'
-"let g:NERDTreeDirArrowCollapsible = '▼'
+let g:NERDTreeDirArrowExpandable='►'
+let g:NERDTreeDirArrowCollapsible='▼'
 "let NERDTreeShowLineNumbers=1
-"let NERDTreeShowHidden=1
-"let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
 
 " Air-line configuration
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
 
 " Key Bindings
-"map <C-e> :NERDTree<CR>
+map <C-e> :NERDTree<CR>
 map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
-map <C-e> :Lex<bar>vertical resize 30<CR>
+"map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
 
 " nvim config
