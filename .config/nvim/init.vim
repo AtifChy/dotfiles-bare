@@ -12,7 +12,7 @@ call plug#begin('/home/atif/.cache/nvim/plugged')
 	Plug 'preservim/nerdtree'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
-	"Plug 'airblade/vim-gitgutter'
+	Plug 'airblade/vim-gitgutter'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
@@ -43,7 +43,7 @@ set smartcase					" ignore case if search pattern is all lowercase, case-sensiti
 set cursorline					" highlight cursor line
 set clipboard+=unnamedplus			" copy paste between vim and everything else
 set inccommand=nosplit				" required for hlsearch
-"set updatetime=300
+set updatetime=100
 
 autocmd BufWritePre * %s/\s\+$//e		" remove trailing whitespace on save
 
