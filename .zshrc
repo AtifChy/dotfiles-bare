@@ -56,6 +56,7 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+# zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 alias sudo='sudo -E'

@@ -1,7 +1,8 @@
 set nocompatible				" be iMproved, required
 
 " Plugins
-call plug#begin('/home/atif/.vim/plugged')	"required
+call plug#begin('/home/atif/.cache/nvim/plugged')
+						"required
 
 	" Tools
 	Plug 'tpope/vim-fugitive'
