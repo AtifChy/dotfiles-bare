@@ -5,14 +5,14 @@ call plug#begin('/home/atif/.cache/nvim/plugged')
 						"required
 
 	" Tools
-	Plug 'tpope/vim-fugitive'
+	"Plug 'tpope/vim-fugitive'
 	Plug 'vim-airline/vim-airline'
 	"Plug 'vim-airline/vim-airline-themes'
 	Plug 'ryanoasis/vim-devicons'
 	Plug 'preservim/nerdtree'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
-	Plug 'airblade/vim-gitgutter'
+	"Plug 'airblade/vim-gitgutter'
 
 	" Colorscheme
 	Plug 'morhetz/gruvbox'
