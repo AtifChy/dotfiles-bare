@@ -69,7 +69,7 @@ export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 
 # alias for reflector
-alias reflector update='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
