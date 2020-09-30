@@ -1,0 +1,48 @@
+!st.font: Fira Code:pixelsize=15:antialias=true:autohint=true;
+
+!st.borderpx: 10
+st.xfps: 120
+st.actionfps: 30
+st.cursorshape: 2
+st.shell: /usr/bin/zsh
+
+
+
+*termname:	st-256color
+
+! special
+*.foreground:   #f2f2f2
+*.background:   #14191d
+*.cursorColor:  #f2f2f2
+
+! black
+*.color0:       #14191d
+*.color8:       #5d5d5f
+
+! red
+*.color1:       #e1331b
+*.color9:       #f9361c
+
+! green
+*.color2:       #6ab019
+*.color10:      #79c71d
+
+! yellow
+*.color3:       #fec106
+*.color11:      #f8cb12
+
+! blue
+*.color4:       #0070ff
+*.color12:      #004e9d
+
+! magenta
+*.color5:       #ed0048
+*.color13:      #fe1d63
+
+! cyan
+*.color6:       #2aa7e7
+*.color14:      #6aaff0
+
+! white
+*.color7:       #f2f2f2
+*.color15:      #cccccc

@@ -101,7 +101,7 @@ let g:airline#extensions#tabline#enabled=1
 
 " Key Bindings
 map <C-e> :NERDTree<CR>
-map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
+"map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
 
@@ -111,4 +111,11 @@ if has('nvim')
 endif
 
 " source coc config
+let g:coc_global_extensions = [
+	\ 'coc-clangd',
+	\ 'coc-pairs',
+	\ 'coc-tsserver',
+	\ 'coc-vimlsp',
+	\ 'coc-json',
+	\ ]
 source $HOME/.config/nvim/coc.vim
