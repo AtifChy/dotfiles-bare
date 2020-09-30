@@ -15,13 +15,15 @@ call plug#begin('/home/atif/.cache/nvim/plugged')
 	"Plug 'airblade/vim-gitgutter'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'airblade/vim-gitgutter'
+	"Plug 'Yggdroot/indentLine'
 
 	" Colorscheme
-	Plug 'morhetz/gruvbox'
+	"Plug 'morhetz/gruvbox'
 	Plug 'sainnhe/sonokai'
 	"Plug 'NLKNguyen/papercolor-theme'
 	Plug 'AtifChy/onedark.vim'
 	Plug 'ap/vim-css-color'
+	"Plug 'mhartington/oceanic-next'
 
 call plug#end()					" required
 
@@ -64,8 +66,13 @@ let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
 
-syntax on
+"syntax on
 colorscheme onedark
+
+" oceanic-next colorscheme
+"colorscheme OceanicNext
+"let g:oceanic_next_terminal_bold = 1
+"let g:oceanic_next_terminal_italic = 1
 
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
