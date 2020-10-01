@@ -1,3 +1,12 @@
+" coc plugin/s
+let g:coc_global_extensions = [
+	\ 'coc-clangd',
+	\ 'coc-pairs',
+	\ 'coc-tsserver',
+	\ 'coc-vimlsp',
+	\ 'coc-json',
+	\ ]
+
 " TextEdit might fail if hidden is not set.
 set hidden
 

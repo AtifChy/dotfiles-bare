@@ -1,8 +1,7 @@
-set nocompatible				" be iMproved, required
+set nocompatible 					" be iMproved, required
 
 " Plugins
-call plug#begin('/home/atif/.cache/nvim/plugged')
-						"required
+call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
 
 	" Tools
 	Plug 'tpope/vim-fugitive'
@@ -12,20 +11,21 @@ call plug#begin('/home/atif/.cache/nvim/plugged')
 	Plug 'preservim/nerdtree'
 	"Plug 'Yggdroot/indentLine'
 	"Plug 'mhinz/vim-startify'
-	"Plug 'airblade/vim-gitgutter'
+	Plug 'airblade/vim-gitgutter'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'airblade/vim-gitgutter'
 	"Plug 'Yggdroot/indentLine'
+	"Plug 'itchyny/lightline.vim'
 
 	" Colorscheme
 	"Plug 'morhetz/gruvbox'
-	Plug 'sainnhe/sonokai'
+	"Plug 'sainnhe/sonokai'
 	"Plug 'NLKNguyen/papercolor-theme'
 	Plug 'AtifChy/onedark.vim'
 	Plug 'ap/vim-css-color'
 	"Plug 'mhartington/oceanic-next'
 
-call plug#end()					" required
+call plug#end()						" required
 
 " Brief help
 " :PlugInstall    - installs plugins; append `!` to update or just :PlugUpdate
@@ -36,20 +36,20 @@ call plug#end()					" required
 " :PlugSnapshot   - Generate script for restoring the current snapshot of the plugins
 
 " General Settings
-set t_Co=256					" color support
-set encoding=UTF-8				" uses UTF-8 as the default encoding
-set splitbelow splitright			" fix vim window split
-set mouse=a					" enable mouse
-set number					" always show line number
-set showmatch					" set show matching parenthesis
-set ignorecase					" ignore case when searching
-set smartcase					" ignore case if search pattern is all lowercase, case-sensitive otherwise
-set cursorline					" highlight cursor line
-set clipboard+=unnamedplus			" copy paste between vim and everything else
-set inccommand=nosplit				" required for hlsearch
+set t_Co=256						" color support
+set encoding=UTF-8					" uses UTF-8 as the default encoding
+set splitbelow splitright				" fix vim window split
+set mouse=a						" enable mouse
+set number						" always show line number
+set showmatch						" set show matching parenthesis
+set ignorecase						" ignore case when searching
+set smartcase						" ignore case if search pattern is all lowercase, case-sensitive otherwise
+set cursorline						" highlight cursor line
+set clipboard+=unnamedplus				" copy paste between vim and everything else
+set inccommand=nosplit					" required for hlsearch
 "set updatetime=100
 
-autocmd BufWritePre * %s/\s\+$//e		" remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
 
 " onedark settings
 if (has("autocmd") && !has("gui_running"))
@@ -84,9 +84,9 @@ endif
 "colorscheme gruvbox
 "let g:gruvbox_italic=1
 "let g:gruvbox_contrast_dark = 'hard'
-"let g:gruvbox_invert_selection = 0		" selected texts are highlighted in white
-"set background=dark				" set background color
-"hi Normal ctermbg=NONE guibg=NONE		" transparent background
+"let g:gruvbox_invert_selection = 0			" selected texts are highlighted in white
+"set background=dark					" set background color
+"hi Normal ctermbg=NONE guibg=NONE			" transparent background
 
 " sonokai settings
 "colorscheme sonokai
@@ -117,12 +117,6 @@ if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
 
-" source coc config
-let g:coc_global_extensions = [
-	\ 'coc-clangd',
-	\ 'coc-pairs',
-	\ 'coc-tsserver',
-	\ 'coc-vimlsp',
-	\ 'coc-json',
-	\ ]
+" source plugin config
 source $HOME/.config/nvim/coc.vim
+"source $HOME/.config/nvim/lightline.vim
