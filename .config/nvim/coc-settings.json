@@ -16,8 +16,8 @@
   	"<space>": "toggleSelection",
   	"<tab>": "actionMenu",
 
-  	"h": "collapse",
-  	"l": ["expandable?", "expand", "open"],
+  	"-": "collapse",
+  	"=": ["expandable?", "expand", "open"],
   	"J": ["toggleSelection", "nodeNext"],
   	"K": ["toggleSelection", "nodePrev"],
   	"<2-LeftMouse>": [

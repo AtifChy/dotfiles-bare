@@ -1,29 +1,38 @@
+"  ████     ██                           ██
+" ░██░██   ░██                          ░░
+" ░██░░██  ░██  █████   ██████  ██    ██ ██ ██████████
+" ░██ ░░██ ░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
+" ░██  ░░██░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██
+" ░██   ░░████░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██
+" ░██    ░░███░░██████░░██████   ░░██   ░██ ███ ░██ ░██
+" ░░      ░░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░
+
 set nocompatible 					" be iMproved, required
 
 " Plugins
 call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
 
-	" Tools
-	Plug 'tpope/vim-fugitive'
-	Plug 'vim-airline/vim-airline'
-	"Plug 'vim-airline/vim-airline-themes'
-	Plug 'ryanoasis/vim-devicons'
-	"Plug 'preservim/nerdtree'
-	"Plug 'Yggdroot/indentLine'
-	"Plug 'mhinz/vim-startify'
-	Plug 'airblade/vim-gitgutter'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'airblade/vim-gitgutter'
-	"Plug 'Yggdroot/indentLine'
-	"Plug 'itchyny/lightline.vim'
+" tools
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+"Plug 'preservim/nerdtree'
+"Plug 'Yggdroot/indentLine'
+"Plug 'mhinz/vim-startify'
+Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
+"Plug 'Yggdroot/indentLine'
+"Plug 'itchyny/lightline.vim'
 
-	" Colorscheme
-	"Plug 'morhetz/gruvbox'
-	"Plug 'sainnhe/sonokai'
-	"Plug 'NLKNguyen/papercolor-theme'
-	Plug 'AtifChy/onedark.vim'
-	Plug 'ap/vim-css-color'
-	"Plug 'mhartington/oceanic-next'
+" colorschemes
+"Plug 'morhetz/gruvbox'
+"Plug 'sainnhe/sonokai'
+"Plug 'NLKNguyen/papercolor-theme'
+Plug 'AtifChy/onedark.vim'
+Plug 'ap/vim-css-color'
+"Plug 'mhartington/oceanic-next'
 
 call plug#end()						" required
 
@@ -45,10 +54,12 @@ set showmatch						" set show matching parenthesis
 set ignorecase						" ignore case when searching
 set smartcase						" ignore case if search pattern is all lowercase, case-sensitive otherwise
 set cursorline						" highlight cursor line
+set cursorcolumn 					" highlight cursor column
 set clipboard+=unnamedplus				" copy paste between vim and everything else
 set inccommand=nosplit					" required for hlsearch
 "set updatetime=100
 
+autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
 
 " onedark settings
@@ -62,9 +73,9 @@ if (has("autocmd") && !has("gui_running"))
 endif
 
 hi Comment cterm=italic
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-let g:onedark_termcolors=256
+let g:onedark_hide_endofbuffer = 1
+let g:onedark_terminal_italics = 1
+let g:onedark_termcolors = 256
 
 "syntax on
 colorscheme onedark
@@ -82,7 +93,7 @@ endif
 
 " gruvbox settings
 "colorscheme gruvbox
-"let g:gruvbox_italic=1
+"let g:gruvbox_italic = 1
 "let g:gruvbox_contrast_dark = 'hard'
 "let g:gruvbox_invert_selection = 0			" selected texts are highlighted in white
 "set background=dark					" set background color
@@ -96,18 +107,20 @@ endif
 "let g:sonokai_enable_italic = 1
 
 " NERDTree Config
-let g:NERDTreeDirArrowExpandable='►'
-let g:NERDTreeDirArrowCollapsible='▼'
-"let NERDTreeShowLineNumbers=1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
+"let g:NERDTreeDirArrowExpandable = '►'
+"let g:NERDTreeDirArrowCollapsible = '▼'
+"let NERDTreeShowLineNumbers = 1
+"let NERDTreeShowHidden = 1
+"let NERDTreeMinimalUI = 1
 
 " Air-line configuration
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 1
+let g:airline_extensions = ['branch', 'tabline', 'coc']
 
 " Key Bindings
-map <C-e> :NERDTree<CR>
+map <M-s> :setlocal spell! spelllang=en_US<CR>
+"map <C-e> :NERDTree<CR>
 "map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
@@ -120,3 +133,15 @@ endif
 " source plugin config
 source $HOME/.config/nvim/coc.vim
 "source $HOME/.config/nvim/lightline.vim
+
+"let g:startify_custom_header = [
+"\'  ████     ██                           ██		 ',
+"\' ░██░██   ░██                          ░░		 ',
+"\' ░██░░██  ░██  █████   ██████  ██    ██ ██ ██████████	 ',
+"\' ░██ ░░██ ░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██ ',
+"\' ░██  ░░██░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██ ',
+"\' ░██   ░░████░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██ ',
+"\' ░██    ░░███░░██████░░██████   ░░██   ░██ ███ ░██ ░██ ',
+"\' ░░      ░░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░  ',
+"\ '',
+"\]

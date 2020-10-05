@@ -1,5 +1,5 @@
 # Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
-if [[ $(ps --no-header -p $PPID -o comm) =~ '^yakuake|st|alacritty|kitty$' ]]; then
+if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
         for wid in $(xdotool search --pid $PPID); do
             xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
 fi
@@ -73,3 +73,9 @@ alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --p
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fix url issue
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic

@@ -1,9 +1,9 @@
 !st.font: Fira Code:pixelsize=15:antialias=true:autohint=true;
 
 !st.borderpx: 10
-st.xfps: 120
-st.actionfps: 30
-st.cursorshape: 2
+!st.xfps: 120
+!st.actionfps: 30
+!st.cursorshape: 2
 st.shell: /usr/bin/zsh
 
 
