@@ -49,7 +49,8 @@ set t_Co=256						" color support
 set encoding=UTF-8					" uses UTF-8 as the default encoding
 set splitbelow splitright				" fix vim window split
 set mouse=a						" enable mouse
-set number						" always show line number
+"set number						" always show line number
+set number relativenumber 				" show number relativenumber
 set showmatch						" set show matching parenthesis
 set ignorecase						" ignore case when searching
 set smartcase						" ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -59,7 +60,7 @@ set clipboard+=unnamedplus				" copy paste between vim and everything else
 set inccommand=nosplit					" required for hlsearch
 "set updatetime=100
 
-autocmd InsertEnter * norm zz 				" vertically center document in insert mode
+"autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
 
 " onedark settings
