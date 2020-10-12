@@ -18,12 +18,11 @@ Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'preservim/nerdtree'
-"Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 "Plug 'mhinz/vim-startify'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
-"Plug 'Yggdroot/indentLine'
 "Plug 'itchyny/lightline.vim'
 
 " colorschemes
@@ -62,6 +61,7 @@ set inccommand=nosplit					" required for hlsearch
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
+autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb % " run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
 
 " onedark settings
 if (has("autocmd") && !has("gui_running"))
