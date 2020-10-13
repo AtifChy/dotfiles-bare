@@ -1,5 +1,3 @@
-Xcursor.theme: xcursor-breeze-snow
-
 !st.font: Fira Code:pixelsize=15:antialias=true:autohint=true;
 
 !st.borderpx: 10
