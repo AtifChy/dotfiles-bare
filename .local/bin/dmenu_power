@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+case "$(echo -e "Shutdown\nRestart\nSuspend\nHibernation" | dmenu \
+    -w 1896 -x 10 -y 8 -i -p \
+    "Power:" -l 5)" in
+        Shutdown) exec systemctl poweroff;;
+        Restart) exec systemctl reboot;;
+        Suspend) exec systemctl suspend;;
+	Hibernation) exec systemctl hibernate;;
+esac
+

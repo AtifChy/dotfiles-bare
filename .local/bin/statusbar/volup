@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+pamixer --allow-boost -i 1
+pkill -RTMIN+7 dwmblocks

@@ -72,7 +72,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Sort messages by urgency.
     sort = yes
@@ -189,7 +189,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = /usr/bin/dmenu -x 10 -y 8 -w 1896-p dunst:
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/brave
@@ -252,9 +252,9 @@
     # * close_all: Close all notifications.
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
 
 # Experimental features that may or may not work correctly. Do not expect them
 # to have a consistent behaviour across releases.

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+case $BUTTON in
+	1) st -e htop;;
+esac
+
 cpu () {
 	read cpu a b c previdle rest < /proc/stat
 	prevtotal=$((a+b+c+previdle))

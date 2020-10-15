@@ -1,3 +1,9 @@
+#!/usr/bin/zsh
+
+# some useful PATH
+export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
+
+# Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -20,3 +26,16 @@ export GOPATH="$XDG_DATA_HOME/go"
 #export UNISON="$XDG_DATA_HOME/unison"
 #export HISTFILE="$XDG_DATA_HOME/history"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+
+# Ibus KDE
+#export GTK_IM_MODULE=ibus
+#export QT_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+
+# start ibus-deamon on boot
+#ibus-daemon -drx
+
+# qt apps theme
+if [ "$XDG_CURRENT_DESKTOP" = "dwm" ] || [ "$XDG_CURRENT_DESKTOP" = "" ]; then
+export QT_QPA_PLATFORMTHEME="qt5ct"
+fi

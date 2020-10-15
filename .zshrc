@@ -63,7 +63,7 @@ alias sudo='sudo -E'
 source /etc/profile
 
 # some useful PATH
-export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
+#export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 
 # alias for for github dotfile repo
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
@@ -79,3 +79,6 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
+
+# alias for ncmpcpp
+alias music="ncmpcpp"
