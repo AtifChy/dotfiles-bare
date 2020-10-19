@@ -172,10 +172,10 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 32
+    max_icon_size = 22
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/breeze-dark/apps/48/:/usr/share/icons/breeze-dark/status/22/:/usr/share/icons/breeze-dark/devices/22/:/usr/share/icons/breeze-dark/mimetypes/22/:/usr/share/icons/breeze-dark/applets/22/:/usr/share/icons/breeze-dark/places/22/:/usr/share/icons/breeze-dark/emblems/22/:/usr/share/icons/hicolor/22x22/apps/:/usr/share/icons/hicolor/32x32/apps/:/usr/share/pixmaps/
 
     ### History ###
 
@@ -189,7 +189,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -x 10 -y 8 -w 1896-p dunst:
+    dmenu = /usr/bin/dmenu -x 10 -y 10 -w 1900 -p dunst:
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/brave

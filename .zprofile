@@ -14,7 +14,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 #export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
 #export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-#export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 #export KODI_DATA="$XDG_DATA_HOME/kodi"
 #export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
@@ -38,4 +38,7 @@ alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 # qt apps theme
 if [ "$XDG_CURRENT_DESKTOP" = "dwm" ] || [ "$XDG_CURRENT_DESKTOP" = "" ]; then
 export QT_QPA_PLATFORMTHEME="qt5ct"
+fi
+if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+	killall -9 redshift && dunstctl set-paused true
 fi

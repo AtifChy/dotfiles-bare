@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 case $BUTTON in
-	1) st -e htop;;
+	1) st -e htop & ;;
 esac
 
 cpu () {
@@ -14,3 +14,4 @@ cpu () {
 }
 
 echo $(cpu)
+

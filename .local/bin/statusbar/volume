@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+case $BUTTON in
+	1) vol_mute_umute ;;
+esac
+
 [ $(pamixer --get-mute) = true ] && echo 🔇 && exit
 
 vol="$(pamixer --get-volume)"

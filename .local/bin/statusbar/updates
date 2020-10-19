@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
-checkupdates | wc -l
 
+case $BUTTON in
+	1) st -e yay -Syu & ;;
+	2) notify-send "$(yay -Qu)" & ;;
+esac
+
+#pacman -Qu | grep -v "\[ignored\]" | wc -l | sed "s/^/📦/;s/^📦0$//g"
+
+checkupdates | wc -l
