@@ -1,5 +1,3 @@
-#!/usr/bin/zsh
-
 # some useful PATH
 export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
@@ -36,9 +34,10 @@ alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 #ibus-daemon -drx
 
 # qt apps theme
-if [ "$XDG_CURRENT_DESKTOP" = "dwm" ] || [ "$XDG_CURRENT_DESKTOP" = "" ]; then
-export QT_QPA_PLATFORMTHEME="qt5ct"
+if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
+	export QT_QPA_PLATFORMTHEME='qt5ct'
 fi
+
 if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-	killall -9 redshift && dunstctl set-paused true
+	dunstctl set-paused true
 fi

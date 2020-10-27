@@ -8,13 +8,13 @@ function run {
 
 run feh --bg-fill /home/atif/Pictures/wallpapers/wallpapers/Art/Other/73497750_p0.jpg &
 run redshift-gtk &
-#redshift-gtk -t 6500k:3800k &
+#run redshift-gtk -t 6500k:3800k &
 run nm-applet &
-run picom --experimental-backends -b &
+run picom --experimental-backends &
 run dunst &
-run xrdb ~/.Xresources &
+run xrdb ~/.config/X11/Xresources &
 run clipmenud &
-run dwmblocks &
+run dwmblocks 2>&1 >/dev/null &
 run mpd &
 
 ## Statusbar loop

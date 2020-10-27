@@ -24,6 +24,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 "Plug 'itchyny/lightline.vim'
+Plug 'dag/vim-fish'
 
 " colorschemes
 "Plug 'morhetz/gruvbox'
@@ -61,7 +62,8 @@ set inccommand=nosplit					" required for hlsearch
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
-autocmd BufWritePost ~/.Xresources,~/.Xdefaults !xrdb % " run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
+autocmd BufWritePost ~/.config/X11/Xresources,~/.config/X11/Xdefaults !xrdb %
+							" run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
 
 " onedark settings
 if (has("autocmd") && !has("gui_running"))
@@ -78,7 +80,9 @@ let g:onedark_hide_endofbuffer = 1
 let g:onedark_terminal_italics = 1
 let g:onedark_termcolors = 256
 
-"syntax on
+syntax enable
+filetype plugin indent on 				" vim-fish
+
 colorscheme onedark
 
 " oceanic-next colorscheme

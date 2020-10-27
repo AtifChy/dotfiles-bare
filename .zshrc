@@ -1,8 +1,8 @@
 # Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
-if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
-        for wid in $(xdotool search --pid $PPID); do
-            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
-fi
+#if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
+#        for wid in $(xdotool search --pid $PPID); do
+#            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
+#fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

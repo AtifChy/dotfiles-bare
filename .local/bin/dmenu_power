@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 case "$(echo -e "Shutdown\nRestart\nSuspend\nHibernation" | dmenu \
-    -w 1896 -x 10 -y 8 -i -p \
-    "Power:" -l 5)" in
+    	-i -c -l 5 -h 30 -p "Power:")" in
         Shutdown) exec systemctl poweroff;;
         Restart) exec systemctl reboot;;
         Suspend) exec systemctl suspend;;
