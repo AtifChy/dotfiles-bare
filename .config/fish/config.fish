@@ -1,11 +1,14 @@
 #!/usr/bin/env fish
 
+# ███████╗██╗░██████╗██╗░░██╗
+# ██╔════╝██║██╔════╝██║░░██║
+# █████╗░░██║╚█████╗░███████║
+# ██╔══╝░░██║░╚═══██╗██╔══██║
+# ██║░░░░░██║██████╔╝██║░░██║
+# ╚═╝░░░░░╚═╝╚═════╝░╚═╝░░╚═╝
+
 # Adds `~/.local/bin` to $PATH
 set PATH $HOME/.local/bin $HOME/.local/bin/statusbar $PATH
-
-# starship theme
-starship init fish | source
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # useful aliases
 alias ls='ls --color=auto -lFh --group-directories-first --time-style long-iso'
@@ -28,9 +31,16 @@ alias watch='watch --color'
 alias df='df -h'
 alias du='du -h'
 alias free='free -h'
-alias sudo='sudo -E'
+alias sudo='sudo -sE'
 alias x='extract'
+alias tri='trizen'
+alias triR='trizen -Rnsuc'
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME' 	# github bare repo dotfile alias
+
+# Abbreviations (expanded aliases)
+abbr tri 'trizen'
+abbr triR 'trizen -Rnsuc'
 
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -55,6 +65,14 @@ export GOPATH="$XDG_DATA_HOME/go"
 #export UNISON="$XDG_DATA_HOME/unison"
 #export HISTFILE="$XDG_DATA_HOME/history"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+
+# starship theme
+#starship init fish | source
+#export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+
+# pfetch environment
+export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
+export PF_SEP="=>"
 
 # color for man pages
 #set -xU LESS_TERMCAP_md (printf "\e[01;31m")

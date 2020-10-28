@@ -1,16 +1,15 @@
-"  ████     ██                           ██
-" ░██░██   ░██                          ░░
-" ░██░░██  ░██  █████   ██████  ██    ██ ██ ██████████
-" ░██ ░░██ ░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
-" ░██  ░░██░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██
-" ░██   ░░████░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██
-" ░██    ░░███░░██████░░██████   ░░██   ░██ ███ ░██ ░██
-" ░░      ░░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░
+
+" ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗
+" ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║
+" ██╔██╗██║█████╗░░██║░░██║╚██╗░██╔╝██║██╔████╔██║
+" ██║╚████║██╔══╝░░██║░░██║░╚████╔╝░██║██║╚██╔╝██║
+" ██║░╚███║███████╗╚█████╔╝░░╚██╔╝░░██║██║░╚═╝░██║
+" ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
 
 set nocompatible 					" be iMproved, required
 
 " Plugins
-call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
+call plug#begin('$HOME/.cache/nvim/plugged') 	"required
 
 " tools
 Plug 'tpope/vim-fugitive'
@@ -62,7 +61,7 @@ set inccommand=nosplit					" required for hlsearch
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
-autocmd BufWritePost ~/.config/X11/Xresources,~/.config/X11/Xdefaults !xrdb %
+autocmd BufWritePost ~/.config/X11/Xresources,~/.config/X11/Xdefaults !xrdb -merge %
 							" run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
 
 " onedark settings
@@ -77,7 +76,7 @@ endif
 
 hi Comment cterm=italic
 let g:onedark_hide_endofbuffer = 1
-let g:onedark_terminal_italics = 1
+let g:onedark_terminal_italics = 0
 let g:onedark_termcolors = 256
 
 syntax enable

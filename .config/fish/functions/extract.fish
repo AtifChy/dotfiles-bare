@@ -21,6 +21,8 @@ function extract --description "Expand or extract bundled & compressed files"
           uncompress $file
         case "*.pax"
           pax -r < $file
+	case "*.zstd"
+	  unzstd $file
         case '*'
           echo "Extension not recognized, cannot extract $file"
       end
