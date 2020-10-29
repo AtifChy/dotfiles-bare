@@ -6,4 +6,4 @@ else
 	pamixer -m && notify-send "📢 Pamxier" "🔊 Unmuted"
 fi
 
-pkill -RTMIN+7 dwmblocks
+pkill -RTMIN+6 dwmblocks

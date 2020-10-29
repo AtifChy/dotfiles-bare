@@ -48,8 +48,8 @@ set t_Co=256						" color support
 set encoding=UTF-8					" uses UTF-8 as the default encoding
 set splitbelow splitright				" fix vim window split
 set mouse=a						" enable mouse
-"set number						" always show line number
-set number relativenumber 				" show number relativenumber
+set number						" always show line number
+"set number relativenumber 				" show number relativenumber
 set showmatch						" set show matching parenthesis
 set ignorecase						" ignore case when searching
 set smartcase						" ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -128,6 +128,12 @@ map <M-s> :setlocal spell! spelllang=en_US<CR>
 "map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
+
+" Cursor fix
+augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:hor20
+augroup END
 
 " nvim config
 if has('nvim')
