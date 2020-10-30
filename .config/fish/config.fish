@@ -35,12 +35,18 @@ alias sudo='sudo -sE'
 alias x='extract'
 alias tri='trizen'
 alias triR='trizen -Rnsuc'
+alias pik='pikaur'
+alias pikR='pikaur -Runsc'
+alias vi='nvim'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME' 	# github bare repo dotfile alias
 
 # Abbreviations (expanded aliases)
 abbr tri 'trizen'
 abbr triR 'trizen -Rnsuc'
+abbr vi 'nvim'
+abbr pik 'pikaur'
+abbr pikR 'pikaur -Runsc'
 
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -75,11 +81,11 @@ export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
 export PF_SEP="=>"
 
 # color for man pages
-#set -xU LESS_TERMCAP_md (printf "\e[01;31m")
-#set -xU LESS_TERMCAP_me (printf "\e[0m")
-#set -xU LESS_TERMCAP_se (printf "\e[0m")
-#set -xU LESS_TERMCAP_so (printf "\e[01;44;33m")
-#set -xU LESS_TERMCAP_ue (printf "\e[0m")
+set -xU LESS_TERMCAP_md (printf "\e[01;31m")
+set -xU LESS_TERMCAP_me (printf "\e[0m")
+set -xU LESS_TERMCAP_se (printf "\e[0m")
+set -xU LESS_TERMCAP_so (printf "\e[01;44;33m")
+set -xU LESS_TERMCAP_ue (printf "\e[0m")
 set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 # Ibus KDE

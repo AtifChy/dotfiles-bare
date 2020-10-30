@@ -20,7 +20,7 @@ else
     TXSPEED="$(($TXSPEED/$SLEEPTIME))"K
 fi
 
-echo -n "⬇️ $RXSPEED  ⬆️ $TXSPEED"
+echo -n "🔻 $RXSPEED  🔺 $TXSPEED"
 
 # some arrow
 #  

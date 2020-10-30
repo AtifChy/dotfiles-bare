@@ -6,8 +6,7 @@
 ! ██╔╝╚██╗██║░░██║███████╗██████╔╝╚█████╔╝╚██████╔╝██║░░██║╚█████╔╝███████╗██████╔╝
 ! ╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░
 
-
-!st.font: Fira Code:pixelsize=15:antialias=true:autohint=true;
+st.font: Fira Code:pixelsize=14:antialias=true:autohint=true;
 
 !st.borderpx: 10
 !st.xfps: 120
@@ -55,11 +54,13 @@
 *.color15:      #cccccc
 
 ! dwm colors
-!dwm.normbordercolor:
-!dwm.normbgcolor:
-!dwm.normfgcolor:
-!dwm.normfloatcolor:
-!dwm.selbordercolor:
-!dwm.selbgcolor:
-!dwm.selfgcolor:
 
+!dwm.normfgcolor: 	#6d8aa1
+!dwm.normbgcolor: 	#0b0b14
+!dwm.normbordercolor: 	#444444
+!dwm.normfloatcolor: 	#bc4a75
+!
+!dwm.selfgcolor: 	#9dc6e6
+!dwm.selbgcolor: 	#2d4674
+!dwm.selbordercolor: 	#2d4674
+!dwm.selfloatcolor: 	#2d4674
