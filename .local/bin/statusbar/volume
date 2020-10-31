@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 case $BUTTON in
-	1) volup ;;
 	2) vol_mute_umute ;;
-	3) voldown ;;
+	4) volup ;;
+	5) voldown ;;
 esac
 
 [ $(pamixer --get-mute) = true ] && echo 🔇 && exit

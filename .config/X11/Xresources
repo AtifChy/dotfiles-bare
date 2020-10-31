@@ -54,7 +54,6 @@ st.font: Fira Code:pixelsize=14:antialias=true:autohint=true;
 *.color15:      #cccccc
 
 ! dwm colors
-
 !dwm.normfgcolor: 	#6d8aa1
 !dwm.normbgcolor: 	#0b0b14
 !dwm.normbordercolor: 	#444444

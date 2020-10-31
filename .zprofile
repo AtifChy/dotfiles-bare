@@ -10,7 +10,7 @@
 export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
-export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
+export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory"
 export PF_SEP="=>"
 
 # Apps
