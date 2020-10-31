@@ -9,6 +9,14 @@
 # some useful PATH
 export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
+# pfetch environment
+export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
+export PF_SEP="=>"
+
+# Apps
+export TERMINAL='alacritty'
+export BROWSER='brave'
+
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

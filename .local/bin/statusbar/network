@@ -1,26 +1,29 @@
 #!/bin/sh
 
-SLEEPTIME="2"
-# Get tx and rx data from all interfaces.
-[ -f /tmp/rxdata ] && PREVRX=$(($(cat /tmp/rxdata))) || PREVRX=0
-[ -f /tmp/txdata ] && PREVTX=$(($(cat /tmp/txdata))) || PREVTX=0
-RXBYTES=$(($(cat /sys/class/net/*/statistics/rx_bytes | paste -sd '+' | tee /tmp/rxdata)))
-TXBYTES=$(($(cat /sys/class/net/*/statistics/tx_bytes | paste -sd '+' | tee /tmp/txdata)))
-RXSPEED=$((($RXBYTES-$PREVRX)/1024))
-TXSPEED=$((($TXBYTES-$PREVTX)/1024))
+# Module showing network traffic. Shows how much data has been received (RX) or
+# transmitted (TX) since the previous time this script ran. So if run every
+# second, gives network traffic per second.
 
-if [ $RXSPEED -gt $(($SLEEPTIME*1024)) ]; then
-    RXSPEED="$(echo "scale=1; ($RXSPEED/($SLEEPTIME*1024))" | bc)M"
-else
-    RXSPEED="$(($RXSPEED/$SLEEPTIME))"K
-fi
-if [ $TXSPEED -gt $(($SLEEPTIME*1024)) ]; then
-    TXSPEED="$(echo "scale=1; ($TXSPEED/($SLEEPTIME*1024))" | bc)M"
-else
-    TXSPEED="$(($TXSPEED/$SLEEPTIME))"K
-fi
+case $BUTTON in
+#	1) setsid -f "$TERMINAL" -e bmon ;;
+	3) notify-send "🌐 Network traffic module" "🔻: Traffic received
+🔺: Traffic transmitted" ;;
+#	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
 
-echo -n "🔻$RXSPEED : 🔺$TXSPEED"
+update() {
+    sum=0
+    for arg; do
+        read -r i < "$arg"
+        sum=$(( sum + i ))
+    done
+    cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+    [ -f "$cache" ] && read -r old < "$cache" || old=0
+    printf %d\\n "$sum" > "$cache"
+    printf %d\\n $(( sum - old ))
+}
 
-# some arrow
-#  
+rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
+
+printf "🔻%4sB 🔺%4sB\\n" $(numfmt --to=iec $rx) $(numfmt --to=iec $tx)
