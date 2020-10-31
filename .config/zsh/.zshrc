@@ -88,8 +88,8 @@ zinit light olets/zsh-abbr
 
 alias sudo='sudo -E'
 alias clr='clear'
-alias vi='nvim'
 alias zinit='zinit -h'
+alias zshrc='nvim ~/.config/zsh/.zshrc'
 
 source /etc/profile
 

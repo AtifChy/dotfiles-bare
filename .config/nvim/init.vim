@@ -18,12 +18,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'preservim/nerdtree'
 Plug 'Yggdroot/indentLine'
-"Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 "Plug 'itchyny/lightline.vim'
 Plug 'dag/vim-fish'
+Plug 'tjdevries/coc-zsh'
 
 " colorschemes
 "Plug 'morhetz/gruvbox'
@@ -144,14 +145,11 @@ endif
 source $HOME/.config/nvim/coc.vim
 "source $HOME/.config/nvim/lightline.vim
 
-"let g:startify_custom_header = [
-"\'  ████     ██                           ██		 ',
-"\' ░██░██   ░██                          ░░		 ',
-"\' ░██░░██  ░██  █████   ██████  ██    ██ ██ ██████████	 ',
-"\' ░██ ░░██ ░██ ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██ ',
-"\' ░██  ░░██░██░███████░██   ░██░░██ ░██ ░██ ░██ ░██ ░██ ',
-"\' ░██   ░░████░██░░░░ ░██   ░██ ░░████  ░██ ░██ ░██ ░██ ',
-"\' ░██    ░░███░░██████░░██████   ░░██   ░██ ███ ░██ ░██ ',
-"\' ░░      ░░░  ░░░░░░  ░░░░░░     ░░    ░░ ░░░  ░░  ░░  ',
-"\ '',
-"\]
+let g:startify_custom_header = [
+\'   ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗ ',
+\'   ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║ ',
+\'   ██╔██╗██║█████╗░░██║░░██║╚██╗░██╔╝██║██╔████╔██║ ',
+\'   ██║╚████║██╔══╝░░██║░░██║░╚████╔╝░██║██║╚██╔╝██║ ',
+\'   ██║░╚███║███████╗╚█████╔╝░░╚██╔╝░░██║██║░╚═╝░██║ ',
+\'   ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝ ',
+\]

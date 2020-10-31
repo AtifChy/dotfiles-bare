@@ -2,8 +2,8 @@
 	"suggest.noselect": false,
 
 	// coc-explorer
-	"explorer.icon.enableNerdfont": false,
-	"explorer.icon.enableVimDevicons": true,
+	"explorer.icon.enableNerdfont": true,
+	"explorer.icon.enableVimDevicons": false,
 	"explorer.quitOnOpen": true,
 	"explorer.position": "left",
 	"explorer.file.showHiddenFiles": true,
