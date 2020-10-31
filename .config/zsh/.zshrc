@@ -46,11 +46,28 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 # ohmyzsh library
-zinit snippet OMZL::history.zsh
+#zinit snippet OMZL::history.zsh
 zinit snippet OMZL::termsupport.zsh
 zinit snippet OMZL::completion.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZL::key-bindings.zsh
+
+# History
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+# Clean HOME_DIR
+autoload -Uz compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
 
 # ohmyzsh plugin/s
 zinit snippet OMZP::extract
@@ -67,7 +84,13 @@ zinit wait lucid for \
 # zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
+zinit light olets/zsh-abbr
+
 alias sudo='sudo -E'
+alias clr='clear'
+alias vi='nvim'
+alias zinit='zinit -h'
+
 source /etc/profile
 
 # some useful PATH
@@ -80,7 +103,7 @@ alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # fix url issue
 autoload -Uz bracketed-paste-magic

@@ -129,11 +129,11 @@ map <M-s> :setlocal spell! spelllang=en_US<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
 
-" Cursor fix
-augroup RestoreCursorShapeOnExit
-    autocmd!
-    autocmd VimLeave * set guicursor=a:hor20
-augroup END
+"" Cursor fix
+"augroup RestoreCursorShapeOnExit
+"    autocmd!
+"    autocmd VimLeave * set guicursor=a:hor20
+"augroup END
 
 " nvim config
 if has('nvim')

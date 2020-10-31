@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+case $BUTTON in
+	1) notify-send "$(cal)" & ;;
+esac
 
 clock=$(date '+%I')
 

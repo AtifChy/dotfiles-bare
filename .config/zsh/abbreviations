@@ -1,0 +1,9 @@
+abbr f="find . -name"
+abbr ff="find / -name"
+abbr vi="nvim"
+abbr tri='trizen'
+abbr triR='trizen -Rnsuc'
+abbr pik='pikaur'
+abbr pikR='pikaur -Runsc'
+abbr clr='clear'
+abbr zshrc='nvim ~/.config/zsh/.zshrc'

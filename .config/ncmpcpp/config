@@ -11,7 +11,7 @@
 ## ncmpcpp.
 ##
 #
-#ncmpcpp_directory = ~/.config/ncmpcpp
+ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
@@ -291,7 +291,7 @@ visualizer_type = wave_filled
 ##
 ## Note: Possible display modes: classic, columns.
 ##
-#playlist_display_mode = columns
+playlist_display_mode = columns
 #
 #browser_display_mode = classic
 #
@@ -448,7 +448,7 @@ visualizer_type = wave_filled
 #
 #empty_tag_marker = <empty>
 #
-#tags_separator = " | "
+tags_separator = " | "
 #
 #tag_editor_extended_numeration = no
 #

@@ -1,27 +1,27 @@
-#!/bin/sh
+#!/bin/bash
 case $BUTTON in
-	1) st -e trizen -Syu & ;;
-	2) notify-send "$(trizen -Qu)" & ;;
+	1) st -e pikaur -Syu & ;;
+	2) notify-send "$(pikaur -Qu)" & ;;
 esac
 
-if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
+if ! updates_arch=$((checkupdates ; pikaur -Qua 2>/dev/null) | wc -l); then
     updates_arch=0
 fi
 
 # if ! updates_aur=$(cower -u 2> /dev/null | wc -l); then
-if ! updates_aur=$(trizen -Su --aur --quiet | wc -l); then
-    updates_aur=0
-fi
+#if ! updates_aur=$(pikaur -Qua 2>/dev/null | wc -l); then
+#    updates_aur=0
+#fi
 
-updates=$(("$updates_arch" + "$updates_aur"))
+#updates=$(("$updates_arch" + "$updates_aur"))
 
-if [ "$updates" -gt 0 ]; then
-    echo " $updates"
+if [ "$updates_arch" -gt 0 ]; then
+    echo " $updates_arch"
 else
     echo "0"
 fi
 
-# for this block to work properly you will need to add the lines listed below to /etc/pacman.d/hooks/statusbar.hook
+# for this block to work properly you will need to add these lines listed below to /etc/pacman.d/hooks/statusbar.hook
 
 #[Trigger]
 #Operation = Upgrade

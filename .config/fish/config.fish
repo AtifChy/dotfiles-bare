@@ -19,7 +19,6 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
-alias ff='find / -name'
 alias f='find . -name'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -28,37 +27,34 @@ alias ip='ip -c'
 alias pactree='pactree --color'
 alias vdir='vdir --color=auto'
 alias watch='watch --color'
-alias df='df -h'
-alias du='du -h'
-alias free='free -h'
 alias sudo='sudo -sE'
-alias x='extract'
-alias tri='trizen'
-alias triR='trizen -Rnsuc'
-alias pik='pikaur'
-alias pikR='pikaur -Runsc'
-alias vi='nvim'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME' 	# github bare repo dotfile alias
 
 # Abbreviations (expanded aliases)
+abbr df 'df -h'
+abbr du 'du -h'
+abbr free 'free -h'
+abbr x 'extract'
 abbr tri 'trizen'
 abbr triR 'trizen -Rnsuc'
 abbr vi 'nvim'
 abbr pik 'pikaur'
 abbr pikR 'pikaur -Runsc'
+abbr ff 'find / -name'
+abbr f 'find . -name'
+abbr clr 'clear'
 
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-#export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority 		# This line will break some DMs.
 #export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 #export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
-#export LESSHISTFILE="-"
-#export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export INPUTRC="$XDG_CONFIG_HOME/inputrc"
-#export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 #export KODI_DATA="$XDG_DATA_HOME/kodi"
@@ -71,10 +67,17 @@ export GOPATH="$XDG_DATA_HOME/go"
 #export UNISON="$XDG_DATA_HOME/unison"
 #export HISTFILE="$XDG_DATA_HOME/history"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+#export LESSHISTFILE="-" 					# disable lesshistfile
+export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export ZDOTDIR=$HOME/.config/zsh
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # starship theme
-#starship init fish | source
-#export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+starship init fish | source
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # pfetch environment
 export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
