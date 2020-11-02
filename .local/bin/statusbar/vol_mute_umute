@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 if [ $(pamixer --get-mute) = true  ]; then
 	pamixer -u && notify-send "📢 Pamxier" "🔇 Muted"

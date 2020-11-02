@@ -6,13 +6,14 @@
 ! ██╔╝╚██╗██║░░██║███████╗██████╔╝╚█████╔╝╚██████╔╝██║░░██║╚█████╔╝███████╗██████╔╝
 ! ╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░
 
-st.font: Fira Code:pixelsize=14:antialias=true:autohint=true;
+st.font: Fira Code:pixelsize=14.5:antialias=true:autohint=true;
 
 !st.borderpx: 10
 !st.xfps: 120
 !st.actionfps: 30
 !st.cursorshape: 4
 !st.shell: /usr/bin/fish
+st.blinktimeout: 550
 
 !*termname:	st-256color
 
@@ -53,7 +54,7 @@ st.font: Fira Code:pixelsize=14:antialias=true:autohint=true;
 *.color7:       #f2f2f2
 *.color15:      #cccccc
 
-! dwm colors
+!! dwm colors
 !dwm.normfgcolor: 	#6d8aa1
 !dwm.normbgcolor: 	#0b0b14
 !dwm.normbordercolor: 	#444444

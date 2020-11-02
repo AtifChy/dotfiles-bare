@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 case $BUTTON in
-	2) vol_mute_umute ;;
-	4) volup ;;
-	5) voldown ;;
+	2) if [ $(pamixer --get-mute) = true  ]; then
+		pamixer -u && notify-send "📢 Pamxier" "🔇 Muted"
+	   else
+		pamixer -m && notify-send "📢 Pamxier" "🔊 Unmuted"
+	   fi ;;
+	4) pamixer --allow-boost -i 1 ;;
+	5) pamixer --allow-boost -d 1 ;;
 esac
 
 [ $(pamixer --get-mute) = true ] && echo 🔇 && exit

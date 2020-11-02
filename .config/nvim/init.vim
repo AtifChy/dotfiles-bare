@@ -165,6 +165,6 @@ let g:startify_bookmarks = [
 	\ { 'b': '~/.config/zsh/.zshrc' },
 	\ { 'c': '~/.config/alacritty/alacritty.yml' },
 	\ { 'd': '~/.config/X11/Xresources' },
-	\ { 'e': '~/.zshrc' },
-	\ { 'f': '~/.local/share/dwm/autostart.sh' },
+	\ { 'f': '~/.config/fish/config.fish' },
+	\ { 'g': '~/.local/share/dwm/autostart.sh' },
 	\ ]

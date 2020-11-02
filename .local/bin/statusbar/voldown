@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 pamixer --allow-boost -d 1
 pkill -RTMIN+6 dwmblocks
