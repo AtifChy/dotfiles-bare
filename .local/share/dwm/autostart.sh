@@ -15,7 +15,7 @@ run dunst &
 xrdb -merge ~/.config/X11/Xresources &
 run clipmenud &
 run mpd &
-run xautolock -locker slock &
+#run xautolock -locker slock &
 
 # keep this below everything
 run dwmblocks 2>&1 >/dev/null &
