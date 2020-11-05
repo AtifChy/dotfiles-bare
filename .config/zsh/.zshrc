@@ -114,7 +114,7 @@ zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-## vi mode
+### vi mode
 #bindkey -v
 #export KEYTIMEOUT=1
 #
@@ -177,4 +177,3 @@ zle -N self-insert url-quote-magic
 #zle -N zle-line-init
 #echo -ne '\e[5 q' # Use beam shape cursor on startup.
 #precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-

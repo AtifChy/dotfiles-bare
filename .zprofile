@@ -17,6 +17,12 @@ export PF_SEP="=>"
 export TERMINAL='alacritty'
 export BROWSER='brave'
 
+# Clipmenu
+export CM_SELECTIONS="clipboard"
+export CM_DEBUG=0
+export CM_OUTPUT_CLIP=1
+export CM_MAX_CLIPS=30
+
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

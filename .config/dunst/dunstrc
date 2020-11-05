@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-10+45"
+    geometry = "300x5-16+48"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -189,7 +189,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -x 10 -y 10 -w 1900 -p dunst:
+    dmenu = /usr/bin/dmenu -x 15 -y 9 -w 1886 -h 24 -p dunst:
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/brave

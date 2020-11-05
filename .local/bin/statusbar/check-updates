@@ -15,9 +15,9 @@ fi
 updates=$(("$updates_arch" + "$updates_aur"))
 
 if [ "$updates" -gt 0 ]; then
-    echo " $updates"
+	echo " $updates"
 else
-    echo "0"
+	echo "0"
 fi
 
 # for this block to work properly you will need to add these lines listed below to /etc/pacman.d/hooks/statusbar.hook
