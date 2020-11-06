@@ -83,6 +83,12 @@ export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
 export PF_SEP="=>"
 
+# Clipmenu
+export CM_SELECTIONS="clipboard"
+export CM_DEBUG=0
+export CM_OUTPUT_CLIP=1
+export CM_MAX_CLIPS=30
+
 # color for man pages
 set -xU LESS_TERMCAP_md (printf "\e[01;31m")
 set -xU LESS_TERMCAP_me (printf "\e[0m")

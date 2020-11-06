@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 case "$(echo -e "Lock\nShutdown\nRestart\nSuspend\nHibernation" | dmenu \
-    	-i -c -l 5 -h 30 -p "Power:")" in
+    	-c -l 5 -h 30 -p "Power:")" in
 	Lock) exec slock ;;
         Shutdown) exec systemctl poweroff;;
         Restart) exec systemctl reboot;;

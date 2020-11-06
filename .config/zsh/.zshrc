@@ -52,24 +52,6 @@ zinit snippet OMZL::completion.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZL::key-bindings.zsh
 
-# History
-## History file configuration
-[ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
-[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
-[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
-
-# Clean HOME_DIR
-autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
-
-## History command configuration
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history 	      # shell share history with other tabs
-
 # ohmyzsh plugin/s
 zinit snippet OMZP::extract
 
@@ -82,10 +64,28 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+zinit light olets/zsh-abbr
+
 # zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-zinit light olets/zsh-abbr
+# History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+# zsh settings
+autoload -Uz compinit
+compinit -u
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history 	      # shell share history with other tabs
 
 alias sudo='sudo -E '
 alias clr='clear'

@@ -83,7 +83,7 @@ trap 'rm "$tmpfile"' 0 1 15
 printf '%s\n%s\n' "$uricur" "$1" > "$tmpfile"
 cat "$bookmarks" >> "$tmpfile"
 sed -i -E '/^(#|$)/d' "$tmpfile"
-choice=$(dmenu -i -p "Go:" -w "$winid" < "$tmpfile" -x 15 -y 9 -h 24 -w 1886 ) || exit 1
+choice=$(dmenu -p "Go:" -w "$winid" < "$tmpfile" -x 15 -y 9 -h 24 -w 1886 ) || exit 1
 
 # Detect links without protocol (This is WIP)
 protocol='^(https?|ftps?|mailto|about|file):///?'
