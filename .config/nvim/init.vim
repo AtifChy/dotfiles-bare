@@ -145,6 +145,7 @@ endif
 source $HOME/.config/nvim/coc.vim
 "source $HOME/.config/nvim/lightline.vim
 
+" startify config
 let g:startify_custom_header = [
 	\'   ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗ ',
 	\'   ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║ ',

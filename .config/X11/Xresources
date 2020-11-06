@@ -8,9 +8,9 @@
 
 st.font: Fira Code:pixelsize=14.5:antialias=true:autohint=true;
 !st.borderpx: 10
-!st.cursorshape: 4
+!st.cursorshape: 2
 !st.shell: /usr/bin/fish
-st.blinktimeout: 550
+!st.blinktimeout: 550
 !st.termname:	st-256color
 
 ! special

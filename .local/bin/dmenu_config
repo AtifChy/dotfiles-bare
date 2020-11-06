@@ -1,0 +1,38 @@
+#!/bin/sh
+
+options=(
+"alacritty
+bash
+dmenu
+dunst
+dwm
+fish
+kitty
+neofetch
+neovim
+picom
+ranger
+st
+zsh
+zprofile"
+)
+
+case "$(echo -e "$options" | dmenu \
+	-i -p 'config:' \
+	-x 15 -y 9 \
+	-w 1886 -h 24)" in
+	alacritty) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/alacritty/alacritty.yml' ;;
+	bash) exec alacritty -e sh -c 'sleep .1s && nvim ~/.bashrc' ;;
+	dmenu ) exec alacritty -e sh -c 'sleep .1s && nvim ~/Downloads/suckless/dmenu-5.0/config.h' ;;
+	dunst ) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/dunst/dunstrc' ;;
+	dwm) exec alacritty -e sh -c 'sleep .1s && nvim ~/Downloads/suckless/dwm/config.h' ;;
+	fish ) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/fish/config.fish' ;;
+	kitty) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/kitty/kitty.conf' ;;
+	neofetch ) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/neofetch/config.conf' ;;
+	neovim) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/nvim/init.vim' ;;
+	picom) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/picom/picom.conf' ;;
+	ranger) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/ranger/rc.conf' ;;
+	st) exec alacritty -e sh -c 'sleep .1s && nvim ~/Downloads/suckless/st-0.8.4/config.h' ;;
+	zsh) exec alacritty -e sh -c 'sleep .1s && nvim ~/.config/zsh/.zshrc' ;;
+	zprofile) exec alacritty -e sh -c 'sleep .1s && nvim ~/.zprofile' ;;
+esac
