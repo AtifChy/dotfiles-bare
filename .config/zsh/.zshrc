@@ -7,10 +7,10 @@
 # ╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░
 
 # Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
-#if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
-#        for wid in $(xdotool search --pid $PPID); do
-#            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
-#fi
+if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
+        for wid in $(xdotool search --pid $PPID); do
+            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -87,12 +87,42 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history 	      # shell share history with other tabs
 
+## aliases
 alias sudo='sudo -E '
 alias clr='clear'
 alias zshrc='nvim ~/.config/zsh/.zshrc'
 alias vi='nvim'
+alias l='ls -lAFh --group-directories-first --time-style=long-iso'
+alias ll='ls -laFh --group-directories-first --time-style=long-iso'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
+alias ff='find / -name'
+alias f='find . -name'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias ip='alias ip="ip -c"'
+alias pactree='pactree --color'
+alias watch='watch --color'
+alias free='free -h'
+alias du='du -h'
+alias df='df -h'
 #alias pik='pikaur'
 #alias pikr='pikaur -Rnsuc'
+
+# color man pages
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
 
 source /etc/profile
 
@@ -113,67 +143,3 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
-
-### vi mode
-#bindkey -v
-#export KEYTIMEOUT=1
-#
-## Enable searching through history
-#bindkey '^R' history-incremental-pattern-search-backward
-#
-## Edit line in vim buffer ctrl-v
-#autoload edit-command-line; zle -N edit-command-line
-#bindkey '^v' edit-command-line
-## Enter vim buffer from normal mode
-#autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
-#
-## Use vim keys in tab complete menu:
-#bindkey -M menuselect 'h' vi-backward-char
-#bindkey -M menuselect 'j' vi-down-line-or-history
-#bindkey -M menuselect 'k' vi-up-line-or-history
-#bindkey -M menuselect 'l' vi-forward-char
-#bindkey -M menuselect 'left' vi-backward-char
-#bindkey -M menuselect 'down' vi-down-line-or-history
-#bindkey -M menuselect 'up' vi-up-line-or-history
-#bindkey -M menuselect 'right' vi-forward-char
-## Fix backspace bug when switching modes
-#bindkey "^?" backward-delete-char
-#
-## Change cursor shape for different vi modes.
-#function zle-keymap-select {
-#  if [[ ${KEYMAP} == vicmd ]] ||
-#     [[ $1 = 'block' ]]; then
-#    echo -ne '\e[1 q'
-#  elif [[ ${KEYMAP} == main ]] ||
-#       [[ ${KEYMAP} == viins ]] ||
-#       [[ ${KEYMAP} = '' ]] ||
-#       [[ $1 = 'beam' ]]; then
-#    echo -ne '\e[5 q'
-#  fi
-#}
-#zle -N zle-keymap-select
-#
-## ci", ci', ci`, di", etc
-#autoload -U select-quoted
-#zle -N select-quoted
-#for m in visual viopp; do
-#  for c in {a,i}{\',\",\`}; do
-#    bindkey -M $m $c select-quoted
-#  done
-#done
-#
-## ci{, ci(, ci<, di{, etc
-#autoload -U select-bracketed
-#zle -N select-bracketed
-#for m in visual viopp; do
-#  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-#    bindkey -M $m $c select-bracketed
-#  done
-#done
-#zle-line-init() {
-#    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-#    echo -ne "\e[5 q"
-#}
-#zle -N zle-line-init
-#echo -ne '\e[5 q' # Use beam shape cursor on startup.
-#precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.

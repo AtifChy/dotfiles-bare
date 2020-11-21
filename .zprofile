@@ -15,7 +15,8 @@ export PF_SEP="=>"
 
 # Apps
 export TERMINAL='alacritty'
-export BROWSER='brave'
+export BROWSER='chromium'
+export EDITOR='nvim'
 
 # Clipmenu
 export CM_SELECTIONS="clipboard"
@@ -62,10 +63,10 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 #ibus-daemon -drx
 
 # qt apps theme
-if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
-	export QT_QPA_PLATFORMTHEME='qt5ct'
-fi
-
-if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-	dunstctl set-paused true
-fi
+#if [ "$XDG_CURRENT_DESKTOP" = "" ]; then
+#	export QT_QPA_PLATFORMTHEME='qt5ct'
+#fi
+#
+#if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+#	dunstctl set-paused true
+#fi
