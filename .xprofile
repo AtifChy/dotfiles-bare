@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[[ -f ~/.zprofile ]] && source ~/.zprofile
+[[ -f ~/.profile ]] && source ~/.profile
