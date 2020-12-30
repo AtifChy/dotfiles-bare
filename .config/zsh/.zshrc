@@ -25,7 +25,7 @@ ZINIT[HOME_DIR]=$HOME/.cache/zinit
 
 if [[ ! -f $HOME/.cache/zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.cache/zinit"
+    command mkdir -p "$HOME/.cache/zinit" && command chmod g-rwX "$HOME/.cache/zinit"
     command git clone https://github.com/zdharma/zinit "$HOME/.cache/zinit/bin" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
@@ -70,6 +70,10 @@ zinit light olets/zsh-abbr
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # History file configuration
+if [[ ! -f $XDG_DATA_HOME/zsh/history ]]; then
+	command mkdir -p $XDG_DATA_HOME/zsh && \
+	command touch $XDG_DATA_HOME/zsh/history
+fi
 [ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
@@ -134,8 +138,9 @@ alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
 
 # alias for reflector
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+alias reflectorbd='sudo reflector -c Bangladesh --save /etc/pacman.d/mirrorlist'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # fix url issue
