@@ -5,15 +5,15 @@ Dotfiles are the customization files that are used to personalize your Linux or 
 #  Install dotfiles
 Clone Repo (https):
 ```
-git clone --bare https://github.com/AtifChy/dotfiles.git $HOME/Documents/Dotfiles
+git clone --bare https://github.com/AtifChy/dotfiles.git $HOME/.config/dotfiles
 ```
 Clone Repo (git):
 ```
-git clone --bare git@github.com:AtifChy/dotfiles.git $HOME/Documents/Dotfiles
+git clone --bare git@github.com:AtifChy/dotfiles.git $HOME/.config/dotfiles
 ```
 Add dotfile alias to .bashrc or .zshrc:
 ```
-alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
+alias dotfile='git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
 ```
 Ignore unnecessary files (IMPORTANT):
 ```
@@ -22,9 +22,9 @@ dotfile config --local status.showUntrackedFiles no
 To stop README.md file from being downloaded (Optional):
 ```
 dotfile config core.sparsecheckout true
-touch $HOME/Documents/Dotfiles/info/sparse-checkout
-echo "/*">>$HOME/Documents/Dotfiles/info/sparse-checkout
-echo "\!README.md">>$HOME/Documents/Dotfiles/info/sparse-checkout
+touch $HOME/.config/dotfiles/info/sparse-checkout
+echo "/*">>$HOME/.config/dotfiles/info/sparse-checkout
+echo "\!README.md">>$HOME/.config/dotfiles/info/sparse-checkout
 ```
 Replace existing files with the files from the repo:
 ```
