@@ -128,13 +128,14 @@ man() {
     command man "$@"
 }
 
+# source default configs
 source /etc/profile
 
 # some useful PATH
 #export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 
 # alias for for github dotfile repo
-alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME'
+alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'
 
 # alias for reflector
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
