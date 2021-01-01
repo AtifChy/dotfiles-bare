@@ -36,6 +36,7 @@ export XDG_CACHE_HOME="$HOME"/.cache
 #export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch-config
 #export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
+#alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 export INPUTRC="$XDG_CONFIG_HOME"/inputrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
@@ -68,7 +69,7 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 #ibus-daemon -drx
 
 # qt apps theme
-export QT_QPA_PLATFORMTHEME='qt5ct'
+#export QT_QPA_PLATFORMTHEME='qt5ct'
 
 #if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
 #	dunstctl set-paused true

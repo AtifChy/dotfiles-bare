@@ -9,7 +9,7 @@
 set nocompatible 					" be iMproved, required
 
 " Plugins
-call plug#begin('$HOME/.cache/nvim/plugged') 	"required
+call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
 
 " tools
 Plug 'tpope/vim-fugitive'
@@ -142,7 +142,7 @@ if has('nvim')
 endif
 
 " source plugin config
-source $HOME/.config/nvim/coc.vim
+source /home/atif/.config/nvim/coc.vim
 "source $HOME/.config/nvim/lightline.vim
 
 " startify config

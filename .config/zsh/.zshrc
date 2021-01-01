@@ -93,7 +93,7 @@ setopt share_history 	      # shell share history with other tabs
 
 ## aliases
 alias sudo='sudo -E '
-alias clr='clear'
+#alias clr='clear'
 alias zshrc='nvim ~/.config/zsh/.zshrc'
 alias vi='nvim'
 alias l='ls -lAFh --group-directories-first --time-style=long-iso'
@@ -114,8 +114,6 @@ alias watch='watch --color'
 alias free='free -h'
 alias du='du -h'
 alias df='df -h'
-#alias pik='pikaur'
-#alias pikr='pikaur -Rnsuc'
 
 # color man pages
 man() {
