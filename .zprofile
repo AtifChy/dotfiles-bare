@@ -36,7 +36,7 @@ export XDG_CACHE_HOME="$HOME"/.cache
 #export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch-config
 #export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
-#alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 export INPUTRC="$XDG_CONFIG_HOME"/inputrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
