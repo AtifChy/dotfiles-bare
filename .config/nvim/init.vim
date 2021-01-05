@@ -23,7 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 "Plug 'itchyny/lightline.vim'
-Plug 'dag/vim-fish'
+"Plug 'dag/vim-fish'
 Plug 'tjdevries/coc-zsh'
 
 " colorschemes

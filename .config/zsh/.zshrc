@@ -114,6 +114,8 @@ alias watch='watch --color'
 alias free='free -h'
 alias du='du -h'
 alias df='df -h'
+alias mkdir='mkdir -p'
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # color man pages
 man() {
