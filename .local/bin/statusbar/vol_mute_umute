@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ $(pamixer --get-mute) = true  ]; then
-	pamixer -u && notify-send "📢 Pamxier" "🔇 Muted"
-else
-	pamixer -m && notify-send "📢 Pamxier" "🔊 Unmuted"
-fi
-
-pkill -RTMIN+6 dwmblocks

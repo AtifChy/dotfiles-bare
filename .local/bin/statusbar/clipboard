@@ -1,5 +1,0 @@
-#!/bin/sh
-
-case $BUTTON in
-	1) clipmenu -i -x 10 -y 8 -w 1896 -p "clipmenu:" & ;;
-esac

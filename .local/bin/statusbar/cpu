@@ -1,7 +1,0 @@
-#!/bin/sh
-
-case $BUTTON in
-	1) st -e htop & ;;
-esac
-
-echo -n "$(top -b -n1 | grep "Cpu(s)" | awk '{print $2 + $4}')%"

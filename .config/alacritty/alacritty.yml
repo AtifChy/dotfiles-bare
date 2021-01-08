@@ -34,9 +34,9 @@ window:
   # Number of lines/columns (not pixels) in the terminal. The number of columns
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
-  #dimensions:
-  #  columns: 0
-  #  lines: 0
+  dimensions:
+    columns: 106
+    lines: 40
 
   # Window position (changes require restart)
   #
@@ -66,7 +66,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background and no title bar buttons
-  #decorations: full
+  decorations: full
 
   # Startup Mode (changes require restart)
   #
@@ -83,7 +83,7 @@ window:
   #title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  #dynamic_title: true
+  dynamic_title: true
 
   # Window class (Linux/BSD only):
   #class:
@@ -179,7 +179,7 @@ font:
 
   # Choose whether to enable ligature (Currently only in Linux, may work in macOS)
   # by default it's true (enabled)
-  ligature: true
+  ligatures: true
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
@@ -187,9 +187,12 @@ font:
 # Colors (Tomorrow Night)
 colors:
   # Default colors
+  #primary:
+  #  background: '#14191d'
+  #  foreground: '#f2f2f2'
   primary:
-    background: '#14191d'
-    foreground: '#f2f2f2'
+     background: '#111111'
+     foreground: '#f2f2f2'
 
     # Bright and dim foreground colors
     #
@@ -248,27 +251,48 @@ colors:
     #  foreground: '#1d1f21'
 
   # Normal colors
+  #normal:
+  #  black:   '#14191d'
+  #  red:     '#e1331b'
+  #  green:   '#6ab019'
+  #  yellow:  '#fec106'
+  #  blue:    '#0070ff'
+  #  magenta: '#ed0048'
+  #  cyan:    '#2aa7e7'
+  #  white:   '#f2f2f2'
+
+  ## Bright colors
+  #bright:
+  #  black:   '#5d5d5f'
+  #  red:     '#f9361c'
+  #  green:   '#79c71d'
+  #  yellow:  '#f8cb12'
+  #  blue:    '#004e9d'
+  #  magenta: '#fe1d63'
+  #  cyan:    '#6aaff0'
+  #  white:   '#cccccc'
+
   # Normal colors
   normal:
-    black:   '#14191d'
-    red:     '#e1331b'
-    green:   '#6ab019'
-    yellow:  '#fec106'
-    blue:    '#0070ff'
-    magenta: '#ed0048'
-    cyan:    '#2aa7e7'
-    white:   '#f2f2f2'
+    black:   '#171421'
+    red:     '#C01C28'
+    green:   '#26A269'
+    yellow:  '#A2734C'
+    blue:    '#12488B'
+    magenta: '#A347BA'
+    cyan:    '#2AA1B3'
+    white:   '#D0CFCC'
 
   # Bright colors
   bright:
-    black:   '#5d5d5f'
-    red:     '#f9361c'
-    green:   '#79c71d'
-    yellow:  '#f8cb12'
-    blue:    '#004e9d'
-    magenta: '#fe1d63'
-    cyan:    '#6aaff0'
-    white:   '#cccccc'
+    black:   '#5E5C64'
+    red:     '#F66151'
+    green:   '#33DA7A'
+    yellow:  '#E9AD0C'
+    blue:    '#2A7BDE'
+    magenta: '#C061CB'
+    cyan:    '#33C7DE'
+    white:   '#f2f2f2'
 
   # Dim colors
   #
@@ -339,7 +363,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.99
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -367,7 +391,7 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: On
+    blinking: Always
 
   # Vi mode cursor style
   #
@@ -382,7 +406,7 @@ cursor:
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
-  #unfocused_hollow: true
+  unfocused_hollow: true
 
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.

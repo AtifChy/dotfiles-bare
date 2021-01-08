@@ -76,18 +76,18 @@ export ZDOTDIR=$HOME/.config/zsh
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # starship theme
-starship init fish | source
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+#starship init fish | source
+#export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # pfetch environment
-export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
-export PF_SEP="=>"
+#export PF_INFO="ascii title os host kernel uptime pkgs shell wm editor memory"
+#export PF_SEP="=>"
 
 # Clipmenu
-export CM_SELECTIONS="clipboard"
-export CM_DEBUG=0
-export CM_OUTPUT_CLIP=1
-export CM_MAX_CLIPS=30
+#export CM_SELECTIONS="clipboard"
+#export CM_DEBUG=0
+#export CM_OUTPUT_CLIP=1
+#export CM_MAX_CLIPS=30
 
 # color for man pages
 set -xU LESS_TERMCAP_md (printf "\e[01;31m")
@@ -106,8 +106,8 @@ set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 #ibus-daemon -drx
 
 # fix qt apps
-if [ $XDG_CURRENT_DESKTOP = "KDE" ]
-	dunstctl set-paused true
-else
-	export QT_QPA_PLATFORMTHEME='qt5ct'
-end
+#if [ $XDG_CURRENT_DESKTOP = "KDE" ]
+#	dunstctl set-paused true
+#else
+#	export QT_QPA_PLATFORMTHEME='qt5ct'
+#end
