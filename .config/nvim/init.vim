@@ -9,7 +9,7 @@
 "======================> VIM-PLUG <=======================
 
 if &compatible
-  set nocompatible               " Be iMproved
+  set nocompatible               			" Be iMproved
 endif
 
 "" Install vim-plug if not found
