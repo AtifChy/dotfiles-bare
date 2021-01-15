@@ -19,8 +19,8 @@ export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin
 export EDITOR='nvim'
 
 # Firefox
-#export MOZ_ENABLE_WAYLAND=1
-#export MOZ_WEBRENDER=1
+export MOZ_ENABLE_WAYLAND=1
+export MOZ_WEBRENDER=1
 
 # Clipmenu
 #export CM_SELECTIONS="clipboard"
