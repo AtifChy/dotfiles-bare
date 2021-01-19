@@ -130,13 +130,14 @@ endif
 " Air-line configuration
 let g:airline_powerline_fonts = 1
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['branch', 'tabline', 'coc']
+let g:airline#extensions#tabline#enabled = 1
+"let g:airline_extensions = ['branch', 'tabline', 'coc']
 
 " Key Bindings
 map <C-e> :CocCommand explorer<CR>
 map <M-s> :setlocal spell! spelllang=en_US<CR>
 "map <C-e> :NERDTree<CR>
-"map <C-r> :source /home/atif/.config/nvim/init.vim<CR>
+map <C-s> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 map <C-t> :term<CR>
 

@@ -7,7 +7,7 @@
 # ╚══════╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚══════╝
 
 # some useful PATH
-export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
+#export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
 #export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory"
@@ -19,7 +19,10 @@ export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin
 export EDITOR='nvim'
 
 # Firefox
-export MOZ_ENABLE_WAYLAND=1
+if [ "loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}'" = "wayland" ]
+then
+	export MOZ_ENABLE_WAYLAND=1
+fi
 export MOZ_WEBRENDER=1
 
 # Clipmenu
@@ -40,7 +43,7 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 export INPUTRC="$XDG_CONFIG_HOME"/inputrc
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+#export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 #export KODI_DATA="$XDG_DATA_HOME/kodi"
 #export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 #export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
