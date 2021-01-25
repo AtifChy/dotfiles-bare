@@ -17,14 +17,13 @@ Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'preservim/nerdtree'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
-Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'itchyny/lightline.vim'
 "Plug 'dag/vim-fish'
-Plug 'tjdevries/coc-zsh'
+"Plug 'tjdevries/coc-zsh'
 
 " colorschemes
 "Plug 'morhetz/gruvbox'
@@ -142,7 +141,7 @@ if has('nvim')
 endif
 
 " source plugin config
-source /home/atif/.config/nvim/coc.vim
+"source /home/atif/.config/nvim/coc.vim
 "source $HOME/.config/nvim/lightline.vim
 
 " startify config

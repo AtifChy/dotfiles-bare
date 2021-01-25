@@ -7,7 +7,7 @@
 # ╚══════╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚══════╝
 
 # some useful PATH
-export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
+#export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
 #export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory"
@@ -69,7 +69,7 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 #ibus-daemon -drx
 
 # qt apps theme
-#export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 #if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
 #	dunstctl set-paused true
