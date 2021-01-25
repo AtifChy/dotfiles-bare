@@ -19,10 +19,11 @@
 export EDITOR='nvim'
 
 # Firefox
-if [ "loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}'" = "wayland" ]
+if [ "$XDG_SESSION_TYPE" = "wayland" ]
 then
 	export MOZ_ENABLE_WAYLAND=1
 fi
+
 export MOZ_WEBRENDER=1
 
 # Clipmenu
