@@ -8,10 +8,6 @@
 
 "======================> VIM-PLUG <=======================
 
-if &compatible
-  set nocompatible               			" Be iMproved
-endif
-
 "" Install vim-plug if not found
 "if empty(glob('/home/atif/.local/share/nvim/site/autoload/plug.vim'))
 "  silent !curl -fLo /home/atif/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -184,9 +180,8 @@ let g:startify_lists = [
         \ ]
 let g:startify_bookmarks = [
 	\ { 'a': '~/.config/nvim/init.vim' } ,
-	\ { 'b': '~/.config/zsh/.zshrc' },
-	\ { 'c': '~/.config/alacritty/alacritty.yml' },
-	\ { 'd': '~/.config/X11/Xresources' },
-	\ { 'f': '~/.config/fish/config.fish' },
-	\ { 'g': '~/.local/share/dwm/autostart.sh' },
+	\ { 's': '~/.config/zsh/.zshrc' },
+	\ { 'd': '~/.config/alacritty/alacritty.yml' },
+	\ { 'f': '~/.config/X11/Xresources' },
+	\ { 'g': '~/.config/fish/config.fish' },
 	\ ]

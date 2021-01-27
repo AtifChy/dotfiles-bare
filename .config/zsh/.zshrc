@@ -6,12 +6,6 @@
 # ███████╗██████╔╝██║░░██║██║░░██║╚█████╔╝
 # ╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░
 
-# Enable blur for unsupported terminals on X11 (Only works on KDE plasma)
-#if [[ $(ps --no-header -p $PPID -o comm) =~ '^st|alacritty|kitty$' ]]; then
-#        for wid in $(xdotool search --pid $PPID); do
-#            xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id $wid; done
-#fi
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -70,11 +64,11 @@ zinit light olets/zsh-abbr
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # History file configuration
-if [[ ! -f $XDG_DATA_HOME/zsh/history ]]; then
-	command mkdir -p $XDG_DATA_HOME/zsh && \
-	command touch $XDG_DATA_HOME/zsh/history
+if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history ]]; then
+	command mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/zsh && \
+	command touch ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history
 fi
-[ -z "$HISTFILE" ] && HISTFILE="$XDG_DATA_HOME/zsh/history"
+[ -z "$HISTFILE" ] && HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
@@ -92,7 +86,7 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt share_history 	      # shell share history with other tabs
 
 ## aliases
-alias sudo='sudo -E '
+alias sudo='sudo '
 #alias clr='clear'
 alias zshrc='nvim ~/.config/zsh/.zshrc'
 alias vi='nvim'
@@ -116,6 +110,7 @@ alias du='du -h'
 alias df='df -h'
 alias mkdir='mkdir -p'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+alias sv='sudo nvim'
 
 # color man pages
 man() {

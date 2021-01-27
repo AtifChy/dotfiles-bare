@@ -19,11 +19,8 @@
 export EDITOR='nvim'
 
 # Firefox
-if [ "$XDG_SESSION_TYPE" = "wayland" ]
-then
-	export MOZ_ENABLE_WAYLAND=1
-fi
-
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
+[ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1
 export MOZ_WEBRENDER=1
 
 # Clipmenu
@@ -75,6 +72,5 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 # qt apps theme
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
-#if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
-#	dunstctl set-paused true
-#fi
+#[ "$XDG_CURRENT_DESKTOP" = "KDE" ] && dunstctl set-paused true
+
