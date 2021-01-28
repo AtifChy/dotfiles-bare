@@ -75,7 +75,7 @@ fi
 # zsh settings
 autoload -Uz compinit
 compinit -u
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
 
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
@@ -90,6 +90,7 @@ alias sudo='sudo '
 #alias clr='clear'
 alias zshrc='nvim ~/.config/zsh/.zshrc'
 alias vi='nvim'
+alias ls='exa --group --icons'
 alias l='ls -lAFh --group-directories-first --time-style=long-iso'
 alias ll='ls -laFh --group-directories-first --time-style=long-iso'
 alias cd..='cd ..'

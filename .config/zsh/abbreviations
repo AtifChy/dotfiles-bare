@@ -1,6 +1,5 @@
 abbr f="find . -name"
 abbr ff="find / -name"
-abbr neo="neofetch"
 abbr paruR="paru -Rnsuc"
 abbr sv="sudo nvim"
 abbr vi="nvim"

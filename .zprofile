@@ -60,6 +60,7 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ZDOTDIR="$HOME"/.config/zsh
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 
 # Ibus KDE
 #export GTK_IM_MODULE=ibus
