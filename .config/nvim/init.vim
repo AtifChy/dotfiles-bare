@@ -24,10 +24,10 @@ Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'preservim/nerdtree'
-"Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 "Plug 'itchyny/lightline.vim'
 "Plug 'dag/vim-fish'
 Plug 'tjdevries/coc-zsh'
@@ -66,7 +66,7 @@ set cursorline						" highlight cursor line
 set cursorcolumn 					" highlight cursor column
 set clipboard+=unnamedplus				" copy paste between vim and everything else
 set inccommand=nosplit					" required for hlsearch
-"set updatetime=100
+set updatetime=100
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
@@ -152,7 +152,14 @@ let g:coc_global_extensions = [
 	\ 'coc-json',
 	\ 'coc-explorer',
 	\ 'coc-rls',
+	\ 'coc-html',
+	\ 'coc-prettier'
 	\ ]
+
+" coc-prettier config
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " nvim config
 if has('nvim')
