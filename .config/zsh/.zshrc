@@ -39,26 +39,24 @@ autoload -Uz _zinit
 
 ### End of Zinit's installer chunk
 
-# ohmyzsh library
-#zinit snippet OMZL::history.zsh
-zinit snippet OMZL::termsupport.zsh
-zinit snippet OMZL::completion.zsh
-zinit snippet OMZL::theme-and-appearance.zsh
-zinit snippet OMZL::key-bindings.zsh
-
-# ohmyzsh plugin/s
-zinit snippet OMZP::extract
-
 # zsh plugins
-zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+      zdharma/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+      zsh-users/zsh-completions
 
-zinit light olets/zsh-abbr
+# ohmyzsh library, plugins, themes
+zinit snippet OMZL::termsupport.zsh
+zinit wait lucid for \
+      OMZL::key-bindings.zsh \
+      OMZP::extract
+
+# more zsh plugins
+zinit ice wait lucid; zinit light olets/zsh-abbr
+#zinit light MichaelAquilina/zsh-you-should-use
 
 # zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -75,6 +73,9 @@ fi
 # zsh settings
 autoload -Uz compinit
 compinit -u
+zstyle ':completion:*' menu select
+export LS_COLORS="di=1;34"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
 
 ## History command configuration
@@ -84,34 +85,6 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history 	      # shell share history with other tabs
-
-## aliases
-alias sudo='sudo '
-#alias clr='clear'
-alias zshrc='nvim ~/.config/zsh/.zshrc'
-alias vi='nvim'
-alias ls='exa --group --icons'
-alias l='ls -lAFh --group-directories-first --time-style=long-iso'
-alias ll='ls -laFh --group-directories-first --time-style=long-iso'
-alias cd..='cd ..'
-alias ..='cd ..'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-alias .....='cd ../../../../'
-alias ff='find / -name'
-alias f='find . -name'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias ip='alias ip="ip -c"'
-alias pactree='pactree --color'
-alias watch='watch --color'
-alias free='free -h'
-alias du='du -h'
-alias df='df -h'
-alias mkdir='mkdir -p'
-alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
-alias sv='sudo nvim'
 
 # color man pages
 man() {
@@ -124,18 +97,14 @@ man() {
     command man "$@"
 }
 
+# alias
+source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
+
 # source default configs
 source /etc/profile
 
 # some useful PATH
 #export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
-
-# alias for for github dotfile repo
-alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'
-
-# alias for reflector
-alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
-alias reflectorbd='sudo reflector -c Bangladesh --save /etc/pacman.d/mirrorlist'
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
@@ -145,3 +114,4 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
+

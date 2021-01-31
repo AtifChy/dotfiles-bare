@@ -15,7 +15,7 @@
 
 # Apps
 #export TERMINAL='alacritty'
-#export BROWSER='chromium'
+#export BROWSER='firefox'
 export EDITOR='nvim'
 
 # Firefox
@@ -71,7 +71,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 #ibus-daemon -drx
 
 # qt apps theme
-export QT_QPA_PLATFORMTHEME='qt5ct'
+#export QT_QPA_PLATFORMTHEME='qt5ct'
 
 #[ "$XDG_CURRENT_DESKTOP" = "KDE" ] && dunstctl set-paused true
 
