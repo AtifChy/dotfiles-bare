@@ -1,15 +1,16 @@
 {
   "suggest.noselect": false,
-  // coc-preview
+  // coc-prettier
   "coc.preferences.formatOnSaveFiletypes": [
-    //    "javascript",
-    //    "typescript",
+    // 	  "javascript",
+    //	  "typescript",
     //    "typescriptreact",
     "json",
     //    "javascriptreact",
     //    "typescript.tsx",
     //    "graphql",
-    "html"
+    "html",
+    "rust"
   ],
   // coc-explorer
   "explorer.icon.enableNerdfont": true,
@@ -20,51 +21,82 @@
   "explorer.file.column.clip.copy": "",
   "explorer.file.column.clip.cut": "",
   "explorer.keyMappings.global": {
-    "gk": "expandablePrev",
-    "gj": "expandableNext",
-    "<space>": "toggleSelection",
+    "i": false, // cancel default mapkey
+
+    "*": "toggleSelection",
     "<tab>": "actionMenu",
-    "-": "collapse",
-    "=": ["expandable?", "expand", "open"],
-    "J": ["toggleSelection", "nodeNext"],
-    "K": ["toggleSelection", "nodePrev"],
+
+    "gk": ["wait", "expandablePrev"],
+    "gj": ["wait", "expandableNext"],
+    "1": ["wait", "collapse"],
+    "2": ["wait", "expandable?", "expand", "open"],
+    "J": ["wait", "toggleSelection", "normal:j"],
+    "K": ["wait", "toggleSelection", "normal:k"],
+    "gl": ["wait", "expand:recursive"],
+    "gh": ["wait", "collapse:recursive"],
     "<2-LeftMouse>": [
       "expandable?",
       ["expanded?", "collapse", "expand"],
       "open"
     ],
-    "o": ["expanded?", "collapse", "expand"],
-    "<cr>": ["expandable?", "cd", "open"],
-    "H": "open:split",
-    "S": "open:split:plain",
-    "V": "open:vsplit",
+    "o": ["wait", "expanded?", "collapse", "expand"],
+    "<cr>": ["wait", "expandable?", "cd", "open"],
+    "e": "open",
+    "s": "open:split",
+    "E": "open:vsplit",
     "t": "open:tab",
-    "<bs>": "gotoParent",
-    "gp": "preview:labeling",
-    "Y": "copyFile",
-    "X": "cutFile",
-    "P": "pasteFile",
-    "dd": "delete",
-    "T": "addFile",
-    "D": "addDirectory",
+    "<bs>": ["wait", "gotoParent"],
+    "gs": ["wait", "reveal:select"],
+    "il": "preview:labeling",
+    "ic": "preview:content",
+    "Il": "previewOnHover:toggle:labeling",
+    "Ic": "previewOnHover:toggle:content",
+    "II": "previewOnHover:disable",
+
+    "yp": "copyFilepath",
+    "yn": "copyFilename",
+    "yy": "copyFile",
+    "dd": "cutFile",
+    "p": "pasteFile",
+    "df": "delete",
+    "dF": "deleteForever",
+
+    "a": "addFile",
+    "A": "addDirectory",
     "r": "rename",
-    ".": "toggleHidden",
+
+    "zh": "toggleHidden",
+    "g<dot>": "toggleHidden",
     "R": "refresh",
+
     "?": "help",
     "q": "quit",
     "<esc>": "esc",
-    "!": "systemExecute",
+    "X": "systemExecute",
     "gd": "listDrive",
+
     "f": "search",
     "F": "searchRecursive",
+
     "gf": "gotoSource:file",
     "gb": "gotoSource:buffer",
-    "[[": "sourcePrev",
-    "]]": "sourceNext",
-    "[d": "diagnosticPrev",
-    "]d": "diagnosticNext",
-    "[c": "gitPrev",
-    "]c": "gitNext",
+
+    "[[": ["wait", "sourcePrev"],
+    "]]": ["wait", "sourceNext"],
+
+    "[i": ["wait", "indentPrev"],
+    "]i": ["wait", "indentNext"],
+
+    "[m": ["wait", "markPrev:modified"],
+    "]m": ["wait", "markNext:modified"],
+
+    "[d": ["wait", "markPrev:diagnosticError:diagnosticWarning"],
+    "]d": ["wait", "markNext:diagnosticError:diagnosticWarning"],
+    "[D": ["wait", "markPrev:diagnosticError"],
+    "]D": ["wait", "markNext:diagnosticError"],
+
+    "[c": ["wait", "markPrev:git"],
+    "]c": ["wait", "markNext:git"],
     "<<": "gitStage",
     ">>": "gitUnstage"
   },

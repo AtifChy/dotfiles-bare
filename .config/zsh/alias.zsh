@@ -57,7 +57,6 @@ alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -v'
 # safer alternative w/ timeout, not stored in history
-#alias rm=' timeout 3 rm -Iv --one-file-system'
 alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'

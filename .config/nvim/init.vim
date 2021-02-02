@@ -67,6 +67,7 @@ set cursorcolumn 					" highlight cursor column
 set clipboard+=unnamedplus				" copy paste between vim and everything else
 set inccommand=nosplit					" required for hlsearch
 set updatetime=100
+filetype plugin indent on
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
@@ -129,13 +130,24 @@ let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline_extensions = ['branch', 'tabline', 'coc']
 
+" indent plugin settings
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
 " Key Bindings
+nnoremap <Space> <Nop>
+let mapleader = " "
 map <C-e> :CocCommand explorer<CR>
 map <M-s> :setlocal spell! spelllang=en_US<CR>
 "map <C-e> :NERDTree<CR>
 map <C-s> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
-map <C-t> :term<CR>
+
+" neovim terminal config
+map <leader>t :sp term://zsh<CR>
+tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+endif
 
 "" Cursor fix
 "augroup RestoreCursorShapeOnExit
@@ -161,10 +173,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-" nvim config
-if has('nvim')
-    autocmd TermOpen term://* startinsert
-endif
 
 " source plugin config
 "source /home/atif/.config/nvim/coc.vim

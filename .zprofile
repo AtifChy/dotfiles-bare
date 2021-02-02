@@ -18,9 +18,9 @@
 #export BROWSER='firefox'
 export EDITOR='nvim'
 
-# Firefox
-[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
-[ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1
+# Firefox hardware video acceleration
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1; unset MOZ_X11_EGL
+[ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1; unset MOZ_ENABLE_WAYLAND
 export MOZ_WEBRENDER=1
 
 # Clipmenu
@@ -57,7 +57,6 @@ export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 #export LESSHISTFILE="-" 					# disable lesshistfile
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
-export ZDOTDIR="$HOME"/.config/zsh
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
