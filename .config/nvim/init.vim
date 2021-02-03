@@ -165,7 +165,8 @@ let g:coc_global_extensions = [
 	\ 'coc-explorer',
 	\ 'coc-rls',
 	\ 'coc-html',
-	\ 'coc-prettier'
+	\ 'coc-prettier',
+	\ 'coc-sh'
 	\ ]
 
 " coc-prettier config

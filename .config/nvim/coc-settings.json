@@ -10,7 +10,8 @@
     //    "typescript.tsx",
     //    "graphql",
     "html",
-    "rust"
+    "rust",
+    "sh"
   ],
   // coc-explorer
   "explorer.icon.enableNerdfont": true,
