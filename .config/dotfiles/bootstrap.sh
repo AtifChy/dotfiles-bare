@@ -26,7 +26,10 @@ if [[ ! -d ~/.ssh ]]; then
 	alias dotfile='git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
 
 	# choose git branch
-	echo "Do you wish to install this program?"
+	echo 'Do you wish to change git branch?'
+	echo '\n\033[1;30mCurrently active:\033[0m [* indicates active branch]'
+	dotfile branch
+	echo '\n'
 	select yn in "master" "gnome"; do
 	    case $yn in
 	        master ) BRANCH=master;;
@@ -49,9 +52,9 @@ else
 fi
 
 ## creating necessary folders and files
-mkdir -p $HOME/.local/share/{gnupg,cargo,go,vscode,rustup}
-mkdir -p $HOME/.config/{less,parallel,npm,yarn}
-mkdir -p $HOME/.cache/{less,pylint}
+mkdir -pv $HOME/.local/share/{gnupg,cargo,go,vscode,rustup}
+mkdir -pv $HOME/.config/{less,parallel,npm,yarn}
+mkdir -pv $HOME/.cache/{less,pylint}
 touch $HOME/.config/{wgetrc,inputrc,npm/npmrc}
 echo hsts-file \= $HOME/.cache/wget-hsts >> "$HOME/.config/wgetrc"
 echo 'prefix=${XDG_DATA_HOME}/npm\ncache=${XDG_CACHE_HOME}/npm\ntmp=${XDG_RUNTIME_DIR}/npm\ninit-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js' >> $HOME/.config/npm/npmrc
