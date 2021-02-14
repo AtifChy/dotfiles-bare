@@ -19,8 +19,8 @@
 export EDITOR='nvim'
 
 # Firefox hardware video acceleration
-[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1; unset MOZ_X11_EGL
-[ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1; unset MOZ_ENABLE_WAYLAND
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
+[ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1
 export MOZ_WEBRENDER=1
 
 # Clipmenu
@@ -70,7 +70,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 #ibus-daemon -drx
 
 # qt apps theme
-#export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 #[ "$XDG_CURRENT_DESKTOP" = "KDE" ] && dunstctl set-paused true
 

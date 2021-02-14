@@ -8,13 +8,6 @@
 
 "======================> VIM-PLUG <=======================
 
-"" Install vim-plug if not found
-"if empty(glob('/home/atif/.local/share/nvim/site/autoload/plug.vim'))
-"  silent !curl -fLo /home/atif/.local/share/nvim/site/autoload/plug.vim --create-dirs
-"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall --sync | source /home/atif/.config/nvim/init.vim
-"endif
-
 " Plugins
 call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
 
@@ -173,7 +166,6 @@ let g:coc_global_extensions = [
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-
 
 " source plugin config
 "source /home/atif/.config/nvim/coc.vim
