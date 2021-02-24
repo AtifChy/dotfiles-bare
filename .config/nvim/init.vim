@@ -136,7 +136,7 @@ map <C-s> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
 
 " neovim terminal config
-map <leader>t :sp term://zsh<CR>
+map <leader>t :sp term://zsh<bar>resize 18<CR>
 tnoremap <Esc> <C-\><C-n>
 if has('nvim')
     autocmd TermOpen term://* startinsert

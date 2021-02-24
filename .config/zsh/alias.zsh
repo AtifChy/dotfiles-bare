@@ -55,13 +55,13 @@ alias fgrep='fgrep --color=auto'
 ## Safety features
 alias cp='cp -v'
 alias mv='mv -v'
-alias rm='rm -v'
+#alias rm='rm -v'
 # safer alternative w/ timeout, not stored in history
 alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-alias cls=' echo -ne "\033c"'       	# clear screen for real (it does not work in Terminology)
+#alias cls=' echo -ne "\033c"'       	# clear screen for real (it does not work in Terminology)
 
 ## Make Bash error tolerant
 alias :q=' exit'

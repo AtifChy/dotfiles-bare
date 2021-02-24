@@ -60,6 +60,15 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
+export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
+export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
+
+# Don't ask me for login keyring
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
 
 # Ibus KDE
 #export GTK_IM_MODULE=ibus
