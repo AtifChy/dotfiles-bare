@@ -1,4 +1,4 @@
-Config { font = "xft:JetBrains Mono:style=Bold:size=10:antialias=true:hinting=true,Symbols Nerd Font:size=10,Noto Color Emoji:size=10:antialias=true:hinting=true,Noto Sans Bengali:style=Bold:size=10,antialias=true:hinting=true"
+Config { font = "xft:JetBrains Mono:style=Bold:size=10:antialias=true:hinting=true,Symbols Nerd Font:size=11,Noto Color Emoji:size=10:antialias=true:hinting=true,Noto Sans Bengali:style=Bold:size=10,antialias=true:hinting=true"
        , additionalFonts = []
        -- , borderColor = "black"
        ,
@@ -19,7 +19,7 @@ Config { font = "xft:JetBrains Mono:style=Bold:size=10:antialias=true:hinting=tr
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader% }{\
+       , template = "<fc=#d8dee9> </fc><fc=#434c5e> | </fc>%UnsafeStdinReader% }{\
                     \    \
                     \<fc=#bf616a>\
                     \<action=`st -c st-floating -e htop -s PERCENT_CPU` button=1>\

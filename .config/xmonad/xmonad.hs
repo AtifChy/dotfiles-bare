@@ -7,7 +7,7 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
--- Basic
+-- Base
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -23,14 +23,17 @@ import XMonad.Actions.Promote
 
 -- Hooks
 import XMonad.Hooks.ManageDocks -- make space for bar so it's not covered up
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog -- handle left side
-import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW support
+import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW & fullscreen events support
 
 -- Layout
-import XMonad.Layout.Spacing -- gaps
-import XMonad.Layout.NoBorders -- smartBorders
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
+
+-- Layout modifiers
+import XMonad.Layout.Spacing -- gaps
+import XMonad.Layout.NoBorders -- smartBorders
 
 -- Util
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
@@ -209,7 +212,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 ------------------------------------------------------------------------
 -- Gaps/Spacing
-mySpacing = spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True
+mySpacing = spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True
 
 -- Layouts:
 
@@ -234,7 +237,7 @@ myTabConfig = def { activeColor         = "#81a1c1"
                   , fontName            = "xft:JetBrains Mono:style=Bold:size=10:antialias=true:hinting=true"
 }
 
-myLayout = avoidStruts (
+myLayout = lessBorders OnlyScreenFloat $ avoidStruts (
      tiled |||
      Mirror tiled |||
      Full |||
@@ -242,7 +245,7 @@ myLayout = avoidStruts (
      noBorders Full
   where
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = smartBorders $ mySpacing $ ResizableTall nmaster delta ratio []
+     tiled   = mySpacing $ ResizableTall nmaster delta ratio []
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -273,7 +276,9 @@ myManageHook = manageHook def <+> manageDocks <+> composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
-    , className =? "firefoxdeveloperedition" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat ]
+    , className =? "firefoxdeveloperedition" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat
+    , isFullscreen 		    --> doFullFloat
+    ]
 
 -- fix for firefox fullscreen
 addNETSupported :: Atom -> X ()
