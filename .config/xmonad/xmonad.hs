@@ -82,8 +82,8 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#2e3440"
-myFocusedBorderColor = "#81a1c1"
+myNormalBorderColor  = "#282c34"
+myFocusedBorderColor = "#426f8c"			-- "#617991"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -94,7 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "dmenu_run -p 'Run:' -w 1916")
 
     -- launch gmrun
     --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -241,8 +241,7 @@ myLayout = lessBorders OnlyScreenFloat $ avoidStruts (
      tiled |||
      Mirror tiled |||
      Full |||
-     tabbed shrinkText myTabConfig ) |||
-     noBorders Full
+     tabbed shrinkText myTabConfig )
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = mySpacing $ ResizableTall nmaster delta ratio []
@@ -326,17 +325,20 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
     setDefaultCursor xC_left_ptr
+    spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 --iconspacing 5 &"
     --spawnOnce "trayer --edge TOP --align right --widthtype request --height 24 --distancefrom right --distance 5 --monitor 0 --iconspacing 2 --transparent true --alpha 0 --tint 0x2e3440"
     spawn "systemctl --user restart redshift"
-    --spawnOnce "xsetroot -cursor_name left_ptr &"
+    spawnOnce "dunst &"
     spawnOnce "feh --no-fehbg --bg-scale ~/Downloads/1776179.png &"
+    spawnOnce "picom --experimental-backends &"
+    spawnOnce "nm-applet &"
 
 
 ------------------------------------------------------------------------
--- Xmober workspaces customization
+-- Xmobar workspaces customization
 -- Danger zone
 --
-myXmoberPP xmproc = xmobarPP
+myXmobarPP xmproc = xmobarPP
     		{ ppOutput  = hPutStrLn xmproc
     		, ppCurrent = xmobarColor "#ebcb8b" "" . wrap "[" "]"  -- Current workspace
     		, ppLayout  = \x -> case x of
@@ -364,7 +366,7 @@ main = do
     xmproc <- spawnPipe "xmobar ~/.config/xmonad/xmobar/xmobar.hs"
 
     xmonad $ ewmh $ docks defaults
-    			{ logHook = dynamicLogWithPP $ myXmoberPP xmproc }
+    			{ logHook = dynamicLogWithPP $ myXmobarPP xmproc }
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
