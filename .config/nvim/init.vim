@@ -30,7 +30,7 @@ Plug 'tjdevries/coc-zsh'
 "Plug 'sainnhe/sonokai'
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'AtifChy/onedark.vim'
-Plug 'ap/vim-css-color'
+"Plug 'ap/vim-css-color'
 "Plug 'mhartington/oceanic-next'
 
 call plug#end()						" required
@@ -159,7 +159,8 @@ let g:coc_global_extensions = [
 	\ 'coc-rls',
 	\ 'coc-html',
 	\ 'coc-prettier',
-	\ 'coc-sh'
+	\ 'coc-sh',
+	\ 'coc-highlight'
 	\ ]
 
 " coc-prettier config

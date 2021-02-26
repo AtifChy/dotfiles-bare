@@ -20,11 +20,12 @@ import Data.Maybe (maybeToList)
 
 -- Actions
 import XMonad.Actions.Promote
+import XMonad.Actions.CycleWS
 
 -- Hooks
 import XMonad.Hooks.ManageDocks -- make space for bar so it's not covered up
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.DynamicLog -- handle left side
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doCenterFloat)
+import XMonad.Hooks.DynamicLog -- show workspaces on xmobar
 import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW & fullscreen events support
 
 -- Layout
@@ -33,7 +34,7 @@ import XMonad.Layout.Tabbed
 
 -- Layout modifiers
 import XMonad.Layout.Spacing -- gaps
-import XMonad.Layout.NoBorders -- smartBorders
+import XMonad.Layout.NoBorders
 
 -- Util
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
@@ -83,7 +84,7 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#282c34"
-myFocusedBorderColor = "#426f8c"			-- "#617991"
+myFocusedBorderColor = "#366799"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -142,7 +143,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_a), sendMessage MirrorShrink)
 
     -- Expand focused windows height
-    , ((modm,               xK_z), sendMessage MirrorExpand)
+    , ((modm,               xK_s), sendMessage MirrorExpand)
 
     -- Push window back into tiling
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
@@ -170,6 +171,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+
+    -- a basic CycleWS setup
+    , ((modm,               xK_Right),  nextWS)
+    , ((modm,               xK_Left),   prevWS)
+    , ((modm .|. shiftMask, xK_Right),  shiftToNext)
+    , ((modm .|. shiftMask, xK_Left),   shiftToPrev)
+    , ((modm,               xK_z),      toggleWS)
     ]
     ++
 
@@ -225,23 +233,22 @@ mySpacing = spacingRaw False (Border 5 5 5 5) True (Border 5 5 5 5) True
 -- which denotes layout choice.
 --
 -- Tabbed layout config
-myTabConfig = def { activeColor         = "#81a1c1"
-                  , activeBorderColor   = "#81a1c1"
+myTabConfig = def { activeColor         = "#366799"
+                  , activeBorderColor   = "#366799"
                   , activeTextColor     = "#eceff4"
-                  , inactiveColor       = "#2e3440"
-                  , inactiveBorderColor = "#2e3440"
+                  , inactiveColor       = "#282c34"
+                  , inactiveBorderColor = "#282c34"
                   , inactiveTextColor   = "#4c566a"
-                  , urgentColor         = "#2e3440"
-                  , urgentBorderColor   = "#2e3440"
+                  , urgentColor         = "#282c34"
+                  , urgentBorderColor   = "#282c34"
                   , urgentTextColor     = "#ebcb8b"
                   , fontName            = "xft:JetBrains Mono:style=Bold:size=10:antialias=true:hinting=true"
 }
 
-myLayout = lessBorders OnlyScreenFloat $ avoidStruts (
-     tiled |||
-     Mirror tiled |||
-     Full |||
-     tabbed shrinkText myTabConfig )
+myLayout = lessBorders OnlyScreenFloat $ avoidStruts ( tiled
+					 	   ||| Mirror tiled
+						   ||| Full
+						   ||| tabbed shrinkText myTabConfig )
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = mySpacing $ ResizableTall nmaster delta ratio []
@@ -275,8 +282,13 @@ myManageHook = manageHook def <+> manageDocks <+> composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
+    , className =? "firefox" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat
     , className =? "firefoxdeveloperedition" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat
-    , isFullscreen 		    --> doFullFloat
+    , isFullscreen 		    --> (doF W.focusDown <+> doFullFloat)
+    , resource  =? "redshift-gtk"   --> doCenterFloat
+    , resource  =? "nm-applet" 	    --> doCenterFloat
+    , resource  =? "volumeicon"     --> doCenterFloat
+    , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doCenterFloat
     ]
 
 -- fix for firefox fullscreen
@@ -326,13 +338,12 @@ myLogHook = return ()
 myStartupHook = do
     setDefaultCursor xC_left_ptr
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 --iconspacing 5 &"
-    --spawnOnce "trayer --edge TOP --align right --widthtype request --height 24 --distancefrom right --distance 5 --monitor 0 --iconspacing 2 --transparent true --alpha 0 --tint 0x2e3440"
-    spawn "systemctl --user restart redshift"
     spawnOnce "dunst &"
     spawnOnce "feh --no-fehbg --bg-scale ~/Downloads/1776179.png &"
     spawnOnce "picom --experimental-backends &"
     spawnOnce "nm-applet &"
-
+    spawnOnce "volumeicon &"
+    spawnOnce "systemctl --user restart redshift-gtk.service"
 
 ------------------------------------------------------------------------
 -- Xmobar workspaces customization
@@ -340,7 +351,7 @@ myStartupHook = do
 --
 myXmobarPP xmproc = xmobarPP
     		{ ppOutput  = hPutStrLn xmproc
-    		, ppCurrent = xmobarColor "#ebcb8b" "" . wrap "[" "]"  -- Current workspace
+    		, ppCurrent = xmobarColor "#ebcb8b" "" . wrap "[" "]"  		-- Current workspace
     		, ppLayout  = \x -> case x of
     		                      "Spacing ResizableTall" -> "[]="
     		                      "Mirror Spacing ResizableTall" -> "TTT"
@@ -350,7 +361,7 @@ myXmobarPP xmproc = xmobarPP
     		--, ppVisible = xmobarColor "#b48ead" "#434c5e" . wrap " " " "    -- Visible but not current workspace (other monitor)
     		--, ppHidden  = xmobarColor "#d8dee9" "" . wrap "*" ""            -- Hidden workspaces, contain windows
     		--, ppHiddenNoWindows = xmobarColor "#4c566a" ""                  -- Hidden workspaces, no windows
-    		, ppTitle   = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50            -- Title of active window
+    		, ppTitle   = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50 -- Title of active window
     		, ppSep     = "<fc=#434c5e> | </fc>"                            -- Separator
     		, ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!"           -- Urgent workspaces
     		, ppExtras  = [windowCount]                                     -- Number of windows in current workspace
@@ -426,7 +437,7 @@ help = unlines ["The default modifier key is 'super'. Default keybindings:",
     "mod-h  Shrink the master width",
     "mod-l  Expand the master width",
     "mod-a  Shrink the master height",
-    "mod-z  Expand the master height",
+    "mod-s  Expand the master height",
     "",
     "-- floating layer support",
     "mod-t  Push window back into tiling; unfloat and re-tile it",
@@ -438,9 +449,14 @@ help = unlines ["The default modifier key is 'super'. Default keybindings:",
     "-- quit, or restart",
     "mod-Shift-q  Quit xmonad",
     "mod-q        Restart xmonad",
-    "mod-[1..9]   Switch to workSpace N",
     "",
     "-- Workspaces & screens",
+    "mod-[1..9]   Switch to workSpace N",
+    "mod-Right    Switch to next workSpace",
+    "mod-Left     Switch to previous workSpace",
+    "mod-Shift-Right    Move client to next workSpace",
+    "mod-Shift-Left     Move client to previous workSpace",
+    "mod-z        Switch between previously used workSpace",
     "mod-Shift-[1..9]   Move client to workspace N",
     "mod-{w,e,r}        Switch to physical/Xinerama screens 1, 2, or 3",
     "mod-Shift-{w,e,r}  Move client to screen 1, 2, or 3",

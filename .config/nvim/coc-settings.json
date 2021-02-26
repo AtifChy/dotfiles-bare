@@ -101,5 +101,7 @@
     "<<": "gitStage",
     ">>": "gitUnstage"
   },
-  "coc.preferences.extensionUpdateCheck": "never"
+  "coc.preferences.extensionUpdateCheck": "never",
+  // highlight colors
+  "coc.preferences.colorSupport": true
 }
