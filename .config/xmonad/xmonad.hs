@@ -23,7 +23,7 @@ import XMonad.Actions.Promote
 import XMonad.Actions.CycleWS
 
 -- Hooks
-import XMonad.Hooks.ManageDocks -- make space for bar so it's not covered up
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doCenterFloat)
 import XMonad.Hooks.DynamicLog -- show workspaces on xmobar
 import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW & fullscreen events support
@@ -277,7 +277,7 @@ myLayout = lessBorders OnlyScreenFloat $ avoidStruts ( tiled
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = manageHook def <+> manageDocks <+> composeAll
+myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
@@ -334,7 +334,6 @@ myLogHook = return ()
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 --
--- By default, do nothing.
 myStartupHook = do
     setDefaultCursor xC_left_ptr
     spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 --iconspacing 5 &"
@@ -343,30 +342,7 @@ myStartupHook = do
     spawnOnce "picom --experimental-backends &"
     spawnOnce "nm-applet &"
     spawnOnce "volumeicon &"
-    spawnOnce "systemctl --user restart redshift-gtk.service"
-
-------------------------------------------------------------------------
--- Xmobar workspaces customization
--- Danger zone
---
-myXmobarPP xmproc = xmobarPP
-    		{ ppOutput  = hPutStrLn xmproc
-    		, ppCurrent = xmobarColor "#ebcb8b" "" . wrap "[" "]"  		-- Current workspace
-    		, ppLayout  = \x -> case x of
-    		                      "Spacing ResizableTall" -> "[]="
-    		                      "Mirror Spacing ResizableTall" -> "TTT"
-    		                      "Full" -> "[F]"
-    		                      "Tabbed Simplest" -> "[T]"
-    		                      _ -> "?"
-    		--, ppVisible = xmobarColor "#b48ead" "#434c5e" . wrap " " " "    -- Visible but not current workspace (other monitor)
-    		--, ppHidden  = xmobarColor "#d8dee9" "" . wrap "*" ""            -- Hidden workspaces, contain windows
-    		--, ppHiddenNoWindows = xmobarColor "#4c566a" ""                  -- Hidden workspaces, no windows
-    		, ppTitle   = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50 -- Title of active window
-    		, ppSep     = "<fc=#434c5e> | </fc>"                            -- Separator
-    		, ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!"           -- Urgent workspaces
-    		, ppExtras  = [windowCount]                                     -- Number of windows in current workspace
-    		, ppOrder   = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-    		}
+    spawn     "systemctl --user restart redshift-gtk.service"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -376,38 +352,52 @@ myXmobarPP xmproc = xmobarPP
 main = do
     xmproc <- spawnPipe "xmobar ~/.config/xmonad/xmobar/xmobar.hs"
 
-    xmonad $ ewmh $ docks defaults
-    			{ logHook = dynamicLogWithPP $ myXmobarPP xmproc }
+    xmonad $ ewmh $ docks def
+    			{
+			-- A structure containing your configuration settings, overriding
+			-- fields in the default config. Any you don't override, will
+			-- use the defaults defined in xmonad/XMonad/Config.hs
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
+		        -- simple stuff
+			terminal           = myTerminal,
+        		focusFollowsMouse  = myFocusFollowsMouse,
+        		clickJustFocuses   = myClickJustFocuses,
+        		borderWidth        = myBorderWidth,
+        		modMask            = myModMask,
+        		workspaces         = myWorkspaces,
+        		normalBorderColor  = myNormalBorderColor,
+        		focusedBorderColor = myFocusedBorderColor,
 
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
+		        -- key bindings
+        		keys               = myKeys,
+        		mouseBindings      = myMouseBindings,
 
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook >> addEWMHFullscreen
-    }
+      		        -- hooks, layouts
+        		layoutHook         = myLayout,
+        		manageHook         = myManageHook,
+        		handleEventHook    = myEventHook,
+        		logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
+    						{ ppOutput  = hPutStrLn xmproc
+    						, ppCurrent = xmobarColor "#ebcb8b" "" . wrap "[" "]"  		-- Current workspace
+    						, ppLayout  = \x -> case x of
+    						                      "Spacing ResizableTall" -> "[]="
+    						                      "Mirror Spacing ResizableTall" -> "TTT"
+    						                      "Full" -> "[F]"
+    						                      "Tabbed Simplest" -> "[T]"
+    						                      _ -> "?"
+    						--, ppVisible = xmobarColor "#b48ead" "#434c5e" . wrap " " " "    -- Visible but not current workspace (other monitor)
+    						--, ppHidden  = xmobarColor "#d8dee9" "" . wrap "*" ""            -- Hidden workspaces, contain windows
+    						--, ppHiddenNoWindows = xmobarColor "#4c566a" ""                  -- Hidden workspaces, no windows
+    						, ppTitle   = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50 -- Title of active window
+    						, ppSep     = "<fc=#434c5e> | </fc>"                            -- Separator
+    						--, ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!"           -- Urgent workspaces
+    						, ppExtras  = [windowCount]                                     -- Number of windows in current workspace
+    						, ppOrder   = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+    						},
+        		startupHook        = myStartupHook >> addEWMHFullscreen
+			}
 
+------------------------------------------------------------------------
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
 help = unlines ["The default modifier key is 'super'. Default keybindings:",

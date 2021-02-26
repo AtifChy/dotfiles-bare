@@ -26,7 +26,7 @@ Config { font    = "xft:JetBrains Mono:weight=bold:size=10:antialias=true:hintin
                     , Run Memory ["-t","<fn=1>\xf233</fn> Mem: <usedratio>%"] 30
 --                    , Run Swap [] 10
 --                    , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date "<fn=1>\xf133</fn> %a %d-%m-%Y%l:%M %p" "date" 50
+                    , Run Date "<fn=1>\xf133</fn> %a %d-%m-%Y %l:%M %p" "date" 50
 		    , Run StdinReader
 		    -- trayer padding icon
 		    , Run Com "/home/atif/.config/xmonad/scripts/trayer-padding-icon.sh" [] "trayerpad" 10
