@@ -7,7 +7,7 @@ Config { font    = "xft:JetBrains Mono:weight=bold:size=10:antialias=true:hintin
        , bgColor = "#282c34"
        , fgColor = "#d8dee9"
        , alpha = 255
-       , position = Top
+       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
 --       , textOffset = -1
 --       , iconOffset = -1
        , lowerOnStart = True

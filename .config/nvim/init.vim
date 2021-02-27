@@ -26,12 +26,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tjdevries/coc-zsh'
 
 " colorschemes
-"Plug 'morhetz/gruvbox'
-"Plug 'sainnhe/sonokai'
-"Plug 'NLKNguyen/papercolor-theme'
 Plug 'AtifChy/onedark.vim'
 "Plug 'ap/vim-css-color'
-"Plug 'mhartington/oceanic-next'
 
 call plug#end()						" required
 
@@ -84,38 +80,11 @@ let g:onedark_termcolors = 256
 
 colorscheme onedark
 
-" oceanic-next colorscheme
-"colorscheme OceanicNext
-"let g:oceanic_next_terminal_bold = 1
-"let g:oceanic_next_terminal_italic = 1
-
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
     set termguicolors
     hi LineNr ctermbg=NONE guibg=NONE
 endif
-
-" gruvbox settings
-"colorscheme gruvbox
-"let g:gruvbox_italic = 1
-"let g:gruvbox_contrast_dark = 'hard'
-"let g:gruvbox_invert_selection = 0			" selected texts are highlighted in white
-"set background=dark					" set background color
-"hi Normal ctermbg=NONE guibg=NONE			" transparent background
-
-" sonokai settings
-"colorscheme sonokai
-"set termguicolors
-"let g:sonokai_style = 'atlantis'
-"let g:sonokai_style = 'andromeda'
-"let g:sonokai_enable_italic = 1
-
-" NERDTree Config
-"let g:NERDTreeDirArrowExpandable = '►'
-"let g:NERDTreeDirArrowCollapsible = '▼'
-"let NERDTreeShowLineNumbers = 1
-"let NERDTreeShowHidden = 1
-"let NERDTreeMinimalUI = 1
 
 " Air-line configuration
 let g:airline_powerline_fonts = 1
