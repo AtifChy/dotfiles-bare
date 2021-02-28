@@ -11,7 +11,8 @@
     //    "graphql",
     "html",
     "rust",
-    "sh"
+    "sh",
+    "haskell"
   ],
   // coc-explorer
   "explorer.icon.enableNerdfont": true,
@@ -103,5 +104,20 @@
   },
   "coc.preferences.extensionUpdateCheck": "never",
   // highlight colors
-  "coc.preferences.colorSupport": true
+  "coc.preferences.colorSupport": true,
+  // haskell
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": ["hs", "lhs", "haskell"]
+    }
+  }
 }
