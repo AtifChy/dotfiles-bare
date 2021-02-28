@@ -19,7 +19,7 @@ Plug 'ryanoasis/vim-devicons'
 "Plug 'preservim/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'airblade/vim-gitgutter'
 "Plug 'itchyny/lightline.vim'
 "Plug 'dag/vim-fish'

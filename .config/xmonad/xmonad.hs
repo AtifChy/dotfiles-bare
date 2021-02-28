@@ -10,7 +10,6 @@
 --
 
 -- Base
-
 import Control.Monad (join, liftM, when, (>=>))
 import qualified Data.Map as M
 import Data.Maybe (maybeToList)
@@ -19,27 +18,21 @@ import System.Exit
 import System.IO (Handle)
 import XMonad
 -- Actions
-
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Promote
 -- Hooks
-
 import XMonad.Hooks.DynamicLog -- show workspaces on xmobar
 import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW & fullscreen events support
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
 -- Layout
-
--- Layout modifiers
--- gaps
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Spacing
+import XMonad.Layout.Spacing -- gaps
 import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
 -- Util
-
-import XMonad.Util.Cursor (setDefaultCursor)
+import XMonad.Util.Cursor (setDefaultCursor) -- fix cursor
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
@@ -106,7 +99,6 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       ((modm, xK_p), spawn "dmenu_run -p 'Run:' -w 1916"),
       -- launch gmrun
       --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-
       -- close focused window
       ((modm .|. shiftMask, xK_c), kill),
       -- Rotate through the available layout algorithms
