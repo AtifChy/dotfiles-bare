@@ -24,7 +24,7 @@ Config
           Network
           "wlp0s20u3"
           [ "-t",
-            "<fn=1>\xf063</fn> <rx>kb  <fn=1>\xf062</fn> <tx>kb",
+            "<fn=1>\xf063</fn> <rx>KB  <fn=1>\xf062</fn> <tx>KB",
             "-L",
             "0",
             "-H",
@@ -53,14 +53,14 @@ Config
         -- Run Swap [] 10,
         -- Run Com "uname" ["-s","-r"] "" 36000,
         Run Date "<fn=1>\xf133</fn> %a %d-%m-%Y %l:%M %p" "date" 50,
-        Run StdinReader,
+        Run UnsafeStdinReader,
         -- trayer padding icon
         Run Com "/home/atif/.config/xmonad/scripts/trayer-padding-icon.sh" [] "trayerpad" 10
       ],
     sepChar = "%",
     alignSep = "}{",
     template =
-      " %StdinReader% }{ \
+      " %UnsafeStdinReader% }{ \
       \<fc=#ecbe7b>%cpu%</fc> <fc=#434c5e>|</fc> \
       \<fc=#ff6c6b>%memory%</fc> <fc=#434c5e>|</fc> \
       \<fc=#51afef>%wlp0s20u3%</fc> <fc=#434c5e>|</fc> \

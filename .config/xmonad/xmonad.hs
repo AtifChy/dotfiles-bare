@@ -12,7 +12,7 @@
 -- Base
 import Control.Monad (join, liftM, when, (>=>))
 import qualified Data.Map as M
-import Data.Maybe (maybeToList)
+import Data.Maybe (fromJust, maybeToList)
 import Data.Monoid
 import System.Exit
 import System.IO (Handle)
@@ -77,6 +77,12 @@ altMask = mod1Mask
 --
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
+myWorkspaceIndices = M.fromList $ zip myWorkspaces [1 ..] -- (,) == \x y -> (x,y)
+
+clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>"
+  where
+    i = fromJust $ M.lookup ws myWorkspaceIndices
+
 -- Get count of available windows on a workspace
 --
 windowCount :: X (Maybe String)
@@ -96,7 +102,13 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
       -- launch dmenu
-      ((modm, xK_p), spawn "dmenu_run -p 'Run:' -w 1916"),
+      ((altMask, xK_p), spawn "dmenu_run -p 'Run:' -w 1916"),
+      -- launch greenclip-dmenu
+      ((altMask, xK_c), spawn "greenclip print | sed '/^$/d' | dmenu -s -l 10 -g 2 -w 1916 -p 'Clipboard:' | xargs -r -d'\n' -I '{}' greenclip print '{}'"),
+      -- launch rofi
+      ((modm, xK_p), spawn "rofi -show drun -show-icons"),
+      -- launch rofi-greenclip
+      ((modm, xK_c), spawn "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"),
       -- launch gmrun
       --, ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
       -- close focused window
@@ -273,17 +285,19 @@ myLayout =
 myManageHook =
   composeAll
     [ className =? "MPlayer" --> doFloat,
-      className =? "Gimp" --> doFloat,
+      --      className =? "Gimp" --> doFloat,
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore,
-      className =? "firefox" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat,
-      className =? "firefoxdeveloperedition" <&&> resource =? "Toolkit" <||> resource =? "Browser" --> doFloat,
+      resource =? "Toolkit" <||> resource =? "Browser" --> doFloat,
       isFullscreen --> doFullFloat,
       resource =? "redshift-gtk" --> doCenterFloat,
       resource =? "nm-applet" --> doCenterFloat,
       resource =? "volumeicon" --> doCenterFloat,
-      stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doCenterFloat
+      role =? "GtkFileChooserDialog" --> doCenterFloat,
+      role =? "gimp-message-dialog" --> doCenterFloat
     ]
+  where
+    role = stringProperty "WM_WINDOW_ROLE"
 
 -- fix for firefox fullscreen
 addNETSupported :: Atom -> X ()
@@ -334,12 +348,12 @@ myLogHook xmproc =
           --"Full" -> "[F]"
           "Tabbed Simplest" -> "[T]"
           _ -> "?",
-        --, ppVisible = xmobarColor "#b48ead" "#434c5e" . wrap " " " " . clickable   -- Visible but not current workspace (other monitor)
-        --, ppHidden  = xmobarColor "#d8dee9" "" . wrap "*" "" . clickable           -- Hidden workspaces, contain windows
-        --, ppHiddenNoWindows = xmobarColor "#4c566a" "" . clickable                 -- Hidden workspaces, no windows
+        -- ppVisible = xmobarColor "#b48ead" "#434c5e" . wrap " " " " . clickable,  -- Visible but not current workspace (other monitor)
+        ppHidden = xmobarColor "#d8dee9" "" . wrap "" "" . clickable, -- Hidden workspaces, contain windows
+        -- ppHiddenNoWindows = xmobarColor "#4c566a" "" . clickable,  -- Hidden workspaces, no windows
         ppTitle = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50, -- Title of active window
         ppSep = "<fc=#434c5e> | </fc>", -- Separator
-        --, ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!"           -- Urgent workspaces
+        -- ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!",  -- Urgent workspaces
         ppExtras = [windowCount], -- Number of windows in current workspace
         ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
       }
@@ -354,11 +368,12 @@ myLogHook xmproc =
 myStartupHook = do
   setDefaultCursor xC_left_ptr
   spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 --iconspacing 5 &"
-  spawnOnce "feh --no-fehbg --bg-scale ~/Pictures/Wallpapers/0143.jpg &"
+  spawnOnce "feh --no-fehbg --bg-scale ~/Pictures/Wallpapers/0143.jpg"
   spawnOnce "nm-applet &"
   spawnOnce "volumeicon &"
-  spawnOnce "picom --experimental-backends &"
+  spawnOnce "picom --experimental-backends -b"
   spawnOnce "dunst &"
+  spawnOnce "greenclip daemon &"
   spawn "systemctl --user restart redshift-gtk.service"
 
 ------------------------------------------------------------------------
