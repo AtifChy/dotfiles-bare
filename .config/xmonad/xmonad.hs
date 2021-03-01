@@ -99,8 +99,8 @@ myFocusedBorderColor = "#366799"
 --
 myKeys conf@XConfig {XMonad.modMask = modm} =
   M.fromList $
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
+    [ -- launch a terminal
+      ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
       -- launch dmenu
       ((altMask, xK_p), spawn "dmenu_run -p 'Run:' -w 1916"),
       -- launch greenclip-dmenu
@@ -167,14 +167,17 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       ((modm .|. shiftMask, xK_Left), shiftToPrev),
       ((modm, xK_z), toggleWS),
       ((modm, xK_f), moveTo Next EmptyWS), -- find a free workspace
-
       -- Increase/Decrease spacing (gaps)
       ((modm, xK_i), incScreenWindowSpacing 4),
       ((modm, xK_d), decScreenWindowSpacing 4),
       ((altMask, xK_i), incScreenSpacing 4),
       ((altMask, xK_d), decScreenSpacing 4),
       ((altMask .|. shiftMask, xK_i), incWindowSpacing 4),
-      ((altMask .|. shiftMask, xK_d), decWindowSpacing 4)
+      ((altMask .|. shiftMask, xK_d), decWindowSpacing 4),
+      -- screenshot shortcuts (Requires: scrot & slop)
+      ((0, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl ful"),
+      ((0 .|. controlMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl win"),
+      ((0 .|. shiftMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl sel")
     ]
       ++
       --
