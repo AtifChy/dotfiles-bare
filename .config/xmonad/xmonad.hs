@@ -25,6 +25,7 @@ import XMonad.Hooks.DynamicLog -- show workspaces on xmobar
 import XMonad.Hooks.EwmhDesktops -- _NET_ACTIVE_WINDOW & fullscreen events support
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat, isFullscreen)
+import XMonad.Hooks.UrgencyHook
 -- Layout
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
@@ -174,10 +175,10 @@ myKeys conf@XConfig {XMonad.modMask = modm} =
       ((altMask, xK_d), decScreenSpacing 4),
       ((altMask .|. shiftMask, xK_i), incWindowSpacing 4),
       ((altMask .|. shiftMask, xK_d), decWindowSpacing 4),
-      -- screenshot shortcuts (Requires: scrot & slop)
-      ((0, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl ful"),
-      ((0 .|. controlMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl win"),
-      ((0 .|. shiftMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/scrotctrl sel")
+      -- Screenshot shortcuts (Requires: scrot & slop)
+      ((0, xK_Print), spawn "$HOME/.config/xmonad/scripts/ssclip -f"),
+      ((0 .|. controlMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/ssclip -w"),
+      ((0 .|. shiftMask, xK_Print), spawn "$HOME/.config/xmonad/scripts/ssclip -s")
     ]
       ++
       --
@@ -356,7 +357,7 @@ myLogHook xmproc =
         -- ppHiddenNoWindows = xmobarColor "#4c566a" "" . clickable,  -- Hidden workspaces, no windows
         ppTitle = xmobarColor "#a3be8c" "" . xmobarRaw . shorten 50, -- Title of active window
         ppSep = "<fc=#434c5e> | </fc>", -- Separator
-        -- ppUrgent  = xmobarColor "#ebcb8b" "" . wrap "!" "!",  -- Urgent workspaces
+        ppUrgent = xmobarColor "#ff6c6b" "" . wrap "!" "!" . clickable, -- Urgent workspaces
         ppExtras = [windowCount], -- Number of windows in current workspace
         ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex ++ [t]
       }
@@ -389,31 +390,33 @@ main = do
 
   xmonad $
     ewmh $
-      docks
-        def
-          { -- A structure containing your configuration settings, overriding
-            -- fields in the default config. Any you don't override, will
-            -- use the defaults defined in xmonad/XMonad/Config.hs
-            --
-            -- simple stuff
-            terminal = myTerminal,
-            focusFollowsMouse = myFocusFollowsMouse,
-            clickJustFocuses = myClickJustFocuses,
-            borderWidth = myBorderWidth,
-            modMask = myModMask,
-            workspaces = myWorkspaces,
-            normalBorderColor = myNormalBorderColor,
-            focusedBorderColor = myFocusedBorderColor,
-            -- key bindings
-            keys = myKeys,
-            mouseBindings = myMouseBindings,
-            -- hooks, layouts
-            layoutHook = myLayout,
-            manageHook = myManageHook,
-            handleEventHook = myEventHook,
-            logHook = myLogHook xmproc,
-            startupHook = myStartupHook >> addEWMHFullscreen
-          }
+      docks $
+        withUrgencyHook
+          NoUrgencyHook
+          def
+            { -- A structure containing your configuration settings, overriding
+              -- fields in the default config. Any you don't override, will
+              -- use the defaults defined in xmonad/XMonad/Config.hs
+              --
+              -- simple stuff
+              terminal = myTerminal,
+              focusFollowsMouse = myFocusFollowsMouse,
+              clickJustFocuses = myClickJustFocuses,
+              borderWidth = myBorderWidth,
+              modMask = myModMask,
+              workspaces = myWorkspaces,
+              normalBorderColor = myNormalBorderColor,
+              focusedBorderColor = myFocusedBorderColor,
+              -- key bindings
+              keys = myKeys,
+              mouseBindings = myMouseBindings,
+              -- hooks, layouts
+              layoutHook = myLayout,
+              manageHook = myManageHook,
+              handleEventHook = myEventHook,
+              logHook = myLogHook xmproc,
+              startupHook = myStartupHook >> addEWMHFullscreen
+            }
 
 ------------------------------------------------------------------------
 
@@ -424,8 +427,11 @@ help =
     [ "The default modifier key is 'super'. Default keybindings:",
       "",
       "-- launching and killing programs",
-      "mod-Shift-Enter      Launch xterminal",
-      "mod-p                Launch dmenu",
+      "mod-Shift-Enter      Launch terminal",
+      "mod-p                Launch rofi",
+      "mod-c                Launch greenclip with rofi",
+      "alt-p                Launch dmenu",
+      "alt-c                Launch greenclip with dmenu",
       --"mod-Shift-p          Launch gmrun",
       "mod-Shift-c          Close/kill the focused window",
       "mod-Space            Rotate through the available layout algorithms",
@@ -484,5 +490,10 @@ help =
       "-- Mouse bindings: default actions bound to mouse events",
       "mod-button1          Set the window to floating mode and move by dragging",
       "mod-button2          Raise the window to the top of the stack",
-      "mod-button3          Set the window to floating mode and resize by dragging"
+      "mod-button3          Set the window to floating mode and resize by dragging",
+      "",
+      "-- Shortcuts for taking screenshots",
+      "Print                Take fullscreen screenshot",
+      "Shift-Print          Take screenshot of selected screen",
+      "Ctrl-Print           Take screenshot of focused window"
     ]

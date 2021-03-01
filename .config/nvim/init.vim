@@ -57,6 +57,9 @@ set clipboard+=unnamedplus				" copy paste between vim and everything else
 set inccommand=nosplit					" required for hlsearch
 set updatetime=100
 filetype plugin indent on
+set expandtab
+set shiftwidth=4
+set tabstop=4
 
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
@@ -93,7 +96,7 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline_extensions = ['branch', 'tabline', 'coc']
 
 " indent plugin settings
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_char_list = ['|']
 
 " Key Bindings
 nnoremap <Space> <Nop>
@@ -153,10 +156,10 @@ let g:startify_custom_header = [
 let g:startify_lists = [
 	\ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
 	\ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+    \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
 	\ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
+    \ { 'type': 'commands',  'header': ['   Commands']       },
+    \ ]
 let g:startify_bookmarks = [
 	\ { 'a': '~/.config/nvim/init.vim' } ,
 	\ { 's': '~/.config/zsh/.zshrc' },
