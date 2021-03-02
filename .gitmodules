@@ -1,0 +1,3 @@
+[submodule ".config/xmonad"]
+	path = .config/xmonad
+	url = git@github.com:AtifChy/xmonad.git
