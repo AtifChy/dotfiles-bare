@@ -24,6 +24,9 @@ if (( UID != 0 )); then
     alias root='sudo -i'
 fi
 
+# neovim
+alias v='nvim'
+
 ## ls
 #alias ls='exa --group --icons -hF'
 alias ls='ls -hF --color=always'

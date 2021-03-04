@@ -55,18 +55,17 @@ zinit wait lucid for \
       OMZP::extract
 
 # more zsh plugins
-zinit ice wait lucid; zinit light olets/zsh-abbr
+#zinit ice wait lucid; zinit light olets/zsh-abbr
 #zinit light MichaelAquilina/zsh-you-should-use
 
 # zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # History file configuration
-if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history ]]; then
-	command mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/zsh && \
-	command touch ${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history
+if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history ]]; then
+	command touch ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history
 fi
-[ -z "$HISTFILE" ] && HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+[ -z "$HISTFILE" ] && HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
@@ -74,7 +73,7 @@ fi
 autoload -Uz compinit
 compinit -u
 zstyle ':completion:*' menu select
-export LS_COLORS="di=1;34"
+export LS_COLORS="di=1;34"          #
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
 

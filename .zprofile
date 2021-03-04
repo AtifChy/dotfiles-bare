@@ -7,7 +7,7 @@
 # ╚══════╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚══════╝
 
 # some useful PATH
-#export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/bin/statusbar:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
 #export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory"
@@ -15,7 +15,7 @@
 
 # Apps
 #export TERMINAL='alacritty'
-#export BROWSER='firefox'
+export BROWSER='firefox'
 export EDITOR='nvim'
 
 # Firefox hardware video acceleration
@@ -81,5 +81,5 @@ fi
 # qt apps theme
 export QT_QPA_PLATFORMTHEME='qt5ct'
 
-#[ "$XDG_CURRENT_DESKTOP" = "KDE" ] && dunstctl set-paused true
+#[ "$DESKTOP_SESSION" != "xmonad" ] && dunstctl set-paused true
 

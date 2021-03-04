@@ -63,10 +63,10 @@ configuration {
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
-/*	cache-dir: ;*/
+/*	cache-dir: "/tmp/" ; */
 /*	window-thumbnail: false;*/
-/*	drun-use-desktop-cache: false;*/
-/*	drun-reload-desktop-cache: false;*/
+	drun-use-desktop-cache: true;
+	drun-reload-desktop-cache: true;
 /*	normalize-match: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/

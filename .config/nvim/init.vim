@@ -145,6 +145,10 @@ nmap <leader>f  <Plug>(coc-format-selected)
 "source $HOME/.config/nvim/lightline.vim
 
 " startify config
+function! StartifyEntryFormat()
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+
 let g:startify_custom_header = [
 	\'   ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗ ',
 	\'   ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║ ',
