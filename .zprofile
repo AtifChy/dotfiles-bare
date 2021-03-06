@@ -35,7 +35,7 @@ export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CACHE_HOME="$HOME"/.cache
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority 		# This line will break some DMs.
 #export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch-config
-#export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 export INPUTRC="$XDG_CONFIG_HOME"/inputrc
@@ -64,6 +64,8 @@ export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
 
+[ -d ~/.ssr ] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
+
 # Don't ask me for login keyring
 if [ -n "$DESKTOP_SESSION" ];then
     eval $(gnome-keyring-daemon --start)
@@ -71,9 +73,9 @@ if [ -n "$DESKTOP_SESSION" ];then
 fi
 
 # Ibus KDE
-#export GTK_IM_MODULE=ibus
-#export QT_IM_MODULE=ibus
-#export XMODIFIERS=@im=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
 
 # start ibus-deamon on boot
 #ibus-daemon -drx

@@ -8,6 +8,7 @@ alias ip='ip -c'
 alias pactree='pactree --color'
 alias watch='watch --color'
 alias free='free -h'
+alias diff='diff --color=always'
 
 ## New commands
 alias da='date "+%A, %B %d, %Y [%r]"'
@@ -16,11 +17,14 @@ alias hist='history | grep'         	# requires an argument
 alias openports='ss --all --numeric --processes --ipv4 --ipv6'
 alias pgg='ps -Af | grep'           	# requires an argument
 
+# Paru
+alias paruR='paru -Rnsuc'
+
 # Privileged access
 if (( UID != 0 )); then
     alias sudo='sudo '
     alias scat='sudo cat'
-    alias svim='sudoedit nvim'
+    alias sv='sudoedit nvim'
     alias root='sudo -i'
 fi
 
@@ -37,7 +41,7 @@ alias la='ll -A'
 alias lx='ll -BX'                   	# sort by extension
 alias lz='ll -rS'                   	# sort by size
 alias lt='ll -rt'                   	# sort by date
-alias lm='la | more'
+#alias lm='la | more'
 
 ## cd
 alias cd..='cd ..'

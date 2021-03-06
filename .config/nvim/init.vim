@@ -8,24 +8,18 @@
 
 "======================> VIM-PLUG <=======================
 
-" Plugins
 call plug#begin('/home/atif/.cache/nvim/plugged') 	"required
 
-" tools
+" Plugins
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-"Plug 'preservim/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'airblade/vim-gitgutter'
-"Plug 'itchyny/lightline.vim'
 "Plug 'dag/vim-fish'
 Plug 'tjdevries/coc-zsh'
-
-" colorschemes
 Plug 'AtifChy/onedark.vim'
 "Plug 'ap/vim-css-color'
 
@@ -114,12 +108,6 @@ if has('nvim')
     autocmd TermOpen term://* startinsert
 endif
 
-"" Cursor fix
-"augroup RestoreCursorShapeOnExit
-"    autocmd!
-"    autocmd VimLeave * set guicursor=a:hor20
-"augroup END
-
 " coc plugin/s
 let g:coc_global_extensions = [
 	\ 'coc-clangd',
@@ -142,7 +130,6 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " source plugin config
 "source /home/atif/.config/nvim/coc.vim
-"source $HOME/.config/nvim/lightline.vim
 
 " startify config
 function! StartifyEntryFormat()
