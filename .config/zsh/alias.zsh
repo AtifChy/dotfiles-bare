@@ -13,7 +13,7 @@ alias diff='diff --color=always'
 ## New commands
 alias da='date "+%A, %B %d, %Y [%r]"'
 alias du1='du --max-depth=1'
-alias hist='history | grep'         	# requires an argument
+alias hist='history -200 | grep'       	# requires an argument
 alias openports='ss --all --numeric --processes --ipv4 --ipv6'
 alias pgg='ps -Af | grep'           	# requires an argument
 
