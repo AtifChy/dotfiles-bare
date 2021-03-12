@@ -25,6 +25,8 @@ textbox {
 entry {
   padding: 16px;
   blink: true;
+  placeholder-color: #5a6372;
+  placeholder: "Type to filer";
 }
 
 listview {
@@ -52,18 +54,18 @@ element selected {
 num-filtered-rows {
     vertical-align: 0.5;
     expand:     false;
-    text-color: rgba ( 128, 128, 128, 100 % );
+    text-color: #5a6372;
 }
 num-rows {
     padding: 0px 16px 0px 0px;
     vertical-align: 0.5;
     expand:     false;
-    text-color: rgba ( 128, 128, 128, 100 % );
+    text-color: #5a6372;
 }
 textbox-num-sep {
     vertical-align: 0.5;
     expand:     false;
     str:        "/";
-    text-color: rgba ( 128, 128, 128, 100 % );
+    text-color: #5a6372;
 }
 /* vim:ft=css

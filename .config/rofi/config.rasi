@@ -69,12 +69,12 @@ configuration {
 	drun-reload-desktop-cache: true;
 /*	normalize-match: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
+	display-window: "";
 /*	display-windowcd: ;*/
 /*	display-run: ;*/
 /*	display-ssh: ;*/
-	display-drun: "Run";
-/*	display-combi: ;*/
+	display-drun: "";
+	display-combi: " Search";
 /*	display-keys: ;*/
 /*	display-file-browser: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/

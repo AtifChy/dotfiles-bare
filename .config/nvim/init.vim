@@ -22,6 +22,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tjdevries/coc-zsh'
 Plug 'AtifChy/onedark.vim'
 "Plug 'ap/vim-css-color'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 call plug#end()						" required
 
@@ -38,17 +39,17 @@ call plug#end()						" required
 " General Settings
 set t_Co=256						" color support
 set encoding=UTF-8					" uses UTF-8 as the default encoding
-set splitbelow splitright				" fix vim window split
-set mouse=a						" enable mouse
-set number						" always show line number
-"set number relativenumber 				" show number relativenumber
+set splitbelow splitright			" fix vim window split
+set mouse=a						    " enable mouse
+set number						    " always show line number
+"set number relativenumber 			" show number relativenumber
 set showmatch						" set show matching parenthesis
 set ignorecase						" ignore case when searching
 set smartcase						" ignore case if search pattern is all lowercase, case-sensitive otherwise
 set cursorline						" highlight cursor line
 set cursorcolumn 					" highlight cursor column
-set clipboard+=unnamedplus				" copy paste between vim and everything else
-set inccommand=nosplit					" required for hlsearch
+set clipboard+=unnamedplus			" copy paste between vim and everything else
+set inccommand=nosplit				" required for hlsearch
 set updatetime=100
 filetype plugin indent on
 set expandtab
@@ -58,7 +59,7 @@ set tabstop=4
 "autocmd InsertEnter * norm zz 				" vertically center document in insert mode
 autocmd BufWritePre * %s/\s\+$//e			" remove trailing whitespace on save
 autocmd BufWritePost ~/.config/X11/Xresources,~/.config/X11/Xdefaults !xrdb -merge %
-							" run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
+							                " run xrdb on ~/.Xresources & ~/.Xdefaults when I edit them
 
 " onedark settings
 if (has("autocmd") && !has("gui_running"))
@@ -100,6 +101,9 @@ map <M-s> :setlocal spell! spelllang=en_US<CR>
 "map <C-e> :NERDTree<CR>
 map <C-s> :source /home/atif/.config/nvim/init.vim<CR>
 "map <C-e> :Lex<bar>vertical resize 30<CR>
+
+" markdown preview toggle
+nmap <C-m> <Plug>MarkdownPreviewToggle
 
 " neovim terminal config
 map <leader>t :sp term://zsh<bar>resize 18<CR>
