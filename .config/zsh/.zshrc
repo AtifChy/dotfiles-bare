@@ -77,6 +77,9 @@ export LS_COLORS="di=1;34"          #
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
 
+# zsh autosuggestions strategy. options: history, completion
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE

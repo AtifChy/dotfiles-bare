@@ -11,8 +11,7 @@
     //    "graphql",
     "html",
     "rust",
-    "sh",
-    "haskell"
+    "sh"
   ],
   // coc-explorer
   "explorer.icon.enableNerdfont": true,
@@ -120,6 +119,7 @@
       "filetypes": ["hs", "lhs", "haskell"],
       "initializationOptions": {
         "languageServerHaskell": {
+          "haskell.formattingProvider": "stylish-haskell",
           "hlintOn": true,
           "maxNumberOfProblems": 10,
           "completionSnippetsOn": true

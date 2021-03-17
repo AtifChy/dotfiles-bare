@@ -60,3 +60,12 @@
 !dwm.selbgcolor: 	#2d4674
 !dwm.selbordercolor: 	#2d4674
 !dwm.selfloatcolor: 	#2d4674
+
+!URxvt.font:                 xft:FiraCode Nerd Font:style=Retina:size=11
+!URxvt.boldFont:             xft:Fira Code:style=Bold:size=11
+!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+!URxvt.url-select.launcher:  /usr/bin/xdg-open
+!URxvt.url-select.underline: true
+!URxvt.keysym.M-u:           perl:url-select:select_next
+!URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+!URxvt.keysym.M-s:           perl:keyboard-select:search

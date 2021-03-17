@@ -8,7 +8,7 @@
 # ╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚══════╝
 
 # custom PATH
-export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"  		# $HOME/.local/share/npm/bin:$PATH"
 
 # pfetch environment
 #export PF_INFO="ascii title os kernel uptime pkgs shell wm editor memory"
@@ -53,14 +53,15 @@ export GOPATH="$XDG_DATA_HOME"/go
 #export UNISON="$XDG_DATA_HOME/unison"
 #export HISTFILE="$XDG_DATA_HOME/history"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
-export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
-export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
-#export LESSHISTFILE="-" 					# disable lesshistfile
+#export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+#export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export LESSHISTFILE="-" 					# disable lesshistfile
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export ATOM_HOME="$XDG_DATA_HOME"/atom
 export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad

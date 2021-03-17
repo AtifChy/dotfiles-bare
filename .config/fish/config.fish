@@ -29,7 +29,7 @@ alias vdir='vdir --color=auto'
 alias watch='watch --color'
 alias sudo='sudo -sE'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
-alias dotfile='git --git-dir=$HOME/Documents/Dotfiles/ --work-tree=$HOME' 	# github bare repo dotfile alias
+alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME' 	# github bare repo dotfile alias
 
 # Abbreviations (expanded aliases)
 abbr df 'df -h'

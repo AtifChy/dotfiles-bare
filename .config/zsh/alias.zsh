@@ -13,19 +13,19 @@ alias diff='diff --color=always'
 ## New commands
 alias da='date "+%A, %B %d, %Y [%r]"'
 alias du1='du --max-depth=1'
-alias hist='history -200 | grep'       	# requires an argument
+alias hist='history -200 | grep' # requires an argument
 alias openports='ss --all --numeric --processes --ipv4 --ipv6'
-alias pgg='ps -Af | grep'           	# requires an argument
+alias pgg='ps -Af | grep' # requires an argument
 
 # Paru
 alias paruR='paru -Rnsuc'
 
 # Privileged access
-if (( UID != 0 )); then
-    alias sudo='sudo '
-    alias scat='sudo cat'
-    alias sv='sudoedit nvim'
-    alias root='sudo -i'
+if ((UID != 0)); then
+	alias sudo='sudo '
+	alias scat='sudo cat'
+	alias sv='sudoedit nvim'
+	alias root='sudo -i'
 fi
 
 # neovim
@@ -36,11 +36,11 @@ alias v='nvim'
 alias ls='ls -hF --color=always'
 alias l='ls -lA --group-directories-first --time-style="+%d-%m-%Y %I:%M%p"'
 alias ll='ls -la --group-directories-first --time-style="+%d-%m-%Y %I:%M%p"'
-alias lr='ls -R'                    	# recursive ls
+alias lr='ls -R' # recursive ls
 alias la='ll -A'
-alias lx='ll -BX'                   	# sort by extension
-alias lz='ll -rS'                   	# sort by size
-alias lt='ll -rt'                   	# sort by date
+alias lx='ll -BX' # sort by extension
+alias lz='ll -rS' # sort by size
+alias lt='ll -rt' # sort by date
 #alias lm='la | more'
 
 ## cd
@@ -88,4 +88,3 @@ alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'
 # alias for reflector
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 alias reflectorbd='sudo reflector -c Bangladesh --save /etc/pacman.d/mirrorlist'
-
