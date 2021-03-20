@@ -193,6 +193,9 @@ colors:
   primary:
      background: '#111111'
      foreground: '#f2f2f2'
+  #primary:
+  #    background: '#1e2127'
+  #    foreground: '#d8dee9'
 
     # Bright and dim foreground colors
     #
@@ -293,6 +296,26 @@ colors:
     magenta: '#C061CB'
     cyan:    '#33C7DE'
     white:   '#f2f2f2'
+
+  #normal:
+  #   black:   '#171a1f'
+  #   red:     '#f07178'
+  #   green:   '#c3e88d'
+  #   yellow:  '#ffcb6b'
+  #   blue:    '#82aaff'
+  #   magenta: '#c792ea'
+  #   cyan:    '#89ddff'
+  #   white:   '#d0d0d0'
+
+  #bright:
+  #   black:   '#434758'
+  #   red:     '#ff8b92'
+  #   green:   '#ddffa7'
+  #   yellow:  '#ffe585'
+  #   blue:    '#9cc4ff'
+  #   magenta: '#e1acff'
+  #   cyan:    '#a3f7ff'
+  #   white:   '#ffffff'
 
   # Dim colors
   #

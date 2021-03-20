@@ -57,7 +57,7 @@ set cursorline					" highlight cursor line
 set cursorcolumn 				" highlight cursor column
 set clipboard+=unnamedplus			" copy paste between vim and everything else
 set inccommand=nosplit				" required for hlsearch
-set updatetime=100
+set updatetime=250
 filetype plugin indent on
 "set expandtab
 "set shiftwidth=4
