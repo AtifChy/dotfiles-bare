@@ -14,6 +14,14 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
+complete -cf sudo
+
+# keybind
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 source /etc/profile
 
 # github dotfile repo alias

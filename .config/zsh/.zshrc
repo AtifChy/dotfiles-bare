@@ -50,9 +50,8 @@ zinit wait lucid light-mode for \
 
 # ohmyzsh library, plugins, themes
 zinit snippet OMZL::termsupport.zsh
-zinit wait lucid for \
-      OMZL::key-bindings.zsh \
-      OMZP::extract
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZP::extract
 
 # more zsh plugins
 #zinit ice wait lucid; zinit light olets/zsh-abbr
@@ -69,13 +68,19 @@ fi
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
-# zsh settings
-autoload -Uz compinit
-compinit -u
-zstyle ':completion:*' menu select
-export LS_COLORS="di=1;34"          #
+## zsh autocompletion
+autoload -Uz compinit && compinit -u
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu yes select=2
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion:*' rehash true
+#zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+export LS_COLORS="di=1;34"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
+compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump
 
 # zsh autosuggestions strategy. options: history, completion
 ZSH_AUTOSUGGEST_STRATEGY=(history)
@@ -88,19 +93,25 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history 	      # shell share history with other tabs
 
+# alias
+source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
+
 # color man pages
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
     LESS_TERMCAP_so=$'\e[01;44;33m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
     command man "$@"
 }
 
-# alias
-source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
+# fix url issue
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 # source default configs
 source /etc/profile
@@ -110,10 +121,3 @@ source /etc/profile
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
 [[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
-
-# fix url issue
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
-
