@@ -1,11 +1,3 @@
-
-# ███████╗░██████╗██╗░░██╗██████╗░░█████╗░
-# ╚════██║██╔════╝██║░░██║██╔══██╗██╔══██╗
-# ░░███╔═╝╚█████╗░███████║██████╔╝██║░░╚═╝
-# ██╔══╝░░░╚═══██╗██╔══██║██╔══██╗██║░░██╗
-# ███████╗██████╔╝██║░░██║██║░░██║╚█████╔╝
-# ╚══════╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -60,6 +52,9 @@ zinit snippet OMZP::extract
 # zsh theme/s
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
+# zsh tweak
+PROMPT_EOL_MARK='⏎'
+
 # History file configuration
 if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history ]]; then
 	command touch ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history
@@ -72,8 +67,7 @@ fi
 autoload -Uz compinit && compinit -u
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu yes select=2
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*' menu select=2
 zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion:*' rehash true
@@ -95,17 +89,6 @@ setopt share_history 	      # shell share history with other tabs
 
 # alias
 source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
-
-# color man pages
-man() {
-    LESS_TERMCAP_md=$'\e[01;31m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;44;33m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[01;32m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    command man "$@"
-}
 
 # fix url issue
 autoload -Uz bracketed-paste-magic

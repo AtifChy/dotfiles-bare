@@ -1,0 +1,18 @@
+require('plugins')
+require('settings')
+require('nvim_tree')
+require('nvim_autopair')
+require('nvim_bufferline')
+require('nvim_colorizer')
+require('nvim_galaxyline')
+require('servers')
+require('nvim_compe')
+require('neo_gitsigns')
+require('neo_format')
+require('startify')
+
+local cmd = vim.cmd
+cmd('source ~/.config/nvim/vimscript/startify.vim')
+cmd('source ~/.config/nvim/vimscript/autocmd.vim')
+cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
+-- cmd('source ~/.config/nvim/vimscript/autocmd.vim')
