@@ -16,3 +16,5 @@ cmd('source ~/.config/nvim/vimscript/startify.vim')
 cmd('source ~/.config/nvim/vimscript/autocmd.vim')
 cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
 -- cmd('source ~/.config/nvim/vimscript/autocmd.vim')
+
+vim.api.nvim_set_keymap('n', '<C-m>', ':MarkdownPreviewToggle<CR>', {noremap = true})

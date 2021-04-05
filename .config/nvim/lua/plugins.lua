@@ -24,6 +24,9 @@ return require('packer').startup(function()
     -- autocompletion
     use {'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip'}}
 
+    -- markdown preview
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+
     -- formatting
     use 'sbdchd/neoformat'
 

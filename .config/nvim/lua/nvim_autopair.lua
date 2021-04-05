@@ -15,7 +15,9 @@
 -- require('nvim-autopairs').setup({
 --   disable_filetype = { "TelescopePrompt" , "vim" },
 -- })
-require('nvim-autopairs').setup()
+require('nvim-autopairs').setup({
+    disable_filetype = {"TelescopePrompt", "markdown"}
+})
 
 -- autopair
 local remap = vim.api.nvim_set_keymap
