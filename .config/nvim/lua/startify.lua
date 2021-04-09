@@ -23,7 +23,7 @@ vim.g.startify_lists = {
 }
 
 vim.g.startify_bookmarks = {
-    {a = '~/.config/nvim/init.vim'}, {s = '~/.config/zsh/.zshrc'},
+    {a = '~/.config/nvim/init.lua'}, {s = '~/.config/zsh/.zshrc'},
     {d = '~/.config/alacritty/alacritty.yml'}, {f = '~/.config/X11/Xresources'},
     {g = '~/.config/fish/config.fish'}
 }

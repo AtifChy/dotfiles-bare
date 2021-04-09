@@ -48,9 +48,13 @@ session=${1:-xmonad}
 
 case $session in
 xmonad)
+	export XDG_CURRENT_DESKTOP=xmonad
+	export XDG_SESSION_TYPE=x11
         dbus-run-session xmonad
         ;;
 dwm)
+	export XDG_CURRENT_DESKTOP=dwm
+	export XDG_SESSION_TYPE=x11
         dbus-run-session dwm
         ;;
 kde)

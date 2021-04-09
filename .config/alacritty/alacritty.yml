@@ -49,9 +49,9 @@ window:
   #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
-  padding:
-    x: 2
-    y: 2
+  #padding:
+  #  x: 2
+  #  y: 2
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: true
@@ -154,7 +154,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 11.0
+  size: 10
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -178,7 +178,7 @@ font:
 
   # Choose whether to enable ligature (Currently only in Linux, may work in macOS)
   # by default it's true (enabled)
-  ligatures: true
+  #ligatures: true
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false

@@ -12,7 +12,9 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true
 vim.wo.number = true
 vim.wo.cursorline = true
+vim.wo.cursorcolumn = true
 
 vim.cmd 'colorscheme one-nvim'
 vim.g.one_nvim_transparent_bg = false
 -- vim.cmd('source ~/.config/nvim/vimscript/color.vim')
+
