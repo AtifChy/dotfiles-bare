@@ -4,6 +4,18 @@ require'lspconfig'.bashls.setup {filetypes = {"sh", "zsh"}}
 -- vim
 require'lspconfig'.vimls.setup {}
 
+-- rust
+require'lspconfig'.rust_analyzer.setup{}
+
+-- haskell
+require'lspconfig'.hls.setup {
+    cmd = {"haskell-language-server-wrapper", "--lsp"},
+    filetypes = {"haskell", "lhaskell"},
+    settings = {
+        languageServerHaskell = {formattingProvider = "stylish-haskell"}
+    }
+}
+
 -- lua
 local sumneko_root_path = '/usr'
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"

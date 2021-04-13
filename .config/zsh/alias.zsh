@@ -79,8 +79,8 @@ alias :x=' exit'
 #alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 ## youtube-dl
-alias yta-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --embed-thumbnail --add-metadata --postprocessor-args "-metadata album=YouTube -metadata"'
-alias yta-m4a='youtube-dl -f bestaudio --extract-audio --audio-format m4a --embed-thumbnail --add-metadata --postprocessor-args "-metadata album=YouTube -metadata comment=YOUTUBE"'
+alias yta-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --embed-thumbnail --add-metadata --xattrs'
+alias yta-m4a='youtube-dl -f bestaudio --extract-audio --audio-format m4a --embed-thumbnail --add-metadata --xattrs --postprocessor-args "-metadata album=YouTube -metadata comment=YOUTUBE"'
 
 # alias for for github dotfile repo
 alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'

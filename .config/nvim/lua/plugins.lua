@@ -47,7 +47,7 @@ return require('packer').startup(function()
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
     use 'mhinz/vim-startify'
-    -- use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 
     -- colorscheme
     -- use 'AtifChy/onedark.vim'
