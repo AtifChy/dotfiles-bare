@@ -11,9 +11,9 @@ Xft.lcdfilter:		lcddefault
 st.font: 		Fira Code Retina:pixelsize=14
 st.borderpx: 		2
 st.opacity: 		255
-st.alpha: 		0.98
+st.alpha: 		1.0
 st.cursorshape: 	0
-st.blinktimeout: 	800
+st.blinktimeout: 	1000
 
 ! special
 *.foreground:   #c8ccd4
@@ -54,4 +54,13 @@ st.blinktimeout: 	800
 
 !
 URxvt.font: 		xft:FiraCode Nerd Font:pixelsize=14
-URxvt.letterSpace: 	-1
+URxvt.letterSpace: 	0
+URxvt.scrollBar: 	false
+
+!! URxvt extensions
+URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+URxvt.url-select.launcher:  /usr/bin/xdg-open
+URxvt.url-select.underline: true
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+URxvt.keysym.M-s:           perl:keyboard-select:search

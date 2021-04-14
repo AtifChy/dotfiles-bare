@@ -200,7 +200,7 @@ alternative_header_second_line_format = "{{$4$b%a$/b$9}{ - $7%b$9}{ ($6%y$9)}}|{
 #
 #current_item_inactive_column_suffix = $/r$(end)
 #
-now_playing_prefix = "$b$(magenta)󰮯 "
+#now_playing_prefix = "$b$(magenta)󰮯 "
 #
 #now_playing_suffix = $/b
 #
