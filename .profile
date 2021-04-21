@@ -5,7 +5,7 @@ export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.local/share/npm/bin
 
 # pfetch environment
 export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'
-export PF_SEP='=>'
+export PF_SEP=' '
 
 # Apps
 export TERMINAL='st'
@@ -87,15 +87,16 @@ export LESS_TERMCAP_us
 export LESS_TERMCAP_ue
 
 ## Don't ask me for login keyring
-if [ -z "$DESKTOP_SESSION" ]; then
-	eval "$(gnome-keyring-daemon --start)"
-	export ssh_auth_sock
-fi
+#if [ -z "$DESKTOP_SESSION" ]; then
+#	eval "$(gnome-keyring-daemon --start)"
+#	export ssh_auth_sock
+#fi
 
 #[ "$DESKTOP_SESSION" != "xmonad" ] && dunstctl set-paused true
 
 # startx
-alias startx='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
-#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#        exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
-#fi
+alias exec='exec '
+alias startx='startx "$XDG_CONFIG_HOME"/X11/xinitrc'
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+        exec startx
+fi

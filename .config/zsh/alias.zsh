@@ -24,9 +24,13 @@ alias paruR='paru -Rnsuc'
 if ((UID != 0)); then
 	alias sudo='sudo '
 	alias scat='sudo cat'
-	alias sv='sudoedit nvim'
+	alias se='sudoedit'
 	alias root='sudo -i'
 fi
+
+# Power
+alias poweroff='loginctl poweroff'
+alias reboot='loginctl reboot'
 
 # neovim
 alias v='nvim'

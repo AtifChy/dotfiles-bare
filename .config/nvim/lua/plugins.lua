@@ -38,14 +38,14 @@ return require('packer').startup(function()
         'akinsho/nvim-bufferline.lua',
         requires = 'kyazdani42/nvim-web-devicons'
     }
-    use {
-        'glepnir/galaxyline.nvim',
-        branch = 'main',
-        -- your statusline
-        config = function() require 'my_statusline' end,
-        -- some optional icons
-        requires = {'kyazdani42/nvim-web-devicons', opt = true}
-    }
+    -- use {
+    --     'glepnir/galaxyline.nvim',
+    --     branch = 'main',
+    --     -- your statusline
+    --     config = function() require 'my_statusline' end,
+    --     -- some optional icons
+    --     requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    -- }
     use 'mhinz/vim-startify'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 
@@ -56,5 +56,5 @@ return require('packer').startup(function()
     -- utils
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use 'norcalli/nvim-colorizer.lua'
-    use 'windwp/nvim-autopairs'
+    -- use 'windwp/nvim-autopairs'
 end)

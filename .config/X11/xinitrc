@@ -76,6 +76,6 @@ awesome)
         dbus-run-session awesome
         ;;
 *)
-        dbus-run-session "$1"
+        exec "$1"
         ;;
 esac

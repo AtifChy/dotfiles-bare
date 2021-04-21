@@ -6,9 +6,15 @@ Xft.hintstyle:		hintslight
 Xft.rgba:		rgb
 Xft.lcdfilter:		lcddefault
 
+! Cursor theme
+Xcursor.theme: 		bloom
+!Xcursor.size: 		16
+
+! sxiv config
+Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
 
 ! st settings
-st.font: 		Fira Code Retina:pixelsize=14
+st.font: 		FiraCode Nerd Font:pixelsize=14
 st.borderpx: 		2
 st.opacity: 		255
 st.alpha: 		1.0
