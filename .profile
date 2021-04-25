@@ -98,5 +98,5 @@ export LESS_TERMCAP_ue
 alias exec='exec '
 alias startx='startx "$XDG_CONFIG_HOME"/X11/xinitrc'
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx
+        exec startx >& "$XDG_CACHE_HOME"/X11/xsession-errors
 fi

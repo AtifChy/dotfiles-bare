@@ -70,3 +70,11 @@ URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
 URxvt.keysym.M-Escape:      perl:keyboard-select:activate
 URxvt.keysym.M-s:           perl:keyboard-select:search
+
+! dwm
+!dwm.normbordercolor: 	#1E2127
+!dwm.normbgcolor: 	#1E2127
+!dwm.normfgcolor: 	#d8dee9
+!dwm.selbordercolor: 	#4280bd
+!dwm.selbgcolor: 	#4280bd
+!dwm.selfgcolor: 	#d8dee9

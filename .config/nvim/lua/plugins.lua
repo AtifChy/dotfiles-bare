@@ -22,39 +22,43 @@ return require('packer').startup(function()
     use 'neovim/nvim-lspconfig'
 
     -- autocompletion
-    use {'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip'}}
+    use { 'hrsh7th/nvim-compe', requires = { 'hrsh7th/vim-vsnip' } }
 
     -- markdown preview
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
 
     -- formatting
     use 'sbdchd/neoformat'
 
     -- git
-    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
     -- ui
     use {
         'akinsho/nvim-bufferline.lua',
         requires = 'kyazdani42/nvim-web-devicons'
     }
-    -- use {
-    --     'glepnir/galaxyline.nvim',
-    --     branch = 'main',
-    --     -- your statusline
-    --     config = function() require 'my_statusline' end,
-    --     -- some optional icons
-    --     requires = {'kyazdani42/nvim-web-devicons', opt = true}
-    -- }
+    use {
+        'glepnir/galaxyline.nvim',
+        branch = 'main',
+        -- your statusline
+        config = function() require 'my_statusline' end,
+        -- some optional icons
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
     use 'mhinz/vim-startify'
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use { 'lukas-reineke/indent-blankline.nvim', branch = 'lua' }
 
     -- colorscheme
     -- use 'AtifChy/onedark.vim'
     use 'Th3Whit3Wolf/one-nvim'
 
     -- utils
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
     use 'norcalli/nvim-colorizer.lua'
-    -- use 'windwp/nvim-autopairs'
+    use {
+	'windwp/nvim-autopairs',
+	require = { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 end)

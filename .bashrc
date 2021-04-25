@@ -12,6 +12,9 @@ bind 'TAB:menu-complete'
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# histfile
+export HISTFILE="$XDG_DATA_HOME"/bash_history
+
 source /etc/profile
 
 # github dotfile repo alias

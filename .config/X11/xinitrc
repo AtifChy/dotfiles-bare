@@ -37,11 +37,11 @@ fi
 # for firefox
 export MOZ_X11_EGL=1
 
-#twm &
-#xclock -geometry 50x50-1+1 &
-#xterm -geometry 80x50+494+51 &
-#xterm -geometry 80x20+494-0 &
-#exec xterm -geometry 80x66+0+0 -name login
+# fix clipboard
+while :; do
+    pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
+    sleep 1
+done &
 
 # keep this at the bottom
 session=${1:-xmonad}
@@ -50,7 +50,7 @@ case $session in
 xmonad)
 	export XDG_CURRENT_DESKTOP=xmonad
 	export XDG_SESSION_TYPE=x11
-        dbus-run-session xmonad
+        dbus-run-session ~/.local/share/xmonad/xmonad-x86_64-linux
         ;;
 dwm)
 	export XDG_CURRENT_DESKTOP=dwm
@@ -76,6 +76,6 @@ awesome)
         dbus-run-session awesome
         ;;
 *)
-        exec "$1"
+        dbus-run-session "$1"
         ;;
 esac

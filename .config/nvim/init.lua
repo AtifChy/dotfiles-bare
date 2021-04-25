@@ -1,7 +1,7 @@
 require('plugins')
 require('settings')
 require('nvim_tree')
--- require('nvim_autopair')
+require('nvim_autopair')
 require('nvim_bufferline')
 require('nvim_colorizer')
 -- require('nvim_galaxyline')
@@ -10,6 +10,7 @@ require('nvim_compe')
 require('neo_gitsigns')
 require('neo_format')
 require('startify')
+require('statusline')
 
 local cmd = vim.cmd
 cmd('source ~/.config/nvim/vimscript/startify.vim')
