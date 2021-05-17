@@ -11,7 +11,7 @@ export PF_SEP=' '
 export TERMINAL='st'
 export BROWSER='firefox'
 export EDITOR='nvim'
-export SYSTEMD_EDITOR='nvim'
+#export SYSTEMD_EDITOR=$EDITOR
 
 # Firefox hardware video acceleration
 [ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
@@ -59,9 +59,9 @@ export ATOM_HOME="$XDG_DATA_HOME"/atom
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
-export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
-export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
-export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
+#export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
+#export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
+#export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
 [ -d ~/.ssr ] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
 
 # Ibus KDE
@@ -98,5 +98,5 @@ export LESS_TERMCAP_ue
 alias exec='exec '
 alias startx='startx "$XDG_CONFIG_HOME"/X11/xinitrc'
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx >& "$XDG_CACHE_HOME"/X11/xsession-errors
+        exec startx > "$XDG_CACHE_HOME"/X11/xsession-errors 2>&1
 fi

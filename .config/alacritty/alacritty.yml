@@ -154,7 +154,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 10
+  size: 10.5
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -187,14 +187,11 @@ font:
 colors:
   # Default colors
   #primary:
-  #  background: '#14191d'
-  #  foreground: '#f2f2f2'
+  #   background: '#111111'
+  #   foreground: '#f2f2f2'
   primary:
-     background: '#111111'
-     foreground: '#f2f2f2'
-  #primary:
-  #    background: '#1e2127'
-  #    foreground: '#d8dee9'
+      background: '#1e2127'
+      foreground: '#d8dee9'
 
     # Bright and dim foreground colors
     #
@@ -252,69 +249,47 @@ colors:
     #  background: '#c5c8c6'
     #  foreground: '#1d1f21'
 
-  # Normal colors
-  #normal:
-  #  black:   '#14191d'
-  #  red:     '#e1331b'
-  #  green:   '#6ab019'
-  #  yellow:  '#fec106'
-  #  blue:    '#0070ff'
-  #  magenta: '#ed0048'
-  #  cyan:    '#2aa7e7'
-  #  white:   '#f2f2f2'
+  ## Normal colors
+  #Normal:
+  #  black:   '#111111'
+  #  red:     '#C01C28'
+  #  green:   '#26A269'
+  #  yellow:  '#A2734C'
+  #  blue:    '#12488B'
+  #  magenta: '#A347BA'
+  #  cyan:    '#2AA1B3'
+  #  white:   '#D0CFCC'
 
   ## Bright colors
-  #bright:
-  #  black:   '#5d5d5f'
-  #  red:     '#f9361c'
-  #  green:   '#79c71d'
-  #  yellow:  '#f8cb12'
-  #  blue:    '#004e9d'
-  #  magenta: '#fe1d63'
-  #  cyan:    '#6aaff0'
-  #  white:   '#cccccc'
+  #Bright:
+  #  black:   '#5E5C64'
+  #  red:     '#F66151'
+  #  green:   '#33DA7A'
+  #  yellow:  '#E9AD0C'
+  #  blue:    '#2A7BDE'
+  #  magenta: '#C061CB'
+  #  cyan:    '#33C7DE'
+  #  white:   '#f2f2f2'
 
-  # Normal colors
   normal:
-    black:   '#111111'
-    red:     '#C01C28'
-    green:   '#26A269'
-    yellow:  '#A2734C'
-    blue:    '#12488B'
-    magenta: '#A347BA'
-    cyan:    '#2AA1B3'
-    white:   '#D0CFCC'
+     black:   '#171a1f'
+     red:     '#f07178'
+     green:   '#c3e88d'
+     yellow:  '#ffcb6b'
+     blue:    '#82aaff'
+     magenta: '#c792ea'
+     cyan:    '#89ddff'
+     white:   '#d0d0d0'
 
-  # Bright colors
   bright:
-    black:   '#5E5C64'
-    red:     '#F66151'
-    green:   '#33DA7A'
-    yellow:  '#E9AD0C'
-    blue:    '#2A7BDE'
-    magenta: '#C061CB'
-    cyan:    '#33C7DE'
-    white:   '#f2f2f2'
-
-  #normal:
-  #   black:   '#171a1f'
-  #   red:     '#f07178'
-  #   green:   '#c3e88d'
-  #   yellow:  '#ffcb6b'
-  #   blue:    '#82aaff'
-  #   magenta: '#c792ea'
-  #   cyan:    '#89ddff'
-  #   white:   '#d0d0d0'
-
-  #bright:
-  #   black:   '#434758'
-  #   red:     '#ff8b92'
-  #   green:   '#ddffa7'
-  #   yellow:  '#ffe585'
-  #   blue:    '#9cc4ff'
-  #   magenta: '#e1acff'
-  #   cyan:    '#a3f7ff'
-  #   white:   '#ffffff'
+     black:   '#434758'
+     red:     '#ff8b92'
+     green:   '#ddffa7'
+     yellow:  '#ffe585'
+     blue:    '#9cc4ff'
+     magenta: '#e1acff'
+     cyan:    '#a3f7ff'
+     white:   '#ffffff'
 
   # Dim colors
   #
@@ -385,7 +360,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 1.0
 
 #selection:
   # This string contains all characters that are used as separators for

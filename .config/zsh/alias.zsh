@@ -18,19 +18,15 @@ alias openports='ss --all --numeric --processes --ipv4 --ipv6'
 alias pgg='ps -Af | grep' # requires an argument
 
 # Paru
-alias paruR='paru -Rnsuc'
+#alias paruR='paru -Rnsuc'
 
 # Privileged access
 if ((UID != 0)); then
 	alias sudo='sudo '
 	alias scat='sudo cat'
-	alias se='sudoedit'
+	alias sv='sudoedit'
 	alias root='sudo -i'
 fi
-
-# Power
-alias poweroff='loginctl poweroff'
-alias reboot='loginctl reboot'
 
 # neovim
 alias v='nvim'
