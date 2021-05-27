@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "350x5-20+44"
+    geometry = "350x5-18+44"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -57,7 +57,7 @@
     padding = 12
 
     # Horizontal padding.
-    horizontal_padding = 16
+    horizontal_padding = 12
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
@@ -86,7 +86,7 @@
 
     ### Text ###
 
-    font = JetBrains Mono Medium 10
+    font = Iosevka Custom Medium 11
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -126,7 +126,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<span size='x-large' font_desc='JetBrains Mono 9' weight='bold' foreground='#d8dee9'>%s</span>\n%b"
+    format = "<span size='x-large' font_desc='Iosevka Custom 9' weight='bold' foreground='#d8dee9'>%s</span>\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -134,7 +134,7 @@
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
-    vertical_alignment = center
+    vertical_alignment = top
 
     # Show age of message if message is older than show_age_threshold
     # seconds.

@@ -36,25 +36,23 @@ fi
 
 # for firefox
 export MOZ_X11_EGL=1
+export XDG_SESSION_TYPE=x11
 
 # fix clipboard
 while :; do
-    pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
-    sleep 1
+        pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
+        sleep 1
 done &
 
 # keep this at the bottom
 session=${1:-xmonad}
+export XDG_SESSION_DESKTOP=$session
 
 case $session in
 xmonad)
-	export XDG_CURRENT_DESKTOP=xmonad
-	export XDG_SESSION_TYPE=x11
         dbus-run-session ~/.local/share/xmonad/xmonad-x86_64-linux
         ;;
 dwm)
-	export XDG_CURRENT_DESKTOP=dwm
-	export XDG_SESSION_TYPE=x11
         dbus-run-session dwm
         ;;
 kde)
@@ -66,9 +64,6 @@ xfce | xfce4)
 gnome)
         dbus-run-session gnome-session
         ;;
-frankenWM | franken)
-        dbus-run-session frankenwm
-        ;;
 spectrwm | spectr)
         dbus-run-session spectrwm
         ;;
@@ -76,6 +71,6 @@ awesome)
         dbus-run-session awesome
         ;;
 *)
-        dbus-run-session "$1"
+        $1
         ;;
 esac

@@ -54,16 +54,16 @@ fi
 ## creating necessary folders and files
 mkdir -pv $HOME/.local/share/{gnupg,cargo,go,vscode,rustup}
 mkdir -pv $HOME/.config/{less,parallel,npm,yarn}
-mkdir -pv $HOME/.cache/{less,pylint}
+mkdir -pv $HOME/.cache/{less,pylint,X11}
 touch $HOME/.config/{wgetrc,inputrc,npm/npmrc}
 echo hsts-file \= $HOME/.cache/wget-hsts >> "$HOME/.config/wgetrc"
 echo 'prefix=${XDG_DATA_HOME}/npm\ncache=${XDG_CACHE_HOME}/npm\ntmp=${XDG_RUNTIME_DIR}/npm\ninit-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js' >> $HOME/.config/npm/npmrc
 
 ## install vim-plug
-echo '\n\n\033[1;31mInstalling vim-plug...\033[0m'
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-echo '===>\033[1;32mInstallation Complete\033[0m<===\n\n'
+#echo '\n\n\033[1;31mInstalling vim-plug...\033[0m'
+#sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+#       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#echo '===>\033[1;32mInstallation Complete\033[0m<===\n\n'
 
 ## reboot
 read -r -p "Do you wish to reboot? [y/n] " REB

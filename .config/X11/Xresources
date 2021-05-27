@@ -13,8 +13,10 @@ Xcursor.theme: 		bloom
 ! sxiv config
 Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
 
+!Xmessage.font:          FiraCode Nerd Font:pixelsize=14
+
 ! st settings
-st.font: 		FiraCode Nerd Font:pixelsize=14
+st.font: 		Iosevka Custom Book:pixelsize=15
 st.borderpx: 		2
 st.opacity: 		255
 st.alpha: 		1.0
@@ -58,18 +60,18 @@ st.blinktimeout: 	1000
 *.color7:       #d0d0d0
 *.color15:      #ffffff
 
-!
-URxvt.font: 		xft:FiraCode Nerd Font:pixelsize=14
-URxvt.letterSpace: 	0
-URxvt.scrollBar: 	false
+!! urxvt settings
+!URxvt.font: 		xft:FiraCode Nerd Font:pixelsize=14
+!URxvt.letterSpace: 	0
+!URxvt.scrollBar: 	false
 
 !! URxvt extensions
-URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  /usr/bin/xdg-open
-URxvt.url-select.underline: true
-URxvt.keysym.M-u:           perl:url-select:select_next
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-URxvt.keysym.M-s:           perl:keyboard-select:search
+!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+!URxvt.url-select.launcher:  /usr/bin/xdg-open
+!URxvt.url-select.underline: true
+!URxvt.keysym.M-u:           perl:url-select:select_next
+!URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+!URxvt.keysym.M-s:           perl:keyboard-select:search
 
 ! dwm
 !dwm.normbordercolor: 	#1E2127

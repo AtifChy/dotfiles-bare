@@ -8,8 +8,8 @@ export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'
 export PF_SEP=' '
 
 # Apps
-export TERMINAL='st'
-export BROWSER='firefox'
+#export TERMINAL='st'
+#export BROWSER='firefox'
 export EDITOR='nvim'
 #export SYSTEMD_EDITOR=$EDITOR
 
@@ -48,7 +48,7 @@ export GOPATH="$XDG_DATA_HOME"/go
 #export HISTFILE="$XDG_DATA_HOME/history"
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME"/yarn/config'
 #export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
-#export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export LESSHISTFILE="$XDG_CACHE_HOME"/lesshst
 export LESSHISTFILE="-" # disable lesshistfile
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
@@ -56,6 +56,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export ATOM_HOME="$XDG_DATA_HOME"/atom
+export SSB_HOME="$XDG_DATA_HOME"/zoom
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
@@ -98,5 +99,5 @@ export LESS_TERMCAP_ue
 alias exec='exec '
 alias startx='startx "$XDG_CONFIG_HOME"/X11/xinitrc'
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx > "$XDG_CACHE_HOME"/X11/xsession-errors 2>&1
+        exec startx >"$XDG_CACHE_HOME"/X11/xsession-errors 2>&1
 fi

@@ -16,5 +16,10 @@ vim.wo.cursorcolumn = true
 
 vim.cmd 'colorscheme one-nvim'
 vim.g.one_nvim_transparent_bg = false
+
+vim.g.indent_blankline_char = '│'
+-- vim.g.indent_blankline_char_list = {'▏', '┆', '┊'}
+-- vim.g.indent_blankline_use_treesitter = true
+
 -- vim.cmd('source ~/.config/nvim/vimscript/color.vim')
 

@@ -17,15 +17,12 @@ alias hist='history -200 | grep' # requires an argument
 alias openports='ss --all --numeric --processes --ipv4 --ipv6'
 alias pgg='ps -Af | grep' # requires an argument
 
-# Paru
-#alias paruR='paru -Rnsuc'
-
 # Privileged access
 if ((UID != 0)); then
-	alias sudo='sudo '
-	alias scat='sudo cat'
-	alias sv='sudoedit'
-	alias root='sudo -i'
+        alias sudo='sudo '
+        alias scat='sudo cat'
+        alias sv='sudoedit'
+        alias root='sudo -i'
 fi
 
 # neovim
