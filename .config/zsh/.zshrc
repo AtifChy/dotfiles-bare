@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 ### Added by Zinit's installer
 declare -A ZINIT					# necessary for changing location
@@ -43,12 +43,23 @@ zinit wait lucid light-mode for \
 # ohmyzsh library, plugins, themes
 zinit snippet OMZP::extract
 
+#autoload -Uz vcs_info
+#precmd() { vcs_info }
+#
+#zstyle ':vcs_info:git:*' formats 'on %F{magenta}%b%f %m%u%c'
+#zstyle ':vcs_info:*' check-for-changes true
+#
+#setopt PROMPT_SUBST
+#PROMPT='%B%F{cyan}%~%f ${vcs_info_msg_0_}%b
+#%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
+
 # more zsh plugins
 #zinit ice wait lucid; zinit light olets/zsh-abbr
 #zinit light MichaelAquilina/zsh-you-should-use
 
 # zsh theme/s
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+#zinit ice depth=1; zinit light romkatv/powerlevel10k
+#zinit light denysdovhan/spaceship-prompt
 
 # zsh tweak
 PROMPT_EOL_MARK='⏎'
@@ -108,10 +119,10 @@ fi
 source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
 
 # fix url issue
-#autoload -Uz bracketed-paste-magic
-#zle -N bracketed-paste bracketed-paste-magic
-#autoload -Uz url-quote-magic
-#zle -N self-insert url-quote-magic
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
 
 ## no more command not found
 function command_not_found_handler {
@@ -189,4 +200,7 @@ source /etc/profile
 #export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
-[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+#[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
+
+# starship
+eval "$(starship init zsh)"
