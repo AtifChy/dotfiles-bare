@@ -1,10 +1,3 @@
-function _G.webDevIcons(path)
-    local filename = vim.fn.fnamemodify(path, ':t')
-    local extension = vim.fn.fnamemodify(path, ':e')
-    return require'nvim-web-devicons'.get_icon(filename, extension,
-                                               {default = true})
-end
-
 vim.g.startify_custom_header = {
     '   ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗ ',
     '   ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║ ',
@@ -29,3 +22,18 @@ vim.g.startify_bookmarks = {
 }
 
 vim.g.startify_commands = {{pu = 'PackerUpdate'}, {ps = 'PackerSync'}}
+
+-- fix startify web icons
+function _G.webDevIcons(path)
+    local filename = vim.fn.fnamemodify(path, ':t')
+    local extension = vim.fn.fnamemodify(path, ':e')
+    return require'nvim-web-devicons'.get_icon(filename, extension,
+                                               {default = true})
+end
+
+vim.cmd([[
+function! StartifyEntryFormat() abort
+  return 'v:lua.webDevIcons(absolute_path) . " " . entry_path'
+endfunction
+]])
+

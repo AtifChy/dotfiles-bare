@@ -11,12 +11,12 @@ require('neo_gitsigns')
 require('neo_format')
 require('startify')
 require('statusline')
+require('file_icons')
+require('neo_lspconfig')
+require('neo_lspkind')
 
-local cmd = vim.cmd
-cmd('source ~/.config/nvim/vimscript/startify.vim')
-cmd('source ~/.config/nvim/vimscript/autocmd.vim')
-cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
-cmd('source ~/.config/nvim/vimscript/neoformat_auto.vim')
--- cmd('source ~/.config/nvim/vimscript/autocmd.vim')
+-- local cmd = vim.cmd
+-- cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
 
-vim.api.nvim_set_keymap('n', '<C-m>', ':MarkdownPreviewToggle<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-m>', ':MarkdownPreviewToggle<CR>',
+                        {noremap = true})
