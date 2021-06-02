@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-
 ### Added by Zinit's installer
 declare -A ZINIT					# necessary for changing location
 ZINIT[HOME_DIR]=$HOME/.cache/zinit
@@ -21,14 +14,6 @@ source "$HOME/.cache/zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-#zinit light-mode for \
-#    zinit-zsh/z-a-rust \
-#    zinit-zsh/z-a-as-monitor \
-#    zinit-zsh/z-a-patch-dl \
-#    zinit-zsh/z-a-bin-gem-node
-
 ### End of Zinit's installer chunk
 
 # zsh plugins
@@ -43,26 +28,45 @@ zinit wait lucid light-mode for \
 # ohmyzsh library, plugins, themes
 zinit snippet OMZP::extract
 
-#autoload -Uz vcs_info
-#precmd() { vcs_info }
-#
-#zstyle ':vcs_info:git:*' formats 'on %F{magenta}%b%f %m%u%c'
-#zstyle ':vcs_info:*' check-for-changes true
-#
-#setopt PROMPT_SUBST
-#PROMPT='%B%F{cyan}%~%f ${vcs_info_msg_0_}%b
-#%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
-
-# more zsh plugins
-#zinit ice wait lucid; zinit light olets/zsh-abbr
-#zinit light MichaelAquilina/zsh-you-should-use
-
-# zsh theme/s
-#zinit ice depth=1; zinit light romkatv/powerlevel10k
-#zinit light denysdovhan/spaceship-prompt
-
-# zsh tweak
+## zsh tweak
 PROMPT_EOL_MARK='⏎'
+
+## zsh settings
+setopt AUTO_CD                # auto cd to given dir if cd command not used
+DIRSTACKSIZE=16               # cache how many dirs for pushd
+setopt AUTO_PUSHD             # go back to previously visited dirs (e.g. cd -<TAB>)
+setopt PUSHD_IGNORE_DUPS      # remove duplicates
+setopt INTERACTIVECOMMENTS    # Ignore lines prefixed with '#'
+setopt PUSHD_MINUS            # last visited dir on top
+setopt NO_BEEP                # disable beeping on tab completion
+setopt EXTENDED_HISTORY       # record timestamp of command in HISTFILE
+setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt HIST_IGNORE_DUPS       # ignore duplicated commands history list
+setopt HIST_IGNORE_SPACE      # ignore commands that start with space
+setopt HIST_VERIFY            # show command with history expansion to user before running it
+setopt SHARE_HISTORY 	      # shell share history with other tabs
+setopt NOFLOWCONTROL
+
+# colors
+export LS_COLORS="di=1;34"
+
+## zsh autocompletion
+autoload -Uz compinit && compinit
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=2
+zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+zstyle ':completion::complete:*' use-cache on
+#zstyle ':completion:*' rehash true   ## bad for performance
+#zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zmodload zsh/complist
+_comp_options+=(globdots)
+TRAPUSR1() { rehash } #rehash function for pacman hook
+
+# zsh autosuggestions strategy. options: history, completion
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # History file configuration
 if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history ]]; then
@@ -71,31 +75,6 @@ fi
 [ -z "$HISTFILE" ] && HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
-
-## zsh autocompletion
-autoload -Uz compinit && compinit -u
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=2
-zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
-zstyle ':completion::complete:*' use-cache on
-#zstyle ':completion:*' rehash true
-#zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
-export LS_COLORS="di=1;34"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-compinit -d ${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
-TRAPUSR1() { rehash } #rehash function for pacman hook
-
-# zsh autosuggestions strategy. options: history, completion
-ZSH_AUTOSUGGEST_STRATEGY=(history)
-
-## History command configuration
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history 	      # shell share history with other tabs
 
 ## terminal title
 autoload -Uz add-zsh-hook
@@ -123,33 +102,6 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
-
-## no more command not found
-function command_not_found_handler {
-    local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
-    printf 'zsh: command not found: %s\n' "$1"
-    local entries=(
-        ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"}
-    )
-    if (( ${#entries[@]} ))
-    then
-        printf "\n${bright}$1${reset} may be found in the following packages:\n"
-        local pkg
-        for entry in "${entries[@]}"
-        do
-            # (repo package version file)
-            local fields=(
-                ${(0)entry}
-            )
-            if [[ "$pkg" != "${fields[2]}" ]]
-            then
-                printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
-            fi
-            printf '    /%s\n' "${fields[4]}"
-            pkg="${fields[2]}"
-        done
-    fi
-}
 
 ## key bindings
 # create a zkbd compatible hash;
@@ -194,7 +146,7 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 fi
 
 # source default configs
-source /etc/profile
+#source /etc/profile
 
 # some useful PATH
 #export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
@@ -202,5 +154,8 @@ source /etc/profile
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
 #[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
+# icons for lf file manager
+[ -f ~/.config/lf/scripts/icons.sh ] && source ~/.config/lf/scripts/icons.sh
+
 # starship
-eval "$(starship init zsh)"
+[ -n $(command -v starship) ] && eval "$(starship init zsh)"

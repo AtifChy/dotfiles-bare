@@ -20,10 +20,12 @@ return require('packer').startup(function()
 
     -- lsp
     use 'neovim/nvim-lspconfig'
-    use 'onsails/lspkind-nvim'
 
     -- autocompletion
-    use {'hrsh7th/nvim-compe', requires = {'hrsh7th/vim-vsnip'}}
+    use {
+        'hrsh7th/nvim-compe',
+        requires = {{'hrsh7th/vim-vsnip'}, {'onsails/lspkind-nvim'}}
+    }
 
     -- markdown preview
     use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
@@ -42,10 +44,7 @@ return require('packer').startup(function()
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
-        -- your statusline
-        config = function() require 'my_statusline' end,
-        -- some optional icons
-        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+        requires = 'kyazdani42/nvim-web-devicons'
     }
     use 'mhinz/vim-startify'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}

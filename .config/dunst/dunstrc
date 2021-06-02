@@ -86,7 +86,7 @@
 
     ### Text ###
 
-    font = Iosevka Custom Medium 11
+    font = Iosevka Medium 11
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -126,7 +126,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<span size='x-large' font_desc='Iosevka Custom 9' weight='bold' foreground='#d8dee9'>%s</span>\n%b"
+    format = "<span size='x-large' font_desc='Iosevka 9' weight='bold' foreground='#d8dee9'>%s</span>\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".

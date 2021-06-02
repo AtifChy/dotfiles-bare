@@ -58,8 +58,8 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 export SSB_HOME="$XDG_DATA_HOME"/zoom
 export STACK_ROOT="$XDG_DATA_HOME"/stack
-export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
-export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
+export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
+export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
 #export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 #export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 #export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
@@ -97,7 +97,7 @@ export LESS_TERMCAP_ue
 
 # startx
 alias exec='exec '
-alias startx='startx "$XDG_CONFIG_HOME"/X11/xinitrc'
+alias startx='startx "$XDG_CONFIG_HOME"/x11/xinitrc'
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx >"$XDG_CACHE_HOME"/X11/xsession-errors 2>&1
+        exec startx >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 fi

@@ -5,7 +5,7 @@ require'lspconfig'.bashls.setup {filetypes = {"sh", "zsh"}}
 require'lspconfig'.vimls.setup {}
 
 -- rust
-require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup {}
 
 -- haskell
 require'lspconfig'.hls.setup {
