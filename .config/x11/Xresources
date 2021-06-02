@@ -1,0 +1,82 @@
+!-- Xft settings -- !
+Xft.antialias:		1
+Xft.hinting:		1
+Xft.autohint:		0
+Xft.hintstyle:		hintslight
+Xft.rgba:		rgb
+Xft.lcdfilter:		lcddefault
+
+! Cursor theme
+Xcursor.theme: 		bloom
+!Xcursor.size: 		16
+
+! sxiv config
+Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
+
+!Xmessage.font:          FiraCode Nerd Font:pixelsize=14
+
+! st settings
+st.font: 		Iosevka:pixelsize=15
+st.borderpx: 		1
+st.opacity: 		255
+st.alpha: 		1.0
+st.cursorshape: 	1
+st.blinktimeout: 	1000
+
+! special
+*.foreground:   #c8ccd4
+*.background:   #1e2127
+*.cursorColor:  #abb2bf
+
+! black
+*.color0:       #2c313a
+*.color8:       #545862
+
+! red
+*.color1:       #e06c75
+*.color9:       #ff8b92
+
+! green
+*.color2:       #98c379
+*.color10:      #ddffa7
+
+! yellow
+*.color3:       #ffcb6b
+*.color11:      #ffe585
+
+! blue
+*.color4:       #61afef
+*.color12:      #9cc4ff
+
+! magenta
+*.color5:       #b58fae
+*.color13:      #e1acff
+
+! cyan
+*.color6:       #56b6c2
+*.color14:      #a3f7ff
+
+! white
+*.color7:       #d0d0d0
+*.color15:      #ffffff
+
+!! urxvt settings
+!URxvt.font: 		xft:FiraCode Nerd Font:pixelsize=14
+!URxvt.letterSpace: 	0
+!URxvt.scrollBar: 	false
+
+!! URxvt extensions
+!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
+!URxvt.url-select.launcher:  /usr/bin/xdg-open
+!URxvt.url-select.underline: true
+!URxvt.keysym.M-u:           perl:url-select:select_next
+!URxvt.keysym.M-Escape:      perl:keyboard-select:activate
+!URxvt.keysym.M-s:           perl:keyboard-select:search
+
+! dwm
+!dwm.normbordercolor: 	#1E2127
+!dwm.normbgcolor: 	#1E2127
+!dwm.normfgcolor: 	#d8dee9
+!dwm.selbordercolor: 	#4280bd
+!dwm.selbgcolor: 	#4280bd
+!dwm.selfgcolor: 	#d8dee9
