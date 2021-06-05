@@ -1,4 +1,4 @@
-require('bufferline').setup {
+require("bufferline").setup {
     options = {
         numbers = "none",
         -- number_style = "superscript" | "" | {"none", "subscript"}, -- buffer_id at index 1, ordinal at index 2
@@ -6,12 +6,12 @@ require('bufferline').setup {
         -- NOTE: this plugin is designed with this icon in mind,
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
-        indicator_icon = '▎',
-        buffer_close_icon = '',
-        modified_icon = '●',
+        indicator_icon = "▎",
+        buffer_close_icon = "",
+        modified_icon = "●",
         close_icon = " ",
-        left_trunc_marker = '',
-        right_trunc_marker = '',
+        left_trunc_marker = "",
+        right_trunc_marker = "",
         max_name_length = 18,
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         tab_size = 20,
@@ -31,8 +31,9 @@ require('bufferline').setup {
             end
             -- filter out based on arbitrary rules
             -- e.g. filter out vim wiki buffer from tabline in your work repo
-            if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~=
-                "wiki" then return true end
+            if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
+                return true
+            end
         end,
         offsets = {
             {
@@ -51,7 +52,11 @@ require('bufferline').setup {
         separator_style = "thin",
         enforce_regular_tabs = false,
         always_show_bufferline = true,
-        sort_by = 'extension'
+        sort_by = "extension"
+    },
+    highlights = {
+        buffer_selected = {gui = "bold"},
+        tab_close = {guifg = "#df6c74"}
     }
 }
 

@@ -1,64 +1,88 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim ' ..
-                install_path)
-    execute 'packadd packer.nvim'
+    fn.system(
+        {
+            "git",
+            "clone",
+            "https://github.com/wbthomason/packer.nvim",
+            install_path
+        }
+    )
+    execute "packadd packer.nvim"
 end
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
--- require('packer').init({display = {non_interactive = true}})
-require('packer').init({display = {auto_clean = false}})
-
-return require('packer').startup(function()
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    -- lsp
-    use 'neovim/nvim-lspconfig'
-
-    -- autocompletion
-    use {
-        'hrsh7th/nvim-compe',
-        requires = {{'hrsh7th/vim-vsnip'}, {'onsails/lspkind-nvim'}}
+require("packer").init(
+    {
+        git = {clone_timeout = 120},
+        display = {
+            open_fn = function()
+                return require("packer.util").float({border = "single"})
+            end
+        }
     }
+)
 
-    -- markdown preview
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+return require("packer").startup(
+    function(use)
+        -- Packer can manage itself
+        use "wbthomason/packer.nvim"
 
-    -- formatting
-    use 'sbdchd/neoformat'
+        -- lsp
+        use "neovim/nvim-lspconfig"
 
-    -- git
-    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+        -- autocompletion
+        use {
+            "hrsh7th/nvim-compe",
+            requires = {{"hrsh7th/vim-vsnip"}, {"onsails/lspkind-nvim"}}
+        }
 
-    -- ui
-    use {
-        'akinsho/nvim-bufferline.lua',
-        requires = 'kyazdani42/nvim-web-devicons'
-    }
-    use {
-        'glepnir/galaxyline.nvim',
-        branch = 'main',
-        requires = 'kyazdani42/nvim-web-devicons'
-    }
-    use 'mhinz/vim-startify'
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+        -- markdown preview
+        use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
 
-    -- colorscheme
-    -- use 'AtifChy/onedark.vim'
-    use 'AtifChy/one-nvim'
+        -- formatting
+        use "sbdchd/neoformat"
 
-    -- utils
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
-    use 'norcalli/nvim-colorizer.lua'
-    use {
-        'windwp/nvim-autopairs',
-        require = {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    }
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-end)
+        -- git
+        use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}}
+
+        -- ui
+        use {
+            "akinsho/nvim-bufferline.lua",
+            requires = "kyazdani42/nvim-web-devicons"
+        }
+        use {
+            "glepnir/galaxyline.nvim",
+            branch = "main",
+            requires = "kyazdani42/nvim-web-devicons"
+        }
+        use "mhinz/vim-startify"
+        use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+
+        -- colorscheme
+        use "AtifChy/one-nvim"
+        -- use 'norcalli/nvim-base16.lua'
+
+        -- utils
+        use {"kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons"}
+        use "norcalli/nvim-colorizer.lua"
+        use {
+            "windwp/nvim-autopairs",
+            require = {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        }
+        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        -- use {
+        --     'nvim-telescope/telescope.nvim',
+        --     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+        -- }
+        -- use {
+        --     'nvim-telescope/telescope-media-files.nvim',
+        --     requires = 'nvim-telescope/telescope.nvim'
+        -- }
+    end
+)

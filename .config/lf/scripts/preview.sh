@@ -55,7 +55,7 @@ esac
 
 case "$(file -Lb --mime-type -- "$file")" in
 text/* | application/json)
-        bat --style plain --color always "$file"
+        bat --style plain --theme base16 --color always "$file"
         ;;
 */pdf)
         if [ -n "$FIFO_UEBERZUG" ]; then

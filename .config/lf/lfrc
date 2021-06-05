@@ -30,26 +30,19 @@ set hidden
 # show icons
 set icons
 
+set mouse
+
 # border
 set drawbox
 
-# Dynamically set number of columns
-%{{
-    w=$(tput cols)
-    if [ $w -le 80 ]; then
-        lf -remote "send $id set ratios 1:2"
-    elif [ $w -le 160 ]; then
-        lf -remote "send $id set ratios 1:2:3"
-    else
-        lf -remote "send $id set ratios 1:2:3:5"
-    fi
-}}
-
 ## keybinds
 map <enter> open
+map <m-1> open
+map <m-up> up
+map <m-down> down
 
 # use enter for shell commands
-map / shell
+#map / shell
 
 # execute current file (must be executable)
 map x $$f
@@ -57,7 +50,7 @@ map X !$f
 
 # dedicated keys for file opener actions
 map o &mimeopen $f
-map O $mimeopen --ask $f
+map O $mimeopen --ask-default $f
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
@@ -66,8 +59,9 @@ map O $mimeopen --ask $f
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
-        text/*) $EDITOR $fx;;
-        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+        text/* | inode/x-empty) $EDITOR $fx;;
+	image/* ) for f in $fx; do setsid ~/.config/lf/scripts/sxiv_lf.sh $f > /dev/null 2> /dev/null & done;;
+        *) for f in $fx; do setsid mimeopen $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 
@@ -126,3 +120,15 @@ cmd zip ${{
     zip -r $1.zip $1
     rm -rf $1
 }}
+
+# Dynamically set number of columns
+%{{
+    w=$(tput cols)
+    if [ $w -le 100 ]; then
+        lf -remote "send $id set ratios 1:2"
+    else
+        lf -remote "send $id set ratios 1:2:3"
+    fi
+}}
+
+

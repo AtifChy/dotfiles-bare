@@ -1,4 +1,4 @@
--- vim.o.t_Co = "256"       -- don't enable this, it breaks everything
+vim.go.t_Co = "256"
 vim.o.fileencoding = "UTF-8"
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -15,20 +15,30 @@ vim.wo.number = true
 vim.wo.cursorline = true
 vim.wo.cursorcolumn = true
 
-vim.cmd('colorscheme one-nvim')
-vim.g.one_nvim_transparent_bg = false
+-- colorscheme
+vim.cmd("colorscheme one-nvim")
+-- local base16 = require "base16"
+-- base16(base16.themes["onedark"], true)
+-- require('custom_highlights')
 
-vim.g.indent_blankline_char = '│'
-vim.g.indent_blankline_filetype_exclude = {
-    'help', 'terminal', 'startify', 'packer'
-}
-vim.g.indent_blackline_buftype_exclude = {'terminal'}
+-- vim.g.one_nvim_transparent_bg = false
+
+-- indent
+vim.g.indent_blankline_char = "│"
 -- vim.g.indent_blankline_char_list = {'▏', '┆', '┊'}
--- vim.g.indent_blankline_use_treesitter = true
+vim.g.indent_blankline_filetype_exclude = {
+    "help",
+    "terminal",
+    "startify",
+    "packer"
+}
+vim.g.indent_blackline_buftype_exclude = {"terminal"}
 
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}
-    if opts then options = vim.tbl_extend("force", options, opts) end
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
@@ -45,10 +55,12 @@ tnoremap <Esc> <C-\><C-n>
 ]])
 
 -- autocmd commands
-cmd([[
+cmd(
+    [[
 autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritePost ~/.config/X11/Xresources,~/.config/X11/Xdefaults !xrdb -merge %
-]])
+autocmd BufWritePost ~/.config/x11/Xresources,~/.config/x11/Xdefaults !xrdb -merge %
+]]
+)
 
 -- auto neoformat
 cmd([[
