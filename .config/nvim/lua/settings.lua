@@ -28,11 +28,14 @@ vim.g.indent_blankline_char = "│"
 -- vim.g.indent_blankline_char_list = {'▏', '┆', '┊'}
 vim.g.indent_blankline_filetype_exclude = {
     "help",
-    "terminal",
     "startify",
     "packer"
 }
-vim.g.indent_blackline_buftype_exclude = {"terminal"}
+vim.g.indent_blackline_buftype_exclude = {
+    "terminal",
+    "nofile"
+}
+vim.g.indent_blackline_char_highlight = "LineNr"
 
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true}

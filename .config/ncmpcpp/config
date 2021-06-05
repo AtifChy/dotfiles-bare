@@ -544,4 +544,4 @@ alternative_ui_separator_color = green:b
 #
 
 ## ncmpcpp ueberzug
-execute_on_song_change = ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh ; dunstify -I /tmp/mpd_cover.jpg "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"
+execute_on_song_change = ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh ; notify-send -u low -i /tmp/mpd_cover.jpg "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"

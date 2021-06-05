@@ -1,5 +1,7 @@
 -- Enable bash-language-server
-require "lspconfig".bashls.setup {filetypes = {"sh", "zsh"}}
+require "lspconfig".bashls.setup {
+    filetypes = {"sh", "zsh"}
+}
 
 -- vim
 -- require'lspconfig'.vimls.setup {}

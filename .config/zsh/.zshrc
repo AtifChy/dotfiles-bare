@@ -59,7 +59,7 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
 zstyle ':completion::complete:*' use-cache on
 #zstyle ':completion:*' rehash true   ## bad for performance
-#zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zmodload zsh/complist
 _comp_options+=(globdots)
