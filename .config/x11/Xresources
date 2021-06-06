@@ -21,7 +21,7 @@ st.borderpx: 		1
 st.opacity: 		255
 st.alpha: 		1.0
 st.cursorshape: 	1
-st.blinktimeout: 	1000
+st.blinktimeout: 	0
 
 ! special
 *.foreground:   #c8ccd4

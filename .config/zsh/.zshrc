@@ -16,8 +16,11 @@ autoload -Uz _zinit
 
 ### End of Zinit's installer chunk
 
-# zsh plugins
+## zsh plugins
 zinit wait lucid light-mode for \
+  atload'bindkey "$terminfo[kcuu1]" history-substring-search-up;
+    bindkey "$terminfo[kcud1]" history-substring-search-down' \
+      zsh-users/zsh-history-substring-search \
   atinit"zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
@@ -25,30 +28,33 @@ zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions
 
+
 # ohmyzsh library, plugins, themes
-zinit snippet OMZP::extract
+zinit snippet OMZL::key-bindings.zsh             # zsh default keybinds are very WEIRD
+zinit snippet OMZP::extract                      # extract archives
 
 ## zsh tweak
 PROMPT_EOL_MARK='⏎'
 
 ## zsh settings
-setopt AUTO_CD                # auto cd to given dir if cd command not used
+setopt auto_cd                # auto cd to given dir if cd command not used
 DIRSTACKSIZE=16               # cache how many dirs for pushd
-setopt AUTO_PUSHD             # go back to previously visited dirs (e.g. cd -<TAB>)
-setopt PUSHD_IGNORE_DUPS      # remove duplicates
-setopt INTERACTIVECOMMENTS    # Ignore lines prefixed with '#'
-setopt PUSHD_MINUS            # last visited dir on top
-setopt NO_BEEP                # disable beeping on tab completion
-setopt EXTENDED_HISTORY       # record timestamp of command in HISTFILE
-setopt HIST_EXPIRE_DUPS_FIRST # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt HIST_IGNORE_DUPS       # ignore duplicated commands history list
-setopt HIST_IGNORE_SPACE      # ignore commands that start with space
-setopt HIST_VERIFY            # show command with history expansion to user before running it
-setopt SHARE_HISTORY 	      # shell share history with other tabs
-setopt NOFLOWCONTROL
-
-# colors
-export LS_COLORS="di=1;34"
+setopt auto_pushd             # go back to previously visited dirs (e.g. cd -<TAB>)
+setopt pushd_ignore_dups      # remove duplicates
+setopt interactivecomments    # Ignore lines prefixed with '#'
+setopt pushd_minus            # last visited dir on top
+setopt no_beep                # disable beeping on tab completion
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history 	      # shell share history with other tabs
+setopt noflowcontrol
+setopt always_to_end          # cursor moved to the end in full completion
+setopt complete_in_word       # allow completion from within a word/phrase
+setopt automenu
 
 ## zsh autocompletion
 autoload -Uz compinit && compinit
@@ -60,13 +66,15 @@ zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcom
 zstyle ':completion::complete:*' use-cache on
 #zstyle ':completion:*' rehash true   ## bad for performance
 zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+eval "$(dircolors)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} "ma=07;1"
 zmodload zsh/complist
 _comp_options+=(globdots)
 TRAPUSR1() { rehash } #rehash function for pacman hook
 
 # zsh autosuggestions strategy. options: history, completion
 ZSH_AUTOSUGGEST_STRATEGY=(history)
+#ZSH_AUTOSUGGEST_HISTORY_IGNORE="pacman -S*|paru -S*|git *"
 
 # History file configuration
 if [[ ! -f ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history ]]; then
@@ -103,56 +111,8 @@ zle -N bracketed-paste bracketed-paste-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-## key bindings
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
-typeset -g -A key
-
-key[Home]="${terminfo[khome]}"
-key[End]="${terminfo[kend]}"
-key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
-key[Delete]="${terminfo[kdch1]}"
-key[Up]="${terminfo[kcuu1]}"
-key[Down]="${terminfo[kcud1]}"
-key[Left]="${terminfo[kcub1]}"
-key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
-key[Shift-Tab]="${terminfo[kcbt]}"
-
-# setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
-[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
-
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	autoload -Uz add-zle-hook-widget
-	function zle_application_mode_start { echoti smkx }
-	function zle_application_mode_stop { echoti rmkx }
-	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
-fi
-
 # source default configs
 #source /etc/profile
-
-# some useful PATH
-#export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
-#[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # icons for lf file manager
 [ -f ~/.config/lf/scripts/icons.sh ] && source ~/.config/lf/scripts/icons.sh
