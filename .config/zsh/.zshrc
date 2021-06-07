@@ -13,7 +13,6 @@ fi
 source "$HOME/.cache/zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
 ### End of Zinit's installer chunk
 
 ## zsh plugins
@@ -23,11 +22,10 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-history-substring-search \
   atinit"zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions
-
+      zsh-users/zsh-completions \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions
 
 # ohmyzsh library, plugins, themes
 zinit snippet OMZL::key-bindings.zsh             # zsh default keybinds are very WEIRD
@@ -43,7 +41,6 @@ setopt auto_pushd             # go back to previously visited dirs (e.g. cd -<TA
 setopt pushd_ignore_dups      # remove duplicates
 setopt interactivecomments    # Ignore lines prefixed with '#'
 setopt pushd_minus            # last visited dir on top
-setopt no_beep                # disable beeping on tab completion
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
@@ -55,6 +52,7 @@ setopt noflowcontrol
 setopt always_to_end          # cursor moved to the end in full completion
 setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu
+unsetopt beep                 # disable beeping on tab completion
 
 ## zsh autocompletion
 autoload -Uz compinit && compinit
