@@ -59,34 +59,59 @@ autoload -Uz vcs_info
 
 setopt prompt_subst
 preexec() {
-	[ -n $cmd_time ] && cmd_time=""
+	unset cmd_time
 	cmd_start="$SECONDS"
 }
 precmd() {
 	is_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)" && changed="$(git status --porcelain)"
 	if [[ $is_repo == 'true' ]] && [[ -n $changed ]]; then
-		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f %F{red}[%m%u%c]%f'
+		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f %F{red}[%m%a%u%c]%f'
 	else
 		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f'
 	fi
 	local cmd_end="$SECONDS"
 	elapsed=$((cmd_end-cmd_start))
-	[ $elapsed -gt 2 ] && cmd_time=$(printf 'took %%B%%F{yellow}%ss%%f%%b' "$elapsed")
+	if [ $elapsed -gt 3600 ]; then
+		h=$((elapsed / 3600))
+		m=$(((elapsed / 60) % 60))
+		s=$((elapsed % 60))
+		time=$(printf "%dh %dm %ds" $h $m $s)
+	elif [ $elapsed -gt 60 ]; then
+		m=$(((elapsed / 60) % 60))
+		s=$((elapsed % 60))
+		time=$(printf "%dm %ds" $m $s)
+	else
+		s=$((elapsed % 60))
+		time=$(printf '%ss' $elapsed)
+	fi
+	[ $elapsed -gt 2 ] && cmd_time=$(printf 'took %%B%%F{yellow}%s%%f%%b' "$time")
 	vcs_info
-}
-PROMPT='%B%F{cyan}%20<…<%~%<<%f%b ${vcs_info_msg_0_}%b $cmd_time
+	PROMPT='%B%F{cyan}%20<…<%~%<<%f%b ${vcs_info_msg_0_}%b $cmd_time
 %(?.%B%F{green}➜%f%b.%F{red}➜%f)  '
+}
 
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st
 +vi-git-untracked() {
   if [[ $is_repo == 'true' ]] && \
      printf "$changed" | grep -m 1 '^??' &>/dev/null
   then
-    hook_com[misc]='?'
+    hook_com[action]='?'
   fi
+}
++vi-git-st() {
+    local ahead behind
+    local -a gitstatus
+
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "+${ahead}" )
+
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "-${behind}" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
 }
 
 ## zsh autocompletion
