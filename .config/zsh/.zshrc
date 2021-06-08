@@ -54,6 +54,41 @@ setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu
 unsetopt beep                 # disable beeping on tab completion
 
+## zsh prompt
+autoload -Uz vcs_info
+
+setopt prompt_subst
+preexec() {
+	[ -n $cmd_time ] && cmd_time=""
+	cmd_start="$SECONDS"
+}
+precmd() {
+	is_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)" && changed="$(git status --porcelain)"
+	if [[ $is_repo == 'true' ]] && [[ -n $changed ]]; then
+		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f %F{red}[%m%u%c]%f'
+	else
+		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f'
+	fi
+	local cmd_end="$SECONDS"
+	elapsed=$((cmd_end-cmd_start))
+	[ $elapsed -gt 2 ] && cmd_time=$(printf 'took %%B%%F{yellow}%ss%%f%%b' "$elapsed")
+	vcs_info
+}
+PROMPT='%B%F{cyan}%20<…<%~%<<%f%b ${vcs_info_msg_0_}%b $cmd_time
+%(?.%B%F{green}➜%f%b.%F{red}➜%f)  '
+
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
++vi-git-untracked() {
+  if [[ $is_repo == 'true' ]] && \
+     printf "$changed" | grep -m 1 '^??' &>/dev/null
+  then
+    hook_com[misc]='?'
+  fi
+}
+
 ## zsh autocompletion
 autoload -Uz compinit && compinit
 
@@ -114,6 +149,3 @@ zle -N self-insert url-quote-magic
 
 # icons for lf file manager
 [ -f ~/.config/lf/scripts/icons.sh ] && source ~/.config/lf/scripts/icons.sh
-
-# starship
-[ -n $(command -v starship) ] && eval "$(starship init zsh)"
