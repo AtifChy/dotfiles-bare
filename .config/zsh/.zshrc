@@ -1,6 +1,7 @@
 ### Added by Zinit's installer
-declare -A ZINIT					# necessary for changing location
-ZINIT[HOME_DIR]=$HOME/.cache/zinit
+declare -A ZINIT
+ZINIT[HOME_DIR]=${XDG_CACHE_HOME:-$HOME/.cache}/zinit
+ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache-$ZSH_VERSION
 
 if [[ ! -f $HOME/.cache/zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -15,21 +16,55 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
+## zsh prompt
+zinit lucid for \
+  as"command" from"gh-r" \
+  atinit'
+        export N_PREFIX="$HOME/n";
+        [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+  ' \
+  atload'eval "$(starship init zsh)"' \
+  bpick'*unknown-linux-gnu*' \
+  starship/starship
+
 ## zsh plugins
 zinit wait lucid light-mode for \
-  atload'bindkey "$terminfo[kcuu1]" history-substring-search-up;
-    bindkey "$terminfo[kcud1]" history-substring-search-down' \
+  atload'
+        bindkey "$terminfo[kcuu1]" history-substring-search-up;
+        bindkey "$terminfo[kcud1]" history-substring-search-down
+  ' \
       zsh-users/zsh-history-substring-search \
-  atinit"zicompinit; zicdreplay" \
+  atinit"
+        typeset -gA FAST_HIGHLIGHT;
+        FAST_HIGHLIGHT[git-cmsg-len]=100;
+	zicompinit;
+	zicdreplay
+  " \
       zdharma/fast-syntax-highlighting \
   blockf atpull'zinit creinstall -q .' \
+  atinit"
+	zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+	zstyle ':completion:*' completer _expand _complete _ignored _approximate
+	zstyle ':completion:*' menu select=2
+	zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+	zstyle ':completion::complete:*' use-cache on
+	zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+	TRAPUSR1() { rehash }        # /bin recache after update -- requires pacman hook
+  " \
+  atload'
+        eval "$(dircolors)"
+        zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
+  ' \
       zsh-users/zsh-completions \
+  atinit"
+        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
+        ZSH_AUTOSUGGEST_STRATEGY=(history)
+  " \
   atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions
-
-# ohmyzsh library, plugins, themes
-zinit snippet OMZL::key-bindings.zsh             # zsh default keybinds are very WEIRD
-zinit snippet OMZP::extract                      # extract archives
+      zsh-users/zsh-autosuggestions \
+  trigger-load'!x' \
+      OMZP::extract \
+      OMZL::key-bindings.zsh
 
 ## zsh tweak
 PROMPT_EOL_MARK='⏎'
@@ -52,86 +87,14 @@ setopt noflowcontrol
 setopt always_to_end          # cursor moved to the end in full completion
 setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu
-unsetopt beep                 # disable beeping on tab completion
-
-## zsh prompt
-autoload -Uz vcs_info
-
-setopt prompt_subst
-preexec() {
-	unset cmd_time
-	cmd_start="$SECONDS"
-}
-precmd() {
-	is_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)" && changed="$(git status --porcelain)"
-	if [[ $is_repo == 'true' ]] && [[ -n $changed ]]; then
-		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f %F{red}[%m%a%u%c]%f'
-	else
-		zstyle ':vcs_info:git:*' formats 'on %B%F{magenta} %b%f'
-	fi
-	local cmd_end="$SECONDS"
-	elapsed=$((cmd_end-cmd_start))
-	if [ $elapsed -gt 3600 ]; then
-		h=$((elapsed / 3600))
-		m=$(((elapsed / 60) % 60))
-		s=$((elapsed % 60))
-		time=$(printf "%dh %dm %ds" $h $m $s)
-	elif [ $elapsed -gt 60 ]; then
-		m=$(((elapsed / 60) % 60))
-		s=$((elapsed % 60))
-		time=$(printf "%dm %ds" $m $s)
-	else
-		s=$((elapsed % 60))
-		time=$(printf '%ss' $elapsed)
-	fi
-	[ $elapsed -gt 2 ] && cmd_time=$(printf 'took %%B%%F{yellow}%s%%f%%b' "$time")
-	vcs_info
-	PROMPT='%B%F{cyan}%20<…<%~%<<%f%b ${vcs_info_msg_0_}%b $cmd_time
-%(?.%B%F{green}➜%f%b.%F{red}➜%f)  '
-}
-
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '!'
-zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-st
-+vi-git-untracked() {
-  if [[ $is_repo == 'true' ]] && \
-     printf "$changed" | grep -m 1 '^??' &>/dev/null
-  then
-    hook_com[action]='?'
-  fi
-}
-+vi-git-st() {
-    local ahead behind
-    local -a gitstatus
-
-    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-    (( $ahead )) && gitstatus+=( "+${ahead}" )
-
-    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-    (( $behind )) && gitstatus+=( "-${behind}" )
-
-    hook_com[misc]+=${(j:/:)gitstatus}
-}
+setopt nobeep                 # disable beeping on tab completion
 
 ## zsh autocompletion
-autoload -Uz compinit && compinit
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=2
-zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
-zstyle ':completion::complete:*' use-cache on
-#zstyle ':completion:*' rehash true   ## bad for performance
-zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
-eval "$(dircolors)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} "ma=07;1"
-zmodload zsh/complist
-_comp_options+=(globdots)
-TRAPUSR1() { rehash } #rehash function for pacman hook
+# Already enabled by zinit. Don't enable them. TEST RUN : `time zsh -i -c exit`
+#autoload -Uz compinit
+#compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 # zsh autosuggestions strategy. options: history, completion
-ZSH_AUTOSUGGEST_STRATEGY=(history)
 #ZSH_AUTOSUGGEST_HISTORY_IGNORE="pacman -S*|paru -S*|git *"
 
 # History file configuration
