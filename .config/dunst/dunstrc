@@ -159,7 +159,7 @@
     hide_duplicate_count = true
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     ### Icons ###
 
@@ -294,7 +294,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#1E2127"
     foreground = "#d8dee9"
-    timeout = 3
+    timeout = 4
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
@@ -310,7 +310,7 @@
     background = "#1E2127"
     foreground = "#d8dee9"
     frame_color = "#e06c75"
-    timeout = 0
+    timeout = 10
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
 

@@ -6,3 +6,4 @@ text/plain=org.gnome.gedit.desktop;nvim.desktop;
 text/x-chdr=org.gnome.gedit.desktop;
 text/x-lua=nvim.desktop;
 video/x-matroska=mpv.desktop;
+image/x-xpixmap=sxiv.desktop;

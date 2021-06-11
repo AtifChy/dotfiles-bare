@@ -17,7 +17,7 @@ Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
 
 ! st settings
 st.font: 		Iosevka:pixelsize=15
-st.borderpx: 		1
+st.borderpx: 		7
 st.opacity: 		255
 st.alpha: 		1.0
 st.cursorshape: 	1

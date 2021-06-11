@@ -8,21 +8,12 @@ export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'
 export PF_SEP=' '
 
 # Apps
-#export TERMINAL='st'
-#export BROWSER='firefox'
 export EDITOR='nvim'
-#export SYSTEMD_EDITOR=$EDITOR
 
 # Firefox hardware video acceleration
 [ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1
 [ "$XDG_SESSION_TYPE" = "x11" ] && export MOZ_X11_EGL=1
 export MOZ_WEBRENDER=1
-
-# Clipmenu
-#export CM_SELECTIONS="clipboard"
-#export CM_DEBUG=0
-#export CM_OUTPUT_CLIP=1
-#export CM_MAX_CLIPS=30
 
 # Follow XDG file directory
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -58,8 +49,8 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 export SSB_HOME="$XDG_DATA_HOME"/zoom
 export STACK_ROOT="$XDG_DATA_HOME"/stack
-export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
-export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
+#export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
+#export XSERVERRC="$XDG_CONFIG_HOME"/x11/xserverrc
 #export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 #export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 #export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
@@ -71,7 +62,7 @@ export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
 # qt apps theme
-export QT_QPA_PLATFORMTHEME='qt5ct'
+[ -n "$(command -v qt5ct)" ] && export QT_QPA_PLATFORMTHEME='qt5ct'
 
 # color less
 LESS_TERMCAP_md=$(printf '\033[01;31m')
@@ -87,17 +78,13 @@ export LESS_TERMCAP_se
 export LESS_TERMCAP_us
 export LESS_TERMCAP_ue
 
-## Don't ask me for login keyring
-#if [ -z "$DESKTOP_SESSION" ]; then
-#	eval "$(gnome-keyring-daemon --start)"
-#	export ssh_auth_sock
-#fi
+# icons for lf file manager
+[ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
 
 #[ "$DESKTOP_SESSION" != "xmonad" ] && dunstctl set-paused true
 
 # startx
-alias exec='exec '
-alias startx='startx "$XDG_CONFIG_HOME"/x11/xinitrc'
+#alias startx='startx $XINITRC'
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
         exec startx >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 fi

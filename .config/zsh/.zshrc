@@ -99,7 +99,7 @@ HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
-# terminal title
+## terminal title
 function title {
   case "$TERM" in
     cygwin|xterm*|putty*|rxvt*|konsole*|ansi|mlterm*|alacritty|st*)
