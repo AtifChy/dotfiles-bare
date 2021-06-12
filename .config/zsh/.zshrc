@@ -29,18 +29,16 @@ zinit lucid for \
 
 ## zsh plugins
 zinit wait lucid light-mode for \
+  atinit"
+	HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold';
+	HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
+  " \
   atload'
         bindkey "$terminfo[kcuu1]" history-substring-search-up;
-        bindkey "$terminfo[kcud1]" history-substring-search-down
+	bindkey "$terminfo[kcud1]" history-substring-search-down
   ' \
-      zsh-users/zsh-history-substring-search \
-  atinit"
-        typeset -gA FAST_HIGHLIGHT;
-        FAST_HIGHLIGHT[git-cmsg-len]=100;
-	zicompinit;
-	zicdreplay
-  " \
-      zdharma/fast-syntax-highlighting \
+  ver'dont-overwrite-config' \
+      ericbn/zsh-history-substring-search \
   blockf atpull'zinit creinstall -q .' \
   atinit"
 	zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -60,15 +58,23 @@ zinit wait lucid light-mode for \
   ' \
       zsh-users/zsh-completions \
   atinit"
+        typeset -gA FAST_HIGHLIGHT;
+        FAST_HIGHLIGHT[git-cmsg-len]=100;
+	ZINIT[COMPINIT_OPTS]=-C;
+	zicompinit;
+	zicdreplay
+  " \
+      zdharma/fast-syntax-highlighting \
+  atinit"
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
-        ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+        ZSH_AUTOSUGGEST_STRATEGY=(history completion);
 	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='sudo pacman*|pacman*|paru*|yay*|git *|\)\*'
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   trigger-load'!x' \
-      OMZP::extract \
-      OMZL::key-bindings.zsh
+      OMZP::extract
+
 
 ## zsh tweak
 PROMPT_EOL_MARK='⏎'
@@ -78,11 +84,12 @@ setopt auto_cd                # auto cd to given dir if cd command not used
 DIRSTACKSIZE=16               # cache how many dirs for pushd
 setopt auto_pushd             # go back to previously visited dirs (e.g. cd -<TAB>)
 setopt pushd_ignore_dups      # remove duplicates
-setopt interactivecomments    # Ignore lines prefixed with '#'
 setopt pushd_minus            # last visited dir on top
+setopt interactivecomments    # Ignore lines prefixed with '#'
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_dups       # Don't record an entry that was just recorded again
+setopt hist_find_no_dups      # Do not display a line previously found
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt inc_append_history     # add commands to HISTFILE in order of execution
@@ -131,3 +138,48 @@ source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
 autoload -Uz bracketed-paste-magic url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 zle -N self-insert url-quote-magic
+
+## keybindings
+# Make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  function zle-line-init() {
+    echoti smkx
+  }
+  function zle-line-finish() {
+    echoti rmkx
+  }
+  zle -N zle-line-init
+  zle -N zle-line-finish
+fi
+
+typeset -g -A key
+
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+
+# setup key accordingly
+bindkey "${key[Home]}"       beginning-of-line
+bindkey "${key[End]}"        end-of-line
+bindkey "${key[Insert]}"     overwrite-mode
+bindkey "${key[Backspace]}"  backward-delete-char
+bindkey "${key[Delete]}"     delete-char
+bindkey "${key[Left]}"       backward-char
+bindkey "${key[Right]}"      forward-char
+bindkey "${key[PageUp]}"     beginning-of-buffer-or-history
+bindkey "${key[PageDown]}"   end-of-buffer-or-history
+bindkey "${key[Shift-Tab]}"  reverse-menu-complete
+
+# being used by plugin:-zsh-history-substring-search
+#bindkey "${key[Up]}"         history-beginning-search-backward
+#bindkey "${key[Down]}"       history-beginning-search-forward
