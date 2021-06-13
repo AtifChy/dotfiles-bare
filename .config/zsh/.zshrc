@@ -68,7 +68,7 @@ zinit wait lucid light-mode for \
   atinit"
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
         ZSH_AUTOSUGGEST_STRATEGY=(history completion);
-	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='sudo pacman*|pacman*|paru*|yay*|git *|\)\*'
+	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*'
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \

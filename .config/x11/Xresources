@@ -1,7 +1,7 @@
 !-- Xft settings -- !
 Xft.antialias:		1
 Xft.hinting:		1
-Xft.autohint:		0
+Xft.autohint:		1
 Xft.hintstyle:		hintslight
 Xft.rgba:		rgb
 Xft.lcdfilter:		lcddefault
@@ -16,7 +16,7 @@ Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
 !Xmessage.font:          FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font: 		Iosevka:pixelsize=15
+st.font: 	        JetBrains Mono:pixelsize=14
 st.borderpx: 		7
 st.opacity: 		255
 st.alpha: 		1.0

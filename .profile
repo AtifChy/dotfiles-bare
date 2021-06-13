@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # custom PATH
 export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.local/share/npm/bin:$PATH"
