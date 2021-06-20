@@ -1,4 +1,4 @@
-!-- Xft settings -- !
+!-- Xft settings --!
 Xft.antialias:		1
 Xft.hinting:		1
 Xft.autohint:		1
@@ -11,13 +11,13 @@ Xcursor.theme: 		bloom
 !Xcursor.size: 		16
 
 ! sxiv config
-Sxiv.font: 		JetBrains Mono:style:Medium:pixelsize=12
+Sxiv.font: 		JetBrains Mono:style=Medium:pixelsize=12
 
 !Xmessage.font:          FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font: 	        JetBrains Mono:pixelsize=14
-st.borderpx: 		7
+st.font: 	        JetBrainsMono Nerd Font:size=10
+st.borderpx: 		6
 st.opacity: 		255
 st.alpha: 		1.0
 st.cursorshape: 	1
@@ -59,24 +59,3 @@ st.blinktimeout: 	900
 ! white
 *.color7:       #d0d0d0
 *.color15:      #ffffff
-
-!! urxvt settings
-!URxvt.font: 		xft:FiraCode Nerd Font:pixelsize=14
-!URxvt.letterSpace: 	0
-!URxvt.scrollBar: 	false
-
-!! URxvt extensions
-!URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-!URxvt.url-select.launcher:  /usr/bin/xdg-open
-!URxvt.url-select.underline: true
-!URxvt.keysym.M-u:           perl:url-select:select_next
-!URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-!URxvt.keysym.M-s:           perl:keyboard-select:search
-
-! dwm
-!dwm.normbordercolor: 	#1E2127
-!dwm.normbgcolor: 	#1E2127
-!dwm.normfgcolor: 	#d8dee9
-!dwm.selbordercolor: 	#4280bd
-!dwm.selbgcolor: 	#4280bd
-!dwm.selfgcolor: 	#d8dee9

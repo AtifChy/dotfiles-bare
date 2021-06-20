@@ -19,10 +19,6 @@ autoload -Uz _zinit
 ## zsh prompt
 zinit lucid for \
   as"command" from"gh-r" \
-  atinit'
-        export N_PREFIX="$HOME/n";
-        [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
-  ' \
   atload'eval "$(starship init zsh)"' \
   bpick'*unknown-linux-gnu*' \
   starship/starship
@@ -50,6 +46,7 @@ zinit wait lucid light-mode for \
 	zstyle ':completion:*' group-name ''
 	zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
 	zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+	zstyle ':completion:*' insert-tab false
 	TRAPUSR1() { rehash }        # /bin recache after update -- requires pacman hook
   " \
   atload'
@@ -68,7 +65,7 @@ zinit wait lucid light-mode for \
   atinit"
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
         ZSH_AUTOSUGGEST_STRATEGY=(history completion);
-	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*'
+	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*|;*'
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \

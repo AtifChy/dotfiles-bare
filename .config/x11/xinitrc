@@ -39,38 +39,38 @@ export MOZ_X11_EGL=1
 export XDG_SESSION_TYPE=x11
 
 # fix clipboard
-while :; do
-        pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
-        sleep 1
-done &
+#while :; do
+#        pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
+#        sleep 1
+#done &
 
 # keep this at the bottom
 session=${1:-xmonad}
 export XDG_SESSION_DESKTOP=$session
 
 case $session in
-xmonad)
-        dbus-run-session ~/.local/share/xmonad/xmonad-x86_64-linux
-        ;;
-dwm)
-        dbus-run-session dwm
-        ;;
-kde)
-        dbus-run-session startplasma-x11
-        ;;
-xfce | xfce4)
-        dbus-run-session startxfce4
-        ;;
-gnome)
-        dbus-run-session gnome-session
-        ;;
-spectrwm | spectr)
-        dbus-run-session spectrwm
-        ;;
-awesome)
-        dbus-run-session awesome
-        ;;
-*)
-        $1
-        ;;
+        xmonad)
+                dbus-run-session ~/.local/share/xmonad/xmonad-x86_64-linux
+                ;;
+        dwm)
+                dbus-run-session dwm
+                ;;
+        kde)
+                dbus-run-session startplasma-x11
+                ;;
+        xfce | xfce4)
+                dbus-run-session startxfce4
+                ;;
+        gnome)
+                dbus-run-session gnome-session
+                ;;
+        spectrwm | spectr)
+                dbus-run-session spectrwm
+                ;;
+        awesome)
+                dbus-run-session awesome
+                ;;
+        *)
+                $1
+                ;;
 esac

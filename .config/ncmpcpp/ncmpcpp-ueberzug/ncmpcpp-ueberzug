@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 export FIFO_UEBERZUG="/tmp/mpd-ueberzug-${PPID}"
 
 cleanup() {

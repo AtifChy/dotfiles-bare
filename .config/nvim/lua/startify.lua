@@ -1,3 +1,4 @@
+-- startify fancy header
 vim.g.startify_custom_header = {
     "   ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗ ",
     "   ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║ ",
@@ -7,6 +8,10 @@ vim.g.startify_custom_header = {
     "   ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝ "
 }
 
+-- number of files to be shown for each list
+vim.g.startify_files_number = 8
+
+-- various list order
 vim.g.startify_lists = {
     {type = "sessions", header = {"   Sessions"}},
     {type = "dir", header = {"   Current Directory " .. vim.fn.getcwd()}},
@@ -15,14 +20,16 @@ vim.g.startify_lists = {
     {type = "commands", header = {"   Commands"}}
 }
 
+-- bookmarks
 vim.g.startify_bookmarks = {
     {a = "~/.config/nvim/init.lua"},
-    {s = "~/.config/zsh/.zshrc"},
-    {d = "~/.config/alacritty/alacritty.yml"},
-    {f = "~/.config/X11/Xresources"},
-    {g = "~/.config/fish/config.fish"}
+    {s = "~/.config/zsh/zshrc"},
+    {d = "~/.config/xmonad/xmonad.hs"},
+    {f = "~/.config/xmonad/xmobar/xmobarrc"},
+    {h = "~/.config/x11/Xresources"}
 }
 
+-- shortcut for commands
 vim.g.startify_commands = {{pu = "PackerUpdate"}, {ps = "PackerSync"}}
 
 -- fix startify web icons

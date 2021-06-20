@@ -130,5 +130,3 @@ cmd zip ${{
         lf -remote "send $id set ratios 1:2:3"
     fi
 }}
-
-
