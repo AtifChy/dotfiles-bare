@@ -1,7 +1,7 @@
 !-- Xft settings --!
 Xft.antialias:		1
 Xft.hinting:		1
-Xft.autohint:		1
+Xft.autohint:		0
 Xft.hintstyle:		hintslight
 Xft.rgba:		rgb
 Xft.lcdfilter:		lcddefault
@@ -11,13 +11,13 @@ Xcursor.theme: 		bloom
 !Xcursor.size: 		16
 
 ! sxiv config
-Sxiv.font: 		JetBrains Mono:style=Medium:pixelsize=12
+Sxiv.font: 		JetBrains Mono:size=9:weight=100
 
 !Xmessage.font:          FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font: 	        JetBrainsMono Nerd Font:size=10
-st.borderpx: 		6
+st.font: 	        JetBrains Mono:size=10:weight=90
+st.borderpx: 		4
 st.opacity: 		255
 st.alpha: 		1.0
 st.cursorshape: 	1

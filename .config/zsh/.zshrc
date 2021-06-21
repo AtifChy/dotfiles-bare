@@ -37,7 +37,7 @@ zinit wait lucid light-mode for \
       ericbn/zsh-history-substring-search \
   blockf atpull'zinit creinstall -q .' \
   atinit"
-	zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+	zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 	zstyle ':completion:*' completer _expand _complete _ignored _approximate
 	zstyle ':completion:*' menu select=2
 	zstyle ':completion:*:default' list-prompt '%S%M matches%s'
@@ -45,13 +45,16 @@ zinit wait lucid light-mode for \
 	zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
 	zstyle ':completion:*' group-name ''
 	zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+	zstyle ':completion:*' ignored-patterns '\['
 	zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+	zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
 	zstyle ':completion:*' insert-tab false
-	TRAPUSR1() { rehash }        # /bin recache after update -- requires pacman hook
+	TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
   " \
   atload'
         eval "$(dircolors)"
         zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
+	zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   ' \
       zsh-users/zsh-completions \
   atinit"

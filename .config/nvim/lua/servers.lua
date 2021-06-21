@@ -9,6 +9,9 @@ require "lspconfig".bashls.setup {
 -- rust
 require "lspconfig".rust_analyzer.setup {}
 
+-- #C
+-- require "lspconfig".clangd.setup {}
+
 -- haskell
 -- require'lspconfig'.hls.setup {
 --     cmd = {"haskell-language-server-wrapper", "--lsp"},

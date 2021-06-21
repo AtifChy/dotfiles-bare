@@ -76,6 +76,7 @@ return require("packer").startup(
             require = {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         }
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use "tweekmonster/startuptime.vim"
         -- use {
         --     'nvim-telescope/telescope.nvim',
         --     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}

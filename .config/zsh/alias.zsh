@@ -67,7 +67,7 @@ alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
 #alias cls=' echo -ne "\033c"'       	# clear screen for real (it does not work in Terminology)
 
-## Make Bash error tolerant
+## Make zsh error tolerant
 alias :q=' exit'
 alias :Q=' exit'
 alias :x=' exit'

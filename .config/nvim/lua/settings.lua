@@ -66,9 +66,9 @@ autocmd BufWritePost ~/.config/x11/Xresources,~/.config/x11/Xdefaults !xrdb -mer
 )
 
 -- auto neoformat
-cmd([[
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
-]])
+-- cmd([[
+-- augroup fmt
+--   autocmd!
+--   autocmd BufWritePre * undojoin | Neoformat
+-- augroup END
+-- ]])
