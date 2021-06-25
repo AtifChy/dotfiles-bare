@@ -26,58 +26,57 @@ zinit lucid for \
 ## zsh plugins
 zinit wait lucid light-mode for \
   atinit"
-	HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold';
-	HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold';
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
   " \
   atload'
         bindkey "$terminfo[kcuu1]" history-substring-search-up;
-	bindkey "$terminfo[kcud1]" history-substring-search-down
+    bindkey "$terminfo[kcud1]" history-substring-search-down
   ' \
   ver'dont-overwrite-config' \
       ericbn/zsh-history-substring-search \
   blockf atpull'zinit creinstall -q .' \
   atinit"
-	zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-	zstyle ':completion:*' completer _expand _complete _ignored _approximate
-	zstyle ':completion:*' menu select=2
-	zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-	zstyle ':completion::complete:*' use-cache on
-	zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
-	zstyle ':completion:*' group-name ''
-	zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
-	zstyle ':completion:*' ignored-patterns '\['
-	zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-	zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
-	zstyle ':completion:*' insert-tab false
-	TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+    zstyle ':completion:*' completer _expand _complete _ignored _approximate
+    zstyle ':completion:*' menu select=2
+    zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+    zstyle ':completion::complete:*' use-cache on
+    zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+    zstyle ':completion:*' group-name ''
+    zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+    zstyle ':completion:*' ignored-patterns '\['
+    zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+    zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
+    zstyle ':completion:*' insert-tab false
+    TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
   " \
   atload'
         eval "$(dircolors)"
         zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
-	zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
+    zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   ' \
       zsh-users/zsh-completions \
   atinit"
         typeset -gA FAST_HIGHLIGHT;
         FAST_HIGHLIGHT[git-cmsg-len]=100;
-	ZINIT[COMPINIT_OPTS]=-C;
-	zicompinit;
-	zicdreplay
+    ZINIT[COMPINIT_OPTS]=-C;
+    zicompinit;
+    zicdreplay
   " \
       zdharma/fast-syntax-highlighting \
   atinit"
         ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
         ZSH_AUTOSUGGEST_STRATEGY=(history completion);
-	ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*|;*'
+    ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*|;*'
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   trigger-load'!x' \
       OMZP::extract
 
-
 ## zsh tweak
-PROMPT_EOL_MARK='⏎'
+PROMPT_EOL_MARK='↵'
 
 ## zsh settings
 setopt auto_cd                # auto cd to given dir if cd command not used
@@ -93,7 +92,7 @@ setopt hist_find_no_dups      # Do not display a line previously found
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt share_history 	      # shell share history with other tabs
+setopt share_history          # shell share history with other tabs
 setopt always_to_end          # cursor moved to the end in full completion
 setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu               # show completion menu on a successive tab press

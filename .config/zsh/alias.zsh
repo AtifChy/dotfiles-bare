@@ -84,4 +84,3 @@ alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'
 
 # alias for reflector
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
-alias reflectorbd='sudo reflector -c Bangladesh --save /etc/pacman.d/mirrorlist'

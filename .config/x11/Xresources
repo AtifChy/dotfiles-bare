@@ -1,61 +1,61 @@
 !-- Xft settings --!
-Xft.antialias:		1
-Xft.hinting:		1
-Xft.autohint:		0
-Xft.hintstyle:		hintslight
-Xft.rgba:		rgb
-Xft.lcdfilter:		lcddefault
+Xft.antialias:      1
+Xft.hinting:        1
+Xft.autohint:       0
+Xft.hintstyle:      hintslight
+Xft.rgba:           rgb
+Xft.lcdfilter:      lcddefault
 
 ! Cursor theme
-Xcursor.theme: 		bloom
-!Xcursor.size: 		16
+Xcursor.theme:      bloom
+!Xcursor.size:      16
 
 ! sxiv config
-Sxiv.font: 		JetBrains Mono:size=9:weight=100
+Sxiv.font:          JetBrains Mono:style=Medium:size=9
 
 !Xmessage.font:          FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font: 	        JetBrains Mono:size=10:weight=90
-st.borderpx: 		4
-st.opacity: 		255
-st.alpha: 		1.0
-st.cursorshape: 	1
-st.blinktimeout: 	900
+st.font:            JetBrains Mono:size=10:weight=90
+st.borderpx:        10
+st.opacity:         255
+st.alpha:           1.0
+st.cursorshape:     1
+st.blinktimeout:    900
 
 ! special
-*.foreground:   #c8ccd4
-*.background:   #1e2127
-*.cursorColor:  #abb2bf
+*.foreground:       #c8ccd4
+*.background:       #1e2127
+*.cursorColor:      #abb2bf
 
 ! black
-*.color0:       #2c313a
-*.color8:       #545862
+*.color0:           #2c313a
+*.color8:           #545862
 
 ! red
-*.color1:       #e06c75
-*.color9:       #ff8b92
+*.color1:           #e06c75
+*.color9:           #ff8b92
 
 ! green
-*.color2:       #98c379
-*.color10:      #ddffa7
+*.color2:           #98c379
+*.color10:          #ddffa7
 
 ! yellow
-*.color3:       #ffcb6b
-*.color11:      #ffe585
+*.color3:           #ffcb6b
+*.color11:          #ffe585
 
 ! blue
-*.color4:       #61afef
-*.color12:      #9cc4ff
+*.color4:           #61afef
+*.color12:          #9cc4ff
 
 ! magenta
-*.color5:       #b58fae
-*.color13:      #e1acff
+*.color5:           #b58fae
+*.color13:          #e1acff
 
 ! cyan
-*.color6:       #56b6c2
-*.color14:      #a3f7ff
+*.color6:           #56b6c2
+*.color14:          #a3f7ff
 
 ! white
-*.color7:       #d0d0d0
-*.color15:      #ffffff
+*.color7:           #d0d0d0
+*.color15:          #ffffff

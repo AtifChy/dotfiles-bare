@@ -113,12 +113,12 @@ font:
     #
     # Default:
     #   - (macOS) Menlo
-    #   - (Linux/BSD) Fira Code
+    #   - (Linux/BSD) JetBrains Mono
     #   - (Windows) Consolas
-    family: FiraCode Nerd Font
+    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Retina
+    style: Medium
 
   # Bold font face
   bold:
@@ -126,7 +126,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fira Code
+    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -137,7 +137,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Fira Code
+    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -154,7 +154,7 @@ font:
   #style: Bold Italic
 
   # Point size
-  size: 10
+  size: 9.5
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

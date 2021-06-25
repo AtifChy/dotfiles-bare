@@ -39,7 +39,23 @@ return require("packer").startup(
         -- autocompletion
         use {
             "hrsh7th/nvim-compe",
-            requires = {{"hrsh7th/vim-vsnip"}, {"onsails/lspkind-nvim"}}
+            event = "InsertEnter",
+            config = function()
+                require("nvim_compe").config()
+            end,
+            requires = {
+                {
+                    "hrsh7th/vim-vsnip",
+                    event = "InsertCharPre"
+                },
+                {
+                    "onsails/lspkind-nvim",
+                    event = "BufRead",
+                    config = function()
+                        require("neo_lspkind").config()
+                    end
+                }
+            }
         }
 
         -- markdown preview
@@ -69,13 +85,16 @@ return require("packer").startup(
         -- use 'norcalli/nvim-base16.lua'
 
         -- utils
-        use {"kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons"}
-        use "norcalli/nvim-colorizer.lua"
         use {
-            "windwp/nvim-autopairs",
-            require = {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+            "kyazdani42/nvim-tree.lua",
+            requires = "kyazdani42/nvim-web-devicons"
         }
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use "norcalli/nvim-colorizer.lua"
+        use "windwp/nvim-autopairs"
+        use {
+            "nvim-treesitter/nvim-treesitter",
+            run = ":TSUpdate"
+        }
         use "tweekmonster/startuptime.vim"
         -- use {
         --     'nvim-telescope/telescope.nvim',

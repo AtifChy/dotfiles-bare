@@ -1,19 +1,46 @@
+local opt = vim.opt
+
+local function list(value, str, sep)
+  sep = sep or ","
+  str = str or ""
+  value = type(value) == "table" and table.concat(value, sep) or value
+  return str ~= "" and table.concat({value, str}, sep) or value
+end
+
+opt.fileencoding = "UTF-8"
+opt.autoindent = true
+-- opt.shiftwidth = 4
+-- opt.tabstop = 4
+opt.expandtab = true
+opt.splitbelow = true
+opt.splitright = true
+opt.mouse = "a"
+opt.showmatch = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.clipboard = "unnamedplus"
+opt.inccommand = "nosplit"
+opt.updatetime = 250
+opt.termguicolors = true
+opt.backspace = list {"indent", "eol", "start"}
+opt.title = true
+opt.number = true
+opt.cursorline = true
+opt.cursorcolumn = true
+opt.swapfile = true
+opt.list = true
+opt.listchars = list {
+  "tab: ──",
+  -- "space:·",
+  "nbsp:␣",
+  "trail:•",
+  "eol:↵",
+  "precedes:«",
+  "extends:»"
+}
+opt.showbreak = "⤷ "
+
 vim.go.t_Co = "256"
-vim.o.fileencoding = "UTF-8"
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.mouse = "a"
-vim.o.showmatch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.clipboard = "unnamedplus"
-vim.o.inccommand = "nosplit"
-vim.o.updatetime = 250
-vim.o.termguicolors = true
-vim.o.title = true
-vim.wo.number = true
-vim.wo.cursorline = true
-vim.wo.cursorcolumn = true
 
 -- colorscheme
 vim.cmd("colorscheme one-nvim")
@@ -26,6 +53,7 @@ vim.cmd("colorscheme one-nvim")
 -- indent
 vim.g.indent_blankline_char = "│"
 -- vim.g.indent_blankline_char_list = {'▏', '┆', '┊'}
+-- vim.g.indent_blankline_use_treesitter = true
 vim.g.indent_blankline_filetype_exclude = {
     "help",
     "startify",
@@ -45,7 +73,8 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local opt = {}
+local opt = {silent = true}
+
 map("n", "<C-x>", [[<Cmd> split term://$SHELL | resize 16 <CR>]], opt) -- bottom
 map("n", "<C-l>", [[<Cmd> vnew term://$SHELL <CR>]], opt) -- over right
 

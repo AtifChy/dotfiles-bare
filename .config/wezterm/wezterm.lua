@@ -9,20 +9,20 @@ return {
     front_end = "OpenGL",
     check_for_updates = false,
     window_close_confirmation = "NeverPrompt",
-    font = font_with_fallback("Iosevka"),
+    font = font_with_fallback("JetBrains Mono Medium"),
     font_rules = {
-        {italic = true, font = font_with_fallback("Iosevka", {italic = true})},
+        {italic = true, font = font_with_fallback("JetBrains Mono", {italic = true})},
         {
             italic = true,
             intensity = "Bold",
-            font = font_with_fallback("Iosevka", {bold = true, italic = true})
+            font = font_with_fallback("JetBrains Mono", {bold = true, italic = true})
         },
         {
             intensity = "Bold",
-            font = font_with_fallback("Iosevka", {bold = true})
-        }, {intensity = "Half", font = font_with_fallback("Iosevka")}
+            font = font_with_fallback("JetBrains Mono", {bold = true})
+        }, {intensity = "Half", font = font_with_fallback("JetBrains Mono")}
     },
-    font_size = 11,
+    font_size = 10.5,
     font_shaper = "Harfbuzz",
     line_height = 1.0,
     freetype_load_target = "HorizontalLcd",

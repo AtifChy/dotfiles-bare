@@ -13,13 +13,18 @@ require "lspconfig".rust_analyzer.setup {}
 -- require "lspconfig".clangd.setup {}
 
 -- haskell
--- require'lspconfig'.hls.setup {
---     cmd = {"haskell-language-server-wrapper", "--lsp"},
---     filetypes = {"haskell", "lhaskell"},
---     settings = {
---         languageServerHaskell = {formattingProvider = "stylish-haskell"}
---     }
--- }
+require "lspconfig".hls.setup {
+    cmd = {"haskell-language-server-wrapper", "--lsp"},
+    filetypes = {
+        "haskell",
+        "lhaskell"
+    },
+    settings = {
+        languageServerHaskell = {
+            formattingProvider = "stylish-haskell"
+        }
+    }
+}
 
 -- lua
 local sumneko_root_path = "/usr"

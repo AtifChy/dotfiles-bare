@@ -2,9 +2,9 @@
 add_newline = false
 
 [character]
-success_symbol = "[➜](bold green) "
-error_symbol = "[➜](bold red) "
-vicmd_symbol = "[V](bold green) "
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vicmd_symbol = "[V](bold green)"
 
 [directory]
 format = "[$path]($style) [$read_only]($read_only_style)"
@@ -14,13 +14,14 @@ read_only_style = "red"
 truncate_to_repo = false
 truncation_length = 3
 truncation_symbol = "…/"
+home_symbol = " ~"
 
 [git_status]
 format = '([\[$ahead_behind$all_status\]]($style) )'
 style = "bold red"
-ahead = "🠕"
-diverged = "⇕ 🠕🠗"
-behind = "🠗"
+ahead = "↑"
+diverged = "⇕ ↑↓"
+behind = "↓"
 
 [aws]
 disabled = true
