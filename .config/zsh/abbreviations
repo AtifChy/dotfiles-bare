@@ -1,6 +1,0 @@
-abbr f="find . -name"
-abbr ff="find / -name"
-abbr paruR="paru -Rnsuc"
-abbr sv="sudo nvim"
-abbr vi="nvim"
-abbr zshrc="nvim ~/.config/zsh/.zshrc"

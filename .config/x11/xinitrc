@@ -36,28 +36,29 @@ export XDG_SESSION_TYPE=x11
 # keep this at the bottom
 session=${1:-xmonad}
 export XDG_SESSION_DESKTOP=$session
+export XDG_CURRENT_DESKTOP=$session
 
 case $session in
         xmonad)
                 exec ~/.local/share/xmonad/xmonad-x86_64-linux
                 ;;
         dwm)
-                dbus-run-session dwm
+                exec dwm
                 ;;
         kde)
-                dbus-run-session startplasma-x11
+                exec startplasma-x11
                 ;;
         xfce | xfce4)
-                dbus-run-session startxfce4
+                exec startxfce4
                 ;;
         gnome)
-                dbus-run-session gnome-session
+                exec gnome-session
                 ;;
         spectrwm | spectr)
-                dbus-run-session spectrwm
+                exec spectrwm
                 ;;
         awesome)
-                dbus-run-session awesome
+                exec awesome
                 ;;
         *)
                 $1

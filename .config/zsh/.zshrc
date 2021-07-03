@@ -1,13 +1,13 @@
 ### Added by Zinit's installer
 declare -A ZINIT
 ZINIT[HOME_DIR]=${XDG_CACHE_HOME:-$HOME/.cache}/zinit
-ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache-$ZSH_VERSION
+ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zinit" && command chmod g-rwX "${XDG_CACHE_HOME:-$HOME/.cache}/zinit"
-    command git clone https://github.com/zdharma/zinit "${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    command git clone https://github.com/zdharma/zinit "${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin" &&
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
@@ -16,13 +16,6 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
-## zsh prompt
-zinit lucid for \
-  as"command" from"gh-r" \
-  atload'eval "$(starship init zsh)"' \
-  bpick'*unknown-linux-gnu*' \
-  starship/starship
-
 ## zsh plugins
 zinit wait lucid light-mode for \
   atinit"
@@ -30,7 +23,7 @@ zinit wait lucid light-mode for \
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
   " \
   atload'
-        bindkey "$terminfo[kcuu1]" history-substring-search-up;
+    bindkey "$terminfo[kcuu1]" history-substring-search-up;
     bindkey "$terminfo[kcud1]" history-substring-search-down
   ' \
   ver'dont-overwrite-config' \
@@ -40,11 +33,12 @@ zinit wait lucid light-mode for \
     zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
     zstyle ':completion:*' completer _expand _complete _ignored _approximate
     zstyle ':completion:*' menu select=2
-    zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+    zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
     zstyle ':completion::complete:*' use-cache on
     zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
     zstyle ':completion:*' group-name ''
     zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
+    zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
     zstyle ':completion:*' ignored-patterns '\['
     zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
     zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
@@ -52,28 +46,36 @@ zinit wait lucid light-mode for \
     TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
   " \
   atload'
-        eval "$(dircolors)"
-        zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
+    eval "$(dircolors)"
+    zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
     zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   ' \
       zsh-users/zsh-completions \
   atinit"
-        typeset -gA FAST_HIGHLIGHT;
-        FAST_HIGHLIGHT[git-cmsg-len]=100;
+    typeset -gA FAST_HIGHLIGHT;
+    FAST_HIGHLIGHT[git-cmsg-len]=100;
     ZINIT[COMPINIT_OPTS]=-C;
     zicompinit;
     zicdreplay
   " \
       zdharma/fast-syntax-highlighting \
   atinit"
-        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
-        ZSH_AUTOSUGGEST_STRATEGY=(history completion);
+    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
+    ZSH_AUTOSUGGEST_STRATEGY=(history completion);
     ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|git *|\)\*|;*'
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
   trigger-load'!x' \
       OMZP::extract
+
+## zsh prompt
+if [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh ]; then
+        source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
+else
+        starship init zsh --print-full-init >${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
+        source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
+fi
 
 ## zsh tweak
 PROMPT_EOL_MARK='↵'
@@ -98,6 +100,7 @@ setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu               # show completion menu on a successive tab press
 setopt nobeep                 # disable beeping on tab completion
 setopt noflowcontrol          # disable start/stop characters in shell editor
+#setopt globdots               # show files beginning with a `.`
 
 # History file configuration
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"

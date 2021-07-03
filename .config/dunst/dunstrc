@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "350x5-20+48"
+    geometry = "350x5-28+58"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -61,10 +61,10 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 2
+    frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#4280bd"
+    frame_color = "#2c323a"
 
     # Define a color for the separator.
     # possible values are:
@@ -72,7 +72,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = "#434758"
+    separator_color = "#2c323a"
 
     # Sort messages by urgency.
     sort = yes
@@ -172,7 +172,7 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 96
+    max_icon_size = 128
 
     # Paths to default icons.
     icon_path = /usr/share/icons/Papirus-Dark/96x96/actions/:/usr/share/icons/Papirus-Dark/96x96/apps/:/usr/share/icons/Papirus-Dark/96x96/devices/:/usr/share/icons/Papirus-Dark/96x96/emblems/:/usr/share/icons/Papirus-Dark/96x96/emotes/:/usr/share/icons/Papirus-Dark/96x96/mimetypes/:/usr/share/icons/Papirus-Dark/96x96/places/:/usr/share/icons/Papirus-Dark/96x96/status/
@@ -294,7 +294,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#1E2127"
     foreground = "#d8dee9"
-    timeout = 4
+    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
@@ -302,7 +302,7 @@
     background = "#1E2127"
     foreground = "#d8dee9"
     frame_color = "#ffcb6b"
-    timeout = 6
+    timeout = 7
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
 

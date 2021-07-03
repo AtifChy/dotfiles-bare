@@ -8,15 +8,15 @@ Xft.lcdfilter:      lcddefault
 
 ! Cursor theme
 Xcursor.theme:      bloom
-!Xcursor.size:      16
+!Xcursor.size:       16
 
 ! sxiv config
 Sxiv.font:          JetBrains Mono:style=Medium:size=9
 
-!Xmessage.font:          FiraCode Nerd Font:pixelsize=14
+!Xmessage.font:      FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font:            JetBrains Mono:size=10:weight=90
+st.font:            JetBrainsMono Nerd Font:size=10:weight=90
 st.borderpx:        10
 st.opacity:         255
 st.alpha:           1.0

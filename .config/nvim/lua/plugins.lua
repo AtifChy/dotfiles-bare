@@ -59,7 +59,7 @@ return require("packer").startup(
         }
 
         -- markdown preview
-        use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
+        -- use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
 
         -- formatting
         use "sbdchd/neoformat"
@@ -78,7 +78,7 @@ return require("packer").startup(
             requires = "kyazdani42/nvim-web-devicons"
         }
         use "mhinz/vim-startify"
-        use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+        use "lukas-reineke/indent-blankline.nvim"
 
         -- colorscheme
         use "AtifChy/one-nvim"
