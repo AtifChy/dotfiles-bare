@@ -20,4 +20,4 @@ require("neo_icons")
 -- local cmd = vim.cmd
 -- cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
 
-vim.api.nvim_set_keymap("n", "<C-m>", ":MarkdownPreviewToggle<CR>", {noremap = true})
+-- vim.api.nvim_set_keymap("n", "<C-m>", ":MarkdownPreviewToggle<CR>", {noremap = true})

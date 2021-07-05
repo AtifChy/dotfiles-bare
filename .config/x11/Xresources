@@ -23,6 +23,10 @@ st.alpha:           1.0
 st.cursorshape:     1
 st.blinktimeout:    900
 
+! xmonad settings
+xmonad.font:        xft:JetBrains Mono:size=10:style=Bold
+xmonad.font.gtk:    JetBrains Mono Medium, 10
+
 ! special
 *.foreground:       #c8ccd4
 *.background:       #1e2127
@@ -33,11 +37,11 @@ st.blinktimeout:    900
 *.color8:           #545862
 
 ! red
-*.color1:           #e06c75
+*.color1:           #ff6c6b
 *.color9:           #ff8b92
 
 ! green
-*.color2:           #98c379
+*.color2:           #98be65
 *.color10:          #ddffa7
 
 ! yellow
@@ -45,7 +49,7 @@ st.blinktimeout:    900
 *.color11:          #ffe585
 
 ! blue
-*.color4:           #61afef
+*.color4:           #51aeed
 *.color12:          #9cc4ff
 
 ! magenta
@@ -57,5 +61,5 @@ st.blinktimeout:    900
 *.color14:          #a3f7ff
 
 ! white
-*.color7:           #d0d0d0
+*.color7:           #a6aebf
 *.color15:          #ffffff

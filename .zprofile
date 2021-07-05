@@ -17,7 +17,7 @@ export MOZ_WEBRENDER=1
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CACHE_HOME="$HOME"/.cache
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority # This line will break some DMs.
+export XAUTHORITY="$XDG_DATA_HOME"/xorg/Xauthority # This line will break some DMs.
 #export NOTMUCH_CONFIG="$XDG_CONFIG_HOME"/notmuch-config
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
@@ -68,7 +68,8 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 # icons for lf file manager
 [ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
 
+#exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 # startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
+        exec sx $XINITRC
 fi

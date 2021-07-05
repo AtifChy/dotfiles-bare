@@ -17,6 +17,7 @@ application/x-extension-shtml=firefox.desktop;
 application/xhtml+xml=firefox.desktop;
 application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
+application/pdf=firefox.desktop;
 
 [Default Applications]
 x-scheme-handler/http=firefox.desktop
