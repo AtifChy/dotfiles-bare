@@ -41,6 +41,7 @@ alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME"/yarn/config'
 export LESSHISTFILE=- # disable lesshistfile
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export CALCHISTFILE="$XDG_CACHE_HOME"/calc_history
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
