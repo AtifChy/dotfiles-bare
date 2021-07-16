@@ -134,7 +134,7 @@
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
-    vertical_alignment = top
+    vertical_alignment = center
 
     # Show age of message if message is older than show_age_threshold
     # seconds.
@@ -172,7 +172,7 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 128
+    max_icon_size = 96
 
     # Paths to default icons.
     icon_path = /usr/share/icons/Papirus-Dark/96x96/actions/:/usr/share/icons/Papirus-Dark/96x96/apps/:/usr/share/icons/Papirus-Dark/96x96/devices/:/usr/share/icons/Papirus-Dark/96x96/emblems/:/usr/share/icons/Papirus-Dark/96x96/emotes/:/usr/share/icons/Papirus-Dark/96x96/mimetypes/:/usr/share/icons/Papirus-Dark/96x96/places/:/usr/share/icons/Papirus-Dark/96x96/status/
