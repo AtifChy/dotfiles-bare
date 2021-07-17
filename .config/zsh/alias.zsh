@@ -9,6 +9,7 @@ alias pactree='pactree --color'
 alias watch='watch --color'
 alias free='free -h'
 alias diff='diff --color=always'
+alias bash='bash --rcfile "$XDG_CONFIG_HOME"/bash/bashrc'
 
 ## New commands
 alias da='date "+%A, %B %d, %Y [%r]"'

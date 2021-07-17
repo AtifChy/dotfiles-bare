@@ -35,7 +35,6 @@ export GOPATH="$XDG_DATA_HOME"/go
 #export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
 #export UNISON="$XDG_DATA_HOME/unison"
 #export HISTFILE="$XDG_DATA_HOME/history"
-alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME"/yarn/config'
 #export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
 #export LESSHISTFILE="$XDG_CACHE_HOME"/lesshst
 export LESSHISTFILE=- # disable lesshistfile
