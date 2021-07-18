@@ -1,23 +1,15 @@
-require("plugins")
-require("settings")
-require("neo_lspconfig")
--- require("nvim_compe")
-require("nvim_tree")
-require("nvim_autopair")
-require("nvim_bufferline")
-require("nvim_colorizer")
--- require('nvim_galaxyline')
--- require("servers")
-require("neo_treesitter")
-require("neo_gitsigns")
-require("neo_format")
-require("startify")
-require("statusline")
--- require('neo_telescope')
-require("neo_icons")
--- require("neo_lspkind")
+require "settings"
 
--- local cmd = vim.cmd
--- cmd('source ~/.config/nvim/vimscript/lsp-config.vim')
+local async
+async =
+    vim.loop.new_async(
+    vim.schedule_wrap(
+        function()
+            require "plugin"
+            require "keybinds"
 
--- vim.api.nvim_set_keymap("n", "<C-m>", ":MarkdownPreviewToggle<CR>", {noremap = true})
+            async:close()
+        end
+    )
+)
+async:send()
