@@ -3,7 +3,7 @@
 #define myFont JetBrainsMono Nerd Font
 
 !-- Xft settings --!
-Xft.antialias:      1
+Xft.antialias: 		1
 Xft.hinting:        1
 Xft.autohint:       0
 Xft.hintstyle:      hintslight
@@ -11,7 +11,7 @@ Xft.rgba:           rgb
 Xft.lcdfilter:      lcddefault
 
 ! Cursor theme
-Xcursor.theme:      bloom
+Xcursor.theme: 		deepinv20-dark-cursors
 !Xcursor.size:       16
 
 ! sxiv config
@@ -38,7 +38,7 @@ xmonad.font.gtk:    JetBrains Mono Medium, 10
 *.cursorColor:      basefg
 
 ! black
-*.color0:           base00
+*.color0: 		base00
 *.color8:           base08
 
 ! red

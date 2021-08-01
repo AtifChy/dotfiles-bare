@@ -71,5 +71,5 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 #exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 # startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec sx $XINITRC
+        exec sx $XINITRC 2>"$XDG_CACHE_HOME"/x11/xsession-errors
 fi

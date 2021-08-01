@@ -1,0 +1,19 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.config/gtk-2.0/gtkrc.mine instead.
+
+include "/home/atif/.config/gtk-2.0/gtkrc.mine"
+gtk-theme-name="oomox-onedark"
+gtk-icon-theme-name="Papirus-Dark"
+gtk-font-name="Signika 10"
+gtk-cursor-theme-name="deepinv20-dark-cursors"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=0
+gtk-menu-images=0
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintslight"
+gtk-xft-rgba="rgb"
