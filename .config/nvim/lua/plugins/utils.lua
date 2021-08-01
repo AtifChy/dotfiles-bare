@@ -15,6 +15,10 @@ M.lspkind = function()
     end
 end
 
+M.neoformat = function()
+	vim.g.shfmt_opt = "-ci -p -kp"
+end
+
 M.blankline = function()
     vim.g.indent_blankline_char = "│"
     -- vim.g.indent_blankline_char_list = {'▏', '┆', '┊'}

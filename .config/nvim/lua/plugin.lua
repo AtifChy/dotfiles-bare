@@ -116,7 +116,13 @@ require("packer").startup(
         }
 
         -- utils
-        use {"sbdchd/neoformat", cmd = "Neoformat"}
+        use {
+		"sbdchd/neoformat",
+		cmd = "Neoformat",
+		config = function()
+			require("plugins.utils").neoformat()
+		end
+	}
 
         use {"andymass/vim-matchup", event = "CursorMoved"}
 
