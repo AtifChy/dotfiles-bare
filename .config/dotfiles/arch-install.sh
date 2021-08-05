@@ -48,7 +48,7 @@ case $home_ask in
         *) echo 'skipping' ;;
 esac
 
-mkfs.ext4 -f -L 'Archlinux' "$root_disk"
+mkfs.ext4 -L 'Archlinux' "$root_disk"
 mount "$root_disk" /mnt
 
 if [ "$home_disk" ]; then
@@ -58,6 +58,7 @@ if [ "$home_disk" ]; then
 fi
 
 mkfs.fat -F32 -n 'EFI' "$efi_disk"
+mkdir /mnt/boot
 mount "$efi_disk" /mnt/boot
 
 # get mirror
@@ -75,41 +76,37 @@ genfstab -U /mnt >>/mnt/etc/fstab
 echo "DONE"
 
 echo "Entering newly installed system..."
-arch-chroot /mnt <<EOF
-ln -sf /usr/share/zoneinfo/"$time_zone" /etc/localtime
-hwclock --systohc
-echo "Uncomment whatever locale you need"
-read -r
-sed -i '/#en_US.UTF-8/s/^#//g' /etc/locale.gen
-locale-gen
-echo "LANG=en_US.UTF-8" >>/etc/locale.conf
-echo "KEYMAP=us" >>/etc/vconsole.conf
-echo "archlinux" >>/etc/hostname
-tee -a /etc/hosts <<END
-127.0.0.1    localhost
-127.0.0.1    localhost
-127.0.1.1    archlinux.localdomain   archlinux
-END
+arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$time_zone" /etc/localtime
+arch-chroot /mnt hwclock --systohc
+arch-chroot /mnt sed -i '/#en_US.UTF-8/s/^#//g' /etc/locale.gen
+arch-chroot /mnt locale-gen
+arch-chroot /mnt echo "LANG=en_US.UTF-8" >>/etc/locale.conf
+arch-chroot /mnt echo "KEYMAP=us" >>/etc/vconsole.conf
+arch-chroot /mnt echo "archlinux" >>/etc/hostname
+arch-chroot /mnt cat <<EOF >>/etc/hosts
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1 	archlinux.localdomain 	archlinux
+EOF
 
 echo "root passwd"
-passwd
+arch-chroot /mnt passwd
 
 echo "adding a user..."
-useradd -mG wheel,network,audio,kvm,optical,storage,video "$user_name"
+arch-chroot /mnt useradd -mG wheel,network,audio,kvm,optical,storage,video "$user_name"
 echo "password for new user"
-passwd "$user_name"
+arch-chroot /mnt passwd "$user_name"
 echo "DONE"
 echo "Enable sudo for new user"
-sed -i '/%wheel ALL=(ALL) ALL/s/^#//g' /etc/sudoers
+arch-chroot /mnt sed -i '/%wheel ALL=(ALL) ALL/s/^#//g' /etc/sudoers
 
 echo "Installing some useful tools"
-#pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk autofs fuse2 fuse3 fuseiso alsa-utils alsa-plugins pulseaudio pulseaudio-alsa xorg-server xorg-xinit font-bh-ttf gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
-
-systemctl enable NetworkManager
+arch-chroot /mnt pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk fuse2 fuse3 fuseiso alsa-utils alsa-plugins xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
 
 ###########################################################
 ##############          Bootloader          ###############
 ###########################################################
+arch-chroot /mnt <<EOF
 while :; do
         printf "Choose your bootloader\n1) systemd-boot\n2) grub\n?#"
         read -r input
@@ -129,7 +126,7 @@ while :; do
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
 			initrd 		/initramfs-linux-zen.img
-			options 	root="LABEL=ArchLinux" rootflags=subvol=@ rw
+			options 	root="LABEL=Archlinux" rw
 			END
 
                         tee -a /boot/loader/entries/arch-2.conf <<-END
@@ -137,7 +134,7 @@ while :; do
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
 			initrd 		/initramfs-linux-zen-fallback.img
-			options 	root="LABEL=ArchLinux" rootflags=subvol=@ rw
+			options 	root="LABEL=Archlinux" rw
 			END
 
 			echo "Setting up Pacman hook for automatic systemd-boot updates"
@@ -147,7 +144,6 @@ while :; do
 			Type = Package
 			Operation = Upgrade
 			Target = systemd
-
 			[Action]
 			Description = Updating systemd-boot
 			When = PostTransaction
