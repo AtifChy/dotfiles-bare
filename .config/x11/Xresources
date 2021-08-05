@@ -11,7 +11,7 @@ Xft.rgba:		rgb
 Xft.lcdfilter:		lcddefault
 
 ! Cursor theme
-Xcursor.theme: 		deepinv20-dark-cursors
+Xcursor.theme: 		volantes_cursors
 !Xcursor.size: 		16
 
 ! sxiv config

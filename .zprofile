@@ -60,7 +60,7 @@ export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
 # qt apps theme
-[ "$(command -v qt5ct)" ] && export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 # color manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
@@ -68,8 +68,8 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 # icons for lf file manager
 [ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
 
-#exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 # startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
         exec sx $XINITRC 2>"$XDG_CACHE_HOME"/x11/xsession-errors
 fi
+#exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
