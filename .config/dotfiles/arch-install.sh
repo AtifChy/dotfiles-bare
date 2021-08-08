@@ -106,7 +106,7 @@ arch-chroot /mnt pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools
 ###########################################################
 ##############          Bootloader          ###############
 ###########################################################
-arch-chroot /mnt <<EOF
+arch-chroot /mnt EOF
 while :; do
         printf "Choose your bootloader\n1) systemd-boot\n2) grub\n?#"
         read -r input

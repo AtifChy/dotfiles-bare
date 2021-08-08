@@ -1,7 +1,7 @@
 #define basebg #1e2127
 #define basefg #c8ccd4
 #define base00 #2c313a
-#define base08 #545862
+#define base08 #4d5566
 #define base01 #ff6c6b
 #define base09 #ff8b92
 #define base02 #98be65

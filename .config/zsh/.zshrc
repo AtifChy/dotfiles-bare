@@ -28,6 +28,14 @@ zinit wait lucid light-mode for \
   ' \
   ver'dont-overwrite-config' \
       ericbn/zsh-history-substring-search \
+  atinit"
+    typeset -gA FAST_HIGHLIGHT;
+    FAST_HIGHLIGHT[git-cmsg-len]=100;
+    ZINIT[COMPINIT_OPTS]=-C;
+    zicompinit;
+    zicdreplay
+  " \
+      zdharma/fast-syntax-highlighting \
   blockf atpull'zinit creinstall -q .' \
   atinit"
     zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -51,14 +59,6 @@ zinit wait lucid light-mode for \
     zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   ' \
       zsh-users/zsh-completions \
-  atinit"
-    typeset -gA FAST_HIGHLIGHT;
-    FAST_HIGHLIGHT[git-cmsg-len]=100;
-    ZINIT[COMPINIT_OPTS]=-C;
-    zicompinit;
-    zicdreplay
-  " \
-      zdharma/fast-syntax-highlighting \
   atinit"
     ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
     ZSH_AUTOSUGGEST_STRATEGY=(history completion);

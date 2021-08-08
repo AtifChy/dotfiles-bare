@@ -1,5 +1,5 @@
 # custom PATH
-export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.local/share/npm/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
 export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'
@@ -7,6 +7,7 @@ export PF_SEP=' '
 
 # Apps
 export EDITOR='nvim'
+export TERMINAL='st'
 
 # Firefox hardware video acceleration
 [ "$XDG_SESSION_TYPE" = "wayland" ] && export MOZ_ENABLE_WAYLAND=1

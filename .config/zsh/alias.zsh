@@ -39,7 +39,7 @@ alias la='ll -A'
 alias lx='ll -BX' # sort by extension
 alias lz='ll -rS' # sort by size
 alias lt='ll -rt' # sort by date
-#alias lm='la | more'
+alias lm='la | more'
 
 ## cd
 alias cd..='cd ..'
@@ -60,7 +60,7 @@ alias fgrep='fgrep --color=auto'
 ## Safety features
 alias cp='cp -v'
 alias mv='mv -v'
-#alias rm='rm -v'
+alias rm='rm -Iv'
 # safer alternative w/ timeout, not stored in history
 alias ln='ln -i'
 alias chown='chown --preserve-root'
@@ -72,9 +72,6 @@ alias chgrp='chgrp --preserve-root'
 alias :q=' exit'
 alias :Q=' exit'
 alias :x=' exit'
-
-## update-grub
-#alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
 ## youtube-dl
 alias yta-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --embed-thumbnail --add-metadata --xattrs'

@@ -9,6 +9,10 @@ userresources="$XDG_CONFIG_HOME"/x11/Xresources
 export MOZ_X11_EGL=1
 export XDG_SESSION_TYPE=x11
 
+# keyring
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+
 # fix clipboard
 #while :; do
 #        pgrep -f "xclip.*clip" || xclip -sel clip -o | xclip -sel clip
