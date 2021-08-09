@@ -19,7 +19,6 @@ colors
 
 /usr/bin/dunst \
         -frame_color "$black" \
-        -sep_color "$black" \
         -lb "$background" \
         -lf "$foreground" \
         -nb "$background" \
@@ -28,4 +27,4 @@ colors
         -cb "$background" \
         -cf "$foreground" \
         -cfr "$red" \
-	$@
+        $@

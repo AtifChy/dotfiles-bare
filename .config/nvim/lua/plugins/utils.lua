@@ -16,7 +16,7 @@ M.lspkind = function()
 end
 
 M.neoformat = function()
-	vim.g.shfmt_opt = "-ci -p -kp"
+	vim.g.shfmt_opt = "-ci -p"
 end
 
 M.blankline = function()

@@ -49,7 +49,7 @@ map x $$f
 map X !$f
 
 # dedicated keys for file opener actions
-map o &handlr open $f
+map o &xdg-open $f
 map O $mimeopen --ask-default $f
 
 # define a custom 'open' command

@@ -53,6 +53,7 @@ export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 #export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 #export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 #export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
+alias ssh='ssh -F "$XDG_CONFIG_HOME"/ssh/ssh_config'
 [ -d ~/.ssr ] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
 
 # Ibus KDE
