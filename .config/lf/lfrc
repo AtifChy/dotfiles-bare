@@ -61,7 +61,7 @@ cmd open ${{
     case $(file --mime-type $f -b) in
         text/* | inode/x-empty) $EDITOR $fx;;
 	image/* ) for f in $fx; do setsid sxiv $f > /dev/null 2> /dev/null & done;;
-        *) for f in $fx; do setsid mimeopen $f > /dev/null 2> /dev/null & done;;
+        *) for f in $fx; do setsid xdg-open $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 

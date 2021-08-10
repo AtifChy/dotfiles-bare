@@ -78,16 +78,16 @@ echo "DONE"
 echo "Entering newly installed system..."
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$time_zone" /etc/localtime
 arch-chroot /mnt hwclock --systohc
-arch-chroot /mnt sed -i '/#en_US.UTF-8/s/^#//g' /etc/locale.gen
+sed -i '/#en_US.UTF-8/s/^#//g' /mnt/etc/locale.gen
 arch-chroot /mnt locale-gen
-arch-chroot /mnt echo "LANG=en_US.UTF-8" >>/etc/locale.conf
-arch-chroot /mnt echo "KEYMAP=us" >>/etc/vconsole.conf
-arch-chroot /mnt echo "archlinux" >>/etc/hostname
-arch-chroot /mnt cat <<EOF >>/etc/hosts
+echo "LANG=en_US.UTF-8" >/mnt/etc/locale.conf
+echo "KEYMAP=us" >/mnt/etc/vconsole.conf
+echo "archlinux" >/mnt/etc/hostname
+tee -a <<END >>/mnt/etc/hosts
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1 	archlinux.localdomain 	archlinux
-EOF
+END
 
 echo "root passwd"
 arch-chroot /mnt passwd
@@ -98,7 +98,7 @@ echo "password for new user"
 arch-chroot /mnt passwd "$user_name"
 echo "DONE"
 echo "Enable sudo for new user"
-arch-chroot /mnt sed -i '/%wheel ALL=(ALL) ALL/s/^#//g' /etc/sudoers
+sed -i '/^# %wheel ALL=(ALL) ALL/s/^# //' /mnt/etc/sudoers
 
 echo "Installing some useful tools"
 arch-chroot /mnt pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk fuse2 fuse3 fuseiso alsa-utils alsa-plugins xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
@@ -106,22 +106,21 @@ arch-chroot /mnt pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools
 ###########################################################
 ##############          Bootloader          ###############
 ###########################################################
-arch-chroot /mnt EOF
 while :; do
         printf "Choose your bootloader\n1) systemd-boot\n2) grub\n?#"
         read -r input
         case $input in
                 1 | systemd-boot)
-                        bootctl -efi-parth=/boot install
+                        arch-chroot /mnt bootctl -efi-parth=/boot install
 
-                        tee -a /boot/loader/loader.conf <<-END
+                        tee -a /mnt/boot/loader/loader.conf <<-END
 			default 	arch-1.conf
 			#timeout 	5
 			#console-mode 	keep
 			editor 		yes
 			END
 
-                        tee -a /boot/loader/entries/arch-1.conf <<-END
+                        tee -a /mnt/boot/loader/entries/arch-1.conf <<-END
 			title 		Arch Linux, with linux-zen
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
@@ -129,7 +128,7 @@ while :; do
 			options 	root="LABEL=Archlinux" rw
 			END
 
-                        tee -a /boot/loader/entries/arch-2.conf <<-END
+                        tee -a /mnt/boot/loader/entries/arch-2.conf <<-END
 			title 		Arch Linux, with linux-zen (fallback initramfs)
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
@@ -137,13 +136,14 @@ while :; do
 			options 	root="LABEL=Archlinux" rw
 			END
 
-			echo "Setting up Pacman hook for automatic systemd-boot updates"
-			mkdir -p /etc/pacman.d/hooks/
-			tee -a /etc/pacman.d/hooks/100-systemd-boot.hook <<-END
+                        echo "Setting up Pacman hook for automatic systemd-boot updates"
+                        mkdir -p /mnt/etc/pacman.d/hooks/
+                        tee -a /mnt/etc/pacman.d/hooks/100-systemd-boot.hook <<-END
 			[Trigger]
 			Type = Package
 			Operation = Upgrade
 			Target = systemd
+
 			[Action]
 			Description = Updating systemd-boot
 			When = PostTransaction
@@ -153,19 +153,18 @@ while :; do
                         break
                         ;;
                 2 | grub)
-                        pacman -Syu --noconfirm grub os-prober
-                        grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch
-                        grub-mkconfig -o /boot/grub/grub.cfg
+                        arch-chroot /mnt pacman -Syu --noconfirm grub os-prober
+                        arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch
+                        arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
                         break
                         ;;
                 *)
-			echo "Invalid option"
-			exit 1
-			;;
+                        echo "Invalid option"
+                        exit 1
+                        ;;
         esac
 done
 
-mkinitcpio -P
-EOF
+arch-chroot /mnt mkinitcpio -P
 
 echo "Reboot"
