@@ -23,7 +23,10 @@ read -r time_zone
 printf "Do you wish to create new partitions? [y/n] "
 read -r partition
 case $partition in
-        [Yy]*) cfdisk ;;
+        [Yy]*)
+		echo "Don't forget to set proper type for EFI partition!"
+		cfdisk
+		;;
         [Nn]*) echo 'skipping' ;;
         *)
                 echo "Please answer yes or no."
@@ -111,16 +114,16 @@ while :; do
         read -r input
         case $input in
                 1 | systemd-boot)
-                        arch-chroot /mnt bootctl -efi-parth=/boot install
+                        arch-chroot /mnt bootctl --esp-path=/boot install
 
-                        tee -a /mnt/boot/loader/loader.conf <<-END
+                        tee /mnt/boot/loader/loader.conf >/dev/null <<-END
 			default 	arch-1.conf
 			#timeout 	5
 			#console-mode 	keep
 			editor 		yes
 			END
 
-                        tee -a /mnt/boot/loader/entries/arch-1.conf <<-END
+                        tee /mnt/boot/loader/entries/arch-1.conf >/dev/null <<-END
 			title 		Arch Linux, with linux-zen
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
@@ -128,7 +131,7 @@ while :; do
 			options 	root="LABEL=Archlinux" rw
 			END
 
-                        tee -a /mnt/boot/loader/entries/arch-2.conf <<-END
+                        tee /mnt/boot/loader/entries/arch-2.conf >/dev/null <<-END
 			title 		Arch Linux, with linux-zen (fallback initramfs)
 			linux 		/vmlinuz-linux-zen
 			initrd 		/intel-ucode.img
@@ -138,7 +141,7 @@ while :; do
 
                         echo "Setting up Pacman hook for automatic systemd-boot updates"
                         mkdir -p /mnt/etc/pacman.d/hooks/
-                        tee -a /mnt/etc/pacman.d/hooks/100-systemd-boot.hook <<-END
+                        tee /mnt/etc/pacman.d/hooks/100-systemd-boot.hook >/dev/null <<-END
 			[Trigger]
 			Type = Package
 			Operation = Upgrade
