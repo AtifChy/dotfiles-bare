@@ -12,7 +12,6 @@ esac
 
 printf "user name (lower case) = "
 read -r user_name
-echo hi, "$user_name"
 
 printf "country (for mirror) [e.g. Bangladesh] = "
 read -r country
@@ -40,7 +39,6 @@ read -r root_disk
 printf "efi partition [e.g. /dev/sda1] = "
 read -r efi_disk
 
-echo "Which file system do you want to use?"
 printf "Do you want to create home partition? [y/n] "
 read -r home_ask
 case $home_ask in
@@ -69,16 +67,10 @@ reflector -c "$country" --save /etc/pacman.d/mirrorlist
 
 echo "Starting Installation. Press Enter to Continue..."
 read -r
+pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware reflector git neovim xclip networkmanager intel-ucode
 
-echo "Installing..."
-pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware reflector git neovim xclip
-echo "DONE"
-
-echo "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
-echo "DONE"
 
-echo "Entering newly installed system..."
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$time_zone" /etc/localtime
 arch-chroot /mnt hwclock --systohc
 sed -i '/#en_US.UTF-8/s/^#//g' /mnt/etc/locale.gen
@@ -92,19 +84,13 @@ tee -a <<END >>/mnt/etc/hosts
 127.0.1.1 	archlinux.localdomain 	archlinux
 END
 
-echo "root passwd"
 arch-chroot /mnt passwd
 
-echo "adding a user..."
 arch-chroot /mnt useradd -mG wheel,network,audio,kvm,optical,storage,video "$user_name"
-echo "password for new user"
 arch-chroot /mnt passwd "$user_name"
-echo "DONE"
-echo "Enable sudo for new user"
 sed -i '/^# %wheel ALL=(ALL) ALL/s/^# //' /mnt/etc/sudoers
 
-echo "Installing some useful tools"
-arch-chroot /mnt pacman -Syu --noconfirm efibootmgr networkmanager dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk fuse2 fuse3 fuseiso alsa-utils alsa-plugins xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
+arch-chroot /mnt pacman -Syu --noconfirm efibootmgr dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk fuse2 fuse3 fuseiso alsa-utils alsa-plugins xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
 
 ###########################################################
 ##############          Bootloader          ###############

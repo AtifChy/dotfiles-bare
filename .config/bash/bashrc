@@ -13,7 +13,8 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # histfile
-export HISTFILE="$XDG_DATA_HOME"/bash_history
+[ ! -d "$XDG_DATA_HOME/bash" ] && mkdir -p "$XDG_DATA_HOME/bash"
+export HISTFILE="$XDG_DATA_HOME"/bash/bash_history
 
 source /etc/profile
 

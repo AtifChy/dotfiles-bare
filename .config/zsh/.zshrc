@@ -1,17 +1,17 @@
 ### Added by Zinit's installer
 declare -A ZINIT
-ZINIT[HOME_DIR]=${XDG_CACHE_HOME:-$HOME/.cache}/zinit
+ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
-if [[ ! -f ${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin/zinit.zsh ]]; then
+if [[ ! -f $ZINIT[HOME_DIR]/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zinit" && command chmod g-rwX "${XDG_CACHE_HOME:-$HOME/.cache}/zinit"
-    command git clone https://github.com/zdharma/zinit "${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin" &&
+    command mkdir -p "$ZINIT[HOME_DIR]" && command chmod g-rwX "$ZINIT[HOME_DIR]"
+    command git clone https://github.com/zdharma/zinit "$ZINIT[HOME_DIR]/bin" &&
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source "${XDG_CACHE_HOME:-$HOME/.cache}/zinit/bin/zinit.zsh"
+source "$ZINIT[HOME_DIR]/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
@@ -100,11 +100,11 @@ setopt complete_in_word       # allow completion from within a word/phrase
 setopt automenu               # show completion menu on a successive tab press
 setopt nobeep                 # disable beeping on tab completion
 setopt noflowcontrol          # disable start/stop characters in shell editor
+setopt correct                # spelling correction
 #setopt globdots               # show files beginning with a `.`
 
 # History file configuration
-HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"
-[ ! -f "$HISTFILE" ] && touch ${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
