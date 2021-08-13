@@ -4,12 +4,12 @@ ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "${ZINIT[HOME_DIR]}" && command chmod g-rwX "${ZINIT[HOME_DIR]}"
-    command git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-    }
+    	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    	command mkdir -p "${ZINIT[HOME_DIR]}" && command chmod g-rwX "${ZINIT[HOME_DIR]}"
+    	command git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
+        	print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
+        	print -P "%F{160}▓▒░ The clone has failed.%f%b"
+	}
 fi
 
 source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
@@ -19,74 +19,74 @@ autoload -Uz _zinit
 
 ## zsh plugins
 zinit wait lucid light-mode for \
-  atinit"
-    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold';
-    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
-  " \
-  atload"
-    bindkey ${terminfo[kcuu1]} history-substring-search-up;
-    bindkey ${terminfo[kcud1]} history-substring-search-down
-  " \
-  ver'dont-overwrite-config' \
-      ericbn/zsh-history-substring-search \
-  atinit"
-    typeset -gA FAST_HIGHLIGHT;
-    FAST_HIGHLIGHT[git-cmsg-len]=100;
-    ZINIT[COMPINIT_OPTS]=-C;
-    zicompinit;
-    zicdreplay
-  " \
-      zdharma/fast-syntax-highlighting \
-  blockf atpull'zinit creinstall -q .' \
-  atinit"
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-    zstyle ':completion:*' completer _expand _complete _ignored _approximate
-    zstyle ':completion:*' menu select=2
-    zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-    zstyle ':completion::complete:*' use-cache on
-    zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
-    zstyle ':completion:*' group-name ''
-    zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%u'
-    zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-    zstyle ':completion:*' ignored-patterns '\['
-    zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-    zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
-    zstyle ':completion:*' insert-tab false
-    TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
-    compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}      # for zsh-z plugin
-  " \
-  atload'
-    eval "$(dircolors)"
-    zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
-    zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
-  ' \
-      zsh-users/zsh-completions \
-  atinit"
-    ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20;
-    ZSH_AUTOSUGGEST_STRATEGY=(history completion);
-    ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman*|pacman*|paru*|yay*|\)\*|;*'
-  " \
-  atload"_zsh_autosuggest_start" \
-      zsh-users/zsh-autosuggestions \
-  trigger-load'!x;!extract' \
-      OMZP::extract \
-  atload"
-    ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/zshz
-    ZSHZ_ECHO=1
-    ZSHZ_TILDE=1
-    ZSHZ_CASE=smart
-    ZSHZ_TRAILING_SLASH=1
-    ZSHZ_UNCOMMON=1
-  " \
-  trigger-load'!zshz;!z' blockf \
-        agkozak/zsh-z
+        atinit"
+		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold'
+  		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
+  	" \
+        atload'
+  		bindkey "$terminfo[kcuu1]" history-substring-search-up
+  	  	bindkey "$terminfo[kcud1]" history-substring-search-down
+  	' \
+        ver'dont-overwrite-config' \
+        	ericbn/zsh-history-substring-search \
+        atinit"
+  	  	typeset -gA FAST_HIGHLIGHT
+  	  	FAST_HIGHLIGHT[git-cmsg-len]=100
+  	  	ZINIT[COMPINIT_OPTS]=-C
+  	  	zicompinit
+  	  	zicdreplay
+  	" \
+        	zdharma/fast-syntax-highlighting \
+        blockf atpull'zinit creinstall -q .' \
+        atinit"
+		zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+		zstyle ':completion:*' completer _expand _complete _ignored _approximate
+		zstyle ':completion:*' menu select=2
+		zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+		zstyle ':completion::complete:*' use-cache on
+		zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+		zstyle ':completion:*' group-name ''
+		zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%b%u'
+		zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+		zstyle ':completion:*' ignored-patterns '\['
+		zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+		zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
+		zstyle ':completion:*' insert-tab false
+		TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
+		compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}      # for zsh-z plugin
+  	" \
+        atload'
+		eval "$(dircolors)"
+		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
+		zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
+  	' \
+        	zsh-users/zsh-completions \
+        atinit"
+  		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+  		ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+  		ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman -S*|pacman -S*|paru -S*|yay -S*|\)\*'
+  	" \
+        atload"_zsh_autosuggest_start" \
+        	zsh-users/zsh-autosuggestions \
+        trigger-load'!x;!extract' \
+        	OMZP::extract \
+        atload"
+		ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/zshz
+		ZSHZ_ECHO=1
+		ZSHZ_TILDE=1
+		ZSHZ_CASE=smart
+		ZSHZ_TRAILING_SLASH=1
+		ZSHZ_UNCOMMON=1
+  	" \
+        trigger-load'!zshz;!z' blockf \
+        	agkozak/zsh-z
 
 ## zsh prompt
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh" ]; then
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
+	source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
 else
-    starship init zsh --print-full-init >"${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
+	starship init zsh --print-full-init >"${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
+	source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
 fi
 
 ## zsh tweak
@@ -122,23 +122,23 @@ HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"
 
 ## terminal title
 function title {
-  case "$TERM" in
-    cygwin|xterm*|putty*|rxvt*|konsole*|ansi|mlterm*|alacritty|st*)
-      print -Pn "\e]2;${1:q}\a"
-      ;;
-    screen*|tmux*)
-      print -Pn "\ek${1:q}\e\\"
-      ;;
-  esac
+	case "$TERM" in
+		cygwin|xterm*|putty*|rxvt*|konsole*|ansi|mlterm*|alacritty|st*)
+			print -Pn "\e]2;${1:q}\a"
+			;;
+		screen*|tmux*)
+			print -Pn "\ek${1:q}\e\\"
+			;;
+	esac
 }
 
 function title_precmd {
-  title "%n@%m:%~"
+	title "%n@%m:%~"
 }
 
 function title_preexec {
-  local CMD="${1:gs/%/%%}"
-  title "%100>...>$CMD%<<"
+	local CMD="${1:gs/%/%%}"
+	title "%100>...>$CMD%<<"
 }
 
 autoload -U add-zsh-hook
@@ -157,14 +157,14 @@ zle -N self-insert url-quote-magic
 # Make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init {
-    echoti smkx
-  }
-  function zle-line-finish {
-    echoti rmkx
-  }
-  zle -N zle-line-init
-  zle -N zle-line-finish
+	function zle-line-init {
+		echoti smkx
+	}
+	function zle-line-finish {
+		echoti rmkx
+	}
+	zle -N zle-line-init
+	zle -N zle-line-finish
 fi
 
 typeset -g -A key

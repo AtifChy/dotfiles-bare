@@ -18,7 +18,7 @@ opt.title = true
 opt.number = true
 opt.cursorline = true
 opt.cursorcolumn = true
-opt.shiftwidth = 4
+-- opt.shiftwidth = 4
 
 -- disable nvim intro
 opt.shortmess:append("sI")
