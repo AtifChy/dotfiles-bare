@@ -53,7 +53,6 @@ export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 #export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 #export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 #export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
-alias ssh='ssh -F "$XDG_CONFIG_HOME"/ssh/ssh_config'
 [ -d ~/.ssr ] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
 
 # Ibus KDE
@@ -62,7 +61,7 @@ export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
 # qt apps theme
-export QT_QPA_PLATFORMTHEME='qt5ct'
+export QT_QPA_PLATFORMTHEME=gtk2
 
 # color manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
@@ -72,6 +71,7 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 
 # startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-        exec sx $XINITRC 2>"$XDG_CACHE_HOME"/x11/xsession-errors
+        exec sx 2>"$XDG_CACHE_HOME"/x11/xsession-errors
+else
+	exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1
 fi
-#exec startx $XINITRC >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1

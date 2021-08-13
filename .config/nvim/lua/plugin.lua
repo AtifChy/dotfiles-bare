@@ -153,6 +153,6 @@ require("packer").startup(
         }
 
         -- extra
-        use {"tweekmonster/startuptime.vim", cmd = "StartupTime"}
+        use {"dstein64/vim-startuptime", cmd = "StartupTime"}
     end
 )

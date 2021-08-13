@@ -66,8 +66,16 @@ zinit wait lucid light-mode for \
   " \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
-  trigger-load'!x' \
-      OMZP::extract
+  trigger-load'!x;!extract' \
+      OMZP::extract \
+  atinit"
+    ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/zshz
+    ZSHZ_ECHO=1
+    ZSHZ_TILDE=1
+    ZSHZ_CASE=smart
+  " \
+  trigger-load'!zshz;!z' blockf \
+        agkozak/zsh-z
 
 ## zsh prompt
 if [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh ]; then

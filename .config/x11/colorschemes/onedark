@@ -5,17 +5,17 @@
 #define base01 #ff6c6b
 #define base09 #ff8b92
 #define base02 #98be65
-#define base10 #ddffa7
+#define base0A #ddffa7
 #define base03 #ffcb6b
-#define base11 #ffe585
+#define base0B #ffe585
 #define base04 #51aeed
-#define base12 #9cc4ff
+#define base0C #9cc4ff
 #define base05 #b58fae
-#define base13 #e1acff
+#define base0D #e1acff
 #define base06 #56b6c2
-#define base14 #a3f7ff
+#define base0E #a3f7ff
 #define base07 #a6aebf
-#define base15 #ffffff
+#define base0F #ffffff
 
 !#define base16 #abb2bf
 

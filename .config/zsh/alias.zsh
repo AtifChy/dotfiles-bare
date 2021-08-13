@@ -78,7 +78,7 @@ alias yta-mp3='youtube-dl -f bestaudio --extract-audio --audio-format mp3 --embe
 alias yta-m4a='youtube-dl -f bestaudio --extract-audio --audio-format m4a --embed-thumbnail --add-metadata --xattrs --postprocessor-args "-metadata album=YouTube -metadata comment=YOUTUBE"'
 
 # alias for for github dotfile repo
-alias dotfile='git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME'
+alias dotfile='git --git-dir="${XDG_DATA_HOME:-$HOME/.local/share}"/dotfiles --work-tree="$HOME"'
 
 # alias for reflector
 alias reflector5='sudo reflector --verbose --latest 100 -n 5 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'

@@ -47,24 +47,24 @@ xmonad.font.gtk: 	JetBrains Mono Medium, 10
 
 ! green
 *.color2: 		base02
-*.color10: 		base10
+*.color10: 		base0A
 
 ! yellow
 *.color3: 		base03
-*.color11: 		base11
+*.color11: 		base0B
 
 ! blue
 *.color4: 		base04
-*.color12: 		base12
+*.color12: 		base0C
 
 ! magenta
 *.color5: 		base05
-*.color13: 		base13
+*.color13: 		base0D
 
 ! cyan
 *.color6: 		base06
-*.color14: 		base14
+*.color14: 		base0E
 
 ! white
 *.color7: 		base07
-*.color15: 		base15
+*.color15: 		base0F

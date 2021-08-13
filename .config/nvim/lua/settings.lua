@@ -18,6 +18,7 @@ opt.title = true
 opt.number = true
 opt.cursorline = true
 opt.cursorcolumn = true
+opt.shiftwidth = 4
 
 -- disable nvim intro
 opt.shortmess:append("sI")
@@ -30,16 +31,31 @@ g.mapleader = " "
 g.auto_save = false
 
 -- disable builtin vim plugins
-g.loaded_gzip = 0
-g.loaded_tar = 0
-g.loaded_tarPlugin = 0
-g.loaded_zipPlugin = 0
-g.loaded_2html_plugin = 0
-g.loaded_netrw = 0
-g.loaded_netrwPlugin = 0
-g.loaded_matchit = 0
-g.loaded_matchparen = 0
-g.loaded_spec = 0
+local disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    "matchit"
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+    g["loaded_" .. plugin] = 1
+end
+
 
 local cmd = vim.cmd
 
