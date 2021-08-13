@@ -3,15 +3,16 @@ declare -A ZINIT
 ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
-if [[ ! -f $ZINIT[HOME_DIR]/bin/zinit.zsh ]]; then
+if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$ZINIT[HOME_DIR]" && command chmod g-rwX "$ZINIT[HOME_DIR]"
-    command git clone https://github.com/zdharma/zinit "$ZINIT[HOME_DIR]/bin" &&
+    command mkdir -p "${ZINIT[HOME_DIR]}" && command chmod g-rwX "${ZINIT[HOME_DIR]}"
+    command git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
+    }
 fi
 
-source "$ZINIT[HOME_DIR]/bin/zinit.zsh"
+source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
@@ -22,10 +23,10 @@ zinit wait lucid light-mode for \
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold';
     HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
   " \
-  atload'
-    bindkey "$terminfo[kcuu1]" history-substring-search-up;
-    bindkey "$terminfo[kcud1]" history-substring-search-down
-  ' \
+  atload"
+    bindkey ${terminfo[kcuu1]} history-substring-search-up;
+    bindkey ${terminfo[kcud1]} history-substring-search-down
+  " \
   ver'dont-overwrite-config' \
       ericbn/zsh-history-substring-search \
   atinit"
@@ -52,6 +53,7 @@ zinit wait lucid light-mode for \
     zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
     zstyle ':completion:*' insert-tab false
     TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
+    compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}      # for zsh-z plugin
   " \
   atload'
     eval "$(dircolors)"
@@ -68,48 +70,50 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-autosuggestions \
   trigger-load'!x;!extract' \
       OMZP::extract \
-  atinit"
+  atload"
     ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/zshz
     ZSHZ_ECHO=1
     ZSHZ_TILDE=1
     ZSHZ_CASE=smart
+    ZSHZ_TRAILING_SLASH=1
+    ZSHZ_UNCOMMON=1
   " \
   trigger-load'!zshz;!z' blockf \
         agkozak/zsh-z
 
 ## zsh prompt
-if [ -f ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh ]; then
-        source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh" ]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
 else
-        starship init zsh --print-full-init >${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
-        source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh
+    starship init zsh --print-full-init >"${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
 fi
 
 ## zsh tweak
 PROMPT_EOL_MARK='↵'
 
 ## zsh settings
-setopt auto_cd                # auto cd to given dir if cd command not used
-DIRSTACKSIZE=16               # cache how many dirs for pushd
-setopt auto_pushd             # go back to previously visited dirs (e.g. cd -<TAB>)
-setopt pushd_ignore_dups      # remove duplicates
-setopt pushd_minus            # last visited dir on top
-setopt interactivecomments    # Ignore lines prefixed with '#'
-setopt extended_history       # record timestamp of command in HISTFILE
-setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # Don't record an entry that was just recorded again
-setopt hist_find_no_dups      # Do not display a line previously found
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt inc_append_history     # add commands to HISTFILE in order of execution
-setopt share_history          # shell share history with other tabs
-setopt always_to_end          # cursor moved to the end in full completion
-setopt complete_in_word       # allow completion from within a word/phrase
-setopt automenu               # show completion menu on a successive tab press
-setopt nobeep                 # disable beeping on tab completion
-setopt noflowcontrol          # disable start/stop characters in shell editor
-setopt correct                # spelling correction
-#setopt globdots               # show files beginning with a `.`
+setopt auto_cd 			# auto cd to given dir if cd command not used
+DIRSTACKSIZE=16 		# cache how many dirs for pushd
+setopt auto_pushd 		# go back to previously visited dirs (e.g. cd -<TAB>)
+setopt pushd_ignore_dups 	# remove duplicates
+setopt pushd_minus 		# last visited dir on top
+setopt interactivecomments 	# Ignore lines prefixed with '#'
+setopt extended_history 	# record timestamp of command in HISTFILE
+setopt hist_expire_dups_first 	# delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups 	# Don't record an entry that was just recorded again
+setopt hist_find_no_dups 	# Do not display a line previously found
+setopt hist_ignore_space 	# ignore commands that start with space
+setopt hist_verify 		# show command with history expansion to user before running it
+setopt inc_append_history 	# add commands to HISTFILE in order of execution
+setopt share_history 		# shell share history with other tabs
+setopt always_to_end 		# cursor moved to the end in full completion
+setopt complete_in_word 	# allow completion from within a word/phrase
+setopt automenu 		# show completion menu on a successive tab press
+setopt nobeep 			# disable beeping on tab completion
+setopt noflowcontrol 		# disable start/stop characters in shell editor
+setopt correct 			# spelling correction
+#setopt globdots 		# show files beginning with a `.`
 
 # History file configuration
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"
@@ -134,7 +138,7 @@ function title_precmd {
 
 function title_preexec {
   local CMD="${1:gs/%/%%}"
-  title '%100>...>$CMD%<<'
+  title "%100>...>$CMD%<<"
 }
 
 autoload -U add-zsh-hook
@@ -142,7 +146,7 @@ add-zsh-hook precmd title_precmd
 add-zsh-hook preexec title_preexec
 
 # alias
-source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh"
 
 # better url management
 autoload -Uz bracketed-paste-magic url-quote-magic
@@ -153,10 +157,10 @@ zle -N self-insert url-quote-magic
 # Make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-  function zle-line-init() {
+  function zle-line-init {
     echoti smkx
   }
-  function zle-line-finish() {
+  function zle-line-finish {
     echoti rmkx
   }
   zle -N zle-line-init
