@@ -5,8 +5,8 @@ ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
     	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    	command mkdir -p "${ZINIT[HOME_DIR]}" && command chmod g-rwX "${ZINIT[HOME_DIR]}"
-    	command git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
+    	mkdir -p "${ZINIT[HOME_DIR]}" && chmod g-rwX "${ZINIT[HOME_DIR]}"
+    	git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
         	print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
         	print -P "%F{160}▓▒░ The clone has failed.%f%b"
 	}
@@ -24,11 +24,10 @@ zinit wait lucid light-mode for \
   		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
   	" \
         atload'
-  		bindkey "$terminfo[kcuu1]" history-substring-search-up
-  	  	bindkey "$terminfo[kcud1]" history-substring-search-down
+  		bindkey "${key[Up]}"   history-substring-search-up
+  	  	bindkey "${key[Down]}" history-substring-search-down
   	' \
-        ver'dont-overwrite-config' \
-        	ericbn/zsh-history-substring-search \
+        	zsh-users/zsh-history-substring-search \
         atinit"
   	  	typeset -gA FAST_HIGHLIGHT
   	  	FAST_HIGHLIGHT[git-cmsg-len]=100
