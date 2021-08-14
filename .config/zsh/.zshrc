@@ -137,7 +137,7 @@ function title_precmd {
 
 function title_preexec {
 	local CMD="${1:gs/%/%%}"
-	title "%100>...>$CMD%<<"
+	title '%100>...>$CMD%<<'
 }
 
 autoload -U add-zsh-hook
