@@ -2,25 +2,22 @@
 
 set -e
 
-printf "Do you wish to install this program? [y/n] "
-read -r input
+read -rp "Do you wish to install this program? [y/n] " input
 case $input in
         [Yy]*) echo "Ok, Let's continue" ;;
         [Nn]*) exit ;;
         *) echo "Please answer yes or no." ;;
 esac
 
-printf "user name (lower case) = "
-read -r user_name
+read -rp "user name (lower case) = " user_name
 
-printf "country (for mirror) [e.g. Bangladesh] = "
-read -r country
+read -rp "host name (lower case) [e.g. archlinux] = " _hostname
 
-printf "time zome [e.g. Asia/Dhaka] = "
-read -r time_zone
+read -rp "country (for mirror) [e.g. Bangladesh] = " country
 
-printf "Do you wish to create new partitions? [y/n] "
-read -r partition
+read -rp "time zome [e.g. Asia/Dhaka] = " time_zone
+
+read -rp "Do you wish to create new partitions? [y/n] " partition
 case $partition in
         [Yy]*)
 		echo "Don't forget to set proper type for EFI partition!"
@@ -34,17 +31,13 @@ case $partition in
 esac
 
 lsblk
-printf "root partition [e.g. /dev/sda2] = "
-read -r root_disk
-printf "efi partition [e.g. /dev/sda1] = "
-read -r efi_disk
+read -rp "root partition [e.g. /dev/sda2] = " root_disk
+read -rp "efi partition [e.g. /dev/sda1] = " efi_disk
 
-printf "Do you want to create home partition? [y/n] "
-read -r home_ask
-case $home_ask in
+read -rp "Do you want to create home partition? [y/n] " home_ask
+case "$home_ask" in
         [Yy]*)
-                printf "home partition [e.g. /dev/sda3] = "
-                read -r home_disk
+                read -rp "home partition [e.g. /dev/sda3] = " home_disk
                 ;;
         *) echo 'skipping' ;;
 esac
@@ -65,8 +58,7 @@ mount "$efi_disk" /mnt/boot
 # get mirror
 reflector -c "$country" --save /etc/pacman.d/mirrorlist
 
-echo "Starting Installation. Press Enter to Continue..."
-read -r
+read -rp "Starting Installation. Press Enter to Continue..." _
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware reflector git neovim xclip networkmanager intel-ucode
 
 genfstab -U /mnt >>/mnt/etc/fstab
@@ -77,11 +69,11 @@ sed -i '/#en_US.UTF-8/s/^#//g' /mnt/etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" >/mnt/etc/locale.conf
 echo "KEYMAP=us" >/mnt/etc/vconsole.conf
-echo "archlinux" >/mnt/etc/hostname
+echo "${_hostname}" >/mnt/etc/hostname
 tee -a <<END >>/mnt/etc/hosts
 127.0.0.1	localhost
 ::1		localhost
-127.0.1.1 	archlinux.localdomain 	archlinux
+127.0.1.1 	${_hostname}.localdomain 	${_hostname}
 END
 
 arch-chroot /mnt passwd
@@ -90,14 +82,17 @@ arch-chroot /mnt useradd -mG wheel,network,audio,kvm,optical,storage,video "$use
 arch-chroot /mnt passwd "$user_name"
 sed -i '/^# %wheel ALL=(ALL) ALL/s/^# //' /mnt/etc/sudoers
 
-arch-chroot /mnt pacman -Syu --noconfirm efibootmgr dialog mtools dosfstools openssh wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode zip unzip unrar p7zip lzop rsync traceroute bind-tools ntfs-3g exfat-utils gptfdisk fuse2 fuse3 fuseiso alsa-utils alsa-plugins xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono --needed
+arch-chroot /mnt pacman -Syu --noconfirm efibootmgr dialog mtools dosfstools wget curl nano pacman-contrib bash-completion usbutils lsof dmidecode p7zip ntfs-3g alsa-utils sx xorg-server xorg-xinit gsfonts sdl_ttf ttf-bitstream-vera ttf-dejavu ttf-liberation xorg-fonts-type1 ttf-fira-code ttf-fira-sans ttf-hack xf86-input-libinput xf86-video-amdgpu gst-plugins-base gst-plugins-good gst-plugins-ugly gst-libav ttf-nerd-fonts-symbols ttf-jetbrains-mono zsh --needed
+
+tee /mnt/etc/zsh/zshenv >/dev/null <<'END'
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
+END
 
 ###########################################################
 ##############          Bootloader          ###############
 ###########################################################
 while :; do
-        printf "Choose your bootloader\n1) systemd-boot\n2) grub\n?#"
-        read -r input
+        read -rp "Choose your bootloader\n1) systemd-boot\n2) grub\n?#" input
         case $input in
                 1 | systemd-boot)
                         arch-chroot /mnt bootctl --esp-path=/boot install
@@ -149,7 +144,6 @@ while :; do
                         ;;
                 *)
                         echo "Invalid option"
-                        exit 1
                         ;;
         esac
 done

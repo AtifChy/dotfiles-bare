@@ -12,8 +12,8 @@ style = "bold cyan"
 read_only = " "
 read_only_style = "red"
 truncate_to_repo = false
-truncation_length = 3
-truncation_symbol = "…/"
+truncation_length = 4
+truncation_symbol = " …/"
 home_symbol = " ~"
 
 [git_status]

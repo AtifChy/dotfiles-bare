@@ -4,11 +4,11 @@ ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-    	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    	print -P "%F{blue}▓▒░ %F{yellow}Installing %F{blue}DHARMA%F{yellow} Initiative Plugin Manager (%F{blue}zdharma/zinit%F{yellow})…%f"
     	mkdir -p "${ZINIT[HOME_DIR]}" && chmod g-rwX "${ZINIT[HOME_DIR]}"
     	git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
-        	print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||
-        	print -P "%F{160}▓▒░ The clone has failed.%f%b"
+        	print -P "%F{blue}▓▒░ %F{34}Installation successful.%f%b" ||
+        	print -P "%F{red}▓▒░ The clone has failed.%f%b"
 	}
 fi
 
@@ -16,6 +16,13 @@ source "${ZINIT[HOME_DIR]}/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
+
+## zsh prompt
+zinit lucid light-mode for \
+	as"command" from"gh-r" \
+	atload'eval "$(starship init zsh)"' \
+	bpick'*unknown-linux-gnu*' \
+		starship/starship
 
 ## zsh plugins
 zinit wait lucid light-mode for \
@@ -80,16 +87,11 @@ zinit wait lucid light-mode for \
         trigger-load'!zshz;!z' blockf \
         	agkozak/zsh-z
 
-## zsh prompt
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh" ]; then
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
-else
-	starship init zsh --print-full-init >"${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/starship.zsh"
-fi
+# Fallback zsh prompt
+#PROMPT='%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
 
 ## zsh tweak
-PROMPT_EOL_MARK='↵'
+PROMPT_EOL_MARK='%B%F{8}↵%f%b'
 
 ## zsh settings
 setopt auto_cd 			# auto cd to given dir if cd command not used
@@ -137,7 +139,7 @@ function title_precmd {
 
 function title_preexec {
 	local CMD="${1:gs/%/%%}"
-	title '%100>...>$CMD%<<'
+	title '%100>…>$CMD%<<'
 }
 
 autoload -U add-zsh-hook
