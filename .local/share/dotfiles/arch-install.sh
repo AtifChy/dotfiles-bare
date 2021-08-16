@@ -88,6 +88,10 @@ tee /mnt/etc/zsh/zshenv >/dev/null <<'END'
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
 END
 
+tee /mnt/etc/sysctl.d/99-swappiness.conf >/dev/null <<END
+vm.swappiness=10
+END
+
 ###########################################################
 ##############          Bootloader          ###############
 ###########################################################

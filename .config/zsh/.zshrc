@@ -27,8 +27,8 @@ zinit lucid light-mode for \
 ## zsh plugins
 zinit wait lucid light-mode for \
         atinit"
-		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=black,bold'
-  		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=black,bold'
+		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=8,fg=2,bold'
+  		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=8,fg=9,bold'
   	" \
         atload'
   		bindkey "${key[Up]}"   history-substring-search-up
@@ -49,10 +49,12 @@ zinit wait lucid light-mode for \
 		zstyle ':completion:*' completer _expand _complete _ignored _approximate
 		zstyle ':completion:*' menu select=2
 		zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+		zstyle ':completion:*' list-separator '=>'
 		zstyle ':completion::complete:*' use-cache on
 		zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
 		zstyle ':completion:*' group-name ''
 		zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%b%u'
+		zstyle ':completion:*:warnings' format '%U%B%F{red}no match found%f%b%u'
 		zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 		zstyle ':completion:*' ignored-patterns '\['
 		zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
@@ -63,7 +65,7 @@ zinit wait lucid light-mode for \
   	" \
         atload'
 		eval "$(dircolors)"
-		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=07;1"
+		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1" "(options)=(#b)(*[^ ]~*  *|)[ ]#(*)=00=30;00=02"
 		zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   	' \
         	zsh-users/zsh-completions \

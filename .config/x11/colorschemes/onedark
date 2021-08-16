@@ -14,9 +14,7 @@
 #define base0D #e1acff
 #define base06 #56b6c2
 #define base0E #a3f7ff
-#define base07 #a6aebf
+#define base07 #abb2bf
 #define base0F #ffffff
-
-!#define base16 #abb2bf
 
 ! vim:ft=xdefaults

@@ -20,7 +20,7 @@ Sxiv.font: 		myFont:style=Medium:size=9
 !Xmessage.font: 	FiraCode Nerd Font:pixelsize=14
 
 ! st settings
-st.font: 		myFont:size=10:weight=90
+st.font: 		myFont:size=10:weight=140
 st.fontalt0: 		Noto Color Emoji:pixelsize=13
 st.borderpx: 		10
 st.opacity: 		255
