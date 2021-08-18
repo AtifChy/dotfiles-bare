@@ -1,27 +1,28 @@
 local wezterm = require 'wezterm';
 
-function font_with_fallback(name, params)
-    local names = {name, "JetBrains Mono", "Noto Color Emoji"}
-    return wezterm.font_with_fallback(names, params)
-end
+-- function font_with_fallback(name, params)
+--     local names = {name, "JetBrainsMono Nerd Font", "Noto Color Emoji"}
+--     return wezterm.font_with_fallback(names, params)
+-- end
 
 return {
     front_end = "OpenGL",
+    enable_wayland = true,
     check_for_updates = false,
     window_close_confirmation = "NeverPrompt",
-    font = font_with_fallback("JetBrains Mono Medium"),
-    font_rules = {
-        {italic = true, font = font_with_fallback("JetBrains Mono", {italic = true})},
-        {
-            italic = true,
-            intensity = "Bold",
-            font = font_with_fallback("JetBrains Mono", {bold = true, italic = true})
-        },
-        {
-            intensity = "Bold",
-            font = font_with_fallback("JetBrains Mono", {bold = true})
-        }, {intensity = "Half", font = font_with_fallback("JetBrains Mono")}
-    },
+    font = wezterm.font("JetBrains Mono"),
+--     font_rules = {
+--         {italic = true, font = font_with_fallback("JetBrainsMono Nerd Font", {italic = true})},
+--         {
+--             italic = true,
+--             intensity = "Bold",
+--             font = font_with_fallback("JetBrainsMono Nerd Font", {bold = true, italic = true})
+--         },
+--         {
+--             intensity = "Bold",
+--             font = font_with_fallback("JetBrainsMono Nerd Font", {bold = true})
+--         }, {intensity = "Half", font = font_with_fallback("JetBrainsMono Nerd Font")}
+--     },
     font_size = 10.5,
     font_shaper = "Harfbuzz",
     line_height = 1.0,
@@ -32,6 +33,7 @@ return {
     window_padding = {left = 4, right = 4, top = 4, bottom = 4},
     default_cursor_style = "BlinkingBlock",
     cursor_blink_rate = 800,
+    force_reverse_video_cursor = true,
     bold_brightens_ansi_colors = false,
     color_scheme = "OneDark",
     color_schemes = {

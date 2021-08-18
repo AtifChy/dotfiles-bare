@@ -13,17 +13,16 @@ riverctl spawn "waybar"
 riverctl spawn "gammastep-indicator -m wayland"
 riverctl spawn "swaybg -i ~/.config/xmonad/preview/the-neon-shallows-redish.png -o '*'"
 riverctl spawn "nm-applet --indicator"
-riverctl spawn "/usr/bin/dunst -geometry '350x5-8+8'"
+riverctl spawn "pkill dunst; /usr/bin/dunst -geometry '350x5-8+8'"
 riverctl spawn "\
 	swayidle -w \
-	timeout 300 'swaylock -f -c 000000' \
+	timeout 300 'swaylock -f' \
 	timeout 600 'wlopm --off "'"*"'"' \
 	resume 'wlopm --on "'"*"'"' \
-	before-sleep 'swaylock -f -c 000000' \
+	before-sleep 'swaylock -f' \
 	"
 riverctl spawn "/etc/X11/xinit/xinitrc.d/50-systemd-user.sh"
-riverctl spawn "export MOZ_ENABLE_WAYLAND=1"
-riverctl spawn "export MOZ_DBUS_REMOTE=1"
+riverctl spawn "wl-paste -t text --watch clipman store"
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
@@ -32,16 +31,9 @@ mod="Mod4"
 riverctl map normal $mod+Shift Return spawn st
 
 # Mod+P to spawn prompt
-riverctl map normal $mod P spawn "\
-	bemenu-run \
-	-H 36 \
-	--fn 'JetBrains Mono,Bold 10' \
-	--tb '#1e2127' \
-	--hb '#1e2127' \
-	--sb '#1e2127' \
-	--scb '#1e2127' \
-	--nb '#1e2127' \
-	"
+riverctl map normal $mod P spawn "wofi -I"
+riverctl map normal $mod C spawn "clipman pick --tool wofi -T'--prompt=Clipboard -i'"
+
 # Take screenshots
 riverctl map normal None print spawn 'grimshot -f'
 riverctl map normal Shift print spawn 'grimshot -s'
@@ -175,13 +167,30 @@ for mode in normal locked; do
         riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
 done
 
+# The scratchpad will live on an unused tag. Which tags are used depends on your
+# config, but rivers default uses the first 9 tags.
+scratch_tag=$((1 << 20 ))
+
+# Toggle the scratchpad with Super+P
+riverctl map normal $mod S toggle-focused-tags ${scratch_tag}
+
+# Send windows to the scratchpad with Super+Shift+P
+riverctl map normal $mod+Shift S set-view-tags ${scratch_tag}
+
+# Set spawn tagmask to ensure new windows don't have the scratchpad tag unless
+# explicitly set.
+all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ))
+riverctl spawn-tagmask ${all_but_scratch_tag}
+
 # Set background and border color
 riverctl background-color 0x1e2127
 riverctl border-color-focused 0x424957
 riverctl border-color-unfocused 0x2c313a
 
+# Cursor theme
 riverctl xcursor-theme volantes_cursors
 
+# Focus follow cursor
 riverctl focus-follows-cursor normal
 
 # Set repeat rate
