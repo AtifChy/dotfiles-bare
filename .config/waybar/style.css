@@ -1,99 +1,118 @@
+@import "/home/atif/.config/wofi/onedark.css";
 
-@keyframes blink-warning {
-    70% {
-        color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @warning;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @critical;
-    }
-}
-
-
-/* -----------------------------------------------------------------------------
- * Styles
- * -------------------------------------------------------------------------- */
-
-/* COLORS */
-
-/* Nord */
-@define-color bg #1e2127;
-/*@define-color bg #353C4A;*/
-@define-color light #D8DEE9;
-/*@define-color dark @nord_dark_font;*/
-@define-color warning #ebcb8b;
-@define-color critical #BF616A;
-@define-color mode #434C5E;
-/*@define-color workspaces @bg;*/
-/*@define-color workspaces @nord_dark_font;*/
-/*@define-color workspacesfocused #434C5E;*/
-@define-color workspacesfocused #424957;
-@define-color tray @nord_bg;
-@define-color sound #EBCB8B;
-@define-color network #5D7096;
-@define-color memory #546484;
-@define-color cpu #596A8D;
-@define-color temp #4D5C78;
-@define-color layout #5e81ac;
-@define-color battery #88c0d0;
-@define-color date #434C5E;
-@define-color time #434C5E;
-@define-color backlight #434C5E;
-@define-color nord_bg #2c313a;
-@define-color nord_bg_blue #434c5e;
-@define-color nord_light #D8DEE9;
-@define-color nord_light_font #D8DEE9;
-@define-color nord_dark_font #434C5E;
-
-/* Reset all styles */
 * {
-    border: none;
-    border-radius: 3px;
-    min-height: 0;
-    margin: 0.2em 0.3em 0.2em 0.3em;
+  border: none;
+  border-radius: 3px;
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", "JetBrainsMono Nerd Font";
+  min-height: 0;
+  margin: 0.2em 0.3em 0.2em 0.3em;
 }
 
-/* The whole bar */
-#waybar {
-    background: @bg;
-    color: @light;
-    font-family: "JetBrains Mono", "Font Awesome 5 Free";
-    font-size: 12px;
-    font-weight: bold;
+window#waybar {
+  background-color: @darker;
+  color: @white;
+  border: 1px solid @darkish;
+  border-radius: 0px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+tooltip {
+  font-size: 13px;
+  font-weight: 500;
+  background-color: @darkish;
+  border: 1px solid @dark-blue;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.8);
+}
+
+tooltip label {
+  color: @white;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+  background-color: #3f3f3f;
+}
+
+window#waybar.chromium {
+  background-color: #000000;
+  border: none;
+}
+
+#workspaces button,
+#tags button {
+  padding: 0 0.3em;
+  background-color: transparent;
+  color: @white;
+  opacity: 0.3;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#tags button.occupied {
+  background-color: @blue;
+  opacity: 0.4;
+}
+
+#workspaces button.focused,
+#tags button.focused {
+  background-color: @blue;
+  opacity: 1;
+  padding: 0 0.4em;
+}
+
+#workspaces button.urgent,
+#tags button.urgent {
+  background-color: @red;
+  opacity: 0.5;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover,
+#tags button:hover {
+  background: @darkish;
+  padding: 0 0.4em;
+  opacity: 0.9;
+}
+
+#mode {
+  background-color: #64727d;
+  border-bottom: 3px solid #ffffff;
 }
 
 /* Each module */
 #battery,
 #clock,
 #cpu,
-#custom-layout,
 #memory,
 #mode,
 #network,
 #pulseaudio,
 #temperature,
-#custom-alsa,
 #custom-pacman,
+#custom-media,
 #custom-weather,
-#custom-gpu,
 #tray,
 #backlight,
-#language,
-#custom-cpugovernor {
-    padding-left: 0.6em;
-    padding-right: 0.6em;
+#language {
+  background-color: @darkish;
+  color: @whiteish;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Each module that should blink */
@@ -101,205 +120,133 @@
 #memory,
 #temperature,
 #battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-/* Each critical module */
-#memory.critical,
-#cpu.critical,
-#temperature.critical,
-#battery.critical {
-    color: @critical;
+#window,
+#workspaces {
+  margin: 0 4px;
 }
 
-/* Each critical that should blink */
-#mode,
-#memory.critical,
-#temperature.critical,
-#battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
 }
 
-/* Each warning */
-#network.disconnected,
-#memory.warning,
-#cpu.warning,
-#temperature.warning,
-#battery.warning {
-    background: @warning;
-    color: @nord_dark_font;
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
 }
 
-/* Each warning that should blink */
-#battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
+#battery.charging,
+#battery.plugged {
+  color: #ffffff;
+  background-color: #26a65b;
 }
 
-/* And now modules themselves in their respective order */
-
-#mode { /* Shown current Sway mode (resize etc.) */
-    color: @light;
-    background: @mode;
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
-/* Workspaces stuff */
-
-#workspaces,
-#tags {
- /*   color: #D8DEE9;
-    margin-right: 10px;*/
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-#workspaces button,
-#tags button {
-    font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
-    padding: 0;
-    /*color: #999;*/
-    opacity: 0.3;
-    background: none;
-    font-size: 1em;
+label:focus {
+  background-color: #000000;
 }
 
-#tags button.occupied {
-    background: @workspacesfocused;
-    color: #D8DEE9;
-    opacity: 0.4;
-}
-
-#workspaces button.focused,
-#tags button.focused {
-    background: @workspacesfocused;
-    color: #D8DEE9;
-    opacity: 1;
-    padding: 0 0.4em;
-}
-
-#workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
-    opacity: 1;
-}
-
-#window {
-    margin-right: 40px;
-    margin-left: 40px;
-    font-weight: normal;
-}
-#bluetooth {
-    background: @nord_bg_blue;
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#custom-gpu {
-    background: @nord_bg;
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#custom-weather {
-    background: @mode;
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#custom-pacman {
-    background: @nord_light;
-    color: @nord_dark_font;
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#custom-scratchpad-indicator {
-    background: @nord_light;
-    color: @nord_dark_font;
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#idle_inhibitor {
-    background: @mode;
-    /*font-size: 1.6em;*/
-    font-weight: bold;
-    padding: 0 0.6em;
-}
-#custom-alsa {
-    background: @sound;
-}
-
-#network {
-    background: @nord_bg;
-}
-
-#memory {
-    background: @nord_bg;
-}
-
-#cpu {
-    background: @nord_bg;
-    color: #D8DEE9;
-}
-#cpu.critical {
-    color: @nord_dark_font;
-}
-#language {
-    background: @nord_bg_blue;
-    color: #D8DEE9;
-    padding: 0 0.4em;
-}
-#custom-cpugovernor {
-    background-color: @nord_light;
-    color: @nord_dark_font;
-}
-#custom-cpugovernor.perf {
-
-}
-#temperature {
-    background-color: @nord_bg;
-    color: #D8DEE9;
-}
-#temperature.critical {
-    background:  @critical;
-}
-#custom-layout {
-    background: @layout;
-}
-
-#battery {
-    background: @battery;
-}
-
-#backlight {
-    background: @backlight;
-}
-
-#clock {
-    background: @nord_bg;
-    color: #D8DEE9;
-}
-#clock.date {
-    background: @date;
-}
-
-#clock.time {
-    background: @mode;
-}
-
-#pulseaudio { /* Unsused but kept for those who needs it */
-    background: @nord_bg;
-    color: #D8DEE9;
+#network.disconnected {
+  background-color: #f53c3c;
 }
 
 #pulseaudio.muted {
-    background: #BF616A;
-    color: #BF616A;
-    /* No styles */
+  background-color: #90b1b1;
+  color: #2a5c45;
 }
-#pulseaudio.source-muted {
-    background: #D08770;
-    color: #D8DEE9;
-    /* No styles */
+
+/*
+#custom-media {
+  background-color: #66cc99;
+  color: #2a5c45;
+  min-width: 100px;
 }
-#tray {
-    background: @nord_bg;
+*/
+
+#custom-media.custom-spotify {
+  background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+  background-color: #ffa000;
+}
+
+#temperature.critical {
+  background-color: #eb4d4b;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+#idle_inhibitor.activated {
+  background-color: #ecf0f1;
+  color: #2d3436;
+}
+
+#mpd {
+  background-color: #66cc99;
+  color: #2a5c45;
+}
+
+#mpd.disconnected {
+  background-color: #f53c3c;
+}
+
+#mpd.stopped {
+  background-color: #90b1b1;
+}
+
+#mpd.paused {
+  background-color: #51a37a;
+}
+
+#language {
+  background: #00b093;
+  color: #740864;
+  padding: 0 5px;
+  margin: 0 5px;
+  min-width: 16px;
+}
+
+#keyboard-state {
+  background: #97e1ad;
+  color: #000000;
+  padding: 0 0px;
+  margin: 0 5px;
+  min-width: 16px;
+}
+
+#keyboard-state > label {
+  padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+  background: rgba(0, 0, 0, 0.2);
 }

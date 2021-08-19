@@ -9,6 +9,7 @@ ts_config.setup(
             "bash",
             "lua",
             "haskell",
+	    "jsonc",
             "toml"
         },
         highlight = {

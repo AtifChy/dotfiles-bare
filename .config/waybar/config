@@ -1,100 +1,131 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    // "height": 36, // Waybar height (to be removed for auto height)
-    // Archived modules
-    // "custom/gpu", "bluetooth",  "custom/weather", "temperature", "sway/window"
-    // Choose the order of the modules
-    "modules-left": [ "clock", "custom/pacman", "idle_inhibitor"],
-    "modules-center": ["river/tags"],
-    "modules-right": [ "cpu", "memory", "pulseaudio", "network", "tray"],
-    // Modules configuration
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    // "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "modules-left": ["clock", "custom/weather", "custom/media" ,"idle_inhibitor"],
+    "modules-center": ["river/tags", "sway/window"],
+    "modules-right": ["custom/pacman", "cpu", "memory", "pulseaudio", "tray"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "format": "{icon}",
+        "format": "{name}: {icon}",
         "format-icons": {
-            "1": "<span color=\"#D8DEE9\"></span>",
-            "2": "<span color=\"#88C0D0\"></span>",
-            "3": "<span color=\"#A3BE8C\"></span>",
-            "4": "<span color=\"#D8DEE9\"></span>",
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
             "urgent": "",
-            "focused": "",
-            "default": ""
+            "focused": "",
+            "default": ""
         }
     },
     "river/tags": {
-	"num-tags": 9,
-	"tag-labels": ["I","II","III","IV","V","VI","VII","VIII","IX"]
+        "num-tags": 9,
+        "tag-labels": ["I","II","III","IV","V","VI","VII","VIII","IX"]
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/window": {
-        "format": "{}",
-        "max-length": 50,
-        "tooltip": false
-    },
-    "bluetooth": {
-        "interval": 30,
-        "format": "{icon}",
-        // "format-alt": "{status}",
-        "format-icons": {
-            "enabled": "",
-            "disabled": ""
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
         },
-        "on-click": "blueberry"
-    },
-    "sway/language": {
-        "format": "<big></big> {}",
-        "max-length": 5,
-        "min-length": 5
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        },
-        "tooltip": "true"
+        }
     },
     "tray": {
-        //"icon-size": 11,
+        // "icon-size": 21,
         "spacing": 1
     },
     "clock": {
-        "format": "  {:%I:%M%p   %e %b}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "today-format": "<b>{}</b>",
-        "on-click": "gnome-calendar"
+        "format": " {:%I:%M%p}",
+	"format-alt": " {:%e-%b-%Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n{calendar}",
+        "today-format": "<b>{}</b>"
     },
     "cpu": {
         "interval": "1",
         "format": " {usage}%",
         "max-length": 10,
         "min-length": 5,
-        "on-click": "st -e htop --sort-key PERCENT_CPU",
-        "tooltip": false
-    },
-    "temperature": {
-        //"thermal-zone": 1,
-        "interval": "4",
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        "format-critical": "  {temperatureC}°C",
-        "format": "{icon}  {temperatureC}°C",
-        "format-icons": ["", "", ""],
-        "max-length": 10,
-        "min-length": 5
+        "on-click": "st -e htop --sort-key PERCENT_CPU"
     },
     "memory": {
-	"interval": "5",
-	"format": " {}%",
-	"max-length": 10
+        "interval": "5",
+        "format": " {}%",
+        "max-length": 10,
+        "on-click": "st -e htop --sort-key PERCENT_MEMORY"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
     },
     "network": {
         // "interface": "wlan0", // (Optional) To force the use of this interface,
-        "format-wifi": "  {essid}",
+        "format-wifi": " {essid}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "",
@@ -104,14 +135,12 @@
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}"
     },
     "pulseaudio": {
-        "scroll-step": 5, // %, can be a float
+        // "scroll-step": 1, // %, can be a float
         "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        //"format-source": "{volume}% ",
-        //"format-source-muted": "",
-        "format-source": "",
+        "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -125,63 +154,34 @@
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
     },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 25,
+        "format-icons": {
+            "spotify": "",
+	    "firefox": "",
+            "default": ""
+        },
+        "escape": true,
+	"on-click": "playerctl play-pause",
+        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
     "custom/pacman": {
-        "format": " {}",
+        "format": " {}",
         "interval": 3600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
         "on-click": "st -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
         "max-length": 10,
-        "min-length": 5
+        "min-length": 3
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/?format=1'",
+        "exec": "$HOME/.config/waybar/custom_modules/weather.sh",
         "interval": 3600
-    },
-    "custom/gpu": {
-      "exec": "$HOME/.config/waybar/custom_modules/custom-gpu.sh",
-      "return-type": "json",
-      "format": "  {}",
-      "interval": 2,
-      "tooltip": "{tooltip}",
-      "max-length": 19,
-      "min-length": 19,
-      "on-click": "powerupp"
-
-    },
-    "custom/cpugovernor": {
-      "format": "{icon}",
-      "interval": "30",
-      "return-type": "json",
-      "exec": "$HOME/.config/waybar/custom_modules/cpugovernor.sh",
-      "min-length": 2,
-      "max-length": 2,
-        "format-icons": {
-            "perf": "",
-            "sched": ""
-        }
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null"
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-    "custom/scratchpad-indicator": {
-        "interval": 3,
-        "return-type": "json",
-        "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
-        "format": "{} 􏠜",
-        "on-click": "exec swaymsg 'scratchpad show'",
-        "on-click-right": "exec swaymsg 'move scratchpad'"
     }
 }
 
-// vim:ft=json
+// vim:ft=jsonc

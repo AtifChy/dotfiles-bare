@@ -10,7 +10,7 @@ return {
     enable_wayland = true,
     check_for_updates = false,
     window_close_confirmation = "NeverPrompt",
-    font = wezterm.font("JetBrains Mono"),
+    font = wezterm.font("JetBrains Mono", {weight="Light"}),
 --     font_rules = {
 --         {italic = true, font = font_with_fallback("JetBrainsMono Nerd Font", {italic = true})},
 --         {
@@ -23,7 +23,7 @@ return {
 --             font = font_with_fallback("JetBrainsMono Nerd Font", {bold = true})
 --         }, {intensity = "Half", font = font_with_fallback("JetBrainsMono Nerd Font")}
 --     },
-    font_size = 10.5,
+    font_size = 10,
     font_shaper = "Harfbuzz",
     line_height = 1.0,
     freetype_load_target = "HorizontalLcd",

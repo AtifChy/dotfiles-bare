@@ -7,7 +7,7 @@
 
 @define-color dark #21242c;
 @define-color darkish #2c313a;
-@define-color darker #16181d;
+@define-color darker #1e2127;
 @define-color dark-blue #3b4252;
 @define-color bright-blue #51aeed;
 @define-color greenish #b8b8ac;
@@ -18,3 +18,5 @@
 @define-color yellow #ffcb6b;
 @define-color green #98be65;
 @define-color purple #b58fae;
+@define-color white #c8ccd4;
+@define-color whiteish #abb2bf;

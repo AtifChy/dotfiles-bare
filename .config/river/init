@@ -8,21 +8,23 @@
 # See the river(1), riverctl(1), and rivertile(1) man pages for complete
 # documentation.
 
-riverctl spawn "xrdb -merge ~/.config/x11/Xresources"
-riverctl spawn "waybar"
-riverctl spawn "gammastep-indicator -m wayland"
-riverctl spawn "swaybg -i ~/.config/xmonad/preview/the-neon-shallows-redish.png -o '*'"
-riverctl spawn "nm-applet --indicator"
-riverctl spawn "pkill dunst; /usr/bin/dunst -geometry '350x5-8+8'"
+riverctl spawn 'xrdb -merge ~/.config/x11/Xresources'
+riverctl spawn 'waybar'
+riverctl spawn 'gammastep-indicator -m wayland'
+riverctl spawn 'swaybg -i ~/.config/xmonad/preview/the-neon-shallows-redish.png -o "*"'
+riverctl spawn 'nm-applet --indicator'
+riverctl spawn 'mako'
 riverctl spawn "\
 	swayidle -w \
-	timeout 300 'swaylock -f' \
-	timeout 600 'wlopm --off "'"*"'"' \
+	timeout 600 'wlrctl toplevel find firefox state:fullscreen || swaylock -f' \
+	timeout 900 'wlrctl toplevel find firefox state:fullscreen || wlopm --off "'"*"'"' \
 	resume 'wlopm --on "'"*"'"' \
 	before-sleep 'swaylock -f' \
 	"
-riverctl spawn "/etc/X11/xinit/xinitrc.d/50-systemd-user.sh"
-riverctl spawn "wl-paste -t text --watch clipman store"
+riverctl spawn '/etc/X11/xinit/xinitrc.d/50-systemd-user.sh'
+riverctl spawn 'wl-paste -t text --watch clipman store'
+riverctl spawn '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1'
+riverctl spawn 'playerctld'
 
 # Use the "logo" key as the primary modifier
 mod="Mod4"
@@ -37,6 +39,9 @@ riverctl map normal $mod C spawn "clipman pick --tool wofi -T'--prompt=Clipboard
 # Take screenshots
 riverctl map normal None print spawn 'grimshot -f'
 riverctl map normal Shift print spawn 'grimshot -s'
+
+# Mod+B to toggle waybar
+riverctl map normal $mod B spawn 'killall -SIGUSR1 waybar'
 
 # Mod+Shift+C to close the focused view
 riverctl map normal $mod+Shift C close
@@ -186,6 +191,7 @@ riverctl spawn-tagmask ${all_but_scratch_tag}
 riverctl background-color 0x1e2127
 riverctl border-color-focused 0x424957
 riverctl border-color-unfocused 0x2c313a
+riverctl border-color-urgent 0xff6c6b
 
 # Cursor theme
 riverctl xcursor-theme volantes_cursors
@@ -201,7 +207,7 @@ riverctl float-filter-add "float"
 riverctl float-filter-add "popup"
 
 # Set app-ids of views which should use client side decorations
-riverctl csd-filter-add "gedit"
+#riverctl csd-filter-add "gedit"
 
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
