@@ -46,6 +46,9 @@ riverctl map normal $mod C spawn 'clipman pick --tool wofi -T"--prompt=Clipboard
 riverctl map normal None print spawn 'grimshot -f'
 riverctl map normal Shift print spawn 'grimshot -s'
 
+# Mako history
+riverctl map normal Control grave spawn 'makoctl restore'
+
 # Mod+B to toggle waybar
 riverctl map normal $mod B spawn 'pkill -USR1 waybar'
 

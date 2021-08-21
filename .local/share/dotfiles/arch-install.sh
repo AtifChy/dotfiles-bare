@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -euo pipefail
 
 read -rp "Do you wish to install this program? [y/n] " input
 case $input in
@@ -20,9 +20,9 @@ read -rp "time zome [e.g. Asia/Dhaka] = " time_zone
 read -rp "Do you wish to create new partitions? [y/n] " partition
 case $partition in
         [Yy]*)
-		echo "Don't forget to set proper type for EFI partition!"
-		cfdisk
-		;;
+                echo "Don't forget to set proper type for EFI partition!"
+                cfdisk
+                ;;
         [Nn]*) echo 'skipping' ;;
         *)
                 echo "Please answer yes or no."
@@ -35,12 +35,7 @@ read -rp "root partition [e.g. /dev/sda2] = " root_disk
 read -rp "efi partition [e.g. /dev/sda1] = " efi_disk
 
 read -rp "Do you want to create home partition? [y/n] " home_ask
-case "$home_ask" in
-        [Yy]*)
-                read -rp "home partition [e.g. /dev/sda3] = " home_disk
-                ;;
-        *) echo 'skipping' ;;
-esac
+[ "$home_ask" = 'y' ] && read -rp "home partition [e.g. /dev/sda3] = " home_disk
 
 mkfs.ext4 -L 'Archlinux' "$root_disk"
 mount "$root_disk" /mnt
@@ -55,13 +50,30 @@ mkfs.fat -F32 -n 'EFI' "$efi_disk"
 mkdir /mnt/boot
 mount "$efi_disk" /mnt/boot
 
+read -rp "Do you want to create a swapfile? [y/n]" swapfile
+if [ "$swapfile" ]; then
+        mkdir /mnt/swap
+        dd if=/dev/zero of=/mnt/swap/swapfile bs=1M count=4096 status=progress
+        chmod 600 /mnt/swap/swapfile
+        mkswap /mnt/swap/swapfile
+fi
+
 # get mirror
 reflector -c "$country" --save /etc/pacman.d/mirrorlist
 
-read -rp "Starting Installation. Press Enter to Continue..." _
+echo "Starting Installation. Press \033[1;34mEnter\033[0m to Continue..."
+read -r _
+
+# trap
+trap 'echo "\n\033[1;33mWARNING: \033[1;39mLet the script finish..."' SIGINT
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware reflector git neovim xclip networkmanager intel-ucode
 
 genfstab -U /mnt >>/mnt/etc/fstab
+[ "$swapfile" ] && tee -a /mnt/etc/fstab >/dev/null <<'END'
+
+#swapfile
+/swap/swapfile 		none 		swap 		defaults 	0 0
+END
 
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$time_zone" /etc/localtime
 arch-chroot /mnt hwclock --systohc
@@ -70,7 +82,7 @@ arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8" >/mnt/etc/locale.conf
 echo "KEYMAP=us" >/mnt/etc/vconsole.conf
 echo "${_hostname}" >/mnt/etc/hostname
-tee -a <<END >>/mnt/etc/hosts
+tee -a /mnt/etc/hosts >/dev/null <<END
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1 	${_hostname}.localdomain 	${_hostname}
@@ -105,7 +117,8 @@ END
 ##############          Bootloader          ###############
 ###########################################################
 while :; do
-        read -rp "Choose your bootloader\n1) systemd-boot\n2) grub\n?#" input
+        printf "Choose your bootloader\n1) systemd-boot\n2) grub\n?#"
+        read -r input
         case $input in
                 1 | systemd-boot)
                         arch-chroot /mnt bootctl --esp-path=/boot install
