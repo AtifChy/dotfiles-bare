@@ -71,7 +71,6 @@ zinit wait lucid light-mode for \
 		zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
 		zstyle ':completion:*' insert-tab false
 		TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
-		compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}      # for zsh-z plugin
   	" \
         atload'
 		eval "$(dircolors)"
@@ -96,7 +95,6 @@ zinit wait lucid light-mode for \
 		ZSHZ_TRAILING_SLASH=1
 		ZSHZ_UNCOMMON=1
   	" \
-        trigger-load'!zshz;!z' blockf \
         	agkozak/zsh-z
 
 # Fallback zsh prompt

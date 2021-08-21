@@ -284,9 +284,9 @@
     if (( $1 )); then
       # Styling for up-to-date Git status.
       local       meta='%f'   # default foreground
-      local      clean='%5F'  # green foreground
-      local   modified='%3F'  # yellow foreground
-      local  untracked='%4F'  # blue foreground
+      local      clean='%1F'  # green foreground
+      local   modified='%1F'  # yellow foreground
+      local  untracked='%1F'  # blue foreground
       local conflicted='%1F'  # red foreground
     else
       # Styling for incomplete and stale Git status.
@@ -305,7 +305,7 @@
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
       (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res+=${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}%B${branch//\%/%%}%b
     fi
 
     if [[ -n $VCS_STATUS_TAG
@@ -328,7 +328,7 @@
 
     # Show tracking branch name if it differs from local branch.
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
+      res+=${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}
     fi
 
     # Display "wip" if the latest commit's summary contains "wip" or "WIP".
@@ -336,36 +336,40 @@
       res+=" ${modified}wip"
     fi
 
+    (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_PUSH_COMMITS_AHEAD || VCS_STATUS_PUSH_COMMITS_BEHIND || VCS_STATUS_STASHES || VCS_STATUS_ACTION || VCS_STATUS_NUM_CONFLICTED || VCS_STATUS_NUM_STAGED || VCS_STATUS_NUM_UN || VCS_STATUS_NUM_UNTRACKED )) && res+=" %1F%B[%b%f"
+
     # ⇣42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_BEHIND )) && res+="${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
     # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
+    #(( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
     (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
     # ⇠42 if behind the push remote.
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+="${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    #(( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
     # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
     (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     # *42 if have stashes.
-    (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
+    (( VCS_STATUS_STASHES        )) && res+="${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
-    [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
+    [[ -n $VCS_STATUS_ACTION     ]] && res+="${conflicted}${VCS_STATUS_ACTION}"
     # ~42 if have merge conflicts.
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
     # +42 if have staged changes.
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+="${modified}+${VCS_STATUS_NUM_STAGED}"
     # !42 if have unstaged changes.
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+="${modified}!${VCS_STATUS_NUM_UNSTAGED}"
     # ?42 if have untracked files. It's really a question mark, your font isn't broken.
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
-    (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
+    (( VCS_STATUS_NUM_UNTRACKED  )) && res+=${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}
     # "─" if the number of unstaged files is unknown. This can happen due to
     # POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY (see below) being set to a non-negative number lower
     # than the number of files in the Git index, or due to bash.showDirtyState being set to false
     # in the repository config. The number of staged and untracked files may also be unknown
     # in this case.
-    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
+    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+="${modified}─"
+
+    (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_PUSH_COMMITS_AHEAD || VCS_STATUS_PUSH_COMMITS_BEHIND || VCS_STATUS_STASHES || VCS_STATUS_ACTION || VCS_STATUS_NUM_CONFLICTED || VCS_STATUS_NUM_STAGED || VCS_STATUS_NUM_UN || VCS_STATUS_NUM_UNTRACKED )) && res+="%1F%B]%b%f "
 
     typeset -g my_git_format=$res
   }
@@ -395,7 +399,7 @@
 
   # Icon color.
   typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=5
-  typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=
+  #typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
@@ -408,9 +412,9 @@
 
   # These settings are used for repositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=2
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=2
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=3
+  #typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=2
+  #typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=2
+  #typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=3
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Show duration of the last command if takes at least this many seconds.
@@ -427,61 +431,7 @@
   # Custom prefix.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='%ftook '
 
-  ####################################[ time: current time ]####################################
-  # Current time color.
-  typeset -g POWERLEVEL9K_TIME_FOREGROUND=6
-  # Format for the current time: 09:51:02. See `man 3 strftime`.
-  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
-  # If set to true, time will update when you hit enter. This way prompts for the past
-  # commands will contain the start times of their commands as opposed to the default
-  # behavior where they contain the end times of their preceding commands.
-  typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  # Custom prefix.
-  typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
-
-  # Example of a user-defined prompt segment. Function prompt_example will be called on every
-  # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
-  # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and green text greeting the user.
-  #
-  # Type `p10k help segment` for documentation and a more sophisticated example.
-  function prompt_example() {
-    p10k segment -f 2 -i '⭐' -t 'hello, %n'
-  }
-
-  # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
-  # is to generate the prompt segment for display in instant prompt. See
-  # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
-  #
-  # Powerlevel10k will call instant_prompt_* at the same time as the regular prompt_* function
-  # and will record all `p10k segment` calls it makes. When displaying instant prompt, Powerlevel10k
-  # will replay these calls without actually calling instant_prompt_*. It is imperative that
-  # instant_prompt_* always makes the same `p10k segment` calls regardless of environment. If this
-  # rule is not observed, the content of instant prompt will be incorrect.
-  #
-  # Usually, you should either not define instant_prompt_* or simply call prompt_* from it. If
-  # instant_prompt_* is not defined for a segment, the segment won't be shown in instant prompt.
-  function instant_prompt_example() {
-    # Since prompt_example always makes the same `p10k segment` calls, we can call it from
-    # instant_prompt_example. This will give us the same `example` prompt segment in the instant
-    # and regular prompts.
-    prompt_example
-  }
-
-  # User-defined prompt segments can be customized the same way as built-in segments.
-  # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208
-  # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
-  # when accepting a command line. Supported values:
-  #
-  #   - off:      Don't change prompt when accepting a command line.
-  #   - always:   Trim down prompt when accepting a command line.
-  #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
-  #               typed after changing current working directory.
-  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
-
+  ###########################################[ EXTRA ]##########################################
   # Instant prompt mode.
   #
   #   - off:     Disable instant prompt. Choose this if you've tried instant prompt and found
