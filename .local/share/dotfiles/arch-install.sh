@@ -88,6 +88,15 @@ tee /mnt/etc/zsh/zshenv >/dev/null <<'END'
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
 END
 
+tee -a /mnt/etc/ssh/ssh_config >/dev/null <<END
+Host *
+   IdentityFile ~/.config/ssh/id_rsa
+   IdentityFile ~/.config/ssh/id_dsa
+   IdentityFile ~/.config/ssh/id_ecdsa
+   IdentityFile ~/.config/ssh/id_ed25519
+   UserKnownHostsFile ~/.config/ssh/known_hosts
+END
+
 tee /mnt/etc/sysctl.d/99-swappiness.conf >/dev/null <<END
 vm.swappiness=10
 END

@@ -65,7 +65,7 @@ zinit wait lucid light-mode for \
   	" \
         atload'
 		eval "$(dircolors)"
-		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1" "(options)=(#b)(*[^ ]~*  *|)[ ]#(*)=00=30;00=02"
+		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
 		zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
   	' \
         	zsh-users/zsh-completions \

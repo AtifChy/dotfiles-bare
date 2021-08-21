@@ -71,7 +71,7 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        // "icon-size": 18,
         "spacing": 1
     },
     "clock": {
@@ -85,13 +85,13 @@
         "format": " {usage}%",
         "max-length": 10,
         "min-length": 5,
-        "on-click": "st -e htop --sort-key PERCENT_CPU"
+        "on-click": "st -e htop -s PERCENT_CPU"
     },
     "memory": {
         "interval": "5",
         "format": " {}%",
         "max-length": 10,
-        "on-click": "st -e htop --sort-key PERCENT_MEMORY"
+        "on-click": "st -e htop -s PERCENT_MEM"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -160,11 +160,11 @@
         "max-length": 25,
         "format-icons": {
             "spotify": "",
-	    "firefox": "",
+            "firefox": "",
             "default": ""
         },
         "escape": true,
-	"on-click": "playerctl play-pause",
+        "on-click": "playerctl play-pause",
         "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
@@ -180,7 +180,7 @@
     },
     "custom/weather": {
         "exec": "$HOME/.config/waybar/custom_modules/weather.sh",
-        "interval": 3600
+        "interval": 1800
     }
 }
 

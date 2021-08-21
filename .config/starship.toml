@@ -4,13 +4,13 @@ add_newline = false
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
-vicmd_symbol = "[V](bold green)"
+vicmd_symbol = "[V](bold blue)"
 
 [directory]
-format = "[ ](cyan)[$path]($style) "
+format = "[ ](cyan)[$read_only]($read_only_style)[$path]($style) "
 style = "bold cyan"
-#read_only = " "
-#read_only_style = "red"
+read_only = " "
+read_only_style = "red"
 truncate_to_repo = false
 truncation_length = 4
 truncation_symbol = "…/"
