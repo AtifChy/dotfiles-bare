@@ -1,0 +1,33 @@
+#!/bin/sh
+
+check() {
+        type "$*" >/dev/null || {
+                echo "\033[1;31mError:\033[0m command \033[1;34m$*\033[0m not found."
+                exit 1
+        }
+}
+
+check grim
+check convert
+check slurp
+check wl-copy
+check wl-paste
+
+_grab="$(slurp -p -b '#00000000' 2>/dev/null)"
+
+[ "${_grab}" ] || {
+        notify-send -u normal -a colorpicker -i gcolor3 'Color 🎨' 'Failed to pick color. 😥'
+        exit 1
+}
+
+grim -g "${_grab}" -t ppm - |
+        convert - -format '%[pixel:p{0,0}]' txt:- |
+        sed '1d' | cut -d\  -f4 |
+        tr '[:upper:]' '[:lower:]' |
+        wl-copy -n
+
+_color=$(wl-paste)
+_tmp="/tmp/color.ppm"
+
+convert -size 80x80 xc:"${_color}" "${_tmp}"
+notify-send -u low -a colorpicker -i "${_tmp}" 'Color 🎨' "${_color}"

@@ -1,63 +1,67 @@
 @import "/home/atif/.config/wofi/onedark.css";
 
 * {
-background-color: #1e2127;
+  background-color: @darker;
 }
 
 #entry {
-border-radius: 5px;
-padding: 5px;
-margin: 0px 4px 0px 4px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px 4px 0px 4px;
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.1;
+  }
 }
 
 #entry:selected {
-border: 1px solid @bright-blue;
-background-color: @darkish;
+  border: 1px solid @bright-blue;
+  background-color: @darkish;
 }
 
-#entry:selected>* {
-background-color: @darkish;
+#entry:selected > * {
+  background-color: @darkish;
 }
 
 #text:selected {
-color: @bright-blue;
+  color: @bright-blue;
 }
 
 #window {
-background-color: transparent;
-font-family: JetBrainsMono Nerd Font;
-font-weight: bold;
-font-size:12px;
+  background-color: transparent;
+  font-family: JetBrainsMono Nerd Font;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 #input {
-border: none;
-background-color: @darkish;
-margin: 4px;
+  border: none;
+  background-color: @darkish;
+  margin: 4px;
 }
 
-#input>* {
-background-color: @darkish;
+#input > * {
+  background-color: @darkish;
 }
 
 #inner-box {
-margin-right: 7px;
+  margin-right: 7px;
 }
 
 #outer-box {
-background-color: #1e2127;
-padding: 3px;
-margin-bottom: 8px;
-box-shadow: 0px 0px 5px 1px  rgba(0,0,0,0.5);
+  background-color: #1e2127;
+  padding: 3px;
+  margin-bottom: 8px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
 #text {
-background-color: transparent;
+  background-color: transparent;
 }
 
 #img {

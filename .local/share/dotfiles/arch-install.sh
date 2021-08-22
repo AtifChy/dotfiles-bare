@@ -65,7 +65,7 @@ echo "Starting Installation. Press \033[1;34mEnter\033[0m to Continue..."
 read -r _
 
 # trap
-trap 'echo "\n\033[1;33mWARNING: \033[1;39mLet the script finish..."' SIGINT
+trap 'echo "\n\033[1;33mWARNING: \033[1;39mLet the script finish..."' INT
 pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware reflector git neovim xclip networkmanager intel-ucode
 
 genfstab -U /mnt >>/mnt/etc/fstab

@@ -25,14 +25,15 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 ## zsh prompt
+zinit lucid light-mode for \
+	romkatv/powerlevel10k
+
+# starship prompt config
 #zinit lucid light-mode for \
 #	as"command" from"gh-r" \
 #	atload'eval "$(starship init zsh)"' \
 #	bpick'*unknown-linux-gnu*' \
 #		starship/starship
-
-zinit lucid light-mode for \
-	romkatv/powerlevel10k
 
 ## zsh plugins
 zinit wait lucid light-mode for \

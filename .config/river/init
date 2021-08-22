@@ -20,8 +20,9 @@ riverctl spawn '\
 	timeout 900 "wlrctl toplevel find firefox state:fullscreen || wlopm --off '"'*'"'" \
 	resume "wlopm --on '"'*'"'" \
 	before-sleep "swaylock -f" \
+	lock "swaylock -f" \
 	'
-riverctl spawn 'wl-paste -t text --watch clipman store'
+riverctl spawn 'wl-paste -t text --watch clipman store --max-items=30 --unix'
 riverctl spawn '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1'
 riverctl spawn 'mpd --no-daemon'
 riverctl spawn 'mpDris2'
