@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ### Added by Zinit's installer
@@ -11,11 +11,11 @@ ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-    	print -P "%F{blue}▓▒░ %F{yellow}Installing %F{blue}DHARMA%F{yellow} Initiative Plugin Manager (%F{blue}zdharma/zinit%F{yellow})…%f"
+    	print -P "%F{4}▓▒░ %F{3}Installing %F{4}DHARMA%F{3} Initiative Plugin Manager (%F{4}zdharma/zinit%F{3})…%f"
     	mkdir -p "${ZINIT[HOME_DIR]}" && chmod g-rwX "${ZINIT[HOME_DIR]}"
     	git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
-        	print -P "%F{blue}▓▒░ %F{34}Installation successful.%f%b" ||
-        	print -P "%F{red}▓▒░ The clone has failed.%f%b"
+        	print -P "%F{4}▓▒░ %F{34}Installation successful.%f%b" ||
+        	print -P "%F{1}▓▒░ The clone has failed.%f%b"
 	}
 fi
 

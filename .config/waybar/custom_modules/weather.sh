@@ -1,8 +1,10 @@
 #!/bin/sh
+city="Sylhet"
+
 refresh() {
         for _ in 1 2 3 4 5; do
                 if ping -q -c 1 -W 1 8.8.8.8 >/dev/null 2>&1; then
-                        weather=$(curl -s wttr.in/sylhet?format="%x+%t\n") && break
+                        weather="$(curl -s https://wttr.in/${city}?format=%x+%t)" && break
                 else
                         sleep 2s
                 fi
@@ -11,6 +13,13 @@ refresh() {
 
         condition=${weather% *}
         temperature=${weather##* }
+
+        if [ "${weather%;*}" = "Unknown location" ]; then
+                unset condition
+                unset temperature
+                condition="Invaild"
+		temperature="$condition"
+        fi
 
         hour=$(date +%H)
         night_yet() {
@@ -68,11 +77,11 @@ refresh() {
                         night_yet ""
                         ;;
                 "mmm") icon="" ;;
-                *) icon=$condition ;;
+		"Invaild") icon="" ;;
         esac
 }
 
-myBar() {
+xmobar() {
         set -- $(xrdb -q | grep -E '*.color0:|*.color3:|*.color7:' | cut -f2 | tr '\n' ' ')
 
         background=${1}:5
@@ -92,8 +101,20 @@ myBar() {
         done
 }
 
+waybar() {
+        refresh
+        if [ -z "$weather" ]; then
+                echo "{\"text\": \" Offline\", \"tooltip\": \"Network connection unavailable.\"}"
+        else
+                tooltip="$(curl -s https://wttr.in/${city}?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w | sed 's/-/\\\\n/g')"
+                echo "{\"text\": \"${icon} ${temperature}\", \"tooltip\": \"${tooltip}\"}"
+        fi
+
+}
+
 case $1 in
-        bar) myBar ;;
+        xmobar) xmobar ;;
+        waybar) waybar ;;
         *)
                 refresh
                 [ -z "$weather" ] &&

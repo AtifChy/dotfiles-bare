@@ -5,7 +5,7 @@
     // "width": 1280, // Waybar width
     "modules-left": ["clock", "custom/weather", "custom/media" ,"idle_inhibitor"],
     "modules-center": ["river/tags", "sway/window"],
-    "modules-right": ["custom/pacman", "cpu", "memory", "pulseaudio", "tray"],
+    "modules-right": ["custom/record" ,"custom/pacman", "cpu", "memory", "pulseaudio", "tray"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -165,22 +165,36 @@
         },
         "escape": true,
         "on-click": "playerctl play-pause",
-        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.sh"
     },
     "custom/pacman": {
         "format": " {}",
-        "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "st -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
+	"return-type": "json",
+        "interval": 3600,
+        "exec": "$HOME/.config/waybar/custom_modules/pacman.sh",
+        "exec-if": "exit 0",
+        "on-click": "st -e 'paru'",
         "signal": 8,
         "max-length": 10,
         "min-length": 3
     },
     "custom/weather": {
-        "exec": "$HOME/.config/waybar/custom_modules/weather.sh",
+        "return-type": "json",
+        "format": "{}",
+	"exec-if": "exit 0",
+        "exec": "$HOME/.config/waybar/custom_modules/weather.sh waybar",
+	"signal": 9,
+	"on-click": "pkill -SIGRTMIN+9 waybar",
         "interval": 1800
+    },
+    "custom/record": {
+	"return-type": "json",
+	"format": "{}",
+	"exec-if": "sleep 0.2s && pgrep wf-recorder",
+	"exec": "echo '{\"text\": \"\", \"tooltip\": \"Recording screen\"}'",
+	"signal": 10,
+	"interval": "once",
+	"on-click": "pkill -INT wf-recorder"
     }
 }
 

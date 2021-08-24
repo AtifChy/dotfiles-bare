@@ -10,7 +10,7 @@ return {
     enable_wayland = true,
     check_for_updates = false,
     window_close_confirmation = "NeverPrompt",
-    font = wezterm.font("JetBrains Mono", {weight="Light"}),
+    font = wezterm.font("JetBrainsMono Nerd Font", {weight="Light"}),
 --     font_rules = {
 --         {italic = true, font = font_with_fallback("JetBrainsMono Nerd Font", {italic = true})},
 --         {
