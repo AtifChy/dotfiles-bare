@@ -1,0 +1,36 @@
+#!/bin/sh
+
+_vid="vid_$(date '+%Y-%m-%d_%H-%M-%S').mp4"
+_dir=$(xdg-user-dir VIDEOS)
+[ ! -d "${_dir}/Records" ] && mkdir "${_dir}/Records"
+file="${_dir}/Records/${_vid}"
+
+while [ "$1" ]; do
+        case $1 in
+                -a | audio)
+                        audio="-a"
+                        shift 1
+                        ;;
+                -s | selection)
+                        select="-g $(slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -w 1)"
+                        test -z "$select" && exit 1
+                        shift 1
+                        ;;
+                -f | fullscreen)
+                        echo "Recording fullscreen..."
+                        shift 1
+                        ;;
+        esac
+done
+
+pkill -SIGRTMIN+10 waybar
+
+trap "pkill -INT wf-recorder; sleep 0.2s && pkill -SIGRTMIN+10 waybar" INT
+
+wf-recorder \
+        -c h264_vaapi \
+        -e -t \
+        -d /dev/dri/renderD128 \
+        "${select}" \
+        "${audio}" \
+        -f "${file}" >/dev/null 2>&1
