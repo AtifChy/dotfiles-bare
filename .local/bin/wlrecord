@@ -33,4 +33,4 @@ wf-recorder \
         -d /dev/dri/renderD128 \
         "${select}" \
         "${audio}" \
-        -f "${file}" >/dev/null 2>&1
+        -f "${file}" 2>/dev/null

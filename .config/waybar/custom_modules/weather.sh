@@ -18,7 +18,7 @@ refresh() {
                 unset condition
                 unset temperature
                 condition="Invaild"
-		temperature="$condition"
+                temperature="$condition"
         fi
 
         hour=$(date +%H)
@@ -77,7 +77,7 @@ refresh() {
                         night_yet ""
                         ;;
                 "mmm") icon="" ;;
-		"Invaild") icon="" ;;
+                "Invaild") icon="" ;;
         esac
 }
 

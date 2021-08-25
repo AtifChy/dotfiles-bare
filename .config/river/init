@@ -8,29 +8,6 @@
 # See the river(1), riverctl(1), and rivertile(1) man pages for complete
 # documentation.
 
-# Autostart
-riverctl spawn 'waybar'
-riverctl spawn 'gammastep-indicator -m wayland'
-riverctl spawn 'swaybg -i ~/.config/xmonad/preview/the-neon-shallows-redish.png -o "*"'
-riverctl spawn 'nm-applet --indicator'
-riverctl spawn 'mako'
-riverctl spawn '\
-	swayidle -w \
-	timeout 600 "wlrctl toplevel find firefox state:fullscreen || swaylock -f" \
-	timeout 900 "wlrctl toplevel find firefox state:fullscreen || wlopm --off '"'*'"'" \
-	resume "wlopm --on '"'*'"'" \
-	before-sleep "swaylock -f" \
-	after-resume "wlopm --on '"'*'"'"
-	lock "swaylock -f" \
-	'
-riverctl spawn 'wl-paste -t text --watch clipman store --max-items=30 --unix'
-riverctl spawn '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1'
-#riverctl spawn 'mpd --no-daemon'
-#riverctl spawn 'mpDris2'
-riverctl spawn 'playerctld'
-riverctl spawn 'xrdb -merge ~/.config/x11/Xresources'
-riverctl spawn '/etc/X11/xinit/xinitrc.d/50-systemd-user.sh'
-
 # Use the "logo" key as the primary modifier
 mod="Mod4"
 
@@ -219,7 +196,30 @@ riverctl float-filter-add "float"
 riverctl float-filter-add "popup"
 
 # Set app-ids of views which should use client side decorations
-#riverctl csd-filter-add "gedit"
+#riverctl csd-filter-add "gedito"
+
+# Autostart
+riverctl spawn 'waybar'
+riverctl spawn 'gammastep-indicator -m wayland'
+riverctl spawn 'swaybg -i ~/.config/xmonad/preview/the-neon-shallows-redish.png -o "*"'
+riverctl spawn 'nm-applet --indicator'
+riverctl spawn 'mako'
+riverctl spawn '\
+	swayidle -w \
+	timeout 600 "wlrctl toplevel find firefox state:fullscreen || swaylock -f" \
+	timeout 900 "wlrctl toplevel find firefox state:fullscreen || wlopm --off '"'*'"'" \
+	resume "wlopm --on '"'*'"'" \
+	before-sleep "swaylock -f" \
+	after-resume "wlopm --on '"'*'"'"
+	lock "swaylock -f" \
+	'
+riverctl spawn 'wl-paste -t text --watch clipman store --max-items=30 --unix'
+riverctl spawn '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1'
+#riverctl spawn 'mpd --no-daemon'
+#riverctl spawn 'mpDris2'
+riverctl spawn 'playerctld'
+riverctl spawn 'xrdb -merge ~/.config/x11/Xresources'
+riverctl spawn '/etc/X11/xinit/xinitrc.d/50-systemd-user.sh'
 
 # Set and exec into the default layout generator, rivertile.
 # River will send the process group of the init executable SIGTERM on exit.
