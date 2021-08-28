@@ -5,20 +5,40 @@ _dir=$(xdg-user-dir VIDEOS)
 [ ! -d "${_dir}/Records" ] && mkdir "${_dir}/Records"
 file="${_dir}/Records/${_vid}"
 
+help() {
+        tee -a <<-END
+	usage: $0
+	-a | --audio         => Enable audio recording
+	-s | --selection     => Only record selected portion of the screen
+	-f | --fullscreen    => Record whole screen
+	-h | --help          => Show a list of available options
+	END
+}
+
+test -z "$1" && help && exit 1
+
 while [ "$1" ]; do
         case $1 in
-                -a | audio)
+                -a | --audio)
                         audio="-a"
+
                         shift 1
                         ;;
-                -s | selection)
+                -s | --selection)
                         select="-g $(slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -w 1)"
                         test -z "$select" && exit 1
+
                         shift 1
                         ;;
-                -f | fullscreen)
+                -f | --fullscreen)
                         echo "Recording fullscreen..."
+
                         shift 1
+                        ;;
+                -h | --help)
+                        help
+
+                        exit 0
                         ;;
         esac
 done

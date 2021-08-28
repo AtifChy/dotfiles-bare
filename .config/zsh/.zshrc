@@ -60,14 +60,14 @@ zinit wait lucid light-mode for \
 		zstyle ':completion:*' completer _expand _complete _ignored _approximate
 		zstyle ':completion:*' menu select=2
 		zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+		zstyle ':completion:*:default' select-prompt %SScrolling active: current selection at %p%s
 		zstyle ':completion:*' list-separator '=>'
 		zstyle ':completion::complete:*' use-cache on
 		zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
 		zstyle ':completion:*' group-name ''
 		zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%b%u'
 		zstyle ':completion:*:warnings' format '%U%B%F{red}no match found%f%b%u'
-		zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-		zstyle ':completion:*' ignored-patterns '\['
+		zstyle ':completion:*' ignored-patterns '\[|~'
 		zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 		zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
 		zstyle ':completion:*' insert-tab false
@@ -87,16 +87,7 @@ zinit wait lucid light-mode for \
         atload"_zsh_autosuggest_start" \
         	zsh-users/zsh-autosuggestions \
         trigger-load'!x;!extract' \
-        	OMZP::extract \
-        atload"
-		ZSHZ_DATA=${XDG_CACHE_HOME:-$HOME/.cache}/zshz
-		ZSHZ_ECHO=1
-		ZSHZ_TILDE=1
-		ZSHZ_CASE=smart
-		ZSHZ_TRAILING_SLASH=1
-		ZSHZ_UNCOMMON=1
-  	" \
-        	agkozak/zsh-z
+        	OMZP::extract
 
 # Fallback zsh prompt
 #PROMPT='%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
@@ -106,10 +97,10 @@ PROMPT_EOL_MARK='%B%F{8}↵%f%b'
 
 ## zsh settings
 setopt auto_cd 			# auto cd to given dir if cd command not used
-DIRSTACKSIZE=16 		# cache how many dirs for pushd
-setopt auto_pushd 		# go back to previously visited dirs (e.g. cd -<TAB>)
-setopt pushd_ignore_dups 	# remove duplicates
-setopt pushd_minus 		# last visited dir on top
+#DIRSTACKSIZE=16 		# cache how many dirs for pushd
+#setopt auto_pushd 		# go back to previously visited dirs (e.g. cd -<TAB>)
+#setopt pushd_ignore_dups 	# remove duplicates
+#setopt pushd_minus 		# last visited dir on top
 setopt interactivecomments 	# Ignore lines prefixed with '#'
 setopt extended_history 	# record timestamp of command in HISTFILE
 setopt hist_expire_dups_first 	# delete duplicates first when HISTFILE size exceeds HISTSIZE
@@ -126,6 +117,14 @@ setopt nobeep 			# disable beeping on tab completion
 setopt noflowcontrol 		# disable start/stop characters in shell editor
 setopt correct 			# spelling correction
 #setopt globdots 		# show files beginning with a `.`
+
+# enable native autojump in zsh
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':chpwd:*' recent-dirs-file "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/chpwd-recent-dirs"
+zstyle ':completion:*' recent-dirs-insert always
+alias z=cdr
 
 # History file configuration
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"

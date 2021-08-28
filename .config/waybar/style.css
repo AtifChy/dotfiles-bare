@@ -18,10 +18,21 @@ window#waybar {
   transition-duration: 0.5s;
   font-size: 12px;
   font-weight: bold;
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
 }
 
 window#waybar.hidden {
   opacity: 0.2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 tooltip {
@@ -64,13 +75,13 @@ window#waybar.chromium {
 }
 
 #tags button.occupied {
-  background-color: @blue;
+  background-color: @gray;
   opacity: 0.4;
 }
 
 #workspaces button.focused,
 #tags button.focused {
-  background-color: @blue;
+  background-color: @gray;
   opacity: 1;
   padding: 0 0.4em;
 }
@@ -89,11 +100,6 @@ window#waybar.chromium {
   opacity: 0.9;
 }
 
-#mode {
-  background-color: #64727d;
-  border-bottom: 3px solid #ffffff;
-}
-
 /* Each module */
 #battery,
 #clock,
@@ -109,11 +115,11 @@ window#waybar.chromium {
 #custom-record,
 #tray,
 #backlight,
-#language {
+#language,
+#idle_inhibitor {
   background-color: @darkish;
   color: @whiteish;
-  padding-left: 0.6em;
-  padding-right: 0.6em;
+  padding: 0.2em 0.7em;
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
   margin: 0.2em 0.3em;
 }
@@ -129,7 +135,7 @@ window#waybar.chromium {
 
 @keyframes blinker {
   to {
-    color: @blue;
+    color: @gray;
   }
 }
 
@@ -224,8 +230,8 @@ label:focus {
 }
 
 #idle_inhibitor.activated {
-  background-color: #ecf0f1;
-  color: #2d3436;
+  background-color: @white;
+  color: @darker;
 }
 
 #mpd {

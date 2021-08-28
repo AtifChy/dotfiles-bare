@@ -1,10 +1,8 @@
 #!/bin/sh
-city="Sylhet"
-
 refresh() {
         for _ in 1 2 3 4 5; do
                 if ping -q -c 1 -W 1 8.8.8.8 >/dev/null 2>&1; then
-                        weather="$(curl -s https://wttr.in/${city}?format=%x+%t)" && break
+                        weather="$(curl -s https://wttr.in/?format=%x+%t)" && break
                 else
                         sleep 2s
                 fi
@@ -106,7 +104,7 @@ waybar() {
         if [ -z "$weather" ]; then
                 echo "{\"text\": \" Offline\", \"tooltip\": \"Network connection unavailable.\"}"
         else
-                tooltip="$(curl -s https://wttr.in/${city}?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w | sed 's/-/\\\\n/g')"
+                tooltip="$(curl -s https://wttr.in/?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w | sed 's/-/\\\\n/g')"
                 echo "{\"text\": \"${icon} ${temperature}\", \"tooltip\": \"${tooltip}\"}"
         fi
 

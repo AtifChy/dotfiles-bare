@@ -1,0 +1,90 @@
+#!/bin/sh
+
+# Required softwares: grim, wl-clipboard, slurp, dunst
+
+_img="grim_$(date '+%Y-%m-%d_%H-%M-%S').png"
+_dir=$(xdg-user-dir PICTURES)
+[ ! -d "${_dir}/Screenshots" ] && mkdir "${_dir}/Screenshots"
+file="${_dir}/Screenshots/${_img}"
+
+action=${1:-"full"}
+
+usage() {
+        tee -a <<-END
+	Usage: $0
+	-f, full         => Take fullscreen screenshot
+	-s, select       => Take screenshot of interactively chosen window or rectangle
+	-a, active       =>
+	-w, window       =>
+	-d, shadow       => Add background shadow to screenshots
+	-h, help         => Display all available options\n"
+	END
+}
+
+grab() {
+        slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a50' -w 1
+}
+
+notifyError() {
+        notify-send -u critical -a 'grimshot' -i 'gnome-screenshot' "Failed!" "Failed to capture screenshot."
+        exit 1
+}
+
+no_dec() {
+	jq -r '"\(.rect.x + .current_border_width),\(.rect.y) \(.window_rect.width)x\(.window_rect.height)"'
+}
+
+with_dec() {
+	jq -r '"\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"'
+}
+
+case $action in
+        -s | select)
+                focused=$(grab)
+                test -z "$focused" && notifyError
+                grim -g "$focused" "$file"
+                ;;
+        -a | active)
+                focused=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
+                if [ "$2" = "--noborder" ]; then
+                        geo=$(echo "$focused" | no_dec)
+                else
+                        geo=$(echo "$focused" | with_dec)
+                fi
+                grim -g "$geo" "$file"
+                ;;
+        -w | window)
+		focused=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?)')
+                if [ "$2" = "--noborder" ]; then
+                        geo=$(echo "$focused" | no_dec | grab)
+                else
+                        geo=$(echo "$focused" | with_dec | grab)
+                fi
+                test -z "$geo" && notifyError
+                grim -g "$geo" "$file"
+                ;;
+
+        -f | full)
+                grim "$file"
+                ;;
+        -h | help)
+                usage
+                exit 0
+                ;;
+esac
+
+if [ "$2" = "-d" ] || [ "$2" = "shadow" ]; then
+        convert "$file" \( +clone -background black -shadow 75x10+0+0 \) \
+                +swap -bordercolor none -border 10 -background none -layers merge +repage "$file"
+fi
+
+wl-copy --type image/png <"$file"
+
+notify-send -u low -a 'grimshot' -i "$file" "Screenshot captured!" "Screenshot saved as <i>${file##*/}</i>"
+
+#ACTION=$(dunstify -u low -A "default,Open" -I "$file" "grim" "Screenshot saved!")
+#
+#case "$ACTION" in
+#        "default") handlr open "$file" ;;
+#        "2") rm "$file" ;;
+#esac

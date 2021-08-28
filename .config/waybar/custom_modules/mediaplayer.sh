@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pkill -9 playerctl
+
 playerctl metadata -F -f '{{ playerName }} {{ status }} {{ title }}' |
         while read -r player state title; do
                 title=$(echo "$title" | sed 's/"/\\"/g')

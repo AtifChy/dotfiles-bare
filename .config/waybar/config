@@ -3,23 +3,31 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     // "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "modules-left": ["clock", "custom/weather", "custom/media" ,"idle_inhibitor"],
-    "modules-center": ["river/tags", "sway/window"],
+    "modules-left": ["clock", "custom/weather", "idle_inhibitor", "sway/mode", "custom/media"],
+    "modules-center": ["river/tags", "sway/workspaces"],
     "modules-right": ["custom/record" ,"custom/pacman", "cpu", "memory", "pulseaudio", "tray"],
     "sway/workspaces": {
-        "disable-scroll": true,
+        "disable-scroll": false,
         "all-outputs": true,
-        "format": "{name}: {icon}",
+        "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "urgent": "",
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+	    "10": "十",
             "focused": "",
+            "urgent": "",
             "default": ""
-        }
+        },
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
     },
     "river/tags": {
         "num-tags": 9,
@@ -33,9 +41,6 @@
             "locked": "",
             "unlocked": ""
         }
-    },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
     },
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",

@@ -1,0 +1,11 @@
+#!/bin/sh
+power="$(printf ' Lock\n Logout\n鈴 Suspend\n Hibernate\n勒 Reboot\n Shutdown\n' | wofi --dmenu)"
+
+case "$power" in
+        *Lock) loginctl lock-session "$XDG_SESSION_ID" ;;
+        *Logout) loginctl terminate-session "$XDG_SESSION_ID" ;;
+        *Suspend) systemctl suspend ;;
+        *Hibernate) systemctl hibernate ;;
+        *Reboot) systemctl reboot ;;
+        *Shutdown) systemctl poweroff ;;
+esac

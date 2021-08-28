@@ -126,7 +126,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format ="<span size='larger'><b>%s</b></span>\n%b"
+    format ="<span size='x-large' font_desc='JetBrains Mono 8' weight='bold' foreground='#d8dee9'>%s</span>\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".

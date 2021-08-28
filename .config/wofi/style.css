@@ -20,7 +20,7 @@
 }
 
 #entry:selected {
-  border: 1px solid @bright-blue;
+  border: 1px solid @blue;
   background-color: @darkish;
 }
 
@@ -29,7 +29,7 @@
 }
 
 #text:selected {
-  color: @bright-blue;
+  color: @blue;
 }
 
 #window {
