@@ -16,18 +16,23 @@ check wl-paste
 _grab="$(slurp -p -b '#00000000' 2>/dev/null)"
 
 [ "${_grab}" ] || {
-        notify-send -u normal -a colorpicker -i gcolor3 'Color 🎨' 'Failed to pick color. 😥'
+        notify-send -u normal -a colorpicker -i gcolor3 'Warning ☠️' 'Failed to pick color. 😥'
         exit 1
 }
 
-grim -g "${_grab}" -t ppm - |
-        convert - -format '%[pixel:p{0,0}]' txt:- |
-        sed '1d' | cut -d\  -f4 |
-        tr '[:upper:]' '[:lower:]' |
-        wl-copy -n
+pick() {
+        grim -g "${_grab}" -t ppm - |
+                convert - -format '%[pixel:p{0,0}]' txt:- |
+                sed '1d' | awk '{print $(NF-1),"\t",$NF}'
+}
+
+pick | cut -d\  -f1 | tr '[:upper:]' '[:lower:]' | wl-copy -n
+
+description=$(pick | cut -d\  -f3)
+description=${description#s}
 
 _color=$(wl-paste)
 _tmp="/tmp/color.ppm"
 
 convert -size 80x80 xc:"${_color}" "${_tmp}"
-notify-send -u low -a colorpicker -i "${_tmp}" 'Color 🎨' "${_color}"
+notify-send -u low -a colorpicker -i "${_tmp}" "🎨 ${_color}" "${description}"

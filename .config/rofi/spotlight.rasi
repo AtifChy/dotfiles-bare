@@ -1,0 +1,86 @@
+configuration {
+	display-drun : "";
+	lines : 15;
+	scroll-method: 1;
+	location: 0;
+}
+
+* {
+  background-color: #1e2127;
+  border-color: #2c313a;
+  text-color: #8ca0aa;
+}
+
+window {
+	width: 648px;
+	border: 1px;
+	children: [mainbox];
+}
+
+inputbar {
+  children: [prompt,entry,num-filtered-rows,textbox-num-sep,num-rows];
+}
+
+prompt {
+  font: "JetBrainsMono Nerd Font 16";
+  padding: 15px 0 24px 16px;
+}
+
+textbox {
+  background-color: #2c313a;
+  border-color: #1e2127;
+  padding: 8px 16px;
+}
+
+entry {
+  font: "Clear Sans 18";
+  padding: 12px 16px;
+  blink: true;
+  placeholder-color: #545862;
+  placeholder: "Search";
+}
+
+listview {
+  cycle: false;
+  margin: 0px 10px 10px 10px;
+  scrollbar: false;
+}
+
+scrollbar {
+	background-color: #1e2127;
+	handle-color: #2c313a;
+}
+
+element {
+  padding: 10px;
+}
+
+element-icon {
+  size: 24px;
+}
+
+element-text {
+  vertical-align: 0.5;
+}
+
+element selected {
+  background-color: #2c313a;
+}
+num-filtered-rows {
+    vertical-align: 0.5;
+    expand:     false;
+    text-color: #545862;
+}
+num-rows {
+    padding: 0px 16px 0px 0px;
+    vertical-align: 0.5;
+    expand:     false;
+    text-color: #545862;
+}
+textbox-num-sep {
+    vertical-align: 0.5;
+    expand:     false;
+    str:        "/";
+    text-color: #545862;
+}
+/* vim:ft=css

@@ -83,7 +83,7 @@
         "format": " {:%I:%M%p}",
 	"format-alt": " {:%e-%b-%Y}",
         "tooltip-format": "<big>{:%Y %B}</big>\n{calendar}",
-        "today-format": "<b>{}</b>"
+        "today-format": "<u><b>{}</b></u>"
     },
     "cpu": {
         "interval": "1",

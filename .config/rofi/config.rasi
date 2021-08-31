@@ -1,67 +1,8 @@
 configuration {
-    font: "JetBrainsMono Nerd Font, Bold 9";
-    icon-theme: "Papirus-Dark";
-    cycle: false;
+    font: "JetBrainsMono Nerd Font, Medium 10";
     matching: "normal";
-    display-drun: "";
-    drun-display-format: "{name}";
-}
-
-* {
-    background-color: #1e2127;
-    text-color: #c8ccd4;
-    border-color: #c8ccd4;
-}
-
-#window {
-    anchor: north;
-    location: north;
-    width: 100%;
-    padding: 4px;
-    children: [ horibox ];
-}
-
-#horibox {
-    padding: 3px;
-    margin-bottom: 8px;
-    orientation: horizontal;
-    children: [ prompt, entry, listview ];
-}
-
-#listview {
-    expand: true;
-    layout: horizontal;
-    spacing: 5px;
-    lines: 100;
-}
-
-#entry {
-    expand: false;
-    width: 10em;
-    margin: 0px 4px 0px 0px;
-    padding: 5px;
-    background-color: #2c313a;
-    placeholder: " Search";
-    placeholder-color: #636d83;
-}
-
-#element {
-    horizontal-align: 1;
-    border-radius: 5px;
-    padding: 5px 8px 5px 8px;
-    margin: 0px 4px;
-}
-
-#element selected {
-    border: 1px solid;
-    border-color: #51aeed;
-    background-color: #2c313a;
-    text-color: #51aeed;
-}
-
-#element-icon {
-    size: 16px;
-    border: 0px;
+    fixed-num-lines: false;
+    theme: "./spotlight.rasi";
 }
 
 /* vim:ft=css

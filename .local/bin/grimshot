@@ -14,19 +14,19 @@ usage() {
 	Usage: $0
 	-f, full         => Take fullscreen screenshot
 	-s, select       => Take screenshot of interactively chosen window or rectangle
-	-a, active       =>
-	-w, window       =>
+	-a, active       => Take screenshot of active window
+	-w, window       => Universal option
 	-d, shadow       => Add background shadow to screenshots
 	-h, help         => Display all available options\n"
 	END
 }
 
 grab() {
-        slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a50' -w 1
+        slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a50' -w 1 "$@"
 }
 
 notifyError() {
-        notify-send -u critical -a 'grimshot' -i 'gnome-screenshot' "Failed!" "Failed to capture screenshot."
+        notify-send -u critical -a grimshot -i gnome-screenshot "Failed!" "Failed to capture screenshot."
         exit 1
 }
 
@@ -40,9 +40,9 @@ with_dec() {
 
 case $action in
         -s | select)
-                focused=$(grab)
-                test -z "$focused" && notifyError
-                grim -g "$focused" "$file"
+                geo=$(grab)
+                test -z "$geo" && notifyError
+		select=yes
                 ;;
         -a | active)
                 focused=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
@@ -51,7 +51,7 @@ case $action in
                 else
                         geo=$(echo "$focused" | with_dec)
                 fi
-                grim -g "$geo" "$file"
+		active=yes
                 ;;
         -w | window)
 		focused=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?)')
@@ -61,17 +61,23 @@ case $action in
                         geo=$(echo "$focused" | with_dec | grab)
                 fi
                 test -z "$geo" && notifyError
-                grim -g "$geo" "$file"
+		window=yes
                 ;;
 
         -f | full)
-                grim "$file"
+		full=yes
                 ;;
         -h | help)
                 usage
                 exit 0
                 ;;
 esac
+
+if [ "$select" ] || [ "$action" ] || [ "$window" ]; then
+	grim -g "$geo" "$file"
+else
+	grim "$file"
+fi
 
 if [ "$2" = "-d" ] || [ "$2" = "shadow" ]; then
         convert "$file" \( +clone -background black -shadow 75x10+0+0 \) \

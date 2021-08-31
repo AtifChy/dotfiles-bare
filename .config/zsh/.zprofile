@@ -68,16 +68,16 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 [ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
 
 # startx
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 2 ]; then
 	export MOZ_X11_EGL=1
         exec sx 2>"$XDG_CACHE_HOME"/x11/xsession-errors
-elif [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 2 ]; then
+elif [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
         export MOZ_ENABLE_WAYLAND=1
         export MOZ_DBUS_REMOTE=1
-        export GDK_BACKEND=wayland
-	export QT_QPA_PLATFORM=wayland-egl
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-	exec river 2>"$XDG_CACHE_HOME"/wl-session.log
+        #export GDK_BACKEND=wayland
+	#export QT_QPA_PLATFORM=wayland-egl
+        #export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+	exec sway 2>"$XDG_CACHE_HOME"/wl-session.log
 fi
 
 #exec startx "$XINITRC" >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1

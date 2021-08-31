@@ -86,17 +86,13 @@ xmobar() {
         yellow=$2
         white=$3
 
-        while :; do
-                refresh
-                if [ -z "$weather" ]; then
-                        printf 'Offline\n'
-                        sleep 5m
-                else
-                        printf '<fc=%s,%s>%s</fc><fc=%s,%s> %s</fc>\n' \
-                                "$yellow" "$background" "$icon" "$white" "$background" "$temperature"
-                        sleep 15m
-                fi
-        done
+        refresh
+        if [ -z "$weather" ]; then
+                echo ' Offline'
+        else
+                printf '<fc=%s,%s>%s</fc><fc=%s,%s> %s</fc>\n' \
+                        "$yellow" "$background" "$icon" "$white" "$background" "$temperature"
+        fi
 }
 
 waybar() {
@@ -104,7 +100,10 @@ waybar() {
         if [ -z "$weather" ]; then
                 echo "{\"text\": \" Offline\", \"tooltip\": \"Network connection unavailable.\"}"
         else
-                tooltip="$(curl -s https://wttr.in/?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w | sed 's/-/\\\\n/g')"
+                tooltip="$(
+                        curl -s https://wttr.in/?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w |
+                                sed 's/-/\\\\n/g'
+                )"
                 echo "{\"text\": \"${icon} ${temperature}\", \"tooltip\": \"${tooltip}\"}"
         fi
 
