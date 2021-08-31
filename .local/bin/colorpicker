@@ -23,12 +23,12 @@ _grab="$(slurp -p -b '#00000000' 2>/dev/null)"
 pick() {
         grim -g "${_grab}" -t ppm - |
                 convert - -format '%[pixel:p{0,0}]' txt:- |
-                sed '1d' | awk '{print $(NF-1),"\t",$NF}'
+                awk 'NR>1 {print $(NF-1),$NF}'
 }
 
 pick | cut -d\  -f1 | tr '[:upper:]' '[:lower:]' | wl-copy -n
 
-description=$(pick | cut -d\  -f3)
+description=$(pick | cut -d\  -f2)
 description=${description#s}
 
 _color=$(wl-paste)
