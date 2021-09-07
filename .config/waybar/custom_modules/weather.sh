@@ -11,7 +11,7 @@ refresh() {
         [ -z "$weather" ] && return
 
         condition=${weather% *}
-	temperature=${weather##* }
+        temperature=${weather##* }
         temperature=${weather##*+}
 
         if [ "${weather%;*}" = "Unknown location" ]; then
@@ -82,9 +82,9 @@ refresh() {
 }
 
 xmobar() {
-	set -f
+        set -f
         set -- $(xrdb -q | grep -E '*.color0:|*.color3:|*.color7:' | cut -f2 | tr '\n' ' ')
-	set +f
+        set +f
 
         background=${1}:5
         yellow=$2
