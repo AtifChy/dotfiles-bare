@@ -6,8 +6,11 @@ export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'
 export PF_SEP=' '
 
 # Apps
-export EDITOR='nvim'
-export TERMINAL='st'
+export EDITOR=nvim
+export TERMINAL=st
+
+# Bat theme
+BAT_THEME=base16
 
 # Firefox
 export MOZ_WEBRENDER=1

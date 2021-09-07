@@ -158,7 +158,9 @@
         },
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
 	"on-click-middle": "pavucontrol",
-        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+	"on-scroll-up": "$HOME/.config/waybar/custom_modules/volume.sh up",
+	"on-scroll-down": "$HOME/.config/waybar/custom_modules/volume.sh down"
     },
     "custom/media": {
         "format": "{icon} {}",

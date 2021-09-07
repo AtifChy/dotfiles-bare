@@ -17,6 +17,16 @@ help() {
 
 test -z "$1" && help && exit 1
 
+grab() {
+        slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a30' -w 1
+}
+
+get_geo() {
+        geo=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | "\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"' | grab)
+        test -z "$geo" && exit 1
+        select="-g $geo"
+}
+
 while [ "$1" ]; do
         case $1 in
                 -a | --audio)
@@ -25,8 +35,7 @@ while [ "$1" ]; do
                         shift 1
                         ;;
                 -s | --selection)
-                        select="-g $(slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -w 1)"
-                        test -z "$select" && exit 1
+                        get_geo
 
                         shift 1
                         ;;
