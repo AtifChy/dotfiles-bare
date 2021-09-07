@@ -7,10 +7,12 @@ refresh() {
                         sleep 2s
                 fi
         done
+
         [ -z "$weather" ] && return
 
         condition=${weather% *}
-        temperature=${weather##* }
+	temperature=${weather##* }
+        temperature=${weather##*+}
 
         if [ "${weather%;*}" = "Unknown location" ]; then
                 unset condition
@@ -80,7 +82,9 @@ refresh() {
 }
 
 xmobar() {
+	set -f
         set -- $(xrdb -q | grep -E '*.color0:|*.color3:|*.color7:' | cut -f2 | tr '\n' ' ')
+	set +f
 
         background=${1}:5
         yellow=$2
@@ -102,7 +106,7 @@ waybar() {
         else
                 tooltip="$(
                         curl -s https://wttr.in/?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w |
-                                sed 's/-/\\\\n/g'
+                                sed -e 's/-/\\\\n/g' -e 's/+//g'
                 )"
                 echo "{\"text\": \"${icon} ${temperature}\", \"tooltip\": \"${tooltip}\"}"
         fi

@@ -86,7 +86,7 @@ fi
 
 wl-copy --type image/png <"$file"
 
-notify-send -u low -a 'grimshot' -i "$file" "Screenshot captured!" "Screenshot saved as <i>${file##*/}</i>"
+notify-send -u low -a grimshot -i "$file" "Screenshot captured!" "Screenshot saved as <i>${file##*/}</i>"
 
 #ACTION=$(dunstify -u low -A "default,Open" -I "$file" "grim" "Screenshot saved!")
 #

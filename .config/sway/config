@@ -32,7 +32,7 @@ exec autotiling
 exec xrdb -merge ~/.config/x11/Xresources
 exec nm-applet --indicator
 exec gammastep-indicator -m wayland
-exec wl-paste -t text --watch clipman store --max-items=30 --unix
+exec wl-paste -t text --watch clipman store --max-items=30
 exec playerctld
 exec mako
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -43,6 +43,7 @@ gaps outer 0
 seat seat0 xcursor_theme volantes_cursors 24
 
 for_window [title=".*"] border normal
+for_window [app_id="firefox"] inhibit_idle fullscreen
 
 input * xkb_numlock enabled
 
@@ -220,6 +221,11 @@ exec swayidle -w \
 
     # active
     bindsym Ctrl+Shift+print exec grimshot -a
+#
+# Mako:
+#
+    # show notification history
+    bindsym Ctrl+grave exec makoctl restore
 #
 # Resizing containers:
 #

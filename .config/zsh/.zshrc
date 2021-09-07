@@ -11,11 +11,11 @@ ZINIT[HOME_DIR]=${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zinit
 ZINIT[ZCOMPDUMP_PATH]=${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump-$ZSH_VERSION
 
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-    	print -P "%F{4}▓▒░ %F{3}Installing %F{4}DHARMA%F{3} Initiative Plugin Manager (%F{4}zdharma/zinit%F{3})…%f"
-    	mkdir -p "${ZINIT[HOME_DIR]}" && chmod g-rwX "${ZINIT[HOME_DIR]}"
-    	git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
-        	print -P "%F{4}▓▒░ %F{34}Installation successful.%f%b" ||
-        	print -P "%F{1}▓▒░ The clone has failed.%f%b"
+	print -P "%F{4}▓▒░ %F{3}Installing %F{4}DHARMA%F{3} Initiative Plugin Manager (%F{4}zdharma/zinit%F{3})…%f"
+	mkdir -p "${ZINIT[HOME_DIR]}" && chmod g-rwX "${ZINIT[HOME_DIR]}"
+	git clone https://github.com/zdharma/zinit "${ZINIT[HOME_DIR]}/bin" && {
+		print -P "%F{4}▓▒░ %F{34}Installation successful.%f%b" ||
+		print -P "%F{1}▓▒░ The clone has failed.%f%b"
 	}
 fi
 
@@ -39,21 +39,21 @@ zinit lucid light-mode for \
 zinit wait lucid light-mode for \
         atinit"
 		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=8,fg=2,bold'
-  		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=8,fg=9,bold'
-  	" \
+		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=8,fg=9,bold'
+	" \
         atload'
-  		bindkey "${key[Up]}"   history-substring-search-up
-  	  	bindkey "${key[Down]}" history-substring-search-down
-  	' \
-        	zsh-users/zsh-history-substring-search \
+		bindkey "${key[Up]}"   history-substring-search-up
+		bindkey "${key[Down]}" history-substring-search-down
+	' \
+		zsh-users/zsh-history-substring-search \
         atinit"
-  	  	typeset -gA FAST_HIGHLIGHT
-  	  	FAST_HIGHLIGHT[git-cmsg-len]=100
-  	  	ZINIT[COMPINIT_OPTS]=-C
-  	  	zicompinit
-  	  	zicdreplay
-  	" \
-        	zdharma/fast-syntax-highlighting \
+		typeset -gA FAST_HIGHLIGHT
+		FAST_HIGHLIGHT[git-cmsg-len]=100
+		ZINIT[COMPINIT_OPTS]=-C
+		zicompinit
+		zicdreplay
+	" \
+		zdharma/fast-syntax-highlighting \
         blockf atpull'zinit creinstall -q .' \
         atinit"
 		zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -72,22 +72,22 @@ zinit wait lucid light-mode for \
 		zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
 		zstyle ':completion:*' insert-tab false
 		TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
-  	" \
+	" \
         atload'
 		eval "$(dircolors)"
 		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
 		zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
-  	' \
-        	zsh-users/zsh-completions \
+	' \
+		zsh-users/zsh-completions \
         atinit"
-  		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  		ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-  		ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman -S*|pacman -S*|paru -S*|yay -S*|\)\*'
-  	" \
+		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+		ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+		ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman -S*|pacman -S*|paru -S*|yay -S*|\)\*'
+	" \
         atload"_zsh_autosuggest_start" \
-        	zsh-users/zsh-autosuggestions \
+		zsh-users/zsh-autosuggestions \
         trigger-load'!x;!extract' \
-        	OMZP::extract
+		OMZP::extract
 
 # Fallback zsh prompt
 #PROMPT='%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
@@ -96,27 +96,27 @@ zinit wait lucid light-mode for \
 PROMPT_EOL_MARK='%B%F{8}↵%f%b'
 
 ## zsh settings
-setopt auto_cd 			# auto cd to given dir if cd command not used
-#DIRSTACKSIZE=16 		# cache how many dirs for pushd
-#setopt auto_pushd 		# go back to previously visited dirs (e.g. cd -<TAB>)
-#setopt pushd_ignore_dups 	# remove duplicates
-#setopt pushd_minus 		# last visited dir on top
-setopt interactivecomments 	# Ignore lines prefixed with '#'
-setopt extended_history 	# record timestamp of command in HISTFILE
-setopt hist_expire_dups_first 	# delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups 	# Don't record an entry that was just recorded again
-setopt hist_find_no_dups 	# Do not display a line previously found
-setopt hist_ignore_space 	# ignore commands that start with space
-setopt hist_verify 		# show command with history expansion to user before running it
-setopt inc_append_history 	# add commands to HISTFILE in order of execution
-setopt share_history 		# shell share history with other tabs
-setopt always_to_end 		# cursor moved to the end in full completion
-setopt complete_in_word 	# allow completion from within a word/phrase
-setopt automenu 		# show completion menu on a successive tab press
-setopt nobeep 			# disable beeping on tab completion
-setopt noflowcontrol 		# disable start/stop characters in shell editor
-setopt correct 			# spelling correction
-#setopt globdots 		# show files beginning with a `.`
+setopt auto_cd			# auto cd to given dir if cd command not used
+#DIRSTACKSIZE=16		# cache how many dirs for pushd
+#setopt auto_pushd		# go back to previously visited dirs (e.g. cd -<TAB>)
+#setopt pushd_ignore_dups	# remove duplicates
+#setopt pushd_minus		# last visited dir on top
+setopt interactivecomments	# Ignore lines prefixed with '#'
+setopt extended_history		# record timestamp of command in HISTFILE
+setopt hist_expire_dups_first	# delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups		# Don't record an entry that was just recorded again
+setopt hist_find_no_dups	# Do not display a line previously found
+setopt hist_ignore_space	# ignore commands that start with space
+setopt hist_verify		# show command with history expansion to user before running it
+setopt inc_append_history	# add commands to HISTFILE in order of execution
+setopt share_history		# shell share history with other tabs
+setopt always_to_end		# cursor moved to the end in full completion
+setopt complete_in_word		# allow completion from within a word/phrase
+setopt automenu			# show completion menu on a successive tab press
+setopt nobeep			# disable beeping on tab completion
+setopt noflowcontrol		# disable start/stop characters in shell editor
+setopt correct			# spelling correction
+#setopt globdots		# show files beginning with a `.`
 
 # enable native autojump in zsh
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook

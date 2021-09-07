@@ -6,11 +6,11 @@ local wezterm = require 'wezterm';
 -- end
 
 return {
-    front_end = "OpenGL",
+--    front_end = "OpenGL",
     enable_wayland = true,
-    check_for_updates = false,
-    window_close_confirmation = "NeverPrompt",
-    font = wezterm.font("JetBrainsMono Nerd Font", {weight="Light"}),
+--    check_for_updates = false,
+--    window_close_confirmation = "NeverPrompt",
+    font = wezterm.font("JetBrainsMono Nerd Font"),
 --     font_rules = {
 --         {italic = true, font = font_with_fallback("JetBrainsMono Nerd Font", {italic = true})},
 --         {
@@ -24,16 +24,16 @@ return {
 --         }, {intensity = "Half", font = font_with_fallback("JetBrainsMono Nerd Font")}
 --     },
     font_size = 10,
-    font_shaper = "Harfbuzz",
-    line_height = 1.0,
-    freetype_load_target = "HorizontalLcd",
-    freetype_render_target = "Normal",
-    enable_tab_bar = true,
+--    font_shaper = "Harfbuzz",
+--    line_height = 1.0,
+--    freetype_load_target = "HorizontalLcd",
+--    freetype_render_target = "Normal",
+--    enable_tab_bar = true,
     hide_tab_bar_if_only_one_tab = true,
     window_padding = {left = 4, right = 4, top = 4, bottom = 4},
-    default_cursor_style = "BlinkingBlock",
-    cursor_blink_rate = 800,
-    force_reverse_video_cursor = true,
+--    default_cursor_style = "BlinkingBlock",
+--    cursor_blink_rate = 800,
+--    force_reverse_video_cursor = true,
     bold_brightens_ansi_colors = false,
     color_scheme = "OneDark",
     color_schemes = {

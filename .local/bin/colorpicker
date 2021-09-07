@@ -13,26 +13,34 @@ check slurp
 check wl-copy
 check wl-paste
 
-_grab="$(slurp -p -b '#00000000' 2>/dev/null)"
+grab=$(slurp -p -b '#00000000' 2>/dev/null)
 
-[ "${_grab}" ] || {
-        notify-send -u normal -a colorpicker -i gcolor3 'Warning ☠️' 'Failed to pick color. 😥'
+[ "$grab" ] || {
+        notify-send -u normal -a colorpicker -i gcolor3 'Warning ☠️' 'Failed to pick color 😥'
         exit 1
 }
 
 pick() {
-        grim -g "${_grab}" -t ppm - |
+        grim -g "$grab" -t ppm - |
                 convert - -format '%[pixel:p{0,0}]' txt:- |
-                awk 'NR>1 {print $(NF-1),$NF}'
+                awk 'NR>1 {print $(NF-1),$NF}' |
+                tr '[:upper:]' '[:lower:]'
 }
 
-pick | cut -d\  -f1 | tr '[:upper:]' '[:lower:]' | wl-copy -n
+color=$(pick)
 
-description=$(pick | cut -d\  -f2)
-description=${description#s}
+# get hex & rgb value
+hex=${color%% *}
+rgb=${color##*s}
 
-_color=$(wl-paste)
-_tmp="/tmp/color.ppm"
+# copy hex value to clipboard
+wl-copy -n <<-EOF
+	$hex
+EOF
 
-convert -size 80x80 xc:"${_color}" "${_tmp}"
-notify-send -u low -a colorpicker -i "${_tmp}" "🎨 ${_color}" "${description}"
+# create temporary icon for notification
+tmp="/tmp/color.ppm"
+convert -size 80x80 xc:"$hex" "$tmp"
+
+# send notification
+notify-send -u low -a colorpicker -i "$tmp" "🎨 $hex" "$rgb"
