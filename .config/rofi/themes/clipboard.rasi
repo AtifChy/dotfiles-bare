@@ -9,7 +9,6 @@ configuration {
 	}
 	disable-history: true;
 	sidebar-mode: true;
-	lines: 12;
 }
 
 @theme "/dev/null"

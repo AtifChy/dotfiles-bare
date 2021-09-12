@@ -4,7 +4,7 @@ configuration {
     	application-fallback-icon: "application-default-icon";
     	scroll-method: 1;
     	/* fixed-num-lines: false; */
-    	theme: "themes/prompt.rasi";
+    	theme: "themes/clipboard.rasi";
 }
 
 /* vim:ft=css

@@ -73,7 +73,7 @@ case $action in
                 ;;
 esac
 
-if [ "$select" ] || [ "$action" ] || [ "$window" ]; then
+if [ "$select" ] || [ "$window" ]; then
 	grim -g "$geo" "$file"
 else
 	grim "$file"

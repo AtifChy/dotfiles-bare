@@ -20,7 +20,7 @@ set $term st
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-set $menu rofi -show drun
+set $menu rofi -show drun -theme themes/prompt.rasi
 set $clip rofi -show clipmenu -theme themes/clipboard.rasi
 
 font pango:JetBrains Mono Medium 10

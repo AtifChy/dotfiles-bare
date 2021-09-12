@@ -1,5 +1,5 @@
 [Added Associations]
-application/pdf=firefox.desktop;
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 application/x-extension-htm=firefox.desktop;
 application/x-extension-html=firefox.desktop;
 application/x-extension-shtml=firefox.desktop;
@@ -31,3 +31,5 @@ x-scheme-handler/chrome=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/terminal=st.desktop;
+applications/pdf=org.pwmt.zathura-pdf-poppler.desktop
+application/pdf=org.pwmt.zathura.desktop

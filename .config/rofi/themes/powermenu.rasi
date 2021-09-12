@@ -1,0 +1,98 @@
+configuration {
+	font: "JetBrainsMono Nerd Font 14";
+	show-icons: false;
+    	disable-history: true;
+	sidebar-mode: false;
+}
+
+@import "styles/colorschemes/onedark.rasi"
+
+window {
+    background-color:               @background;
+    text-color:                     @foreground;
+    border-color:                   @border;
+    border:                         1px 0;
+    width:                          100%;
+    location:                       center;
+}
+
+prompt {
+	enabled: 						true;
+	background-color: 				@background-alt;
+	text-color: 					@foreground;
+	padding: 2% 1% 2% 0%;
+	border-radius: 0 25px 25px 0;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"System | ";
+	background-color: 				@background-alt;
+	text-color: 					@foreground;
+	padding: 2% 0% 2% 1%;
+	border-radius: 25px 0 0 25px;
+}
+
+inputbar {
+    children: [ textbox-prompt-colon, prompt ];
+    background-color:               @background;
+    text-color:                     @foreground;
+    expand:                         false;
+    position:                       center;
+    spacing: 0;
+}
+
+listview {
+    background-color:               @background;
+    margin:                         0%;
+    spacing:                        2%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         horizontal;
+}
+
+mainbox {
+    background-color:               @background;
+    children:                       [ inputbar, listview ];
+    spacing:                        5%;
+    padding:                        5% 10.5% 5%;
+}
+
+element {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    orientation:                    horizontal;
+    border-radius:                  100%;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    font: "JetBrainsMono Nerd Font 64";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         5% 4%;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+}
+
+element selected {
+    background-color:               @border;
+    text-color:                     @foreground;
+    border: 2px;
+    border-color: @selected;
+}
+
+element selected.urgent {
+    text-color:               @urgent;
+}
+
+element selected.active {
+    text-color:                          @active;
+}
+/* vim:ft=css

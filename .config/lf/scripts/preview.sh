@@ -31,78 +31,76 @@ default_x="1920"
 #default_y="1080"
 
 case "$file" in
-*.7z | *.a | *.ace | *.alz | *.arc | \
-        *.arj | *.bz | *.bz2 | *.cab | \
-        *.cpio | *.deb | *.gz | *.iso | \
-        *.jar | *.lha | *.lrz | *.lz | \
-        *.lzh | *.lzma | *.lzo | *.rar | \
-        *.rpm | *.rz | *.t7z | *.tar | *.tbz | \
-        *.tbz2 | *.tgz | *.tlz | *.txz | \
-        *.tZ | *.tzo | *.war | *.xz | *.Z | \
-        *.zip | *.zst)
-        bsdtar --list --file "$file"
-        exit 0
-        ;;
-*.svg)
-        if [ -n "$FIFO_UEBERZUG" ]; then
-                cache="$(hash "$file").jpg"
-                cache "$cache"
-                convert -- "$file" "$cache"
-                draw "$cache"
-        fi
-        ;;
+        *.7z | *.a | *.ace | *.alz | *.arc | \
+                *.arj | *.bz | *.bz2 | *.cab | \
+                *.cpio | *.deb | *.gz | *.iso | \
+                *.jar | *.lha | *.lrz | *.lz | \
+                *.lzh | *.lzma | *.lzo | *.rar | \
+                *.rpm | *.rz | *.t7z | *.tar | *.tbz | \
+                *.tbz2 | *.tgz | *.tlz | *.txz | \
+                *.tZ | *.tzo | *.war | *.xz | *.Z | \
+                *.zip | *.zst)
+                bsdtar --list --file "$file"
+                exit 0
+                ;;
+        *.svg)
+                if [ -n "$FIFO_UEBERZUG" ]; then
+                        cache="$(hash "$file").jpg"
+                        cache "$cache"
+                        convert -- "$file" "$cache"
+                        draw "$cache"
+                fi
+                ;;
 esac
 
 case "$(file -Lb --mime-type -- "$file")" in
-text/* | application/json)
-        bat --style plain --theme base16 --color always "$file"
-        ;;
-*/pdf)
-        if [ -n "$FIFO_UEBERZUG" ]; then
-                cache="$(hash "$file").jpg"
-                cache "$cache"
-                pdftoppm -f 1 -l 1 \
-                        -scale-to-x "$default_x" \
-                        -scale-to-y -1 \
-                        -singlefile \
-                        -jpeg \
-                        -- "$file" "$cache"
-                draw "$cache"
-        else
-                pdftotext "$file" -
-        fi
-        ;;
-image/*)
-        if [ -n "$FIFO_UEBERZUG" ]; then
-                orientation="$(identify -format '%[EXIF:Orientation]\n' -- "$file")"
-                if [ -n "$orientation" ] && [ "$orientation" != 1 ]; then
+        text/* | application/json)
+                bat --style plain --theme base16 --color always "$file"
+                ;;
+        */pdf)
+                if [ -n "$FIFO_UEBERZUG" ]; then
+                        cache="$(hash "$file")"
+                        cache "${cache}.jpg"
+                        pdftoppm -f 1 -l 1 \
+                                -singlefile \
+                                -jpeg \
+                                -- "$file" "$cache"
+                        draw "${cache}.jpg"
+                else
+                        pdftotext "$file" -
+                fi
+                ;;
+        image/*)
+                if [ -n "$FIFO_UEBERZUG" ]; then
+                        orientation="$(identify -format '%[EXIF:Orientation]\n' -- "$file")"
+                        if [ -n "$orientation" ] && [ "$orientation" != 1 ]; then
+                                cache="$(hash "$file").jpg"
+                                cache "$cache"
+                                convert -- "$file" -auto-orient "$cache"
+                                draw "$cache"
+                        else
+                                draw "$file"
+                        fi
+                else
+                        chafa --fill=block --symbols=block "$file"
+                fi
+                ;;
+        video/*)
+                if [ -n "$FIFO_UEBERZUG" ]; then
                         cache="$(hash "$file").jpg"
                         cache "$cache"
-                        convert -- "$file" -auto-orient "$cache"
+                        ffmpegthumbnailer -i "$file" -o "$cache" -s 0
                         draw "$cache"
                 else
-                        draw "$file"
+                        mediainfo "$file"
                 fi
-        else
-                chafa --fill=block --symbols=block "$file"
-        fi
-        ;;
-video/*)
-        if [ -n "$FIFO_UEBERZUG" ]; then
-                cache="$(hash "$file").jpg"
-                cache "$cache"
-                ffmpegthumbnailer -i "$file" -o "$cache" -s 0
-                draw "$cache"
-        else
+                ;;
+        audio/*)
                 mediainfo "$file"
-        fi
-        ;;
-audio/*)
-        mediainfo "$file"
-        ;;
-*)
-        file -Lb --mime-type -- "$file"
-        ;;
+                ;;
+        *)
+                file -Lb --mime-type -- "$file"
+                ;;
 esac
 
 exit 0

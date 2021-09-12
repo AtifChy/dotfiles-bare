@@ -95,6 +95,11 @@ element alternate.urgent {
 	text-color: @urgent;
 }
 
+element normal.active,
+element alternate.active {
+	text-color: @active;
+}
+
 element selected {
 	background-color: @border;
 }
@@ -105,7 +110,8 @@ element selected.urgent {
 }
 
 element selected.active {
-	text-color: @active;
+	background-color: @active;
+	text-color: @background-alt;
 }
 
 /*

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+lock=''
+logout=''
+suspend=''
+hibernate=''
+reboot=''
+poweroff=''
+
+up=$(uptime -p)
+
+options=$(
+        echo "$lock\n$logout\n$suspend\n$hibernate\n$reboot\n$poweroff" |
+                rofi -dmenu -a 4 -u 5 -theme themes/powermenu.rasi -p "uptime: ${up#up }"
+)
+
+case $options in
+        "$lock") loginctl lock-session "$XDG_SESSION_ID" ;;
+        "$logout") loginctl terminate-session "$XDG_SESSION_ID" ;;
+        "$suspend") systemctl suspend ;;
+        "$hibernate") systemctl hibernate ;;
+        "$reboot") systemctl reboot ;;
+        "$poweroff") systemctl poweroff ;;
+esac
