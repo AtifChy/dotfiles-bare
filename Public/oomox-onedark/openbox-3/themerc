@@ -32,7 +32,7 @@ menu.separator.padding.height: 4
 window.active.title.separator.color: #16191d
 
 # Active window
-window.active.border.color: #3b84b5
+window.active.border.color: #2c323a
 
 
 window.active.title.bg: flat solid
@@ -69,7 +69,7 @@ window.active.button.hover.image.color: #3b84b5
 #window.active.button.toggled.image.color: #ffffff
 
 # Inactive window
-window.inactive.border.color: #2c323a
+window.inactive.border.color: #282c34
 
 window.inactive.title.bg: flat solid
 window.inactive.title.bg.color: #16191d

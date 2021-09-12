@@ -10,7 +10,7 @@ export EDITOR=nvim
 export TERMINAL=st
 
 # Bat theme
-BAT_THEME=base16
+export BAT_THEME=base16
 
 # Firefox
 export MOZ_WEBRENDER=1
@@ -54,7 +54,7 @@ export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 #export XMONAD_CONFIG_HOME="$XDG_CONFIG_HOME"/xmonad
 #export XMONAD_DATA_HOME="$XDG_DATA_HOME"/xmonad
 #export XMONAD_CACHE_HOME="$XDG_CACHE_HOME"/xmonad
-[ -d ~/.ssr ] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
+[[ -d ~/.ssr ]] && mv ~/.ssr "$XDG_CONFIG_HOME"/simplescreenrecorder
 
 # Ibus KDE
 export GTK_IM_MODULE=ibus
@@ -68,19 +68,23 @@ export QT_QPA_PLATFORMTHEME=gtk2
 export MANPAGER="less -R --use-color -Dd+r -Du+b -DS+ky -DP+kg -DE+kR"
 
 # icons for lf file manager
-[ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
+[[ -f "$XDG_CONFIG_HOME"/lf/scripts/icons.sh ]] && . "$XDG_CONFIG_HOME"/lf/scripts/icons.sh
 
 # startx
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 2 ]; then
-	export MOZ_X11_EGL=1
-        exec sx 2>"$XDG_CACHE_HOME"/x11/xsession-errors
-elif [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+if [[ -z "${DISPLAY}" && "${XDG_VTNR}" -eq 2 ]]; then
+        export MOZ_X11_EGL=1
+        if type sx >/dev/null; then
+                exec sx 2>"$XDG_CACHE_HOME"/x11/xsession-errors
+        else
+                exec startx "$XINITRC" &>"$XDG_CACHE_HOME"/x11/xsession-errors
+        fi
+elif [[ -z "${DISPLAY}" && "${XDG_VTNR}" -eq 1 ]]; then
         export MOZ_ENABLE_WAYLAND=1
         export MOZ_DBUS_REMOTE=1
         #export GDK_BACKEND=wayland
-	#export QT_QPA_PLATFORM=wayland-egl
+        #export QT_QPA_PLATFORM=wayland-egl
         #export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-	exec sway 2>"$XDG_CACHE_HOME"/wl-session.log
+        exec sway 2>"$XDG_CACHE_HOME"/wl-session.log
 fi
 
 #exec startx "$XINITRC" >"$XDG_CACHE_HOME"/x11/xsession-errors 2>&1

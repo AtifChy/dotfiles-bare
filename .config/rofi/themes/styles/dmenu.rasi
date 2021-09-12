@@ -1,0 +1,71 @@
+configuration {
+    font: "JetBrainsMono Nerd Font, Bold 9";
+    icon-theme: "Papirus-Dark";
+    cycle: false;
+    display-drun: "";
+    drun-display-format: "{name}";
+}
+
+* {
+    bg: #1e2127;
+    button: #2c313a;
+    fg: #c8ccd4;
+    gray: #636d83;
+    accent: #51aeed;
+
+    background-color: @bg;
+    text-color: @fg;
+}
+
+#window {
+    anchor: north;
+    location: north;
+    width: 100%;
+    padding: 4px;
+    children: [ horibox ];
+}
+
+#horibox {
+    padding: 3px;
+    margin-bottom: 8px;
+    orientation: horizontal;
+    children: [ prompt, entry, listview ];
+}
+
+#listview {
+    expand: true;
+    layout: horizontal;
+    spacing: 5px;
+    lines: 100;
+}
+
+#entry {
+    expand: false;
+    width: 10em;
+    margin: 0px 4px 0px 0px;
+    padding: 5px;
+    background-color: @button;
+    placeholder: " Search";
+    placeholder-color: @gray;
+}
+
+#element {
+    horizontal-align: 1;
+    border-radius: 3px;
+    padding: 5px 8px 5px 8px;
+    margin: 0px 4px;
+}
+
+#element selected {
+    border: 1px solid;
+    border-color: #51aeed80;
+    background-color: @button;
+    text-color: @accent;
+}
+
+#element-icon {
+    size: 16px;
+    border: 0px;
+}
+
+/* vim:ft=css

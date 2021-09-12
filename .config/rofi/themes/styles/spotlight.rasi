@@ -1,0 +1,164 @@
+@import "colorschemes/onedark.rasi"
+
+* {
+  background-color: @background;
+  border-color: @border;
+  text-color: @foreground;
+}
+
+window {
+	location: center;
+	/* anchor: north;
+	y-offset: 180px; */
+	width: 648px;
+	border-radius: 6px;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+mainbox {
+	margin: 1px;
+	border: 1px;
+	border-radius: 5px;
+	/* children: [inputbar,listview,wrapper-mode-switcher]; */
+}
+
+inputbar {
+  children: [button-left,entry,num-filtered-rows,textbox-num-sep,num-rows];
+}
+
+button-left, prompt, entry {
+	font: "JetBrainsMono Nerd Font 14";
+	vertical-align: 0.5;
+}
+
+button-left {
+	expand: false;
+	padding: 16px;
+	content: "";
+	action: "kb-primary-paste";
+}
+
+prompt {
+  padding: 0px 16px;
+}
+
+entry {
+  blink: true;
+  placeholder-color: @selected;
+  placeholder: "Search";
+  padding: 16px 0;
+}
+
+textbox {
+  background-color: @border;
+  padding: 8px 16px;
+}
+
+listview {
+  lines: 15;
+  /* columns: 2; */
+  cycle: false;
+  /* scrollbar: true;
+  dynamic: true;
+  fixed-height: false; */
+  margin: 0px 10px 10px;
+  border-radius: 5px;
+  background-color: @background-alt;
+  spacing: 0px;
+}
+
+scrollbar {
+	background-color: @background-alt;
+	handle-color: @border;
+	handle-width: 4px;
+}
+
+element {
+  padding: 10px;
+  background-color: @background-alt;
+}
+
+element-icon {
+  background-color: inherit;
+  padding: 0 10px 0 0;
+  size: 24px;
+}
+
+element-text {
+  background-color: inherit;
+  text-color:       inherit;
+  vertical-align: 0.5;
+}
+
+element normal.urgent,
+element alternate.urgent {
+	text-color: @urgent;
+}
+
+element selected {
+	background-color: @border;
+}
+
+element selected.urgent {
+	background-color: @urgent;
+	text-color: @background-alt;
+}
+
+element selected.active {
+	text-color: @active;
+}
+
+/*
+wrapper-mode-switcher {
+    orientation: horizontal;
+
+    expand:     false;
+    spacing:    0;
+    children: [ icon-ms-ic1, mode-switcher, icon-ms-ic2 ];
+}
+icon-ms-ic1 {
+    filename: "go-previous";
+}
+
+icon-ms-ic2 {
+    filename: "go-next";
+}
+*/
+
+mode-switcher {
+	padding: 0px;
+	margin: -12px 50px 10px;
+	spacing: 0px;
+}
+
+button {
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+  background-color: @background-alt;
+}
+
+num-filtered-rows {
+    vertical-align: 0.5;
+    expand:     false;
+    text-color: @selected;
+}
+
+num-rows {
+    padding: 0 16px 0 0;
+    vertical-align: 0.5;
+    expand:     false;
+    text-color: @selected;
+}
+
+textbox-num-sep {
+    vertical-align: 0.5;
+    expand:     false;
+    str:        "/";
+    text-color: @selected;
+}
+/* vim:ft=css

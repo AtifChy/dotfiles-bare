@@ -5,9 +5,17 @@ check=$(checkupdates)
 if [ -z "$check" ]; then
         count=0
 else
-        pkg=$(echo "$check" | sed -z 's/\n/\\\\n/g')
+        pkg=$(
+                sed -z 's/\n/\\\\n/g' <<-EOF
+			$check
+		EOF
+        )
         pkg="\\\n\\\n${pkg%\\\\n}"
-        count=$(echo "$check" | wc -l)
+        count=$(
+                wc -l <<-EOF
+			$check
+		EOF
+        )
 fi
 
 echo "{\"text\": \"${count}\", \"tooltip\": \"${count} available update(s)${pkg}\"}"

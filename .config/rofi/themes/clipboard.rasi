@@ -1,0 +1,18 @@
+configuration {
+	matching: "normal";
+	modi: "clipmenu:~/.config/rofi/scripts/clipmenu.sh,emoji:~/.config/rofi/scripts/emoji.sh";
+	clipmenu {
+		display-name: " Clipmenu";
+    	}
+	emoji {
+		display-name: "😄 Emoji";
+	}
+	disable-history: true;
+	sidebar-mode: true;
+	lines: 12;
+}
+
+@theme "/dev/null"
+@import "styles/spotlight.rasi"
+
+/* vim:ft=css

@@ -20,7 +20,8 @@ set $term st
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-set $menu wofi -I
+set $menu rofi -show drun
+set $clip rofi -show clipmenu -theme themes/clipboard.rasi
 
 font pango:JetBrains Mono Medium 10
 
@@ -44,6 +45,7 @@ seat seat0 xcursor_theme volantes_cursors 24
 
 for_window [title=".*"] border normal
 for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [app_id="mpv"] inhibit_idle fullscreen
 
 input * xkb_numlock enabled
 
@@ -105,7 +107,7 @@ exec swayidle -w \
     # Start your launcher
     bindsym $mod+p exec $menu
 
-    bindsym $mod+c exec clipman pick --tool wofi -T"--prompt=Clipboard -i"
+    bindsym $mod+c exec $clip
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

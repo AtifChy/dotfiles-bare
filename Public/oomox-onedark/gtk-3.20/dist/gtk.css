@@ -86,8 +86,8 @@
 /* window manager colors */
 @define-color wm_bg_focused #16191d;
 @define-color wm_bg_unfocused #1e2127;
-@define-color wm_border_focused #3b84b5;
-@define-color wm_border_unfocused #2c323a;
+@define-color wm_border_focused #2c323a;
+@define-color wm_border_unfocused #282c34;
 @define-color wm_title_focused #abb2bf;
 @define-color wm_title_unfocused mix(#b6bdca,#1e2127,0.4);
 @define-color wm_icons_focused #abb2bf;
@@ -7331,33 +7331,33 @@ decoration {
   background-image: none;
   border-radius: 2px 2px 0 0;
   border-width: 0;
-  box-shadow: 0 3px 9px 1px rgba(65, 73, 89, 0.7), 0 0 0 1px #3b84b5;
+  box-shadow: 0 3px 9px 1px rgba(65, 73, 89, 0.7), 0 0 0 1px #2c323a;
   /* this is used for the resize cursor area */
   margin: 9px; }
   decoration:backdrop {
-    box-shadow: 0 3px 9px 1px transparent, 0 2px 6px 2px rgba(65, 73, 89, 0.4), 0 0 0 1px #2c323a;
+    box-shadow: 0 3px 9px 1px transparent, 0 2px 6px 2px rgba(65, 73, 89, 0.4), 0 0 0 1px #282c34;
     transition: 200ms ease-out; }
   .maximized decoration, .fullscreen decoration, .tiled decoration {
     border-radius: 0; }
   .popup decoration {
     box-shadow: none; }
   .ssd decoration {
-    box-shadow: 0 0 0 1px #3b84b5; }
+    box-shadow: 0 0 0 1px #2c323a; }
     .ssd decoration:backdrop {
-      box-shadow: 0 0 0 1px #2c323a; }
+      box-shadow: 0 0 0 1px #282c34; }
   .solid-csd decoration {
     border-radius: 0;
     margin: 0;
     box-shadow: none; }
   .csd.popup decoration {
     border-radius: 0;
-    box-shadow: 0 1px 2px rgba(65, 73, 89, 0.2), 0 0 0 1px rgba(44, 50, 58, 0.13); }
+    box-shadow: 0 1px 2px rgba(65, 73, 89, 0.2), 0 0 0 1px rgba(40, 44, 52, 0.13); }
   tooltip.csd decoration {
     border-radius: 2px;
     box-shadow: none; }
   messagedialog.csd decoration {
     border-radius: 2px;
-    box-shadow: 0 1px 2px rgba(65, 73, 89, 0.2), 0 0 0 1px rgba(44, 50, 58, 0.13); }
+    box-shadow: 0 1px 2px rgba(65, 73, 89, 0.2), 0 0 0 1px rgba(40, 44, 52, 0.13); }
 
 /***********************
  ! Fallback mode panel *
@@ -7940,7 +7940,7 @@ UnityDecoration {
   -UnityDecoration-title-fade: 35px;
   -UnityDecoration-title-alignment: 0; }
   UnityDecoration .top {
-    border: 1px solid #3b84b5;
+    border: 1px solid #2c323a;
     border-bottom: 0;
     border-radius: 2px 2px 0 0;
     padding: 1px 6px 0;
@@ -7954,7 +7954,7 @@ UnityDecoration {
       background-image: none;
       color: #bbc1cc; }
     UnityDecoration .top:backdrop {
-      border: 1px solid #2c323a;
+      border: 1px solid #282c34;
       color: mix(#b6bdca,#1e2127,0.4); }
   UnityDecoration .left, UnityDecoration .right, UnityDecoration .bottom {
     background-color: #16191d; }

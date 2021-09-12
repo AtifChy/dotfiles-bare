@@ -1,8 +1,10 @@
 configuration {
-    font: "JetBrainsMono Nerd Font, Medium 10";
-    matching: "normal";
-    fixed-num-lines: false;
-    theme: "./spotlight.rasi";
+	font: "JetBrainsMono Nerd Font, Medium 10";
+    	icon-theme: "Papirus-Dark";
+    	application-fallback-icon: "application-default-icon";
+    	scroll-method: 1;
+    	/* fixed-num-lines: false; */
+    	theme: "themes/prompt.rasi";
 }
 
 /* vim:ft=css
