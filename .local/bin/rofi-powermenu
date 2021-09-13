@@ -14,6 +14,8 @@ options=$(
                 rofi -dmenu -a 4 -u 5 -theme themes/powermenu.rasi -p "uptime: ${up#up }"
 )
 
+[ -z "$options" ] && playerctl -a pause
+
 case $options in
         "$lock") loginctl lock-session "$XDG_SESSION_ID" ;;
         "$logout") loginctl terminate-session "$XDG_SESSION_ID" ;;

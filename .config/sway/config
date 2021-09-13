@@ -46,6 +46,7 @@ seat seat0 xcursor_theme volantes_cursors 24
 for_window [title=".*"] border normal
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
+for_window [title="Print"] floating enable
 
 input * xkb_numlock enabled
 

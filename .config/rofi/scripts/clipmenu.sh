@@ -1,7 +1,8 @@
 #!/bin/sh
 
 if [ "$@" ]; then
-        value=$(printf '%b\n' "$@")
+        value=$(printf '%s\n' "$@" | sed 's/\033/\\\0/g')
+        value=$(printf '%b\n' "$value")
         [ "$(wl-paste)" = "$value" ] && exit
         wl-copy -n <<-EOF
 		$value

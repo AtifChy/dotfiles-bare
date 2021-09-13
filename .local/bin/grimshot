@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# Required softwares: grim, wl-clipboard, slurp, dunst
+# Required softwares: grim, wl-clipboard, slurp, dunst/mako
 
 _img="grim_$(date '+%Y-%m-%d_%H-%M-%S').png"
 _dir=$(xdg-user-dir PICTURES)
 [ ! -d "${_dir}/Screenshots" ] && mkdir "${_dir}/Screenshots"
 file="${_dir}/Screenshots/${_img}"
 
-action=${1:-"full"}
+options=${1:-"full"}
 
 usage() {
         tee -a <<-END
@@ -30,42 +30,43 @@ notifyError() {
         exit 1
 }
 
-no_dec() {
-	jq -r '"\(.rect.x + .current_border_width),\(.rect.y) \(.window_rect.width)x\(.window_rect.height)"'
-}
+no_dec='"\(.rect.x + .current_border_width),\(.rect.y) \(.window_rect.width)x\(.window_rect.height)"'
 
-with_dec() {
-	jq -r '"\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"'
-}
+with_dec='"\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"'
 
-case $action in
+case $options in
         -s | select)
                 geo=$(grab)
                 test -z "$geo" && notifyError
-		select=yes
+                select=yes
                 ;;
         -a | active)
-                focused=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
                 if [ "$2" = "--noborder" ]; then
-                        geo=$(echo "$focused" | no_dec)
+                        format="$no_dec"
                 else
-                        geo=$(echo "$focused" | with_dec)
+                        format="$with_dec"
                 fi
-		active=yes
+                geo=$(
+                        swaymsg -t get_tree |
+                                jq -r "recurse(.nodes[]?, .floating_nodes[]?) | select(.focused) | $format"
+                )
+                active=yes
                 ;;
         -w | window)
-		focused=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?)')
                 if [ "$2" = "--noborder" ]; then
-                        geo=$(echo "$focused" | no_dec | grab)
+                        format="$no_dec"
                 else
-                        geo=$(echo "$focused" | with_dec | grab)
+                        format="$with_dec"
                 fi
+                geo=$(
+                        swaymsg -t get_tree | jq -r ".. | select(.pid? and .visible?) | $format" | grab
+                )
                 test -z "$geo" && notifyError
-		window=yes
+                window=yes
                 ;;
 
         -f | full)
-		full=yes
+                full=yes
                 ;;
         -h | help)
                 usage
@@ -73,10 +74,10 @@ case $action in
                 ;;
 esac
 
-if [ "$select" ] || [ "$window" ]; then
-	grim -g "$geo" "$file"
+if [ "$select" ] || [ "$window" ] || [ "$active" != 'full' ]; then
+        grim -g "$geo" "$file"
 else
-	grim "$file"
+        grim "$file"
 fi
 
 if [ "$2" = "-d" ] || [ "$2" = "shadow" ]; then
@@ -87,10 +88,3 @@ fi
 wl-copy --type image/png <"$file"
 
 notify-send -u low -a grimshot -i "$file" "Screenshot captured!" "Screenshot saved as <i>${file##*/}</i>"
-
-#ACTION=$(dunstify -u low -A "default,Open" -I "$file" "grim" "Screenshot saved!")
-#
-#case "$ACTION" in
-#        "default") handlr open "$file" ;;
-#        "2") rm "$file" ;;
-#esac
