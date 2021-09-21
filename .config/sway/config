@@ -38,18 +38,24 @@ exec playerctld
 exec mako
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
+# gaps
 gaps inner 6
 gaps outer 0
 
+# cursor theme
 seat seat0 xcursor_theme volantes_cursors 24
 
+# window management
 for_window [title=".*"] border normal
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 for_window [title="Print"] floating enable
+for_window [title="About Mozilla Firefox"] floating enable
 
+# enable numlock on start
 input * xkb_numlock enabled
 
+# color
 #client.focused #4c7899 #285577 #ffffff #285577 #285577
 #client.focused #636d83 #424957 #c8ccd4 #424957 #424957
 client.focused #424957 #373d49 #c8ccd4 #373d49 #373d49
@@ -217,18 +223,20 @@ exec swayidle -w \
     bindsym print exec grimshot
 
     # area
-    bindsym Shift+print exec grimshot -s
+    bindsym Shift+print exec grimshot -w
 
     # window
-    bindsym Ctrl+print exec grimshot -w
-
-    # active
-    bindsym Ctrl+Shift+print exec grimshot -a
+    bindsym Ctrl+print exec grimshot -a
 #
 # Mako:
 #
     # show notification history
     bindsym Ctrl+grave exec makoctl restore
+#
+# Waybar:
+#
+    # Toggle waybar
+    bindsym $mod+Shift+b exec pkill -USR1 waybar
 #
 # Resizing containers:
 #

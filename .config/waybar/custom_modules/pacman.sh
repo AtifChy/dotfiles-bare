@@ -6,11 +6,11 @@ if [ -z "$check" ]; then
         count=0
 else
         pkg=$(
-                sed -z 's/\n/\\\\n/g' <<-EOF
+                sed -z 's/\n/\\n/g' <<-EOF
 			$check
 		EOF
         )
-        pkg="\\\n\\\n${pkg%\\\\n}"
+        pkg="\\n\\n${pkg%\\n}"
         count=$(
                 wc -l <<-EOF
 			$check
@@ -18,4 +18,4 @@ else
         )
 fi
 
-echo "{\"text\": \"${count}\", \"tooltip\": \"${count} available update(s)${pkg}\"}"
+printf '{"text": "%s", "tooltip": "%s available update(s)%s"}\n' "$count" "$count" "$pkg"

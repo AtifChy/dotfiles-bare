@@ -169,6 +169,7 @@
         "format-icons": {
             "spotify": "",
             "firefox": "",
+            "chromium": "",
             "default": ""
         },
         "escape": true,

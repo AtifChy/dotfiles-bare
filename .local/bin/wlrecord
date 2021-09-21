@@ -40,7 +40,7 @@ while [ "$1" ]; do
                         shift 1
                         ;;
                 -f | --fullscreen)
-                        echo "Recording fullscreen..."
+                        echo 'Recording fullscreen...'
 
                         shift 1
                         ;;

@@ -102,13 +102,10 @@ xmobar() {
 waybar() {
         refresh
         if [ -z "$weather" ]; then
-                echo "{\"text\": \" Offline\", \"tooltip\": \"Network connection unavailable.\"}"
+                echo '{"text": " Offline", "tooltip": "Network connection unavailable."}'
         else
-                tooltip="$(
-                        curl -s https://wttr.in/?format=Condition:+%C-Temperature:+%t\(%f\)-Wind:+%w |
-                                sed -e 's/-/\\\\n/g' -e 's/+//g'
-                )"
-                echo "{\"text\": \"${icon} ${temperature}\", \"tooltip\": \"${tooltip}\"}"
+                tooltip="$(curl -s https://wttr.in/?format=\<b\>Condition:\</b\>+%C-\<b\>Temperature:\</b\>+%t\(%f\)-\<b\>Wind:\</b\>+%w | sed -e 's/-/\\n/g' -e 's/+//g')"
+                printf '{"text": "%s %s", "tooltip": "%s"}\n' "$icon" "$temperature" "$tooltip"
         fi
 
 }
@@ -118,8 +115,10 @@ case $1 in
         waybar) waybar ;;
         *)
                 refresh
-                [ -z "$weather" ] &&
-                        printf "\033[01;31mERROR:\033[0m Check your network connection.\n" ||
-                        printf "%s %s\n" "$icon" "$temperature"
+                if [ -z "$weather" ]; then
+                        printf '\033[01;31mERROR:\033[0m Check your network connection.\n'
+                else
+                        printf '%s  %s\n' "$icon" "$temperature"
+                fi
                 ;;
 esac
