@@ -1,5 +1,5 @@
 # custom PATH
-export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
+#export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$PATH"
 
 # pfetch environment
 export PF_INFO='ascii title os kernel uptime pkgs shell wm editor memory'

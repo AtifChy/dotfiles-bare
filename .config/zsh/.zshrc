@@ -55,29 +55,6 @@ zinit wait lucid light-mode for \
 	" \
 		zdharma/fast-syntax-highlighting \
         blockf atpull'zinit creinstall -q .' \
-        atinit"
-		zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-		zstyle ':completion:*' completer _expand _complete _ignored _approximate
-		zstyle ':completion:*' menu select=2
-		zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-		zstyle ':completion:*:default' select-prompt %SScrolling active: current selection at %p%s
-		zstyle ':completion:*' list-separator '=>'
-		zstyle ':completion::complete:*' use-cache on
-		zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
-		zstyle ':completion:*' group-name ''
-		zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%b%u'
-		zstyle ':completion:*:warnings' format '%U%B%F{red}no match found%f%b%u'
-		zstyle ':completion:*' ignored-patterns '\[|~'
-		zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-		zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
-		zstyle ':completion:*' insert-tab false
-		TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
-	" \
-        atload'
-		eval "$(dircolors)"
-		zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
-		zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
-	' \
 		zsh-users/zsh-completions \
         atinit"
 		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -92,8 +69,12 @@ zinit wait lucid light-mode for \
 # Fallback zsh prompt
 #PROMPT='%(?.%B%F{green}➜%f%b.%F{red}➜%f) '
 
-## zsh tweak
+## zsh tweaks
 PROMPT_EOL_MARK='%B%F{8}↵%f%b'
+SPROMPT='zsh: correct %B%F{red}%R%f%b to %B%F{green}%r%f%b [nyae]? '
+function command_not_found_handler {
+	print -P "zsh: command not found: %B%F{blue}$1%f%B"
+}
 
 ## zsh settings
 setopt auto_cd			# auto cd to given dir if cd command not used
@@ -127,6 +108,27 @@ zstyle ':chpwd:*' recent-dirs-file "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/chp
 zstyle ':completion:*' recent-dirs-insert always
 alias z=cdr
 
+# zsh completion settings
+eval "$(dircolors)"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*:default' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*:default' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' list-separator '=>'
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%U%B%F{cyan}%d%f%b%u'
+zstyle ':completion:*:warnings' format '%U%B%F{red}no match found%f%b%u'
+zstyle ':completion:*' ignored-patterns '\[|~'
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
+zstyle ':completion:*' insert-tab false
+zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
+zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
+TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
+
 # History file configuration
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/zsh_history"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
@@ -153,7 +155,6 @@ function title_preexec {
 	title '%100>…>$CMD%<<'
 }
 
-autoload -U add-zsh-hook
 add-zsh-hook precmd title_precmd
 add-zsh-hook preexec title_preexec
 
@@ -161,38 +162,27 @@ add-zsh-hook preexec title_preexec
 source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/alias.zsh"
 
 # better url management
-autoload -Uz bracketed-paste-magic url-quote-magic
+autoload -U bracketed-paste-magic url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 zle -N self-insert url-quote-magic
 
 ## keybindings
-# Make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-	function zle-line-init {
-		echoti smkx
-	}
-	function zle-line-finish {
-		echoti rmkx
-	}
-	zle -N zle-line-init
-	zle -N zle-line-finish
-fi
-
 typeset -g -A key
 
-key[Home]="${terminfo[khome]}"
-key[End]="${terminfo[kend]}"
-key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
-key[Delete]="${terminfo[kdch1]}"
-key[Up]="${terminfo[kcuu1]}"
-key[Down]="${terminfo[kcud1]}"
-key[Left]="${terminfo[kcub1]}"
-key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
-key[Shift-Tab]="${terminfo[kcbt]}"
+key[Home]='^[[H'
+key[End]='^[[4~'
+key[Insert]='^[[4h'
+key[Backspace]='^?'
+key[Delete]='^[[P'
+key[Up]='^[[A'
+key[Down]='^[[B'
+key[Left]='^[[D'
+key[Right]='^[[C'
+key[PageUp]='^[[5~'
+key[PageDown]='^[[6~'
+key[Shift-Tab]='^[[Z'
+key[Ctrl-Left]='^[[1;5D'
+key[Ctrl-Right]='^[[1;5C'
 
 # setup key accordingly
 bindkey "${key[Home]}"       beginning-of-line
@@ -205,6 +195,8 @@ bindkey "${key[Right]}"      forward-char
 bindkey "${key[PageUp]}"     beginning-of-buffer-or-history
 bindkey "${key[PageDown]}"   end-of-buffer-or-history
 bindkey "${key[Shift-Tab]}"  reverse-menu-complete
+bindkey "${key[Ctrl-Left]}"  backward-word
+bindkey "${key[Ctrl-Right]}" forward-word
 
 # being used by plugin:-zsh-history-substring-search
 #bindkey "${key[Up]}"         history-beginning-search-backward
