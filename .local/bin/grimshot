@@ -10,7 +10,7 @@ file="${_dir}/Screenshots/${_img}"
 options=${1:-"full"}
 
 usage() {
-        tee -a <<-END
+    tee -a <<-END
 	Usage: $0
 	-f, full         => Take fullscreen screenshot
 	-s, select       => Take screenshot of interactively chosen window or rectangle
@@ -22,12 +22,12 @@ usage() {
 }
 
 grab() {
-        slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a50' -w 1 "$@"
+    slurp -s '#51aeed10' -c '#51aeed' -b '#00000000' -B '#2c313a50' -w 1 "$@"
 }
 
 notifyError() {
-        notify-send -u critical -a grimshot -i gnome-screenshot "Failed!" "Failed to capture screenshot."
-        exit 1
+    notify-send -u critical -a grimshot -i gnome-screenshot "Failed!" "Failed to capture screenshot."
+    exit 1
 }
 
 no_dec='"\(.rect.x + .current_border_width),\(.rect.y) \(.window_rect.width)x\(.window_rect.height)"'
@@ -35,54 +35,49 @@ no_dec='"\(.rect.x + .current_border_width),\(.rect.y) \(.window_rect.width)x\(.
 with_dec='"\(.rect.x),\(.rect.y - .deco_rect.height) \(.rect.width)x\(.rect.height + .deco_rect.height)"'
 
 case $options in
-        -s | select)
-                geo=$(grab)
-                test -z "$geo" && notifyError
-                select=yes
-                ;;
-        -a | active)
-                if [ "$2" = "--noborder" ]; then
-                        format="$no_dec"
-                else
-                        format="$with_dec"
-                fi
-                geo=$(
-                        swaymsg -t get_tree |
-                                jq -r "recurse(.nodes[]?, .floating_nodes[]?) | select(.focused) | $format"
-                )
-                active=yes
-                ;;
-        -w | window)
-                if [ "$2" = "--noborder" ]; then
-                        format="$no_dec"
-                else
-                        format="$with_dec"
-                fi
-                geo=$(
-                        swaymsg -t get_tree | jq -r ".. | select(.pid? and .visible?) | $format" | grab
-                )
-                test -z "$geo" && notifyError
-                window=yes
-                ;;
+    -s | select)
+        geo=$(grab)
+        test -z "$geo" && notifyError
+        select=yes
+        ;;
+    -a | active)
+        if [ "$2" = "--noborder" ]; then
+            format="$no_dec"
+        else
+            format="$with_dec"
+        fi
+        geo=$(swaymsg -t get_tree | jq -r "recurse(.nodes[]?, .floating_nodes[]?)|select(.focused)|$format")
+        active=yes
+        ;;
+    -w | window)
+        if [ "$2" = "--noborder" ]; then
+            format="$no_dec"
+        else
+            format="$with_dec"
+        fi
+        geo=$(swaymsg -t get_tree | jq -r ".. | select(.pid? and .visible?) | $format" | grab)
+        test -z "$geo" && notifyError
+        window=yes
+        ;;
 
-        -f | full)
-                full=yes
-                ;;
-        -h | help)
-                usage
-                exit 0
-                ;;
+    -f | full)
+        full=yes
+        ;;
+    -h | help)
+        usage
+        exit 0
+        ;;
 esac
 
 if [ "$select" ] || [ "$window" ] || [ "$active" != 'full' ]; then
-        grim -g "$geo" "$file"
+    grim -g "$geo" "$file"
 else
-        grim "$file"
+    grim "$file"
 fi
 
 if [ "$2" = "-d" ] || [ "$2" = "shadow" ]; then
-        convert "$file" \( +clone -background black -shadow 75x10+0+0 \) \
-                +swap -bordercolor none -border 10 -background none -layers merge +repage "$file"
+    convert "$file" \( +clone -background black -shadow 75x10+0+0 \) \
+        +swap -bordercolor none -border 10 -background none -layers merge +repage "$file"
 fi
 
 wl-copy --type image/png <"$file"

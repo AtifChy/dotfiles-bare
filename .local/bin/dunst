@@ -1,30 +1,30 @@
 #!/bin/sh
 
 colors() {
-        set -- $(
-                xrdb -q |
-                        grep '*.background:\|*.color0:\|*.color1:\|*.color3:\|*.foreground:' |
-                        cut -f2 |
-                        tr '\n' ' '
-        )
+    set -- $(
+        xrdb -q |
+            grep '*.background:\|*.color0:\|*.color1:\|*.color3:\|*.foreground:' |
+            cut -f2 |
+            tr '\n' ' '
+    )
 
-        background=$1
-        black=$2
-        red=$3
-        yellow=$4
-        foreground=$5
+    background=$1
+    black=$2
+    red=$3
+    yellow=$4
+    foreground=$5
 }
 
 colors
 
 /usr/bin/dunst \
-        -frame_color "$black" \
-        -lb "$background" \
-        -lf "$foreground" \
-        -nb "$background" \
-        -nf "$foreground" \
-        -nfr "$yellow" \
-        -cb "$background" \
-        -cf "$foreground" \
-        -cfr "$red" \
-        $@
+    -frame_color "$black" \
+    -lb "$background" \
+    -lf "$foreground" \
+    -nb "$background" \
+    -nf "$foreground" \
+    -nfr "$yellow" \
+    -cb "$background" \
+    -cf "$foreground" \
+    -cfr "$red" \
+    $@

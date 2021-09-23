@@ -1,10 +1,10 @@
 #!/bin/sh
 
 check() {
-        type "$*" >/dev/null || {
-                echo "\033[1;31mError:\033[0m command \033[1;34m$*\033[0m not found."
-                exit 1
-        }
+    type "$*" >/dev/null || {
+        echo "\033[1;31mError:\033[0m command \033[1;34m$*\033[0m not found."
+        exit 1
+    }
 }
 
 check grim
@@ -16,15 +16,15 @@ check wl-paste
 grab=$(slurp -p -b '#00000000' 2>/dev/null)
 
 [ "$grab" ] || {
-        notify-send -u normal -a colorpicker -i gcolor3 'Warning ☠️' 'Failed to pick color 😥'
-        exit 1
+    notify-send -u normal -a colorpicker -i gcolor3 'Warning ☠️' 'Failed to pick color 😥'
+    exit 1
 }
 
 pick() {
-        grim -g "$grab" -t ppm - |
-                convert - -format '%[pixel:p{0,0}]' txt:- |
-                awk 'NR>1 {print $(NF-1),$NF}' |
-                tr '[:upper:]' '[:lower:]'
+    grim -g "$grab" -t ppm - |
+        convert - -format '%[pixel:p{0,0}]' txt:- |
+        awk 'NR>1 {print $(NF-1),$NF}' |
+        tr '[:upper:]' '[:lower:]'
 }
 
 color=$(pick)

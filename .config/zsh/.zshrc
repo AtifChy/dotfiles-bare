@@ -37,16 +37,16 @@ zinit lucid light-mode for \
 
 ## zsh plugins
 zinit wait lucid light-mode for \
-        atinit"
+    atinit"
 		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=8,fg=2,bold'
 		HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=8,fg=9,bold'
 	" \
-        atload'
+    atload'
 		bindkey "${key[Up]}"   history-substring-search-up
 		bindkey "${key[Down]}" history-substring-search-down
 	' \
 		zsh-users/zsh-history-substring-search \
-        atinit"
+    atinit"
 		typeset -gA FAST_HIGHLIGHT
 		FAST_HIGHLIGHT[git-cmsg-len]=100
 		ZINIT[COMPINIT_OPTS]=-C
@@ -56,14 +56,14 @@ zinit wait lucid light-mode for \
 		zdharma/fast-syntax-highlighting \
         blockf atpull'zinit creinstall -q .' \
 		zsh-users/zsh-completions \
-        atinit"
+    atinit"
 		ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 		ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 		ZSH_AUTOSUGGEST_COMPLETION_IGNORE='_*|pre(cmd|exec)|sudo pacman -S*|pacman -S*|paru -S*|yay -S*|\)\*'
 	" \
-        atload"_zsh_autosuggest_start" \
+    atload"_zsh_autosuggest_start" \
 		zsh-users/zsh-autosuggestions \
-        trigger-load'!x;!extract' \
+    trigger-load'!x;!extract' \
 		OMZP::extract
 
 # Fallback zsh prompt
@@ -125,8 +125,8 @@ zstyle ':completion:*' ignored-patterns '\[|~'
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*:(vim|nvim|vi|nano):*' ignored-patterns '*.(wav|mp3|flac|ogg|mp4|avi|mkv|iso|so|o|7z|zip|tar|gz|bz2|rar|deb|pkg|gzip|pdf|png|jpeg|jpg|gif)'
 zstyle ':completion:*' insert-tab false
-zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
-zstyle ":completion:*:*:kill:*:processes" list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}" "ma=38;5;7;7;1"
+zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=01"
 TRAPUSR1() { rehash }        # rehash after upgrade -- requires pacman hook
 
 # History file configuration

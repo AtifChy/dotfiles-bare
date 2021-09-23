@@ -6,22 +6,22 @@
 # directory in thumbnail mode.
 #
 if [ $# -eq 0 ]; then
-	/usr/bin/sxiv -h
-        exit
+    /usr/bin/sxiv -h
+    exit
 fi
 
 [ "$1" = '--' ] && shift
 
-abspath()  {
-        case "$1" in
-                /*) printf "%s\n" "$1" ;;
-                *) printf "%s\n" "$PWD/$1" ;;
-        esac
+abspath() {
+    case "$1" in
+        /*) printf "%s\n" "$1" ;;
+        *) printf "%s\n" "$PWD/$1" ;;
+    esac
 }
 
-listfiles()  {
-        find -L "$(dirname "$target")" -maxdepth 1 -type f -iregex \
-                '.*\(jpe?g\|bmp\|png\|gif\)$' -print0 | sort -z
+listfiles() {
+    find -L "$(dirname "$target")" -maxdepth 1 -type f -iregex \
+        '.*\(jpe?g\|bmp\|png\|gif\)$' -print0 | sort -z
 }
 
 target="$(abspath "$1")"
@@ -29,9 +29,9 @@ count="$(listfiles | grep -m 1 -ZznF "$target" | cut -d: -f1)"
 isDir="$(printf '%s\t' "$@" | awk '{ print $NF }')"
 
 if [ -d "$isDir" ] || [ -h "$isDir" ]; then
-        /usr/bin/sxiv -a -t -- "$@"
+    /usr/bin/sxiv -a -t -- "$@"
 elif [ -n "$count" ]; then
-        listfiles | xargs -0 /usr/bin/sxiv -a -b -n "$count" --
+    listfiles | xargs -0 /usr/bin/sxiv -a -b -n "$count" --
 else
-        /usr/bin/sxiv -a -b -- "$@" # fallback
+    /usr/bin/sxiv -a -b -- "$@" # fallback
 fi
